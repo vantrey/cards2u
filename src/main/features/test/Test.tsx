@@ -3,15 +3,17 @@ import styles from './Test.module.css'
 import Input from "../../ui/common/Input/Input";
 import Button from "../../ui/common/Button/Button";
 import Link from '../../ui/common/Link/Link';
-import {loginPath, newPswPath, profilePath, registrationPath, restorePswPath} from "../../ui/components/routes/Routes";
+import {
+  LOGIN_PATH, NEW_PSW_PATH, PROFILE_PATH, REGISTRATION_PATH, RESTORE_PSW_PATH
+} from "../../ui/components/routes/Routes";
 
 const Test = () => {
   let links: Array<JSX.Element> = [
-    {title: 'login', path: loginPath},
-    {title: 'registration', path: registrationPath},
-    {title: 'restore password', path: restorePswPath},
-    {title: 'new password', path: newPswPath},
-    {title: 'profile', path: profilePath},
+    {title: 'login', path: LOGIN_PATH},
+    {title: 'registration', path: REGISTRATION_PATH},
+    {title: 'restore password', path: RESTORE_PSW_PATH},
+    {title: 'new password', path: NEW_PSW_PATH},
+    {title: 'profile', path: PROFILE_PATH},
   ].map(l => <Link key={l.title} title={l.title} path={l.path}/>)
 
   return  <div className={styles.test}>

@@ -6,19 +6,19 @@ import RestorePsw from "../../../auth/restorePsw/RestorePsw";
 import NewPsw from "../../../auth/newPsw/newPsw";
 import Profile from "../../../auth/profile/Profile";
 
-export const loginPath = '/login'
-export const registrationPath = '/registration'
-export const restorePswPath = '/restorePsw'
-export const newPswPath = '/newPsw'
-export const profilePath = '/profile'
+export const LOGIN_PATH = '/login'
+export const REGISTRATION_PATH = '/registration'
+export const RESTORE_PSW_PATH = '/restorePsw'
+export const NEW_PSW_PATH = '/newPsw'
+export const PROFILE_PATH = '/profile'
 
 const Routs = () => {
   return <div>
-    <Route path={loginPath} render={() => <Login/>}/>
-    <Route path={registrationPath} render={() => <Registration/>}/>
-    <Route path={restorePswPath} render={() => <RestorePsw/>}/>
-    <Route path={newPswPath} render={() => <NewPsw/>}/>
-    <Route path={profilePath} render={() => <Profile/>}/>
+    <Route path={LOGIN_PATH} render={() => <Login/>}/>
+    <Route path={REGISTRATION_PATH} render={() => <Registration/>}/>
+    <Route path={RESTORE_PSW_PATH} render={() => <RestorePsw/>}/>
+    <Route path={NEW_PSW_PATH} render={() => <NewPsw/>}/>
+    <Route path={PROFILE_PATH} render={() => <Profile/>}/>
   </div>
 }
 export default Routs
