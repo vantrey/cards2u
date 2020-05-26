@@ -1,0 +1,15 @@
+.button {
+  height: 30px;
+  border-radius: 1px;
+}
+
+.button:focus {
+ outline: none;
+}
+
+.buttonTitle {
+  font-size: 100%;
+  font-family: fantasy;
+  font-style: italic;
+  padding: 3px;
+}

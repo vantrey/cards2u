@@ -1,0 +1,15 @@
+.input {
+  padding: 3px;
+  margin-bottom: 10px;
+  width: 100px;
+  outline-color: black;
+  font-family: fantasy;
+  font-style: italic;
+}
+
+.input.error {
+  border-color: red;
+  outline-color: red;
+}
+
+

@@ -1,0 +1,9 @@
+a {
+  padding: 5px;
+  text-decoration: none;
+  color: #0003ff;
+}
+
+a.active {
+  color: #ff4000;
+}
