@@ -1,10 +1,10 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
-import Login from "../../../auth/a1-login/Login";
-import Registration from "../../../auth/a2-registration/Regirtration";
-import RestorePsw from "../../../auth/a3-restorePsw/RestorePsw";
-import NewPsw from "../../../auth/a4-newPsw/newPsw";
-import Profile from "../../../auth/a5-profile/Profile";
+import Login from "../../../auth/login/Login";
+import Registration from "../../../auth/registration/Regirtration";
+import RestorePsw from "../../../auth/restorePsw/RestorePsw";
+import NewPsw from "../../../auth/newPsw/newPsw";
+import Profile from "../../../auth/profile/Profile";
 
 export const loginPath = '/login'
 export const registrationPath = '/registration'
