@@ -25,7 +25,7 @@ const Test = () => {
     <div className={styles.links}>{links}</div>
     <form onSubmit={handleSubmit(onSubmit)}>
       <Input name={'name'} register={register} errors={errors}/>
-      <Button isDisabled={false}/>
+      <Button onButtonClick={()=>{}} tittle='send' isDisabled={false}/>
     </form>
   </div>
 }

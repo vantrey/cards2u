@@ -12,7 +12,7 @@ const Input: React.FC<OwnPropsType> = ({name, errors, register}) => {
   let classForEl = errors.name ? `${styles.input} ${styles.error}` : styles.input
   return (
     <>
-      <input name={name} ref={register({required: true})} className={classForEl} type='text' placeholder=''/>
+      <input name={name} ref={register({required: 'error msg'})} className={classForEl} type='text' placeholder=''/>
       {errors.name && <span>This field is required</span>}
     </>
   )
