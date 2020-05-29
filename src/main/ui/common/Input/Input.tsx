@@ -2,17 +2,19 @@ import React from 'react';
 import styles from './Input.module.css'
 
 type OwnPropsType = {
-  isError: boolean
+  name: string
+  register: any
+  errors: any
 }
 
-const Input: React.FC<OwnPropsType> = (props) => {
+const Input: React.FC<OwnPropsType> = ({name, errors, register}) => {
 
-  let classForEl = props.isError ? `${styles.input} ${styles.error}` : styles.input
+  let classForEl = errors.name ? `${styles.input} ${styles.error}` : styles.input
   return (
-    <input className={classForEl}
-           type='text'
-           placeholder=''
-    />
+    <>
+      <input name={name} ref={register({required: true})} className={classForEl} type='text' placeholder=''/>
+      {errors.name && <span>This field is required</span>}
+    </>
   )
 }
 

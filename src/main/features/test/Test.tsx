@@ -6,6 +6,7 @@ import Link from '../../ui/common/Link/Link';
 import {
   LOGIN_PATH, NEW_PSW_PATH, PROFILE_PATH, REGISTRATION_PATH, RESTORE_PSW_PATH
 } from "../../ui/components/routes/Routes";
+import {useForm} from "react-hook-form";
 
 const Test = () => {
   let links: Array<JSX.Element> = [
@@ -16,12 +17,16 @@ const Test = () => {
     {title: 'profile', path: PROFILE_PATH},
   ].map(l => <Link key={l.title} title={l.title} path={l.path}/>)
 
+  const { register, handleSubmit, errors } = useForm({mode: 'onBlur'});
+  const onSubmit = (data: any) => console.log(data);
+
   return  <div className={styles.test}>
     <h1>TEST</h1>
     <div className={styles.links}>{links}</div>
-    <Input isError={false}/>
-    <Button isDisabled={false}/>
-
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Input name={'name'} register={register} errors={errors}/>
+      <Button isDisabled={false}/>
+    </form>
   </div>
 }
 export default Test
