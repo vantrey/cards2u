@@ -24,7 +24,19 @@ const Test = () => {
     <h1>TEST</h1>
     <div className={styles.links}>{links}</div>
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Input name={'name'} register={register} errors={errors}/>
+      <Input
+        name={'login'}
+        register={register}
+        errors={errors}
+        errorMessage='error login'
+        placeholder=''
+      />
+      <Input
+        name={'email'}
+        register={register}
+        errors={errors}
+        errorMessage='error email'
+      />
       <Button onButtonClick={()=>{}} tittle='send' isDisabled={false}/>
     </form>
   </div>
