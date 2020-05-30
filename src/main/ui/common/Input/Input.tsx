@@ -3,23 +3,22 @@ import styles from './Input.module.css'
 
 type OwnPropsType = {
   name: string
-  errorMessage: string
+  error: {message: string, type: string} | undefined
   register: any
-  errors: any
 }
 type InputType = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 type PropsType = OwnPropsType & InputType
-const Input: React.FC<PropsType> = ({name, errors, register, errorMessage, ...props}) => {
-  let classForEl = errors[name] ? `${styles.input} ${styles.error}` : styles.input
+const Input: React.FC<PropsType> = ({name, register, error, ...props}) => {
+  let classForEl = error ? `${styles.input} ${styles.error}` : styles.input
   return (
     <>
       <input
         {...props}
         name={name}
-        ref={register({required: errorMessage})}
+        ref={register}
         className={classForEl}
       />
-      {errors[name] && <span>{errors[name].message}</span>}
+      {error && <span>{error.message}</span>}
     </>
   )
 }
