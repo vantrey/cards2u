@@ -7,6 +7,7 @@ import {
   LOGIN_PATH, NEW_PSW_PATH, PROFILE_PATH, REGISTRATION_PATH, RESTORE_PSW_PATH
 } from "../../ui/components/routes/Routes";
 import {useForm} from "react-hook-form";
+import * as yup from 'yup';
 
 const Test = () => {
   let links: Array<JSX.Element> = [
@@ -17,14 +18,31 @@ const Test = () => {
     {title: 'profile', path: PROFILE_PATH},
   ].map(l => <Link key={l.title} title={l.title} path={l.path}/>)
 
-  const { register, handleSubmit, errors } = useForm({mode: 'onBlur'});
+  const formSchema = yup.object().shape({
+    login: yup.string().required('⚠ please, fill up your login'),
+    email: yup.string().required('⚠ please, fill up your email')
+      .email('⚠ please, fill up a valid email address'),
+  })
+
+  const { register, handleSubmit, errors } = useForm({mode: 'onBlur', validationSchema: formSchema});
   const onSubmit = (data: any) => console.log(data);
 
   return  <div className={styles.test}>
     <h1>TEST</h1>
     <div className={styles.links}>{links}</div>
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Input name={'name'} register={register} errors={errors}/>
+      <Input
+        name={'login'}
+        register={register}
+        error={errors.login}
+        placeholder='login'
+      />
+      <Input
+        name={'email'}
+        register={register}
+        error={errors.email}
+        placeholder='email'
+      />
       <Button onButtonClick={()=>{}} tittle='send' isDisabled={false}/>
     </form>
   </div>
