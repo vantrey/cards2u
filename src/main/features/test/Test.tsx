@@ -7,6 +7,7 @@ import {
   LOGIN_PATH, NEW_PSW_PATH, PROFILE_PATH, REGISTRATION_PATH, RESTORE_PSW_PATH
 } from "../../ui/components/routes/Routes";
 import {useForm} from "react-hook-form";
+import * as yup from 'yup';
 
 const Test = () => {
   let links: Array<JSX.Element> = [
@@ -17,7 +18,13 @@ const Test = () => {
     {title: 'profile', path: PROFILE_PATH},
   ].map(l => <Link key={l.title} title={l.title} path={l.path}/>)
 
-  const { register, handleSubmit, errors } = useForm({mode: 'onBlur'});
+  const formSchema = yup.object().shape({
+    login: yup.string().required('⚠ please, fill up your login'),
+    email: yup.string().required('⚠ please, fill up your email')
+      .email('⚠ please, fill up a valid email address'),
+  })
+
+  const { register, handleSubmit, errors } = useForm({mode: 'onBlur', validationSchema: formSchema});
   const onSubmit = (data: any) => console.log(data);
 
   return  <div className={styles.test}>
@@ -27,15 +34,14 @@ const Test = () => {
       <Input
         name={'login'}
         register={register}
-        errors={errors}
-        errorMessage='error login'
-        placeholder=''
+        error={errors.login}
+        placeholder='login'
       />
       <Input
         name={'email'}
         register={register}
-        errors={errors}
-        errorMessage='error email'
+        error={errors.email}
+        placeholder='email'
       />
       <Button onButtonClick={()=>{}} tittle='send' isDisabled={false}/>
     </form>
