@@ -2,15 +2,20 @@ import React from 'react'
 import styles from './Button.module.css'
 
 type OwnPropsType = {
-  isDisabled: boolean
   tittle: string
-  onButtonClick: () => void
 }
-
-const Button: React.FC<OwnPropsType> = ({...props}) => {
+type ButtonType = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+type PropsType = OwnPropsType & ButtonType
+const Button: React.FC<PropsType> = ({...props}) => {
   return (
-    <button onClick={props.onButtonClick} disabled={props.isDisabled} className={styles.button}>
-      <span className={styles.buttonTitle}>{props.tittle}</span>
+    <button
+      className={styles.button}
+    >
+      <span
+        className={styles.buttonTitle}
+      >
+        {props.tittle}
+      </span>
     </button>
   )
 }
