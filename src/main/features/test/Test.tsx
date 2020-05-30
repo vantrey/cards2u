@@ -43,7 +43,7 @@ const Test = () => {
         error={errors.email}
         placeholder='email'
       />
-      <Button onButtonClick={()=>{}} tittle='send' isDisabled={false}/>
+      <Button tittle='send' />
     </form>
   </div>
 }
