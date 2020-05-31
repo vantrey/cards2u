@@ -17,7 +17,7 @@ type FormDataType = {
 }
 
 const Registration: React.FC = () => {
- const {isSuccess} = useSelector((state: AppStateType) => state.registration)
+ const {isSuccess, errorMessage} = useSelector((state: AppStateType) => state.registration)
   const dispatch = useDispatch()
   const registrationFormSchema = yup.object().shape({
     email: yup.string().required('⚠ please, fill up your email')
@@ -33,6 +33,7 @@ const Registration: React.FC = () => {
     console.log(data)
    dispatch(createUser(data.email, data.password))
   }
+  if (isSuccess) return <Redirect to={LOGIN_PATH}/>
   return  <div className={styles.registration}>
     <form onSubmit={handleSubmit(onSubmit)} className={styles.registration__form}>
       <Input
@@ -57,6 +58,7 @@ const Registration: React.FC = () => {
       />
       <Button tittle='sign up free'/>
     </form>
+    <div className={styles.registration__form_errorMessage}>{errorMessage}</div>
   </div>
 }
 

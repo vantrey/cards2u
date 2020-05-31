@@ -18,7 +18,7 @@ const Input: React.FC<PropsType> = ({name, register, error, ...props}) => {
         ref={register}
         className={classForEl}
       />
-      {error && <span>{error.message}</span>}
+      {error && <span className={styles.errorMessage}>{error.message}</span>}
     </>
   )
 }

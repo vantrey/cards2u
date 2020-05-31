@@ -5,7 +5,7 @@ import Routs from "./routes/Routes";
 import Test from "../../features/test/Test";
 
 const Main = () => {
-  return  <div className={styles.header}>
+  return <div className={styles.header}>
     <Header/>
     <Test/>
     <Routs/>

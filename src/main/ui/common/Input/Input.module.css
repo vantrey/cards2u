@@ -1,6 +1,6 @@
 .input {
   padding: 3px;
-  margin-bottom: 10px;
+  margin-top: 10px;
   width: 100px;
   outline-color: black;
   font-family: fantasy;
@@ -12,4 +12,6 @@
   outline-color: red;
 }
 
-
+.errorMessage {
+  color: red;
+}
