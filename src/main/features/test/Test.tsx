@@ -24,10 +24,13 @@ const Test = () => {
       .email('⚠ please, fill up a valid email address'),
   })
 
-  const { register, handleSubmit, errors } = useForm({mode: 'onBlur', validationSchema: formSchema});
-  const onSubmit = (data: any) => console.log(data);
+  const {register, handleSubmit, errors} = useForm({mode: 'onBlur', validationSchema: formSchema});
+  const onSubmit = (data: any, e: any) => {
+    e.target.reset()
+    console.log(data)
+  }
 
-  return  <div className={styles.test}>
+  return <div className={styles.test}>
     <h1>TEST</h1>
     <div className={styles.links}>{links}</div>
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -43,7 +46,7 @@ const Test = () => {
         error={errors.email}
         placeholder='email'
       />
-      <Button tittle='send' />
+      <Button tittle='send'/>
     </form>
   </div>
 }
