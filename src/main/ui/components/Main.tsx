@@ -1,16 +1,20 @@
 import React from 'react';
 import styles from './Main.module.css'
 import Header from "./header/Header";
-import Routs from "./routes/Routes";
-import Test from "../../features/test/Test";
-import Root from "./Root";
+import Root from './Root';
+import Menu from './menu/Menu';
 
 const Main = () => {
-  return  <div className={styles.header}>
+  return  <div >
     <Header/>
-    <Test/>
-    <Root/>
-    <Routs/>
+    <div className={styles.main__wrap}>
+      <Root/>
+      <Menu/>
+    </div>
+
+    {/*<Test/>*/}
+    {/*<Routs/>*/}
+
   </div>
 }
 export default Main

@@ -4,7 +4,7 @@ import Input from "../../ui/common/Input/Input";
 import Button from "../../ui/common/Button/Button";
 import Link from '../../ui/common/Link/Link';
 import {
-  LOGIN_PATH, NEW_PSW_PATH, PROFILE_PATH, REGISTRATION_PATH, RESTORE_PSW_PATH
+  LOGIN_PATH, NEW_PSW_PATH, PROFILE_PATH, REGISTRATION_PATH, RESTORE_PSW_PATH, ROOT_PATH
 } from "../../ui/components/routes/Routes";
 import {useForm} from "react-hook-form";
 import * as yup from 'yup';
@@ -16,6 +16,7 @@ const Test = () => {
     {title: 'restore password', path: RESTORE_PSW_PATH},
     {title: 'new password', path: NEW_PSW_PATH},
     {title: 'profile', path: PROFILE_PATH},
+    {title: 'root', path: ROOT_PATH},
   ].map(l => <Link key={l.title} title={l.title} path={l.path}/>)
 
   const formSchema = yup.object().shape({
