@@ -10,57 +10,43 @@ import {createUser} from "./registrationReducer";
 import {Redirect} from 'react-router-dom';
 import {LOGIN_PATH} from "../../ui/components/routes/Routes";
 
-type FormDataType = {
-  email: string
-  password: string
-  passwordConfirmation: string
+type RegistrationPropsType = {
+  errorMessage: string
+  register: any
+  handleSubmit: any
+  errors: any
+  onSubmit: (data: {email: string, password:string}, e: {target: { reset: () => void}}) => void
 }
 
-const Registration: React.FC = () => {
-  const {isSuccess, errorMessage} = useSelector((state: AppStateType) => state.registration)
-  const dispatch = useDispatch()
-  const registrationFormSchema = yup.object().shape({
-    email: yup.string().required('⚠ please, fill up your email')
-      .email('⚠ please, fill up a valid email address'),
-    password: yup.string().required('⚠ please, fill up your password')
-      .min(8, `password has to be at least ${8} characters long.`),
-    passwordConfirmation: yup.string()
-      .oneOf([yup.ref('password'), undefined], 'password mismatch')
-  })
-  const {register, handleSubmit, errors} = useForm({mode: 'onBlur', validationSchema: registrationFormSchema});
-  const onSubmit = (data: any, e: any) => {
-    e.target.reset()
-    console.log(data)
-    dispatch(createUser(data.email, data.password))
-  }
-  if (isSuccess) return <Redirect to={LOGIN_PATH}/>
+const Registration: React.FC<RegistrationPropsType> = (props) => {
+
   return <div className={styles.registration}>
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.registration__form}>
+    <form onSubmit={props.handleSubmit(props.onSubmit)} className={styles.registration__form}>
       <Input
         name='email'
-        register={register}
-        error={errors.email}
+        register={props.register}
+        error={props.errors.email}
         placeholder='email'
       />
       <Input
         type='password'
         name='password'
-        register={register}
-        error={errors.password}
+        register={props.register}
+        error={props.errors.password}
         placeholder='password'
       />
       <Input
         type='password'
         name='passwordConfirmation'
-        register={register}
-        error={errors.passwordConfirmation}
+        register={props.register}
+        error={props.errors.passwordConfirmation}
         placeholder='confirm password'
       />
       <div className={styles.registration__form_button}>
         <Button tittle='sign up free'/>
       </div>
     </form>
-    <div className={styles.registration__form_errorMessage}>{errorMessage}</div>
+    <div className={styles.registration__form_errorMessage}>{props.errorMessage}</div>
   </div>
 }
 

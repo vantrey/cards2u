@@ -5,6 +5,7 @@ import Registration from "../../../auth/registration/Regirtration";
 import RestorePsw from "../../../auth/restorePsw/RestorePsw";
 import NewPsw from "../../../auth/newPsw/newPsw";
 import Profile from "../../../auth/profile/Profile";
+import RegistrationContainer from "../../../auth/registration/RegirtrationContainer";
 
 export const LOGIN_PATH = '/login'
 export const REGISTRATION_PATH = '/registration'
@@ -15,7 +16,7 @@ export const PROFILE_PATH = '/profile'
 const Routs = () => {
   return <div>
     <Route path={LOGIN_PATH} render={() => <Login/>}/>
-    <Route path={REGISTRATION_PATH} render={() => <Registration/>}/>
+    <Route path={REGISTRATION_PATH} render={() => <RegistrationContainer/>}/>
     <Route path={RESTORE_PSW_PATH} render={() => <RestorePsw/>}/>
     <Route path={NEW_PSW_PATH} render={() => <NewPsw/>}/>
     <Route path={PROFILE_PATH} render={() => <Profile/>}/>
