@@ -5,7 +5,7 @@ import Registration from "../../../auth/registration/Regirtration";
 import RestorePsw from "../../../auth/restorePsw/RestorePsw";
 import NewPsw from "../../../auth/newPsw/newPsw";
 import Profile from "../../../auth/profile/Profile";
-import Root from "../Root";
+import Root from "../root/Root";
 
 
 export const LOGIN_PATH = '/login'

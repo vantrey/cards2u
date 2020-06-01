@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Main.module.css'
 import Header from "./header/Header";
-import Root from './Root';
+import Root from './root/Root';
 import Menu from './menu/Menu';
 
 const Main = () => {
