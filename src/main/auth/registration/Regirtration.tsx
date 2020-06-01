@@ -7,7 +7,7 @@ import Button from "../../ui/common/Button/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../bll/store/store";
 import {createUser} from "./registrationReducer";
-import { Redirect } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {LOGIN_PATH} from "../../ui/components/routes/Routes";
 
 type FormDataType = {
@@ -17,7 +17,7 @@ type FormDataType = {
 }
 
 const Registration: React.FC = () => {
- const {isSuccess, errorMessage} = useSelector((state: AppStateType) => state.registration)
+  const {isSuccess, errorMessage} = useSelector((state: AppStateType) => state.registration)
   const dispatch = useDispatch()
   const registrationFormSchema = yup.object().shape({
     email: yup.string().required('⚠ please, fill up your email')
@@ -31,10 +31,10 @@ const Registration: React.FC = () => {
   const onSubmit = (data: any, e: any) => {
     e.target.reset()
     console.log(data)
-   dispatch(createUser(data.email, data.password))
+    dispatch(createUser(data.email, data.password))
   }
   if (isSuccess) return <Redirect to={LOGIN_PATH}/>
-  return  <div className={styles.registration}>
+  return <div className={styles.registration}>
     <form onSubmit={handleSubmit(onSubmit)} className={styles.registration__form}>
       <Input
         name='email'
@@ -56,7 +56,9 @@ const Registration: React.FC = () => {
         error={errors.passwordConfirmation}
         placeholder='confirm password'
       />
-      <Button tittle='sign up free'/>
+      <div className={styles.registration__form_button}>
+        <Button tittle='sign up free'/>
+      </div>
     </form>
     <div className={styles.registration__form_errorMessage}>{errorMessage}</div>
   </div>
