@@ -7,13 +7,13 @@ import poster from '../../images/main-bg.png'
 
 
 const Intro = () => {
+
 	let [ sound, setSound ] = useState (true);
+
 	useEffect (() => {
 		let vid = document.getElementById ('intro');
-		console.log (vid);
 		vid.volume = 0.15;
 	}, []);
-
 
 	return (
 		<div className={styles.intro}>

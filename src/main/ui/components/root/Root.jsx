@@ -12,14 +12,12 @@ const Root = () => {
 	let [ sound, setSound ] = useState (true);
 	useEffect (() => {
 		let vid = document.getElementById ('intro');
-		console.log (vid);
 		vid.volume = 0.15;
 	}, []);
 
-
 	return (
 		<div className={styles.root}>
-			<video className={styles.root__video} id='intro' controls autoPlay muted={sound}
+			<video className={styles.root__video} id='intro' controls autoPlay loop muted={sound}
 				   poster={poster}>
 				<source src={videomp4} type="video/mp4"/>
 				<source src={videowebm} type="video/webm"/>
