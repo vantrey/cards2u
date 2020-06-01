@@ -16,12 +16,12 @@ const Menu: React.FC = (): any => {
                 <div className={styles.menu__point}>
                     <img src={imgPoint} alt="point"/>
                 </div>
-                {/*<div className={styles.menu__about}>*/}
-                {/*    <img src={imgAbout} alt="about"/>*/}
-                {/*</div>*/}
-                <div className={styles.menu__close}>
-                    <img src={imgClose} alt="close"/>
+                <div className={styles.menu__about}>
+                    <img src={imgAbout} alt="about"/>
                 </div>
+                {/*<div className={styles.menu__close}>*/}
+                {/*    <img src={imgClose} alt="close"/>*/}
+                {/*</div>*/}
 
             </div>
 
