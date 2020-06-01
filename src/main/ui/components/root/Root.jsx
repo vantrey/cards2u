@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Root.module.css'
 import videomp4 from '../../video/main-bg-video-20.mp4'
 import videowebm from '../../video/main-bg-video-20.mp4'
 import videoogg from '../../video/main-bg-video-20.mp4'
 import soundOf from '../../icons/sound-of.svg'
 import soundOn from '../../icons/sound-on.svg'
-import intro from '../../video/intro-compress2.mp4'
 import poster from '../../images/main-bg.png'
 
 
@@ -38,7 +37,7 @@ const Root = () => {
 					<img src={soundOn} alt='soundOf'/>
 				</div>
 			}
-			We are sorry that you cannot see the intro
+			We are sorry that you cannot see the video
 		</div>
 	)
 }
