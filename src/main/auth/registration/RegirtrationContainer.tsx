@@ -8,18 +8,18 @@ import {LOGIN_PATH} from '../../ui/components/routes/Routes'
 import Registration from "./Regirtration"
 import {registrationFormSchema} from './registrationFormShema'
 
-type FormDataType = {
+type RegistrationFormDataType = {
   email: string
   password: string
   passwordConfirmation: string
 }
-export type RegisterType = ReturnType<typeof useForm>['register'];
-export type ErrorsType = ReturnType<typeof useForm>['errors'];
+export type RegisterType = ReturnType<typeof useForm>['register']
+export type ErrorsType = ReturnType<typeof useForm>['errors']
 
 const RegistrationContainer: React.FC = () => {
-  const {isSuccess, errorMessage} = useSelector((state: AppStateType) => state.registration)
+  const {isSuccess, errorServerMessage, isFetching} = useSelector((state: AppStateType) => state.registration)
   const dispatch = useDispatch()
-  const {register, handleSubmit, errors, reset} = useForm<FormDataType>({
+  const {register, handleSubmit, errors, reset} = useForm<RegistrationFormDataType>({
     mode: 'onBlur',
     validationSchema: registrationFormSchema
   })
@@ -30,10 +30,11 @@ const RegistrationContainer: React.FC = () => {
 
   if (isSuccess) return <Redirect to={LOGIN_PATH}/>
   return <Registration
-    errorMessage={errorMessage}
+    errorServerMessage={errorServerMessage}
     register={register}
     errors={errors}
     onSubmit={onSubmit}
+    isFetching={isFetching}
   />
 }
 

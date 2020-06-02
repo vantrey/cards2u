@@ -4,7 +4,7 @@ import {api} from "../../dal/api";
 
 const initialState = {
   isSuccess: false,
-  errorMessage: '',
+  errorServerMessage: '',
   isFetching: false
 }
 
@@ -14,7 +14,7 @@ export const registrationReducer = (state: typeof initialState = initialState, a
       return {
         ...state,
         isSuccess: action.isSuccess,
-        errorMessage: action.errorMessage
+        errorServerMessage: action.errorServerMessage
       }
     case "REGISTRATION_REDUCER/IS_FETCHING":
       return {
@@ -27,10 +27,10 @@ export const registrationReducer = (state: typeof initialState = initialState, a
 }
 
 const actions = {
-  createUserSuccess: (isSuccess: boolean, errorMessage: string) => ({
+  createUserSuccess: (isSuccess: boolean, errorServerMessage: string) => ({
     type: 'REGISTRATION_REDUCER/CREATE_USER_SUCCESS',
     isSuccess,
-    errorMessage
+    errorServerMessage
   } as const),
   setIsFetching: (isFetching: boolean) => ({
     type: 'REGISTRATION_REDUCER/IS_FETCHING',
@@ -49,10 +49,10 @@ export const createUser = (email: string, password: string): ThunkType => async 
     const result = await api.registration(email, password)
     console.log(result)
     dispatch(actions.createUserSuccess(result.data.success, ''))
-    dispatch(actions.setIsFetching(true))
+    dispatch(actions.setIsFetching(false))
   } catch (e) {
     dispatch(actions.createUserSuccess(false, e.response.data.error))
-    dispatch(actions.setIsFetching(true))
+    dispatch(actions.setIsFetching(false))
     console.log({...e})
   }
 }
