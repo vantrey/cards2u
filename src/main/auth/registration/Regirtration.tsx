@@ -11,12 +11,12 @@ type RegistrationPropsType = {
   onSubmit: () => void
 }
 
-const Registration: React.FC<RegistrationPropsType> = (props) => {
+const Registration: React.FC<RegistrationPropsType> = ({isFetching, errorServerMessage, ...props}) => {
 
   return <div className={styles.registration}>
-    <RegistrationForm register={props.register} errors={props.errors} onSubmit={props.onSubmit}/>
-    {props.isFetching && <span>...LOADING</span>}
-    <div className={styles.registration__form_errorMessage}>{props.errorServerMessage}</div>
+    <RegistrationForm {...props}/>
+    {isFetching && <span>...LOADING</span>}
+    {errorServerMessage && <div className={styles.registration__form_errorMessage}>{errorServerMessage}</div>}
   </div>
 }
 

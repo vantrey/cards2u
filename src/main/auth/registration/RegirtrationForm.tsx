@@ -17,21 +17,21 @@ const RegistrationForm: React.FC<RegistrationPropsType> = (props) => {
       <Input
         name='email'
         register={props.register}
-        error={props.errors.email}
+        errors={props.errors}
         placeholder='email'
       />
       <Input
         type='password'
         name='password'
         register={props.register}
-        error={props.errors.password}
+        errors={props.errors}
         placeholder='password'
       />
       <Input
         type='password'
         name='passwordConfirmation'
         register={props.register}
-        error={props.errors.passwordConfirmation}
+        errors={props.errors}
         placeholder='confirm password'
       />
       <div className={styles.registration__form_button}>
