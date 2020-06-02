@@ -21,12 +21,17 @@ export const registrationReducer = (state: typeof initialState = initialState, a
         ...state,
         isFetching: action.isFetching
       }
+    case "REGISTRATION_REDUCER/SET_IS_SUCCESS":
+      return {
+        ...state,
+        isSuccess: action.isSuccess
+      }
     default:
       return state
   }
 }
 
-const actions = {
+export const actions = {
   createUserSuccess: (isSuccess: boolean, errorServerMessage: string) => ({
     type: 'REGISTRATION_REDUCER/CREATE_USER_SUCCESS',
     isSuccess,
@@ -35,8 +40,13 @@ const actions = {
   setIsFetching: (isFetching: boolean) => ({
     type: 'REGISTRATION_REDUCER/IS_FETCHING',
     isFetching
+  } as const),
+  setIsSuccess: (isSuccess: boolean) => ({
+    type: 'REGISTRATION_REDUCER/SET_IS_SUCCESS',
+      isSuccess
   } as const)
 }
+
 type ActionsType = InferActionTypes<typeof actions>
 
 // thunks
