@@ -11,27 +11,27 @@ type RegistrationPropsType = {
   onSubmit: () => void
 }
 
-const RegistrationForm: React.FC<RegistrationPropsType> = (props) => {
+const RegistrationForm: React.FC<RegistrationPropsType> = ({onSubmit, register, ...props}) => {
   return <div>
-    <form onSubmit={props.onSubmit} className={styles.registration__form}>
+    <form onSubmit={onSubmit} className={styles.registration__form}>
       <Input
+        register={register}
         name='email'
-        register={props.register}
-        errors={props.errors}
+        {...props}
         placeholder='email'
       />
       <Input
+        register={register}
         type='password'
         name='password'
-        register={props.register}
-        errors={props.errors}
+        {...props}
         placeholder='password'
       />
       <Input
+        register={register}
         type='password'
         name='passwordConfirmation'
-        register={props.register}
-        errors={props.errors}
+        {...props}
         placeholder='confirm password'
       />
       <div className={styles.registration__form_button}>
