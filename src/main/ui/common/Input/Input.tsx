@@ -9,17 +9,17 @@ type OwnPropsType = {
 }
 type InputType = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 type PropsType = OwnPropsType & InputType
-const Input: React.FC<PropsType> = ({name, register, ...props}) => {
-  let classForEl = props.errors[name] ? `${styles.input} ${styles.error}` : styles.input
+const Input: React.FC<PropsType> = ({ register, errors, name, ...props}) => {
+  let classForEl = errors[name] ? `${styles.input} ${styles.error}` : styles.input
   return (
     <>
       <input
+        ref={register}
         {...props}
         name={name}
-        ref={register}
         className={classForEl}
       />
-      {props.errors[name] && <span className={styles.errorMessage}>{props.errors[name].message}</span>}
+      {errors[name] && <span className={styles.errorMessage}>{errors[name].message}</span>}
     </>
   )
 }
