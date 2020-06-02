@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './Input.module.css'
+import {RegisterType} from "../../../auth/registration/RegirtrationContainer";
 
 type OwnPropsType = {
   name: string
   error: {message: string, type: string} | undefined
-  register: any
+  register: RegisterType
 }
 type InputType = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 type PropsType = OwnPropsType & InputType

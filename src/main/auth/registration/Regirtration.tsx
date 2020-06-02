@@ -1,27 +1,21 @@
-import React from 'react';
+import React from 'react'
 import styles from './Registration.module.css'
-import * as yup from "yup";
-import {useForm} from "react-hook-form";
-import Input from "../../ui/common/Input/Input";
-import Button from "../../ui/common/Button/Button";
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../bll/store/store";
-import {createUser} from "./registrationReducer";
-import {Redirect} from 'react-router-dom';
-import {LOGIN_PATH} from "../../ui/components/routes/Routes";
+import Input from "../../ui/common/Input/Input"
+import Button from "../../ui/common/Button/Button"
+import {ErrorsType, RegisterType} from "./RegirtrationContainer";
+
 
 type RegistrationPropsType = {
   errorMessage: string
-  register: any
-  handleSubmit: any
-  errors: any
-  onSubmit: (data: {email: string, password:string}, e: {target: { reset: () => void}}) => void
+  register: RegisterType
+  errors: ErrorsType
+  onSubmit: () => void
 }
 
 const Registration: React.FC<RegistrationPropsType> = (props) => {
 
   return <div className={styles.registration}>
-    <form onSubmit={props.handleSubmit(props.onSubmit)} className={styles.registration__form}>
+    <form onSubmit={props.onSubmit} className={styles.registration__form}>
       <Input
         name='email'
         register={props.register}
