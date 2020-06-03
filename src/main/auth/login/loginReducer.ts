@@ -17,7 +17,6 @@ const initialState = {
 export const loginReducer = (state: typeof initialState = initialState, action: ActionsType) => {
     switch (action.type) {
         case 'cards2u/main/auth/AUTH_ME':
-            debugger
             return {
                 ...state,
                 isAuth: action.isAuth, errorServerMessage: action.errorServerMessage
@@ -40,11 +39,11 @@ const actions = {
         isFetching
     } as const),
 }
-
 type ActionsType = InferActionTypes<typeof actions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
+//!Для усовершенстования логина. Показывает кнопку "login out". Дает возможность вылогиниться.
 // export const logout = (): ThunkType => async (dispatch: DispatchType) => {
 //     debugger
 //     let response = await api.logout()
@@ -53,22 +52,17 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 //     }
 // };
 
-
-export const login = (email: string, password: string, rememberMe: boolean):ThunkType =>
+export const login = (email: string, password: string, rememberMe: boolean): ThunkType =>
     async (dispatch: DispatchType) => {
-        debugger
         try {
             dispatch(actions.loginIsFetching(true))
             const result = await api.login(email, password, rememberMe)
             dispatch(actions.loginAuthMeSuccess(result.data.success, ""));
             dispatch(actions.loginIsFetching(false))
-
         } catch (e) {
-            debugger
             dispatch(actions.loginAuthMeSuccess(false, 'error'))
             dispatch(actions.loginIsFetching(false))
             console.log({...e})
         }
-
     }
 

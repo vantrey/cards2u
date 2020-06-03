@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './Login.module.css'
-
 import Input from "../../ui/common/Input/Input";
 import Button from "../../ui/common/Button/Button";
 import {ErrorsLoginType, RegisterLoginType} from "./LoginContainer";
@@ -34,7 +33,7 @@ const LoginForm: React.FC<LoginFormPropsType> = ({onSubmit, register, ...props})
                     {...props}
                     placeholder='confirm password'
                 />RememberMe
-                <div className={styles.registration__form_button}>
+                <div className={styles.login__form_button}>
                     <Button tittle='sign in'/>
                 </div>
         </form>
