@@ -3,6 +3,7 @@ import styles from './RestorePassword.module.css'
 import RestorePswForm from "./RestorePswForm";
 import {ErrorType, RegisterType} from "./RestorePswContainer";
 
+
 type ownProps = {
     register: RegisterType,
     errors: ErrorType,

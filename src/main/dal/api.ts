@@ -67,7 +67,7 @@ export const api = {
   },
   restorePsw(email: string, html1: string, html2: string) {
     return instance.post<{ success: boolean }>(
-      ` /auth/forgot`,
+      `/auth/forgot`,
       {
         email,
         html1,

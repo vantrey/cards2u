@@ -4,6 +4,7 @@ import Button from "../../ui/common/Button/Button";
 import styles from './RestorePassword.module.css'
 import {ErrorType, RegisterType} from "./RestorePswContainer";
 
+
 type RestorePswFormType = {
     onSubmit: () => void;
     register: RegisterType,

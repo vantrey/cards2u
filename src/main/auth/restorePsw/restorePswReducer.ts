@@ -48,15 +48,13 @@ export const send_Email = (email: string, html1: string, html2: string): ThunkTy
     async (dispatch: DispatchType, getState: () => AppStateType) => {
         try {
             dispatch(actions.set_Fetching(true));
-            await api.restorePsw(email, html1, html2).then((res) => {
-                dispatch(actions.sendEmail(res.data.success, ''));
-                dispatch(actions.set_Fetching(false));
-                console.log(res);
-            })
-
+            const res = await api.restorePsw(email, html1, html2)
+            dispatch(actions.sendEmail(res.data.success, ''));
+            dispatch(actions.set_Fetching(false));
+            console.log(res);
         } catch (e) {
             dispatch(actions.sendEmail(false, e.response.data.error));
             dispatch(actions.set_Fetching(false));
-            console.error('error: ' + {...e});
+            console.log({...e});
         }
     }
