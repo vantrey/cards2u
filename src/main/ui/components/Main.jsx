@@ -6,40 +6,42 @@ import Menu from './menu/Menu';
 import Intro from "./intro/Intro";
 import Scroll from "../common/scroll/Scroll";
 import Loader from "../common/loader/Loader";
+import Test from "../../features/test/Test";
+import Routs from "./routes/Routes";
 
 const Main = () => {
 
-	let [ toggleBg, setBg ] = useState (true);
-
-	useEffect (() => {
-		let vid = document.getElementById ('intro');
-		vid.addEventListener ('ended', () => {
-			setBg (!toggleBg);
-		}, true);
-
-	}, []);
+	// let [ toggleBg, setBg ] = useState (true);
+	//
+	// useEffect (() => {
+	// 	let vid = document.getElementById ('intro');
+	// 	vid.addEventListener ('ended', () => {
+	// 		setBg (!toggleBg);
+	// 	}, true);
+	//
+	// }, []);
 
 	return (
 		<div>
 			<Header/>
-			<div className={styles.main__wrap}>
-				{
-					toggleBg &&
-					<Intro/>
-				}
-				{
-					!toggleBg &&
-					<>
-						<Root/>
-						<Loader/>
-					</>
-				}
-				<Scroll/>
-				<Menu/>
-			</div>
+				{/*<div className={styles.main__wrap}>*/}
+				{/*	{*/}
+				{/*		toggleBg &&*/}
+				{/*		<Intro/>*/}
+				{/*	}*/}
+				{/*	{*/}
+				{/*		!toggleBg &&*/}
+				{/*		<>*/}
+				{/*			<Root/>*/}
+				{/*			<Loader/>*/}
+				{/*		</>*/}
+				{/*	}*/}
+				{/*	<Scroll/>*/}
+				{/*	<Menu/>*/}
+				{/*</div>*/}
 
-			{/*<Test/>*/}
-			{/*<Routs/>*/}
+			<Test/>
+			<Routs/>
 		</div>
 	)
 }
