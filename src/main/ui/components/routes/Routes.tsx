@@ -1,7 +1,6 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
 import Login from "../../../auth/login/Login";
-import Registration from "../../../auth/registration/Regirtration";
 import RestorePsw from "../../../auth/restorePsw/RestorePsw";
 import NewPsw from "../../../auth/newPsw/newPsw";
 import Profile from "../../../auth/profile/Profile";
