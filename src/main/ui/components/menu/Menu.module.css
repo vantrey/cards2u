@@ -1,0 +1,53 @@
+.menu {
+    width: 90px;
+    height: 100vh;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 100;
+    background-image: url('../../images/cтена-218.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    padding-top: 120px;
+}
+.menu__wrap {
+    position: relative;
+    width: 80%;
+    height: 77%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    margin:  auto 0;
+    /*border: 1px solid red;*/
+    margin-right: -14px;
+
+}
+.menu__taverna {
+    width: 132px;
+    height: 0;
+    transform: rotate(-90deg);
+    cursor: pointer;
+}
+
+.menu__point {
+    width: 20px;
+    height: 0;
+    transform: rotate(-90deg);
+}
+
+.menu__about {
+    width: 100px;
+    height: 0;
+    transform: rotate(-90deg);
+    cursor: pointer;
+}
+
+.menu__close {
+    width: 128px;
+    height: 0;
+    transform: rotate(-90deg);
+    cursor: pointer;
+}

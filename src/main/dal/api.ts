@@ -57,6 +57,9 @@ export const api = {
         rememberMe
       })
   },
+  logout() {
+    return instance.delete<LoginType>(`/auth/login`)
+  },
   registration(email: string, password: string) {
     return instance.post<RegistrationType>(
       `/auth/register`,
