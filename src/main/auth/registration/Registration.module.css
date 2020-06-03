@@ -1,3 +1,17 @@
 .registration {
+  display: flex;
+  flex-direction: column;
+}
 
+.registration__form {
+  composes: registration;
+  align-items: center;
+}
+
+.registration__form_errorMessage {
+color: red;
+}
+
+.registration__form_button {
+  margin-top: 10px;
 }
