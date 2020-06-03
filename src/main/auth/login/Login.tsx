@@ -1,10 +1,23 @@
 import React from 'react';
-import styles from './Login.module.css'
+import LoginForm from "./LoginForm";
+import styles from "../registration/Registration.module.css";
+import {ErrorsLoginType, RegisterLoginType} from "./LoginContainer";
 
-const Login = () => {
+type LoginPropsType = {
+    errorServerMessage: string
+    register: RegisterLoginType
+    errors: ErrorsLoginType
+    isFetching: boolean
+    onSubmit: () => void
+}
 
-  return  <div className={styles.login}>
-LOGIN
-  </div>
+
+const Login: React.FC<LoginPropsType> = ({isFetching, errorServerMessage, ...props}) => {
+    return <div className={styles.registration}>
+        <LoginForm {...props}/>
+        {isFetching && <span>...LOADING</span>}
+        {errorServerMessage && <div className={styles.registration__form_errorMessage}>{errorServerMessage}</div>}
+
+    </div>
 }
 export default Login
