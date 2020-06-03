@@ -4,6 +4,8 @@ import Header from "./header/Header";
 import Root from './root/Root';
 import Menu from './menu/Menu';
 import Intro from "./intro/Intro";
+import Scroll from "../common/scroll/Scroll";
+import Loader from "../common/loader/Loader";
 
 const Main = () => {
 
@@ -27,14 +29,17 @@ const Main = () => {
 				}
 				{
 					!toggleBg &&
-					<Root/>
+					<>
+						<Root/>
+						<Loader/>
+					</>
 				}
+				<Scroll/>
 				<Menu/>
 			</div>
 
-			{/*<Test/>*/}
-			{/*<Routs/>*/}
-
+					{/*<Test/>*/}
+					{/*<Routs/>*/}
 		</div>
 	)
 }

@@ -1,8 +1,8 @@
 {
-  "name": "cards2u",
+  "name": "wisemen",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vantrey.github.io/cards2u",
+  "homepage": "https://SantYaga33.github.io/Wisemen",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
