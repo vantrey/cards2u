@@ -1,3 +1,4 @@
-.main {
-color: aqua;
+.main__wrap {
+    display: flex;
+    justify-content: space-between;
 }

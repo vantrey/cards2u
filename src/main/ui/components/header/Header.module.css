@@ -1,3 +1,45 @@
 .header {
-color: #477400;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 90px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-image: url('../../images/header-bg-cloud80.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.header__wrap {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+}
+
+.header__logo {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    width: 170px;
+    margin-left: 100px;
+}
+
+.header__login {
+    display: flex;
+    align-items: center;
+    width: 60px;
+    height: 40px;
+    margin-right: 100px;
+    cursor: pointer;
+}
+
+.header__login img, .header__logo img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
