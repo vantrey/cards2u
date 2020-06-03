@@ -38,8 +38,8 @@ const Main = () => {
 				<Menu/>
 			</div>
 
-					{/*<Test/>*/}
-					{/*<Routs/>*/}
+			{/*<Test/>*/}
+			{/*<Routs/>*/}
 		</div>
 	)
 }

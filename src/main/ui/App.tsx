@@ -10,7 +10,7 @@ const App = () => {
     <div className="App">
       <Provider store={store}>
         <HashRouter>
-          <Main/>
+        <Main/>
         </HashRouter>
       </Provider>
     </div>
