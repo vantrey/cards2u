@@ -19,4 +19,4 @@ const Test = () => {
     <div className={styles.links}>{links}</div>
   </div>
 }
-export default Test
+export default Test;
