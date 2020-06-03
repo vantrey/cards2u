@@ -1,0 +1,42 @@
+import React, { useEffect, useState } from 'react';
+import styles from './Intro.module.css'
+import soundOf from '../../icons/sound-of.svg'
+import soundOn from '../../icons/sound-on.svg'
+import intro from '../../video/intro-compress2.mp4'
+import poster from '../../images/main-bg.png'
+
+
+const Intro = () => {
+
+	let [ sound, setSound ] = useState (true);
+
+	useEffect (() => {
+		let vid = document.getElementById ('intro');
+		vid.volume = 0.15;
+	}, []);
+
+	return (
+		<div className={styles.intro}>
+			<video className={styles.intro__video} id='intro' controls autoPlay muted={sound}
+				   poster={poster}>
+				<source src={intro} type="video/mp4"/>
+				{/*<source src={videowebm} type="video/webm"/>*/}
+				{/*<source src={videoogg} type="video/ogg"/>*/}
+			</video>
+			{
+				!sound &&
+				<div className={styles.intro__icon} onClick={() => setSound (!sound)}>
+					<img src={soundOf} alt='soundOn'/>
+				</div>
+			}
+			{
+				sound &&
+				<div className={styles.intro__icon} onClick={() => setSound (!sound)}>
+					<img src={soundOn} alt='soundOf'/>
+				</div>
+			}
+			We are sorry that you cannot see the intro
+		</div>
+	)
+}
+export default Intro;
