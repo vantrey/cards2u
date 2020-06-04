@@ -14,30 +14,29 @@ const Main = () => {
 	let [ toggleBg, setBg ] = useState (true);
 	let [ modal, setModal ] = useState (false);
 
-	// useEffect (() => {
-	// 	let vid = document.getElementById ('intro');
-	// 	vid.addEventListener ('ended', () => {
-	// 		setBg (!toggleBg);
-	// 	}, true);
-	//
-	// }, []);
+	useEffect (() => {
+		let vid = document.getElementById ('intro');
+		vid.addEventListener ('ended', () => {
+			setBg (!toggleBg);
+		}, true);
+
+	}, []);
 
 	return (
 		<div>
 			<Header setModal={setModal}/>
 				<div className={styles.main__wrap}>
-					{/*{*/}
-					{/*	toggleBg &&*/}
-					{/*	<Intro/>*/}
-					{/*}*/}
-					{/*{*/}
-					{/*	!toggleBg &&*/}
-					{/*	<>*/}
-					{/*		<Root/>*/}
-					{/*		<Loader/>*/}
-					{/*	</>*/}
-					{/*}*/}
-					<Root/>
+					{
+						toggleBg &&
+						<Intro/>
+					}
+					{
+						!toggleBg &&
+						<>
+							<Root/>
+							<Loader/>
+						</>
+					}
 
 					<Scroll modal={modal} setModal={setModal}/>
 					<Menu/>

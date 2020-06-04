@@ -29,16 +29,16 @@
     margin-left: 100px;
 }
 
-.header__login {
+.header__home {
     display: flex;
     align-items: center;
-    width: 60px;
+    width: 40px;
     height: 40px;
     margin-right: 100px;
     cursor: pointer;
 }
 
-.header__login img, .header__logo img {
+.header__home img, .header__logo img {
     max-width: 100%;
     height: auto;
     display: block;

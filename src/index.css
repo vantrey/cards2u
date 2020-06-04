@@ -1,11 +1,25 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /*margin: 0;*/
+  /*font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',*/
+  /*  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',*/
+  /*  sans-serif;*/
+  /*-webkit-font-smoothing: antialiased;*/
+  /*-moz-osx-font-smoothing: grayscale;*/
 }
+@font-face {
+  font-family: 'CS Grimrock';
+  src: url('./main/ui/fonts/CSGrimrock.eot');
+  src: local('CS Grimrock'), local('CSGrimrock'),
+  url('./main/ui/fonts/CSGrimrock.eot?#iefix') format('embedded-opentype'),
+  url('./main/ui/fonts/CSGrimrock.woff2') format('woff2'),
+  url('./main/ui/fonts/CSGrimrock.woff') format('woff'),
+  url('./main/ui/fonts/CSGrimrock.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -22,7 +36,6 @@ code {
 }
 
 /* Убираем внутренние отступы */
-ul[class],
 ol[class] {
   padding: 0;
 }
