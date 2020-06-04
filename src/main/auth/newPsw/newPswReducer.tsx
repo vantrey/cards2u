@@ -47,12 +47,10 @@ export const setNewPsw = (resetPswToken: string, password: string): ThunkType =>
   try {
     dispatch(actions.setIsFetching(true))
     const response = await api.setNewPsw(resetPswToken, password)
-    console.log(response);
     dispatch(actions.setNewPswSuccess(response.data.success, ''))
     dispatch(actions.setIsFetching(false))
   } catch (e) {
     dispatch(actions.setNewPswSuccess(false, e.response.data.error))
     dispatch(actions.setIsFetching(false))
-    console.log({...e})
   }
 }

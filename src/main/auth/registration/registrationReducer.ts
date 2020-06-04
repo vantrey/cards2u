@@ -57,12 +57,10 @@ export const createUser = (email: string, password: string): ThunkType => async 
   try {
     dispatch(actions.setIsFetching(true))
     const response = await api.registration(email, password)
-    console.log(response)
     dispatch(actions.createUserSuccess(response.data.success, ''))
     dispatch(actions.setIsFetching(false))
   } catch (e) {
     dispatch(actions.createUserSuccess(false, e.response.data.error))
     dispatch(actions.setIsFetching(false))
-    console.log({...e})
   }
 }
