@@ -4,25 +4,18 @@ import scrollBg from '../../images/scroll.png';
 import closeIcon from '../../icons/cancel .png';
 
 
-const Scroll = () => {
+const Scroll = ({ modal, setModal }) => {
 
-// ===== временно для работы =====
+	const closeModal = () =>{
+		setModal(false);
+	};
 
-	useEffect (() => {
-		let closeEl = document.getElementById ('closeIconId');
-		let modalEl = document.getElementById('modal');
-		closeEl.addEventListener ('click', () => {
-			modalEl.classList.remove('scroll__wrap_active');
-		}, true);
-
-	}, []);
-
-// =====
+	const classForModal = modal === true ? `${styles.scroll__wrap} ${styles.scroll__wrap_active}` : `${styles.scroll__wrap}`;
 
 	return (
-		<div className={styles.scroll__wrap} id='modal'>
+		<div className={classForModal} id='modal'>
 			<div className={styles.scroll__img}>
-				<div className={styles.scroll__icon} id='closeIconId'>
+				<div className={styles.scroll__icon} id='closeIconId' onClick={closeModal}>
 					<img src={closeIcon} alt="cancel-Icon"/>
 				</div>
 				<img src={scrollBg} alt="scroll"/>
