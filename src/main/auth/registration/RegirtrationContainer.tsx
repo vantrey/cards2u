@@ -13,8 +13,6 @@ type RegistrationFormDataType = {
   password: string
   passwordConfirmation: string
 }
-export type RegisterType = ReturnType<typeof useForm>['register']
-export type ErrorsType = ReturnType<typeof useForm>['errors']
 
 const RegistrationContainer: React.FC = () => {
   const [isFirsRendering, setIsFirstRendering] = useState(true)

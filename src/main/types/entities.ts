@@ -1,3 +1,5 @@
+import {useForm} from "react-hook-form";
+
 export type UserType = {
   avatar: string
   created: string
@@ -9,3 +11,6 @@ export type UserType = {
   verified: boolean
   _id: string
 }
+
+export type UseFormRegisterType = ReturnType<typeof useForm>['register']
+export type UseFormErrorsType = ReturnType<typeof useForm>['errors']

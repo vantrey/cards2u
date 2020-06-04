@@ -1,14 +1,13 @@
 import React from 'react';
 import styles from './RestorePassword.module.css'
 import RestorePswForm from "./RestorePswForm";
-import {ErrorType, RegisterType} from "./RestorePswContainer";
-
+import {UseFormErrorsType, UseFormRegisterType} from "../../types/entities";
 
 type ownProps = {
-    register: RegisterType,
-    errors: ErrorType,
-    messageAboutError: string,
-    onSubmit: () => void,
+    register: UseFormRegisterType
+    errors: UseFormErrorsType
+    messageAboutError: string
+    onSubmit: () => void
     isFetching: boolean
 }
 

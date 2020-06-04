@@ -2,14 +2,12 @@ import React from 'react';
 import Input from "../../ui/common/Input/Input";
 import Button from "../../ui/common/Button/Button";
 import styles from './RestorePassword.module.css'
-import {ErrorType, RegisterType} from "./RestorePswContainer";
-
+import {UseFormErrorsType, UseFormRegisterType} from "../../types/entities";
 
 type RestorePswFormType = {
-    onSubmit: () => void;
-    register: RegisterType,
-    errors: ErrorType
-
+    onSubmit: () => void
+    register: UseFormRegisterType
+    errors: UseFormErrorsType
 }
 
 const RestorePswForm: React.FC<RestorePswFormType> = ({onSubmit, register, errors}) => {
