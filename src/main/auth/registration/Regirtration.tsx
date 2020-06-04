@@ -1,12 +1,12 @@
 import React from 'react'
 import styles from './Registration.module.css'
-import {ErrorsType, RegisterType} from "./RegirtrationContainer";
 import RegistrationForm from "./RegirtrationForm";
+import {UseFormErrorsType, UseFormRegisterType} from "../../types/entities";
 
 type RegistrationPropsType = {
   errorServerMessage: string
-  register: RegisterType
-  errors: ErrorsType
+  register: UseFormRegisterType
+  errors: UseFormErrorsType
   isFetching: boolean
   onSubmit: () => void
 }

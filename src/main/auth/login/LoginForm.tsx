@@ -2,11 +2,11 @@ import React from 'react';
 import styles from './Login.module.css'
 import Input from "../../ui/common/Input/Input";
 import Button from "../../ui/common/Button/Button";
-import {ErrorsLoginType, RegisterLoginType} from "./LoginContainer";
+import {UseFormErrorsType, UseFormRegisterType} from "../../types/entities";
 
 type LoginFormPropsType = {
-    register: RegisterLoginType
-    errors: ErrorsLoginType
+    register: UseFormRegisterType
+    errors: UseFormErrorsType
     onSubmit: () => void
 }
 const LoginForm: React.FC<LoginFormPropsType> = ({onSubmit, register, ...props}) => {

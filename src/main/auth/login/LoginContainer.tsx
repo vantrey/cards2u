@@ -14,9 +14,6 @@ type LoginFormDataType = {
     rememberMe: boolean
 }
 
-export type RegisterLoginType = ReturnType<typeof useForm>['register']
-export type ErrorsLoginType = ReturnType<typeof useForm>['errors']
-
 const LoginContainer: React.FC = () => {
     const {isAuth, errorServerMessage, isFetching} = useSelector((state: AppStateType) => state.login)
     const dispatch = useDispatch()

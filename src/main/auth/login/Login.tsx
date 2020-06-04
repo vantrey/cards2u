@@ -1,15 +1,14 @@
 import React from 'react';
 import LoginForm from "./LoginForm";
-import {ErrorsLoginType, RegisterLoginType} from "./LoginContainer";
+import {UseFormErrorsType, UseFormRegisterType} from "../../types/entities";
 
 type LoginPropsType = {
     errorServerMessage: string
-    register: RegisterLoginType
-    errors: ErrorsLoginType
+    register: UseFormRegisterType
+    errors: UseFormErrorsType
     isFetching: boolean
     onSubmit: () => void
 }
-
 
 const Login: React.FC<LoginPropsType> = ({isFetching, errorServerMessage, ...props}) => {
     return <div>

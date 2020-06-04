@@ -14,10 +14,6 @@ type RestorePasswordFormDataType = {
     email: string
 }
 
-export type RegisterType = ReturnType<typeof useForm>['register'];
-export type ErrorType = ReturnType<typeof useForm>['errors'];
-
-
 const RestorePswContainer: React.FC = () => {
     const html1 =  "<a href='http://localhost:3000/#/newPsw/";
 

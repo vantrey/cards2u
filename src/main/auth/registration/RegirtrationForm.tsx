@@ -2,12 +2,12 @@ import React from 'react'
 import styles from './Registration.module.css'
 import Input from "../../ui/common/Input/Input"
 import Button from "../../ui/common/Button/Button"
-import {ErrorsType, RegisterType} from "./RegirtrationContainer";
+import {UseFormErrorsType, UseFormRegisterType} from "../../types/entities";
 
 
 type RegistrationPropsType = {
-  register: RegisterType
-  errors: ErrorsType
+  register: UseFormRegisterType
+  errors: UseFormErrorsType
   onSubmit: () => void
 }
 
