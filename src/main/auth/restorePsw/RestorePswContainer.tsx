@@ -5,7 +5,7 @@ import {AppStateType} from "../../bll/store/store";
 import {useForm} from "react-hook-form";
 import {restorePswFormSchema} from "./restorePswFormShema";
 import {send_Email} from "./restorePswReducer";
-import {RESTORE_PSW_PATH} from "../../ui/components/routes/Routes";
+import {NEW_PSW_PATH, RESTORE_PSW_PATH} from "../../ui/components/routes/Routes";
 import {Redirect} from 'react-router-dom';
 import styles from './RestorePassword.module.css';
 
@@ -19,9 +19,9 @@ export type ErrorType = ReturnType<typeof useForm>['errors'];
 
 
 const RestorePswContainer: React.FC = () => {
-    const html1 = "<a href='http://localhost:3000/#/NEW_PSW_PATH/";
+    const html1 = `<a href='http://localhost:3000/#/${NEW_PSW_PATH}/`;
 
-    const html2 = "'>reset-password-link</a>";
+    const html2 = `'>reset-password-link</a>`;
 
     const {isSuccess, messageAboutError, isFetching} = useSelector((state: AppStateType) => state.restorePsw);
 
