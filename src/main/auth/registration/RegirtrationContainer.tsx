@@ -33,13 +33,15 @@ const RegistrationContainer: React.FC = () => {
     setIsFirstRendering(false)
   }
   if (isSuccess && !isFirsRendering) return <Redirect to={LOGIN_PATH}/>
-  return <Registration
-    errorServerMessage={errorServerMessage}
-    register={register}
-    errors={errors}
-    onSubmit={onSubmit}
-    isFetching={isFetching}
-  />
+  return (
+    <Registration
+      errorServerMessage={errorServerMessage}
+      register={register}
+      errors={errors}
+      onSubmit={onSubmit}
+      isFetching={isFetching}
+    />
+  )
 }
 
 export default RegistrationContainer

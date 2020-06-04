@@ -12,7 +12,7 @@ export const LOGIN_PATH = '/login'
 // export const LOGOUT_PATH = '/Logout'
 export const REGISTRATION_PATH = '/registration'
 export const RESTORE_PSW_PATH = '/restorePsw'
-export const NEW_PSW_PATH = '/newPsw/:resetPswToken'
+export const NEW_PSW_PATH = '/newPsw'
 export const PROFILE_PATH = '/profile'
 export const ROOT_PATH = '/root'
 
@@ -22,7 +22,7 @@ const Routs = () => {
         {/*<Route path={LOGOUT_PATH} render={() => <Logout logout={logout}/>}/>*/}
         <Route path={REGISTRATION_PATH} render={() => <RegistrationPage/>}/>
         <Route path={RESTORE_PSW_PATH} render={() => <RestorePswPage/>}/>
-        <Route path={NEW_PSW_PATH} render={() => <NewPswPage/>}/>
+        <Route path={`${NEW_PSW_PATH}/:resetPswToken?`} render={() => <NewPswPage/>}/>
         <Route path={PROFILE_PATH} render={() => <Profile/>}/>
         <Route path={ROOT_PATH} render={() => <Root/>}/>
     </div>
