@@ -12,7 +12,7 @@ export const LOGIN_PATH = '/login'
 // export const LOGOUT_PATH = '/Logout'
 export const REGISTRATION_PATH = '/registration'
 export const RESTORE_PSW_PATH = '/restorePsw'
-export const NEW_PSW_PATH = '/newPsw'
+export const NEW_PSW_PATH = '/newPsw/:resetPswToken'
 export const PROFILE_PATH = '/profile'
 export const ROOT_PATH = '/root'
 

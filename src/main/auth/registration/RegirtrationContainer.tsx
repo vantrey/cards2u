@@ -28,7 +28,7 @@ const RegistrationContainer: React.FC = () => {
   })
   if (isFirsRendering) {
     if (isSuccess) {
-      dispatch(actions.setIsSuccess(false))
+      dispatch(actions.setIsRegistrationSuccess(false))
     }
     setIsFirstRendering(false)
   }
