@@ -19,7 +19,7 @@ export type ErrorType = ReturnType<typeof useForm>['errors'];
 
 
 const RestorePswContainer: React.FC = () => {
-    const html1 =  "<a href='http://localhost:3000/#/newPsw/";
+    const html1 = "<a href='http://localhost:3000/#/NEW_PSW_PATH/";
 
     const html2 = "'>reset-password-link</a>";
 
@@ -40,7 +40,7 @@ const RestorePswContainer: React.FC = () => {
     return (
         <div className={styles.container_restorePassword}>
             {isSuccess ?
-                <Redirect to={RESTORE_PSW_PATH}/>
+                <span>Password recovery link sent to the specified email</span>
                 :
                 <RestorePassword
                     register={register}
