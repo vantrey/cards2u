@@ -21,6 +21,7 @@ const Scroll = ({ modal, setModal }) => {
 				<div className={styles.scroll__icon}  >
 					<img src={closeIcon} alt="cancel-Icon" id='closeIconId'/>
 				</div>
+
 				<img src={scrollBg} alt="scroll"/>
 				<div className={styles.scroll__loader}>
 					<Loader/>

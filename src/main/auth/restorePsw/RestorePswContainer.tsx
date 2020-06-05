@@ -5,8 +5,7 @@ import {AppStateType} from "../../bll/store/store";
 import {useForm} from "react-hook-form";
 import {restorePswFormSchema} from "./restorePswFormShema";
 import {send_Email} from "./restorePswReducer";
-import {NEW_PSW_PATH, RESTORE_PSW_PATH} from "../../ui/components/routes/Routes";
-import {Redirect} from 'react-router-dom';
+import {NEW_PSW_PATH} from "../../ui/components/routes/Routes";
 import styles from './RestorePassword.module.css';
 
 
