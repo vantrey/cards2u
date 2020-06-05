@@ -1,0 +1,50 @@
+import React, {useEffect, useState} from 'react';
+import {useForm} from 'react-hook-form'
+import {useDispatch, useSelector} from 'react-redux'
+import NewPsw from "./NewPsw";
+import {newPswFormSchema} from "./newPswFormShema";
+import {AppStateType} from "../../bll/store/store";
+import {setNewPsw} from "./newPswReducer";
+import {useParams, Redirect} from 'react-router-dom';
+import {LOGIN_PATH} from "../../ui/components/routes/Routes";
+
+type NewPswFormDataType = {
+  password: string
+  passwordConfirmation: string
+}
+
+const NewPswContainer: React.FC = () => {
+  const {isSuccess, errorServerMessage, isFetching} = useSelector((state: AppStateType) => state.newPsw)
+  const [successWithTiming, setSuccessWithTiming] = useState(false)
+  useEffect(() => {
+    if (isSuccess) {
+      setTimeout(() => {
+        setSuccessWithTiming(true)
+      }, 1000)
+    }
+  }, [isSuccess])
+  const dispatch = useDispatch()
+  const {resetPswToken} = useParams()
+  const {register, handleSubmit, errors, reset} = useForm<NewPswFormDataType>({
+    mode: 'onBlur',
+    validationSchema: newPswFormSchema
+  })
+  const onSubmit = handleSubmit((data) => {
+    dispatch(setNewPsw(resetPswToken, data.password))
+    reset()
+  })
+
+  if (successWithTiming) return <Redirect to={LOGIN_PATH}/>
+  return (
+    <NewPsw
+      isSuccess={isSuccess}
+      isFetching={isFetching}
+      errorServerMessage={errorServerMessage}
+      register={register}
+      errors={errors}
+      onSubmit={onSubmit}
+    />
+  )
+}
+
+export default NewPswContainer

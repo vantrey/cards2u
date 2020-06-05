@@ -1,3 +1,23 @@
 .newPsw {
-
+  display: flex;
+  flex-direction: column;
 }
+
+.newPsw__form {
+  composes: newPsw;
+  align-items: center;
+}
+
+.newPsw__form_errorMessage {
+  color: red;
+}
+
+.newPsw__form_successMessage {
+  color: blue;
+}
+
+.newPsw__form_button {
+  margin-top: 10px;
+}
+
+

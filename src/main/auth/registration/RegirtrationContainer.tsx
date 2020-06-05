@@ -28,18 +28,20 @@ const RegistrationContainer: React.FC = () => {
   })
   if (isFirsRendering) {
     if (isSuccess) {
-      dispatch(actions.setIsSuccess(false))
+      dispatch(actions.setIsRegistrationSuccess(false))
     }
     setIsFirstRendering(false)
   }
   if (isSuccess && !isFirsRendering) return <Redirect to={LOGIN_PATH}/>
-  return <Registration
-    errorServerMessage={errorServerMessage}
-    register={register}
-    errors={errors}
-    onSubmit={onSubmit}
-    isFetching={isFetching}
-  />
+  return (
+    <Registration
+      errorServerMessage={errorServerMessage}
+      register={register}
+      errors={errors}
+      onSubmit={onSubmit}
+      isFetching={isFetching}
+    />
+  )
 }
 
 export default RegistrationContainer
