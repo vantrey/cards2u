@@ -14,7 +14,8 @@ type NewPswPropsType = {
 
 const NewPsw: React.FC<NewPswPropsType> = (
   {isFetching, isSuccess, errorServerMessage, ...props}
-  ) => {
+) => {
+
   return (
     <div className={styles.newPsw}>
       <NewPswForm {...props}/>
