@@ -11,39 +11,40 @@ import Routs from "./routes/Routes";
 
 const Main = () => {
 
-	let [ toggleBg, setBg ] = useState (true);
-	let [ modal, setModal ] = useState (false);
-
-	useEffect (() => {
-		let vid = document.getElementById ('intro');
-		vid.addEventListener ('ended', () => {
-			setBg (!toggleBg);
-		}, true);
-
-	}, []);
+	// let [ toggleBg, setBg ] = useState (true);
+	// let [ modal, setModal ] = useState (false);
+	//
+	// useEffect (() => {
+	// 	let vid = document.getElementById ('intro');
+	// 	vid.addEventListener ('ended', () => {
+	// 		setBg (!toggleBg);
+	// 	}, true);
+	//
+	// }, []);
 
 	return (
 		<div>
-			<Header setModal={setModal} setBg={setBg} toggleBg={toggleBg}/>
-				<div className={styles.main__wrap}>
-					{
-						toggleBg &&
-						<Intro setBg={setBg}/>
-					}
-					{
-						!toggleBg &&
-						<>
-							<Root/>
-							<Loader/>
-						</>
-					}
+			{/*<Header setModal={setModal} setBg={setBg} toggleBg={toggleBg}/>*/}
+				{/*<div className={styles.main__wrap}>*/}
+				{/*	{*/}
+				{/*		toggleBg &&*/}
+				{/*		<Intro setBg={setBg}/>*/}
+				{/*	}*/}
+				{/*	{*/}
+				{/*		!toggleBg &&*/}
+				{/*		<>*/}
+				{/*			<Root/>*/}
+				{/*			<Loader/>*/}
+				{/*		</>*/}
+				{/*	}*/}
 
-					<Scroll modal={modal} setModal={setModal}/>
-					<Menu/>
-				</div>
+				{/*	<Scroll modal={modal} setModal={setModal}/>*/}
+				{/*	<Menu/>*/}
+				{/*</div>*/}
 
-			{/*<Test/>*/}
-			{/*<Routs/>*/}
+			<Header/>
+			<Test/>
+			<Routs/>
 		</div>
 	)
 }
