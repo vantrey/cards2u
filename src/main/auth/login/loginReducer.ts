@@ -60,9 +60,8 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
             dispatch(actions.loginAuthMeSuccess(result.data.success, ""));
             dispatch(actions.loginIsFetching(false))
         } catch (e) {
-            dispatch(actions.loginAuthMeSuccess(false, 'error'))
+            dispatch(actions.loginAuthMeSuccess(false, e.response.data.error))
             dispatch(actions.loginIsFetching(false))
-            console.log({...e})
         }
     }
 
