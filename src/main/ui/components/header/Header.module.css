@@ -27,6 +27,7 @@
     align-items: center;
     width: 170px;
     margin-left: 100px;
+    cursor: pointer;
 }
 
 .header__home {

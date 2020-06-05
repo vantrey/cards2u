@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styles from './Intro.module.css'
 import soundOf from '../../icons/sound-of.svg'
 import soundOn from '../../icons/sound-on.svg'
+// import skip from '../../icons/skip.svg'
+import skip from '../../icons/skip-circle .svg'
 import intro from '../../video/Intro-53-commpres.mp4'
 import intro_webm from '../../video/Intro-53-commpres-webm.webm'
 import poster from '../../images/main-bg.png'
 
 
-const Intro = () => {
+const Intro = ({ setBg }) => {
 
 	let [ sound, setSound ] = useState (true);
 	let [ iconFlash, setIconlash ] = useState (false);
@@ -16,9 +18,9 @@ const Intro = () => {
 		let vid = document.getElementById ('intro');
 		vid.volume = 0.25;
 		vid.addEventListener ('playing', () => {
-			setIconlash(true);
-			setTimeout( () => {
-				setIconlash(false);
+			setIconlash (true);
+			setTimeout (() => {
+				setIconlash (false);
 			}, 3000);
 		}, true);
 
@@ -46,6 +48,9 @@ const Intro = () => {
 				</div>
 			}
 			We are sorry that you cannot see the intro
+			<div className={styles.intro__icon_skip } onClick={() => setBg (false)}>
+				<img src={skip} alt='skip'/>
+			</div>
 		</div>
 	)
 }

@@ -4,20 +4,18 @@ import castle from '../../icons/castle-40.png'
 import imgLogo from '../../images/Wisemen-shadow2.png'
 import Navbar from "../navbar/Navbar";
 
-const Header = ({ setModal }) => {
-
-	const activationModal = () => {
-		setModal (true);
-	};
-
+const Header = ({ setModal, setBg, toggleBg }) => {
+	const switchBg = () => {
+		setBg(!toggleBg);
+	}
 	return (
 		<div className={styles.header}>
 			<div className={styles.header__wrap}>
-				<div className={styles.header__logo}>
+				<div className={styles.header__logo} onClick={switchBg}>
 					<img src={imgLogo} alt="logo"/>
 				</div>
-				<Navbar/>
-				<div className={styles.header__home} id='login' onClick={activationModal}>
+				<Navbar setModal={setModal}/>
+				<div className={styles.header__home} id='login' >
 					<img src={castle} alt="login"/>
 				</div>
 			</div>

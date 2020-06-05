@@ -3,7 +3,11 @@ import styles from './Navbar.module.css';
 import imgLogin from '../../images/login-shadow.png'
 
 
-const Navbar = () => {
+const Navbar = ({ setModal}) => {
+
+    const activationModal = () => {
+        setModal (true);
+    };
 
     return (
         <div className={styles.navbar__wrap}>
@@ -11,22 +15,22 @@ const Navbar = () => {
                 <input type="checkbox" className={styles.nav__cb} id="menu-cb"/>
                 <div className={styles.nav__content}>
                     <ul className={styles.nav__items}>
-                        <li className={styles.nav__item}>
+                        <li className={styles.nav__item} onClick={activationModal}>
                             <span className={styles.nav__item_text}>
                                  Sign in
                             </span>
                         </li>
-                        <li className={styles.nav__item}>
+                        <li className={styles.nav__item} onClick={activationModal}>
                             <span className={styles.nav__item_text}>
                                  Registration
                             </span>
                         </li>
-                        {/*<li className={styles.nav__item}>*/}
+                        {/*<li className={styles.nav__item}  onClick={activationModal}>*/ }
                         {/*     <span className={styles.nav__item_text}>*/}
                         {/*     New password*/}
                         {/*    </span>*/}
                         {/*</li>*/}
-                        <li className={styles.nav__item}>
+                        <li className={styles.nav__item} onClick={activationModal} >
                             <span className={styles.nav__item_text}>
                                 Restore
                             </span>

@@ -24,11 +24,11 @@ const Main = () => {
 
 	return (
 		<div>
-			<Header setModal={setModal}/>
+			<Header setModal={setModal} setBg={setBg} toggleBg={toggleBg}/>
 				<div className={styles.main__wrap}>
 					{
 						toggleBg &&
-						<Intro/>
+						<Intro setBg={setBg}/>
 					}
 					{
 						!toggleBg &&
