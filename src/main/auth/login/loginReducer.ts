@@ -1,20 +1,19 @@
 import {AppStateType, InferActionTypes} from "../../bll/store/store";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {api} from "../../dal/api";
-import {boolean, string} from "yup";
-
 
 const initialState = {
     email: null,
     login: null,
     isFetching: false,
     isAuth: false,
-    token: string,
-    rememberMe: boolean,
-    errorServerMessage: string
+    token: '',
+    rememberMe: false,
+    errorServerMessage: ''
 }
+type InitialStateType = typeof initialState
 
-export const loginReducer = (state: typeof initialState = initialState, action: ActionsType) => {
+export const loginReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case 'cards2u/main/auth/AUTH_ME':
             return {
