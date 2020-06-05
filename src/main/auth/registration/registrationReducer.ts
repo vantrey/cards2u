@@ -41,7 +41,7 @@ export const actions = {
     type: 'REGISTRATION_REDUCER/IS_FETCHING',
     isFetching
   } as const),
-  setIsSuccess: (isSuccess: boolean) => ({
+  setIsRegistrationSuccess: (isSuccess: boolean) => ({
     type: 'REGISTRATION_REDUCER/SET_IS_SUCCESS',
       isSuccess
   } as const)
@@ -56,13 +56,11 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 export const createUser = (email: string, password: string): ThunkType => async (dispatch: DispatchType) => {
   try {
     dispatch(actions.setIsFetching(true))
-    const result = await api.registration(email, password)
-    console.log(result)
-    dispatch(actions.createUserSuccess(result.data.success, ''))
+    const response = await api.registration(email, password)
+    dispatch(actions.createUserSuccess(response.data.success, ''))
     dispatch(actions.setIsFetching(false))
   } catch (e) {
     dispatch(actions.createUserSuccess(false, e.response.data.error))
     dispatch(actions.setIsFetching(false))
-    console.log({...e})
   }
 }
