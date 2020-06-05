@@ -15,7 +15,7 @@ type RestorePasswordFormDataType = {
 }
 
 const RestorePswContainer: React.FC = () => {
-    const html1 = `<a href='http://localhost:3000/#/${NEW_PSW_PATH}/`;
+    const html1 = `<a href='http://localhost:3000/#${NEW_PSW_PATH}/`;
 
     const html2 = `'>reset-password-link</a>`;
 
