@@ -1,3 +1,10 @@
+.navbar__wrap {
+    pointer-events: auto;
+}
+.navbar__wrap_notActive {
+    pointer-events: none;
+}
+
 .nav__login {
     display: flex;
     align-items: center;

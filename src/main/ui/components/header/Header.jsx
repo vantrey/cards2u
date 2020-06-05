@@ -9,12 +9,12 @@ const Header = ({ setModal, setBg, toggleBg }) => {
 		setBg(!toggleBg);
 	}
 	return (
-		<div className={styles.header}>
+		<div className={styles.header} >
 			<div className={styles.header__wrap}>
 				<div className={styles.header__logo} onClick={switchBg}>
 					<img src={imgLogo} alt="logo"/>
 				</div>
-				<Navbar setModal={setModal}/>
+				<Navbar setModal={setModal} toggleBg={toggleBg}/>
 				<div className={styles.header__home} id='login' >
 					<img src={castle} alt="login"/>
 				</div>
