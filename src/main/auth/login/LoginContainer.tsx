@@ -24,7 +24,6 @@ const LoginContainer: React.FC = () => {
 
     const onSubmit = handleSubmit((data) => {
         dispatch(login(data.email, data.password, data.rememberMe))
-        console.log(data)
         reset()
     })
 
