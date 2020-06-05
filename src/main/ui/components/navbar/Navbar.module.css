@@ -68,6 +68,8 @@
 
 .nav__item:hover {
     color: #bf360c;
+    transform: translateY(-1px);
+    transition: transform 0.3s cubic-bezier(0.48, 0.43, 0.7, 2.5);
 }
 
 .nav__item-text {
@@ -122,23 +124,22 @@
     top: 0;
     width: 90px;
     height: 90px;
-    /*padding: 36px 31px;*/
     cursor: pointer;
     padding: 26px 32px;
 }
 
-.nav__btn:before {
-    margin-bottom: 10px;
-}
+/*.nav__btn:before {*/
+/*    margin-bottom: 10px;*/
+/*}*/
 
-.nav__btn:hover:before, .nav__btn:hover:after {
-    background: #1539cf;
-}
+/*.nav__btn:hover:before, .nav__btn:hover:after {*/
+/*    background: #1539cf;*/
+/*}*/
 
-.nav__cb:checked ~ .nav__btn:before {
-    transform: translateY(7px) rotate(-225deg);
-}
+/*.nav__cb:checked ~ .nav__btn:before {*/
+/*    transform: translateY(7px) rotate(-225deg);*/
+/*}*/
 
-.nav__cb:checked ~ .nav__btn:after {
-    transform: translateY(-7px) rotate(225deg);
-}
+/*.nav__cb:checked ~ .nav__btn:after {*/
+/*    transform: translateY(-7px) rotate(225deg);*/
+/*}*/

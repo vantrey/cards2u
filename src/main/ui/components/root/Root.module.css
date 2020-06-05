@@ -50,6 +50,16 @@
     -webkit-animation: heartbeat 1s ease-in-out infinite both;
     animation: heartbeat 1s ease-in-out infinite both;
 }
+
+.root__icon:hover {
+    transform: translateY(-1px);
+    transition: transform 0.3s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+}
+
+.root__icon_flash:hover {
+    transform: translateY(-1px);
+    transition: transform 0.3s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+}
 /**
  * ----------------------------------------
  * animation icons
