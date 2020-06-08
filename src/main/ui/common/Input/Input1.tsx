@@ -8,7 +8,7 @@ const Input1 = () => {
 
   return (
     <>
-        <form method="post">
+        <form method="post" className={styles.form}>
             <div className={styles.form__group}>
                 <input type="text" id="input"  required={true}/>
                 <label className={styles.control__label} htmlFor="input">New User</label>
@@ -24,18 +24,14 @@ const Input1 = () => {
                 <label className={styles.control__label} htmlFor="input">New password</label>
                 <i className={styles.mtrl__select}> </i>
             </div>
+            <div className={styles.form__checkbox}>
+                <input type='checkbox' name='checkbox' id='form__checkbox' />
+                <label  htmlFor="checkbox">N</label>
+            </div>
+            <div className={styles.form__group}>
+                <button className={styles.form__button}>ACCEPT</button>
+            </div>
 
-
-            {/*<div className={styles.form__group}>*/}
-            {/*    <input type="password" id="input"  required={true} name='psw'/>*/}
-            {/*    <label className={styles.control__label} htmlFor="psw">New password</label>*/}
-            {/*    <i className={styles.mtrl__select}> </i>*/}
-            {/*</div>*/}
-            {/*<div className={styles.form__group}>*/}
-            {/*    <input type="password" id="input"  required={true}  name='psw1'/>*/}
-            {/*    <label className={styles.control__label} htmlFor="psw1">New password</label>*/}
-            {/*    <i className={styles.mtrl__select}> </i>*/}
-            {/*</div>*/}
         </form>
     </>
   )

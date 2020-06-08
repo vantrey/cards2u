@@ -1,103 +1,148 @@
-
-.form__group {
-  position: relative;
-  margin-top: 2.25rem;
-  margin-bottom: 2.25rem;
+.form {
+    position: absolute;
+    left: 50%;
+    top: 42%;
+    transform: translateX(-50%);
 }
 
-.form__group  {
-  /*position: absolute;*/
-  width: 100%;
+.form__group {
+    position: relative;
+    /*margin-top: 2.25rem;*/
+    /*margin-bottom: 2.25rem;*/
+    margin: 10px 0;
+
+}
+
+.form__group {
+    min-width: 240px;
+    max-width: 300px;
 }
 
 .form__group input {
-  height: 1.9rem;
+    height: 1.9rem;
+    /*color: #0003ff;*/
+    color: red;
 }
 
 
 .form__group .control__label {
-  position: absolute;
-  top: 0.25rem;
-  pointer-events: none;
-  padding-left: 0.125rem;
-  z-index: 1;
-  color: #b7b7b7;
-  font-size: 1rem;
-  font-weight: normal;
-  -webkit-transition: all 0.28s ease;
-  transition: all 0.28s ease;
+    position: absolute;
+    top: 0.25rem;
+    pointer-events: none;
+    padding-left: 0.125rem;
+    z-index: 1;
+    /*color: #b7b7b7;*/
+    color: #5d4037;
+    font-size: 1rem;
+    font-weight: normal;
+    -webkit-transition: all 0.28s ease;
+    transition: all 0.28s ease;
 
-  left: 0;
+    left: 0;
 }
+
 .form__group .mtrl__select {
-  position: relative;
-  border-bottom: 0.0625rem solid #e1e8ed;
-  display: block;
+    position: relative;
+    border-bottom: 0.0625rem solid #795548;
+    display: block;
 }
+
 .form__group .mtrl__select::before {
-  content: '';
-  height: 0.125rem;
-  width: 0;
-  left: 50%;
-  bottom: -0.0625rem;
-  position: absolute;
-  background: #088dcd;
-  -webkit-transition: left 0.28s ease, width 0.28s ease;
-  transition: left 0.28s ease, width 0.28s ease;
-  z-index: 2;
+    content: '';
+    height: 0.125rem;
+    width: 0;
+    left: 50%;
+    bottom: -0.0625rem;
+    position: absolute;
+    /*background: #088dcd;*/
+    background: #3e2723;
+    -webkit-transition: left 0.28s ease, width 0.28s ease;
+    transition: left 0.28s ease, width 0.28s ease;
+    z-index: 2;
 }
+
 .form__group input {
-  display: block;
-  background: none;
-  padding: 0.125rem 0.125rem 0.0625rem;
-  font-size: 1rem;
-  border-width: 0;
-  border-color: transparent;
-  line-height: 1.9;
-  width: 100%;
-  color: transparent;
-  -webkit-transition: all 0.28s ease;
-  transition: all 0.28s ease;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+    display: block;
+    background: none;
+    padding: 0.125rem 0.125rem 0.0625rem;
+    font-size: 1rem;
+    border-width: 0;
+    border-color: transparent;
+    line-height: 1.9;
+    width: 100%;
+    /*color: transparent;*/
+    color: #3e2723;
+    font-weight: 600;
+    -webkit-transition: all 0.28s ease;
+    transition: all 0.28s ease;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 .form__group input:focus {
-  color: #82898e;
+    color: #82898e;
 }
 
 .form__group input:focus ~ .control__label,
 .form__group input:valid ~ .control__label {
-  font-size: 0.8rem;
-  color: gray;
-  top: -1rem;
-  left: 0;
+    font-size: 0.8rem;
+    color: #795548;
+    top: -10px;
+    left: 0;
 }
 
 .form__group input:focus {
-  outline: none;
+    outline: none;
 }
 
 .form__group input:focus ~ .control__label {
-  color: #088dcd;
+    color: #82898e;
 }
 
 .form__group input:focus ~ .mtrl__select::before {
-  width: 100%;
-  left: 0;
+    width: 100%;
+    left: 0;
+}
+
+.form__button {
+    background-color: transparent;
+    border: 1px solid #795548;
+    outline: none;
+    padding: 2px 10px;
+    -webkit-transition: all 0.33s ease;
+    transition: all 0.33s ease;
+}
+
+.form__button:hover {
+    background-color: #3e2723;
+    color: wheat;
+    -webkit-transition: all 0.33s ease;
+    transition: all 0.33s ease;
 }
 
 
-
-.has-error.form__group .control__label.control__label {
-  color: #d9534f;
+.form__checkbox {
+    position: relative;
+    margin: 10px 0;
+    min-width: 240px;
+    max-width: 300px;
 }
 
-.has-error.form__group  {
-  color: #d9534f;
+#form__checkbox {
+    width: 15px;
+    height: 15px;
 }
-.has-error .mtrl__select::before {
-  background: #d9534f;
-  left: 0;
-  width: 100%;
-}
+
+
+/*.has-error.form__group .control__label.control__label {*/
+/*  color: #d9534f;*/
+/*}*/
+
+/*.has-error.form__group  {*/
+/*  color: #d9534f;*/
+/*}*/
+/*.has-error .mtrl__select::before {*/
+/*  background: #d9534f;*/
+/*  left: 0;*/
+/*  width: 100%;*/
+/*}*/
