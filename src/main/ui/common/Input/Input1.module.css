@@ -1,0 +1,103 @@
+
+.form__group {
+  position: relative;
+  margin-top: 2.25rem;
+  margin-bottom: 2.25rem;
+}
+
+.form__group  {
+  /*position: absolute;*/
+  width: 100%;
+}
+
+.form__group input {
+  height: 1.9rem;
+}
+
+
+.form__group .control__label {
+  position: absolute;
+  top: 0.25rem;
+  pointer-events: none;
+  padding-left: 0.125rem;
+  z-index: 1;
+  color: #b7b7b7;
+  font-size: 1rem;
+  font-weight: normal;
+  -webkit-transition: all 0.28s ease;
+  transition: all 0.28s ease;
+
+  left: 0;
+}
+.form__group .mtrl__select {
+  position: relative;
+  border-bottom: 0.0625rem solid #e1e8ed;
+  display: block;
+}
+.form__group .mtrl__select::before {
+  content: '';
+  height: 0.125rem;
+  width: 0;
+  left: 50%;
+  bottom: -0.0625rem;
+  position: absolute;
+  background: #088dcd;
+  -webkit-transition: left 0.28s ease, width 0.28s ease;
+  transition: left 0.28s ease, width 0.28s ease;
+  z-index: 2;
+}
+.form__group input {
+  display: block;
+  background: none;
+  padding: 0.125rem 0.125rem 0.0625rem;
+  font-size: 1rem;
+  border-width: 0;
+  border-color: transparent;
+  line-height: 1.9;
+  width: 100%;
+  color: transparent;
+  -webkit-transition: all 0.28s ease;
+  transition: all 0.28s ease;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.form__group input:focus {
+  color: #82898e;
+}
+
+.form__group input:focus ~ .control__label,
+.form__group input:valid ~ .control__label {
+  font-size: 0.8rem;
+  color: gray;
+  top: -1rem;
+  left: 0;
+}
+
+.form__group input:focus {
+  outline: none;
+}
+
+.form__group input:focus ~ .control__label {
+  color: #088dcd;
+}
+
+.form__group input:focus ~ .mtrl__select::before {
+  width: 100%;
+  left: 0;
+}
+
+
+
+.has-error.form__group .control__label.control__label {
+  color: #d9534f;
+}
+
+.has-error.form__group  {
+  color: #d9534f;
+}
+.has-error .mtrl__select::before {
+  background: #d9534f;
+  left: 0;
+  width: 100%;
+}

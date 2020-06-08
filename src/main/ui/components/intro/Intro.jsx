@@ -46,7 +46,8 @@ const Intro = ({ setBg }) => {
 					<img src={soundOn} alt='soundOf'/>
 				</div>
 			}
-			We are sorry that you cannot see the intro
+			<p>Your browser doesn't support HTML5 video.</p>
+			<p>We are sorry that you cannot see the video.</p>
 			<div className={styles.intro__icon_skip } onClick={() => setBg (false)}>
 				<img src={skip} alt='skip'/>
 			</div>
