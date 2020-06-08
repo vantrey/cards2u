@@ -20,6 +20,8 @@ const Scroll = ({ modal, setModal }) => {
 	return (
 		<div className={classForModal}  onClick={closeModal}>
 			<div className={styles.scroll__img}  id='skrollContent'>
+				{/*<h2  className={styles.scroll__title}>Registration</h2>*/}
+				<h2  className={styles.scroll__title}>Login</h2>
 
 				<Input1/>
 

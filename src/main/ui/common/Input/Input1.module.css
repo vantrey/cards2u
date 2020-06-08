@@ -7,10 +7,7 @@
 
 .form__group {
     position: relative;
-    /*margin-top: 2.25rem;*/
-    /*margin-bottom: 2.25rem;*/
     margin: 10px 0;
-
 }
 
 .form__group {
@@ -20,7 +17,6 @@
 
 .form__group input {
     height: 1.9rem;
-    /*color: #0003ff;*/
     color: red;
 }
 
@@ -31,13 +27,11 @@
     pointer-events: none;
     padding-left: 0.125rem;
     z-index: 1;
-    /*color: #b7b7b7;*/
     color: #5d4037;
-    font-size: 1rem;
+    font-size: 12px;
     font-weight: normal;
     -webkit-transition: all 0.28s ease;
     transition: all 0.28s ease;
-
     left: 0;
 }
 
@@ -54,7 +48,6 @@
     left: 50%;
     bottom: -0.0625rem;
     position: absolute;
-    /*background: #088dcd;*/
     background: #3e2723;
     -webkit-transition: left 0.28s ease, width 0.28s ease;
     transition: left 0.28s ease, width 0.28s ease;
@@ -65,12 +58,11 @@
     display: block;
     background: none;
     padding: 0.125rem 0.125rem 0.0625rem;
-    font-size: 1rem;
+    font-size: 12px;
     border-width: 0;
     border-color: transparent;
     line-height: 1.9;
     width: 100%;
-    /*color: transparent;*/
     color: #3e2723;
     font-weight: 600;
     -webkit-transition: all 0.28s ease;
@@ -85,7 +77,7 @@
 
 .form__group input:focus ~ .control__label,
 .form__group input:valid ~ .control__label {
-    font-size: 0.8rem;
+    font-size: 9px;
     color: #795548;
     top: -10px;
     left: 0;
@@ -108,9 +100,10 @@
     background-color: transparent;
     border: 1px solid #795548;
     outline: none;
-    padding: 2px 10px;
+    padding: 4px 10px;
     -webkit-transition: all 0.33s ease;
     transition: all 0.33s ease;
+    font-size: 10px;
 }
 
 .form__button:hover {
@@ -123,26 +116,89 @@
 
 .form__checkbox {
     position: relative;
-    margin: 10px 0;
+    margin: 12px 0;
     min-width: 240px;
     max-width: 300px;
+    height: 20px;
+    display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
 }
 
-#form__checkbox {
+
+/*===== кастомные чекбоксы стили =====*/
+input[type="checkbox"]:checked,
+input[type="checkbox"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+
+input[type="checkbox"]:checked + label,
+input[type="checkbox"]:not(:checked) + label {
+    position: relative;
+    padding-left: 28px;
+    line-height: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+input[type="checkbox"]:checked + label:before,
+input[type="checkbox"]:not(:checked) + label:before {
+    content: "";
+    position: absolute;
+    border: 1px solid #795548;
+    background-color: transparent;
+    border-radius: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
     width: 15px;
     height: 15px;
+    box-sizing: border-box;
 }
 
+input[type="checkbox"]:checked + label:before,
+input[type="checkbox"]:not(:checked) + label:before {
+    border-radius: 2px;
+}
 
-/*.has-error.form__group .control__label.control__label {*/
-/*  color: #d9534f;*/
-/*}*/
+input[type="checkbox"]:checked + label:after,
+input[type="checkbox"]:not(:checked) + label:after {
+    content: "";
+    position: absolute;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
 
-/*.has-error.form__group  {*/
-/*  color: #d9534f;*/
-/*}*/
-/*.has-error .mtrl__select::before {*/
-/*  background: #d9534f;*/
-/*  left: 0;*/
-/*  width: 100%;*/
-/*}*/
+input[type="checkbox"]:checked + label:after,
+input[type="checkbox"]:not(:checked) + label:after {
+    left: 32%;
+    top: 0;
+    width: 15px;
+    height: 9px;
+    border-radius: 1px;
+    border-left: 4px solid #3e2723;
+    border-bottom: 4px solid #3e2723;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+}
+
+input[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+}
+
+input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+}
+
+.form__remember {
+    font-size: 8px;
+}
