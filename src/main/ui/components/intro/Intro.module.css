@@ -6,7 +6,7 @@
     left: 0;
     overflow: hidden;
     z-index: 1;
-    background-image: url('../../images/main-bg.png');
+    background-image: url('../../images/main-bg.webp');
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }

@@ -5,7 +5,7 @@ import soundOn from '../../icons/sound-on.svg'
 import skip from '../../icons/skip-circle .svg'
 import intro from '../../video/Intro-53-commpres.mp4'
 import intro_webm from '../../video/Intro-53-commpres-webm.webm'
-import poster from '../../images/main-bg.png'
+import poster from '../../images/main-bg.webp'
 
 
 const Intro = ({ setBg }) => {
