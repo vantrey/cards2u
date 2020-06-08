@@ -4,7 +4,7 @@ import videomp4 from '../../video/main-bg-video-20.mp4'
 import videowebm from '../../video/main-bg-video-20.webm'
 import soundOf from '../../icons/sound-of.svg'
 import soundOn from '../../icons/sound-on.svg'
-import poster from '../../images/main-bg.png'
+import poster from '../../images/main-bg.webp'
 
 
 const Root = () => {

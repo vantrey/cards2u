@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Scroll.module.css';
-import scrollBg from '../../images/scroll.png';
-import closeIcon from '../../icons/cancel .png';
+import scrollBg from '../../images/scroll.webp';
+import closeIcon from '../../icons/cancel.png';
 import Loader from "../loader/Loader";
 import Input1 from "../Input/Input1";
 import Input from "../Input/Input";
