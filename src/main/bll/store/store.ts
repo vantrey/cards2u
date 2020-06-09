@@ -5,6 +5,7 @@ import {registrationReducer} from "../../auth/registration/registrationReducer";
 import {restorePswReducer} from "../../auth/restorePsw/restorePswReducer";
 import {newPswReducer} from "../../auth/newPsw/newPswReducer";
 import {profileReducer} from "../../auth/profile/profileReducer";
+import {cardPacksReducer} from "../../features/cardsPacks/bll/cardPacksReducer";
 
 const rootReducer = combineReducers({
   login: loginReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   restorePsw: restorePswReducer,
   newPsw: newPswReducer,
   profile: profileReducer,
+  cardPacks: cardPacksReducer
 
 })
 export type AppStateType = ReturnType<typeof rootReducer>
