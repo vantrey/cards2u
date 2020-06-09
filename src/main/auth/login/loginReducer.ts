@@ -26,12 +26,6 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
                 ...state,
                 isFetching: action.isFetching
             }
-        // case "cards2u/main/auth/SAVE_TOKEN":
-        //     return {
-        //         ...state,
-        //         token: action.token,
-        //         errorServerMessage: action.errorServerMessage
-        //     }
         default:
             return state
     }
@@ -40,9 +34,7 @@ const actions = {
     loginAuthMeSuccess: (isAuth: boolean, errorServerMessage: string) => ({
         type: 'cards2u/main/auth/AUTH_ME', isAuth, errorServerMessage
     } as const),
-    // saveTokenSuccess: (token: string, errorServerMessage: string) => ({
-    //     type: 'cards2u/main/auth/SAVE_TOKEN', token, errorServerMessage
-    // } as const),
+
     loginIsFetching: (isFetching: boolean) => ({
         type: 'cards2u/main/auth/IS_FETCHING',
         isFetching
@@ -61,21 +53,6 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 //     }
 // };
 
-// export const saveToken = (token: string): ThunkType =>
-//     async (dispatch: DispatchType) => {
-//         try {
-//             const result = await api.authMe(token)
-//             dispatch(actions.saveTokenSuccess(result.data.token, ""))
-//             let stateAsString = JSON.stringify(result.data.token);
-//             localStorage.setItem("token", stateAsString);
-//             let saveTokenParse = localStorage.getItem("token");
-//             if (saveTokenParse != null) {
-//                 token = JSON.parse(stateAsString);
-//             }
-//         } catch (e) {
-//             dispatch(actions.saveTokenSuccess(token, e.response.data.error))
-//         }
-//     }
 
 
 export const login = (email: string, password: string, rememberMe: boolean): ThunkType =>
