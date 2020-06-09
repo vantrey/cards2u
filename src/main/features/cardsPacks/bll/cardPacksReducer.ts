@@ -2,6 +2,7 @@ import {AppStateType, InferActionTypes} from '../../../bll/store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {CardPackType} from "../../../types/entities";
 import {cardPacksApi} from "../dal/cardPacksApi";
+import {repository} from "../../../helpers/repos_localStorrage/Token";
 
 type InitialStateType = {
   cardPacks: Array<CardPackType>
@@ -9,7 +10,7 @@ type InitialStateType = {
   error: string
 }
 
-const initialState = {
+const initialState: InitialStateType = {
   cardPacks: [],
   isFetching: false,
   error: ''
@@ -20,7 +21,7 @@ export const cardPacksReducer = (state = initialState, action: ActionsType): Ini
     case "CARD_PACKS_REDUCER/GET_CARD_PACKS":
       return {
         ...state,
-        cardPacks: [],
+        cardPacks: action.cardPacks,
         isFetching: false
       }
     case "CARD_PACKS_REDUCER/SET_IS_FETCHING":
@@ -64,7 +65,8 @@ export const getCardPacks = (token: string): ThunkType => async (dispatch: Dispa
     dispatch(cardPacksActions.setIsFetching(true))
     const response = await cardPacksApi.getPacks(token)
     dispatch(cardPacksActions.getCardPacksSuccess(response.data.cardPacks))
+    repository.saveToken(response.data.token, response.data.tokenDeathTime)
   } catch (e) {
-    dispatch(cardPacksActions.getCardPacksSuccess(e.response.data.error))
+    dispatch(cardPacksActions.setError(e.response.data.error))
   }
 }
