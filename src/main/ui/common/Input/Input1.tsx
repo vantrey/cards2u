@@ -1,36 +1,30 @@
 import React from 'react';
 import styles from './Input1.module.css'
+import {UseFormErrorsType, UseFormRegisterType} from "../../../types/entities";
 
 
-const Input1 = () => {
+type OwnPropsType = {
+    name: string
+    errors: UseFormErrorsType
+    register: UseFormRegisterType
+    title: string
+}
+type InputType = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+type PropsType = OwnPropsType & InputType
+
+const Input1: React.FC<PropsType> = ({ title,register, errors, name, ...props}) => {
 
     return (
         <>
-            <form method="post" className={styles.form}>
-                <div className={styles.form__group}>
-                    <input type="text" id="input" required={true}/>
-                    <label className={styles.control__label} htmlFor="input">New User</label>
-                    <i className={styles.mtrl__select}> </i>
-                </div>
-                <div className={styles.form__group}>
-                    <input type="password" id="input" required={true}/>
-                    <label className={styles.control__label} htmlFor="input">New password</label>
-                    <i className={styles.mtrl__select}> </i>
-                </div>
-                <div className={styles.form__group}>
-                    <input type="password" id="input" required={true}/>
-                    <label className={styles.control__label} htmlFor="input">New password</label>
-                    <i className={styles.mtrl__select}> </i>
-                </div>
-                <div className={styles.form__checkbox}>
-                    <input type='checkbox' id='checkbox'/>
-                    <label htmlFor="checkbox"> </label>
-                    <span className={styles.form__remember}>remember me</span>
-                </div>
-                <div className={styles.form__group}>
-                    <button className={styles.form__button}>ACCEPT</button>
-                </div>
-            </form>
+            <div className={styles.form__group}>
+                <input type="text" id="input"
+                       required={true}
+                       ref={register}
+                       {...props}
+                       name={name}/>
+                <label className={styles.control__label} htmlFor="input">{title}</label>
+                <i className={styles.mtrl__select}> </i>
+            </div>
         </>
     )
 }
