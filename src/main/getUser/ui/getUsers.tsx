@@ -8,6 +8,7 @@ type UsersPropsType = {
     onSort:(sortField:any)=>void
     sort: 'asc' | 'desc'
     sortField: string
+    // data:displayData
 
 }
 
