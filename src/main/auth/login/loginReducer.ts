@@ -11,6 +11,7 @@ const initialState = {
     token: '',
     rememberMe: false,
     errorServerMessage: '',
+    _id: ''
 }
 type InitialStateType = typeof initialState
 
@@ -19,7 +20,7 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
         case 'cards2u/main/auth/AUTH_ME':
             return {
                 ...state,
-                isAuth: action.isAuth, errorServerMessage: action.errorServerMessage
+                isAuth: action.isAuth, errorServerMessage: action.errorServerMessage, _id: action._id
             }
         case "cards2u/main/auth/IS_FETCHING":
             return {
@@ -31,8 +32,8 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
     }
 }
 const actions = {
-    loginAuthMeSuccess: (isAuth: boolean, errorServerMessage: string) => ({
-        type: 'cards2u/main/auth/AUTH_ME', isAuth, errorServerMessage
+    loginAuthMeSuccess: (isAuth: boolean, errorServerMessage: string, _id: string) => ({
+        type: 'cards2u/main/auth/AUTH_ME', isAuth, errorServerMessage, _id
     } as const),
 
     loginIsFetching: (isFetching: boolean) => ({
@@ -60,13 +61,13 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
         try {
             dispatch(actions.loginIsFetching(true))
             const result = await api.login(email, password, rememberMe)
-            dispatch(actions.loginAuthMeSuccess(result.data.success, ""));
+            dispatch(actions.loginAuthMeSuccess(result.data.success, "", result.data._id));
             repository.saveToken(result.data.token,result.data.tokenDeathTime)
             repository.getToken()
 
             dispatch(actions.loginIsFetching(false))
         } catch (e) {
-            dispatch(actions.loginAuthMeSuccess(false, e.response.data.error))
+            dispatch(actions.loginAuthMeSuccess(false, e.response.data.error, ''))
             dispatch(actions.loginIsFetching(false))
         }
     }

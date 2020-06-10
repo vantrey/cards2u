@@ -1,0 +1,9 @@
+.cardPacks {
+  display: flex;
+  justify-content: center;
+}
+.addDeck {
+  margin-left: 20px;
+  height: 30px;
+}
+

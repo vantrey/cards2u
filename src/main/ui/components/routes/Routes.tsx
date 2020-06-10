@@ -7,6 +7,7 @@ import Root from "../root/Root";
 import RestorePswPage from "../../../auth/restorePsw/RestorePswPage";
 import NewPswPage from "../../../auth/newPsw/NewPswPage";
 import GetUsersContainer from "../../../getUser/ui/getUsersContainer";
+import CardPacksContainer from "../../../features/cardsPacks/ui/CardPacksContainer";
 
 export const LOGIN_PATH = '/login'
 export const REGISTRATION_PATH = '/registration'
@@ -15,6 +16,7 @@ export const NEW_PSW_PATH = '/newPsw'
 export const GET_USERS = '/getUsers'
 export const PROFILE_PATH = '/profile'
 export const ROOT_PATH = '/root'
+export const CARD_PACKS_PATH = '/packs'
 
 const Routs = () => {
     return <div>
@@ -25,6 +27,7 @@ const Routs = () => {
         <Route path={GET_USERS} render={() => <GetUsersContainer/>}/>
         <Route path={PROFILE_PATH} render={() => <Profile/>}/>
         <Route path={ROOT_PATH} render={() => <Root/>}/>
+        <Route path={CARD_PACKS_PATH} render={() => <CardPacksContainer/>}/>
     </div>
 }
 export default Routs
