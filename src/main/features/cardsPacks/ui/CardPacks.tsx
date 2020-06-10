@@ -6,8 +6,8 @@ import CardPacksHeader from "./CardPacksHeader";
 import Pagination from "./Pagination/Pagination";
 
 type CardPacksPropsType = {
-  onSortClickUp: () => void
-  onSortClickDown: () => void
+  onSortClickUp: (e: any) => void
+  onSortClickDown: (e: any) => void
   cardPacksOrdered: Array<CardPackType>
   onAddDeck: () => void
   onPageChanged: (pageNumber: number) => void
@@ -20,8 +20,8 @@ type CardPacksPropsType = {
 const CardPacks: React.FC<CardPacksPropsType> = (props) => {
 
   const CardPacksHeaderEls = [
-    {name: 'Name'},
-    {name: 'Grade'},
+    {name: 'name'},
+    {name: 'grade'},
   ]
   return (
     <div>
