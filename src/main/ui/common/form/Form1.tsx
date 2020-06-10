@@ -7,7 +7,6 @@ import warning from '../../icons/shield.svg'
 const Form1 = () => {
 
     return (
-        <>
             <form method="post" className={styles.form}>
                 <div className={styles.form__group}>
                     <input type="text" id="input" required={true}/>
@@ -51,7 +50,6 @@ const Form1 = () => {
                     <button className={styles.form__button}>ACCEPT</button>
                 </div>
             </form>
-        </>
     )
 }
 

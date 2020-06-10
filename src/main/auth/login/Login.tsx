@@ -11,10 +11,12 @@ type LoginPropsType = {
 }
 
 const Login: React.FC<LoginPropsType> = ({isFetching, errorServerMessage, ...props}) => {
-    return <div>
-        <LoginForm {...props}/>
-        {isFetching && <span>...LOADING</span>}
-        {errorServerMessage && <div>{errorServerMessage}</div>}
-    </div>
+    return (
+        <>
+            <LoginForm {...props}/>
+            {isFetching && <span>...LOADING</span>}
+            {errorServerMessage && <div>{errorServerMessage}</div>}
+        </>
+    )
 }
 export default Login

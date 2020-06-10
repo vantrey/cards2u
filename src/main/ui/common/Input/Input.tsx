@@ -7,6 +7,7 @@ type OwnPropsType = {
     name: string
     errors: UseFormErrorsType
     register: UseFormRegisterType
+    // onMouseOut : ((event: React.MouseEvent<HTMLInputElement, MouseEvent>) => void) | undefined
 }
 type InputType = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 type PropsType = OwnPropsType & InputType
@@ -18,6 +19,7 @@ const Input: React.FC<PropsType> = ({register, errors, name, title, type, ...pro
                    ref={register}
                    {...props}
                    name={name}
+                   // onMouseOut={ () => blur()}
             />
             <label className={styles.control__label} htmlFor="input">{title}</label>
             <i className={styles.mtrl__select}> </i>
