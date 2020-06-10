@@ -5,14 +5,15 @@ import {registrationReducer} from "../../auth/registration/registrationReducer";
 import {restorePswReducer} from "../../auth/restorePsw/restorePswReducer";
 import {newPswReducer} from "../../auth/newPsw/newPswReducer";
 import {profileReducer} from "../../auth/profile/profileReducer";
+import {CardsReducer} from "../../features/Cards/bll/cardsReducer";
 
 const rootReducer = combineReducers({
-  login: loginReducer,
-  registration: registrationReducer,
-  restorePsw: restorePswReducer,
-  newPsw: newPswReducer,
-  profile: profileReducer,
-
+    login: loginReducer,
+    registration: registrationReducer,
+    restorePsw: restorePswReducer,
+    newPsw: newPswReducer,
+    profile: profileReducer,
+    cards: CardsReducer,
 })
 export type AppStateType = ReturnType<typeof rootReducer>
 export type InferActionTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
