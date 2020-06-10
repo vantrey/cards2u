@@ -8,7 +8,13 @@ import CardPacks from "./CardPacks";
 
 
 const CardPacksContainer = () => {
-  const {cardPacks, totalCardPacksCount, currentPage, pageSize} = useSelector((state: AppStateType) => state.cardPacks)
+  const {
+    cardPacks,
+    isFetching,
+    totalCardPacksCount,
+    currentPage, pageSize
+  } = useSelector((state: AppStateType) => state.cardPacks)
+
   const [cardPacksOrdered, setCardPacksOrdered] = useState<Array<CardPackType>>([])
   const dispatch = useDispatch()
   useEffect(() => {
@@ -43,6 +49,7 @@ const CardPacksContainer = () => {
       pageSize={pageSize}
       totalCardPacksCount={totalCardPacksCount}
       currentPage={currentPage}
+      isFetching={isFetching}
     />
   )
 }

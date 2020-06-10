@@ -13,6 +13,7 @@ type CardPacksPropsType = {
   totalCardPacksCount: number
   pageSize: number
   currentPage: number
+  isFetching: boolean
 }
 
 const CardPacks: React.FC<CardPacksPropsType> = (props) => {
@@ -47,7 +48,8 @@ const CardPacks: React.FC<CardPacksPropsType> = (props) => {
                 onSortClickDown={props.onSortClickDown}
               />)}
           </tr>
-          {props.cardPacksOrdered.map(p =>
+          {props.isFetching && <div>...loading</div> ||
+          props.cardPacksOrdered.map(p =>
             <tr key={p._id}>
               <CardPack
                 name={p.name}
