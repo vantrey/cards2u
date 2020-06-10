@@ -24,9 +24,9 @@ type CreateCardPackType = {
 }
 
 export const cardPacksApi = {
-  getPacks(token: string, currentPage: number, pageCount: number) {
+  getPacks(token: string, currentPage: number, pageSize: number) {
     return instance.get<GetPacksType>(
-      `?token=${token}&page=${currentPage}&pageCount=${pageCount}`
+      `?token=${token}&page=${currentPage}&pageCount=${pageSize}`
     )
   },
   createCardPack(token: string, cardsPack: {name: string, user_id: string} ) {

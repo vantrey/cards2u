@@ -8,15 +8,19 @@ import CardPacks from "./CardPacks";
 
 
 const CardPacksContainer = () => {
-  const {cardPacks} = useSelector((state: AppStateType) => state.cardPacks)
+  const {cardPacks, totalCardPacksCount, currentPage, pageSize} = useSelector((state: AppStateType) => state.cardPacks)
   const [cardPacksOrdered, setCardPacksOrdered] = useState<Array<CardPackType>>([])
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getCardPacks(1, 10))
+    dispatch(getCardPacks(currentPage, pageSize))
   }, [])
   useEffect(() => {
     setCardPacksOrdered(cardPacks)
   }, [cardPacks])
+
+  const onPageChanged = (pageNumber: number) => {
+    dispatch(getCardPacks(pageNumber, pageSize))
+  }
 
   const onSortClickUp = () => {
     const Ordered = lodash.orderBy(cardPacks, 'name', 'asc')
@@ -31,11 +35,15 @@ const CardPacksContainer = () => {
   }
   return (
     <CardPacks
+      onPageChanged={onPageChanged}
       onSortClickUp={onSortClickUp}
       onSortClickDown={onSortClickDown}
       cardPacksOrdered={cardPacksOrdered}
       onAddDeck={onAddDeck}
-      />
+      pageSize={pageSize}
+      totalCardPacksCount={totalCardPacksCount}
+      currentPage={currentPage}
+    />
   )
 }
 

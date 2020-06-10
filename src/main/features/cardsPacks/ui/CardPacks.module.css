@@ -6,3 +6,11 @@
   margin-left: 20px;
   height: 30px;
 }
+
+.pagesNumbers {
+  cursor: pointer;
+}
+
+.selected {
+  font-weight: bold;
+}
