@@ -1,22 +1,14 @@
 import React from 'react'
 import styles from './Button.module.css'
 
-type OwnPropsType = {
-  tittle: string
-}
+
 type ButtonType = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
-type PropsType = OwnPropsType & ButtonType
-const Button: React.FC<PropsType> = ({...props}) => {
+type PropsType =  ButtonType
+const Button: React.FC<PropsType> = () => {
   return (
-    <button
-      className={styles.button}
-    >
-      <span
-        className={styles.buttonTitle}
-      >
-        {props.tittle}
-      </span>
-    </button>
+      <div className={styles.form__group}>
+        <button className={styles.form__button}>ACCEPT</button>
+      </div>
   )
 }
 

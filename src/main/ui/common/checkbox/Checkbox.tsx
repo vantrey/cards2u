@@ -1,13 +1,10 @@
 import React from 'react'
 import styles from './Checkbox.module.css'
 
-type OwnPropsType = {
-  tittle: string
-}
-type ButtonType = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
-type PropsType = OwnPropsType & ButtonType
+type InputType = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+type PropsType =  InputType;
 
-const Checkbox: React.FC<PropsType> = ({title}) => {
+const Checkbox: React.FC<PropsType> = () => {
   return (
       <div className={styles.form__checkbox}>
           <input type='checkbox' id='checkbox'/>

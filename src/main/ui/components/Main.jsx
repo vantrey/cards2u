@@ -8,53 +8,55 @@ import Scroll from "../common/scroll/Scroll";
 import Loader from "../common/loader/Loader";
 import Test from "../../features/test/Test";
 import Routs from "./routes/Routes";
+import Form1 from "../common/form/Form1";
 
 const Main = () => {
 
-	let [ toggleBg, setBg ] = useState (true);
-	let [ modal, setModal ] = useState (false);
-	let [ loader, setLoader ] = useState (true);
+	// let [ toggleBg, setBg ] = useState (true);
+	// let [ modal, setModal ] = useState (false);
+	// let [ loader, setLoader ] = useState (true);
+	// let [ children, setChildren ] = useState (Form1);
 
-	useEffect (() => {
-		let vid = document.getElementById ('intro');
+	// useEffect (() => {
+	// 	let vid = document.getElementById ('intro');
 		// vid.addEventListener ('canplaythrough', () => {
 		// 	setLoader (false);
 		// }, true);
 
-		vid.addEventListener ('ended', () => {
-			setBg (!toggleBg);
-		}, true);
-
-	}, []);
+	// 	vid.addEventListener ('ended', () => {
+	// 		setBg (!toggleBg);
+	// 	}, true);
+	//
+	// }, []);
 
 	return (
 		<div>
-			<Header setModal={setModal} setBg={setBg} toggleBg={toggleBg}/>
-				<div className={styles.main__wrap}>
-					{/*{*/}
-					{/*	loader &&*/}
-					{/*	<Loader/>*/}
-					{/*}*/}
+			{/*<Header setModal={setModal} setBg={setBg} toggleBg={toggleBg} setChildren={setChildren}/>*/}
+				{/*<div className={styles.main__wrap}>*/}
+				{/*	/!*{*!/*/}
+				{/*	/!*	loader &&*!/*/}
+				{/*	/!*	<Loader/>*!/*/}
+				{/*	/!*}*!/*/}
 
-					{
-						toggleBg &&
-						<Intro setBg={setBg}/>
-					}
-					{
-						!toggleBg &&
-						<>
-							<Root/>
-							<Loader/>
-						</>
-					}
+				{/*	{*/}
+				{/*		toggleBg &&*/}
+				{/*		<Intro setBg={setBg}/>*/}
+				{/*	}*/}
+				{/*	{*/}
+				{/*		!toggleBg &&*/}
+				{/*		<>*/}
+				{/*			<Root/>*/}
+				{/*			<Loader/>*/}
+				{/*		</>*/}
+				{/*	}*/}
 
-					<Scroll modal={modal} setModal={setModal}/>
-					<Menu/>
-				</div>
+				{/*	<Scroll modal={modal} setModal={setModal} children={children}/>*/}
+				{/*	<Menu/>*/}
+				{/*</div>*/}
 
-			{/*<Header/>*/}
-			{/*<Test/>*/}
-			{/*<Routs/>*/}
+			<Header/>
+			<Test/>
+			<Routs/>
 		</div>
 	)
 }

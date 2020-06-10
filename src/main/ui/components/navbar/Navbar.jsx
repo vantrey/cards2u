@@ -1,13 +1,20 @@
 import React from 'react';
 import styles from './Navbar.module.css';
 import imgLogin from '../../images/login-shadow.png'
+import Form2 from "../../common/form/Form2";
 
 
-const Navbar = ({ setModal, toggleBg }) => {
+const Navbar = ({ setModal, toggleBg, setChildren }) => {
 
 	const activationModal = () => {
 		setModal (true);
 	};
+
+	const activationModal1 = () => {
+		setChildren(Form2);
+		setModal (true);
+	};
+
 	const classForNavbar = toggleBg === true ? `${styles.navbar__wrap_notActive}` : `${styles.navbar__wrap}`;
 	return (
 		<div className={classForNavbar}>
@@ -20,7 +27,7 @@ const Navbar = ({ setModal, toggleBg }) => {
                                  Sign in
                             </span>
 						</li>
-						<li className={styles.nav__item} onClick={activationModal}>
+						<li className={styles.nav__item} onClick={activationModal1}>
                             <span className={styles.nav__item_text}>
                                  Registration
                             </span>
