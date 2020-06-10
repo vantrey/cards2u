@@ -17,6 +17,7 @@ export const GET_USERS = '/getUsers'
 export const PROFILE_PATH = '/profile'
 export const ROOT_PATH = '/root'
 export const CARD_PACKS_PATH = '/packs'
+export const CARDS_PATH = '/cards'
 
 const Routs = () => {
     return <div>
@@ -28,6 +29,7 @@ const Routs = () => {
         <Route path={PROFILE_PATH} render={() => <Profile/>}/>
         <Route path={ROOT_PATH} render={() => <Root/>}/>
         <Route path={CARD_PACKS_PATH} render={() => <CardPacksContainer/>}/>
+        <Route path={`${CARDS_PATH}/:pack_id?`} render={() => <Profile/>}/>
     </div>
 }
 export default Routs
