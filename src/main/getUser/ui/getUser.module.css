@@ -1,0 +1,31 @@
+.get_user {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 9px;
+    width: fit-content;
+    margin: 10px;
+    padding: 7px;
+}
+.get_users_container{
+ display: flex;
+    justify-content: center;
+}
+.name_user {
+    color: #bf360c;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: underline;
+}
+.avatar_user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+img {
+    border-radius: 50%;
+}
+
+.get_users {
+    display: flex;
+}

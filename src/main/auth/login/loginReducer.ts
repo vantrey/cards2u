@@ -1,6 +1,7 @@
 import {AppStateType, InferActionTypes} from "../../bll/store/store";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {api} from "../../dal/api";
+import {repository} from "../../helpers/repos_localStorrage/Token";
 
 const initialState = {
     email: null,
@@ -9,7 +10,8 @@ const initialState = {
     isAuth: false,
     token: '',
     rememberMe: false,
-    errorServerMessage: ''
+    errorServerMessage: '',
+    _id: ''
 }
 type InitialStateType = typeof initialState
 
@@ -18,7 +20,7 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
         case 'cards2u/main/auth/AUTH_ME':
             return {
                 ...state,
-                isAuth: action.isAuth, errorServerMessage: action.errorServerMessage
+                isAuth: action.isAuth, errorServerMessage: action.errorServerMessage, _id: action._id
             }
         case "cards2u/main/auth/IS_FETCHING":
             return {
@@ -30,9 +32,10 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
     }
 }
 const actions = {
-    loginAuthMeSuccess: (isAuth: boolean, errorServerMessage: string) => ({
-        type: 'cards2u/main/auth/AUTH_ME', isAuth, errorServerMessage
+    loginAuthMeSuccess: (isAuth: boolean, errorServerMessage: string, _id: string) => ({
+        type: 'cards2u/main/auth/AUTH_ME', isAuth, errorServerMessage, _id
     } as const),
+
     loginIsFetching: (isFetching: boolean) => ({
         type: 'cards2u/main/auth/IS_FETCHING',
         isFetching
@@ -51,15 +54,20 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 //     }
 // };
 
+
+
 export const login = (email: string, password: string, rememberMe: boolean): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
             dispatch(actions.loginIsFetching(true))
             const result = await api.login(email, password, rememberMe)
-            dispatch(actions.loginAuthMeSuccess(result.data.success, ""));
+            dispatch(actions.loginAuthMeSuccess(result.data.success, "", result.data._id));
+            repository.saveToken(result.data.token,result.data.tokenDeathTime)
+            repository.getToken()
+
             dispatch(actions.loginIsFetching(false))
         } catch (e) {
-            dispatch(actions.loginAuthMeSuccess(false, e.response.data.error))
+            dispatch(actions.loginAuthMeSuccess(false, e.response.data.error, ''))
             dispatch(actions.loginIsFetching(false))
         }
     }
