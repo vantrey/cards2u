@@ -9,7 +9,7 @@ type CardPacksPropsType = {
   onSortClickDown: () => void
   cardPacksOrdered: Array<CardPackType>
   onAddDeck: () => void
-  onPageChanged: (pageNumber: number)=> void
+  onPageChanged: (pageNumber: number) => void
   totalCardPacksCount: number
   pageSize: number
   currentPage: number
