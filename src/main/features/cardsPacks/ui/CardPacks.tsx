@@ -40,6 +40,7 @@ const CardPacks: React.FC<CardPacksPropsType> = (props) => {
           props.cardPacksOrdered.map(p =>
             <tr key={p._id}>
               <CardPack
+                id={p._id}
                 name={p.name}
                 grade={p.grade}
               />
