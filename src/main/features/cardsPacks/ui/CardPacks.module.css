@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
 }
- .row {
-   margin: 15px;
- }
+.addDeck {
+  margin-left: 20px;
+  height: 30px;
+}

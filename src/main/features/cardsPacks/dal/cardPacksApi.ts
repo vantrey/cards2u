@@ -16,12 +16,25 @@ type GetPacksType = {
   token: string
   tokenDeathTime: number
 }
+type CreateCardPackType = {
+  newCardsPack: CardPackType
+  success: boolean
+  token: string
+  tokenDeathTime: number
+}
 
 export const cardPacksApi = {
   getPacks(token: string) {
     return instance.get<GetPacksType>(
-      `?token=${token}`
+      `?token=${token}&pageCount=${100}`
     )
   },
-  
+  createCardPack(token: string, cardsPack: {name: string, user_id: string} ) {
+    return instance.post<CreateCardPackType>(
+      ``,
+      {
+        cardsPack,
+        token
+      })
+  }
 }

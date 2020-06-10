@@ -2,22 +2,23 @@ import React, {useEffect, useState} from 'react'
 import styles from './CardPacks.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store/store";
-import {getCardPacks} from "../bll/cardPacksReducer";
-import {repository} from "../../../helpers/repos_localStorrage/Token";
+import {getCardPacks, createCardPack} from "../bll/cardPacksReducer";
 import lodash from 'lodash'
 import {CardPackType} from "../../../types/entities";
+import CardPack from "./cardPack";
+
 
 const CardPacksContainer = () => {
   const {cardPacks} = useSelector((state: AppStateType) => state.cardPacks)
   const [cardPacksOrdered, setCardPacksOrdered] = useState<Array<CardPackType>>([])
   const dispatch = useDispatch()
-  const token = repository.getToken()
   useEffect(() => {
-    dispatch(getCardPacks(token))
+    dispatch(getCardPacks())
   }, [])
   useEffect(() => {
     setCardPacksOrdered(cardPacks)
   }, [cardPacks])
+
   const onSortClickUp = () => {
     const Ordered = lodash.orderBy(cardPacks, 'name', 'asc')
     setCardPacksOrdered(Ordered)
@@ -26,27 +27,28 @@ const CardPacksContainer = () => {
     const Ordered = lodash.orderBy(cardPacks, 'name', 'desc')
     setCardPacksOrdered(Ordered)
   }
+  const onAddDeck = () => {
+    dispatch(createCardPack({name: 'Ideck'}))
+  }
   return (
     <div className={styles.cardPacks}>
-      <div className={styles.row}>
-        <h3>Name <button onClick={onSortClickUp}>&#8593;</button><button onClick={onSortClickDown}>&#8595;</button></h3>
-        {cardPacksOrdered.map(p => {
-          return (
-            <div key={p._id}>{p.name}</div>
-          )
-        })}
-      </div>
-      <div className={styles.row}>
-        <h3>Grade</h3>
-        {cardPacksOrdered.map(p => {
-          return (
-            <div key={p._id}>{p.grade}</div>
-          )
-        })}
-      </div>
+      <table>
+        <tr>
+          <th>
+            Name
+            <button onClick={onSortClickUp}>&#8593;</button>
+            <button onClick={onSortClickDown}>&#8595;</button>
+          </th>
+          <th>
+            Grade
+          </th>
+        </tr>
+          {cardPacksOrdered.map(p => <CardPack name={p.name} grade={p.grade}/>)}
+      </table>
+      <button onClick={onAddDeck} className={styles.addDeck}> Add Deck</button>
+
     </div>
   )
-
 }
 
 export default CardPacksContainer

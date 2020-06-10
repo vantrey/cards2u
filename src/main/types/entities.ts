@@ -12,8 +12,11 @@ export type UserType = {
   _id: string
 }
 export type CardPackType = {
+  cardsCount: number
+  private: boolean
   _id: string
   user_id: string
+  user_name: string
   name: string
   path: string // папка
   grade: number // средняя оценка карточек
