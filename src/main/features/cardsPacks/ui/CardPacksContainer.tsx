@@ -29,12 +29,12 @@ const CardPacksContainer = () => {
     dispatch(getCardPacks(pageNumber, pageSize))
   }
 
-  const onSortClickUp = () => {
-    const Ordered = lodash.orderBy(cardPacks, 'name', 'asc')
+  const onSortClickUp = (e: any) => {
+    const Ordered = lodash.orderBy(cardPacks, e.currentTarget.name, 'asc')
     setCardPacksOrdered(Ordered)
   }
-  const onSortClickDown = () => {
-    const Ordered = lodash.orderBy(cardPacks, 'name', 'desc')
+  const onSortClickDown = (e: any) => {
+    const Ordered = lodash.orderBy(cardPacks, e.currentTarget.name, 'desc')
     setCardPacksOrdered(Ordered)
   }
   const onAddDeck = () => {
