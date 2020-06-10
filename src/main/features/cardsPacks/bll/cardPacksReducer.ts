@@ -71,12 +71,12 @@ type ActionsType = InferActionTypes<typeof cardPacksActions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const getCardPacks = (): ThunkType => async (dispatch: DispatchType) => {
+export const getCardPacks = (currentPage: number, pageCount: number): ThunkType => async (dispatch: DispatchType) => {
   try {
     dispatch(cardPacksActions.setIsFetching(true))
     let token = repository.getToken()
     if (!token) token = ''
-    const response = await cardPacksApi.getPacks(token)
+    const response = await cardPacksApi.getPacks(token, currentPage, pageCount)
     dispatch(cardPacksActions.getCardPacksSuccess(response.data.cardPacks))
     repository.saveToken(response.data.token, response.data.tokenDeathTime)
   } catch (e) {

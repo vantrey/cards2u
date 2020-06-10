@@ -6,6 +6,7 @@ import {getCardPacks, createCardPack} from "../bll/cardPacksReducer";
 import lodash from 'lodash'
 import {CardPackType} from "../../../types/entities";
 import CardPack from "./cardPack";
+import CardPacks from "./CardPacks";
 
 
 const CardPacksContainer = () => {
@@ -13,7 +14,7 @@ const CardPacksContainer = () => {
   const [cardPacksOrdered, setCardPacksOrdered] = useState<Array<CardPackType>>([])
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getCardPacks())
+    dispatch(getCardPacks(1, 3))
   }, [])
   useEffect(() => {
     setCardPacksOrdered(cardPacks)
@@ -31,23 +32,12 @@ const CardPacksContainer = () => {
     dispatch(createCardPack({name: 'Ideck'}))
   }
   return (
-    <div className={styles.cardPacks}>
-      <table>
-        <tr>
-          <th>
-            Name
-            <button onClick={onSortClickUp}>&#8593;</button>
-            <button onClick={onSortClickDown}>&#8595;</button>
-          </th>
-          <th>
-            Grade
-          </th>
-        </tr>
-          {cardPacksOrdered.map(p => <CardPack name={p.name} grade={p.grade}/>)}
-      </table>
-      <button onClick={onAddDeck} className={styles.addDeck}> Add Deck</button>
-
-    </div>
+    <CardPacks
+      onSortClickUp={onSortClickUp}
+      onSortClickDown={onSortClickDown}
+      cardPacksOrdered={cardPacksOrdered}
+      onAddDeck={onAddDeck}
+      />
   )
 }
 
