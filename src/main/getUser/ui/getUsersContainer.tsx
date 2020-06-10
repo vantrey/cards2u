@@ -45,7 +45,13 @@ const GetUsersContainer: React.FC = (props) => {
 
         return (
             <div className={s.get_users_container}>
-                <GetUsers users={data.data} onSort={onSort}/>
+                <GetUsers
+                    users={data.data}
+                    onSort={onSort}
+                    sort={data.sort}
+                    sortField={data.sortField}
+
+                />
             </div>
         );
     }

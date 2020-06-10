@@ -29,3 +29,6 @@ img {
 .get_users {
     display: flex;
 }
+.cursorSort {
+ cursor: pointer;
+}

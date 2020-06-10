@@ -45,7 +45,7 @@ type UpdateNameType = {
   export const api = {
   getUsers(token:string) {
     return instance.get<GetUsersType>(
-      `/social/users?token=${token}`
+      `/social/users?token=${token}&page=1&pageCount=10`
     ).then(r=>r.data)
   },
   login(email: string, password: string, rememberMe: boolean) {

@@ -6,6 +6,8 @@ import s from "./getUser.module.css"
 type UsersPropsType = {
     users:  UserType[]
     onSort:(sortField:any)=>void
+    sort: 'asc' | 'desc'
+    sortField: string
 
 }
 
@@ -15,12 +17,30 @@ const GetUsers: React.FC<UsersPropsType> = (props) => {
             <table className="table">
                 <thead>
                 <tr>
-                    <th onClick={()=>props.onSort('_id')} >ID</th>
-                    <th onClick={()=>props.onSort('avatar')}>AVATAR</th>
-                    <th onClick={()=>props.onSort('name')}>NAME</th>
-                    <th onClick={()=>props.onSort('email')}>EMAIL</th>
-                    <th onClick={()=>props.onSort('isAdmin')}>IS ADMIN</th>
-                    <th onClick={()=>props.onSort('created')}>CREATED</th>
+                    <th >
+                        ID
+                        <span className={s.cursorSort} onClick={()=>props.onSort('_id')}>⇵</span>
+                    </th>
+                    <th>
+                        AVATAR
+                        <span className={s.cursorSort} onClick={()=>props.onSort('avatar')}>⇵</span>
+                    </th>
+                    <th>
+                        NAME
+                        <span className={s.cursorSort} onClick={()=>props.onSort('name')}>⇵</span>
+                    </th>
+                    <th>
+                        EMAIL
+                        <span className={s.cursorSort} onClick={()=>props.onSort('email')}>⇵</span>
+                    </th>
+                    <th onClick={()=>props.onSort('isAdmin')}>
+                        IS ADMIN
+                        <span className={s.cursorSort} onClick={()=>props.onSort('isAdmin')}>⇵</span>
+                    </th>
+                    <th>
+                        CREATED
+                        <span className={s.cursorSort} onClick={()=>props.onSort('created')}>⇵</span>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
