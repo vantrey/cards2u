@@ -12,7 +12,8 @@ const CardPacksContainer = () => {
     cardPacks,
     isFetching,
     totalCardPacksCount,
-    currentPage, pageSize
+    currentPage,
+    pageSize
   } = useSelector((state: AppStateType) => state.cardPacks)
 
   const [cardPacksOrdered, setCardPacksOrdered] = useState<Array<CardPackType>>([])

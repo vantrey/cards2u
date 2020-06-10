@@ -3,6 +3,7 @@ import styles from './CardPacks.module.css'
 import CardPack from "./cardPack";
 import {CardPackType} from "../../../types/entities";
 import CardPacksHeader from "./CardPacksHeader";
+import Pagination from "./Pagination/Pagination";
 
 type CardPacksPropsType = {
   onSortClickUp: () => void
@@ -17,20 +18,7 @@ type CardPacksPropsType = {
 }
 
 const CardPacks: React.FC<CardPacksPropsType> = (props) => {
-  const pagesNumbersEls = Array.from({
-    length: Math.ceil(props.totalCardPacksCount / props.pageSize)
-  }).map((el, i) => {
-    let pageNumber = i + 1
-    return <span
-      onClick={() => {
-        props.onPageChanged(pageNumber)
-      }}
-      key={i}
-      className={`${styles.pagesNumbers} ${(props.currentPage === pageNumber && styles.selected)
-      || ''}`}>
-     {pageNumber} -
-    </span>
-  })
+
   const CardPacksHeaderEls = [
     {name: 'Name'},
     {name: 'Grade'},
@@ -60,7 +48,12 @@ const CardPacks: React.FC<CardPacksPropsType> = (props) => {
         </table>
         <button onClick={props.onAddDeck} className={styles.addDeck}> Add Deck</button>
       </div>
-      {pagesNumbersEls}
+      <Pagination
+        onPageChanged={props.onPageChanged}
+        totalCount={props.totalCardPacksCount}
+        pageSize={props.pageSize}
+        currentPage={props.currentPage}
+      />
     </div>
   )
 }
