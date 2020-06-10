@@ -51,9 +51,7 @@ const GetUsersContainer: React.FC = (props) => {
         }
 
         const pageCountSize = Math.ceil(totalUsersCount / pageCount)
-        // const displayData = _.chunk(data.data,pageSize)
-        // @ts-ignore
-        // @ts-ignore
+
         return (
             <div className={s.get_users_container}>
                 <ReactPaginate
