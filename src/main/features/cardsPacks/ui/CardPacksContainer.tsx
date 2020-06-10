@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import styles from './CardPacks.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store/store";
-import {getCardPacks, createCardPack} from "../bll/cardPacksReducer";
+import {createCardPack, getCardPacks} from "../bll/cardPacksReducer";
 import lodash from 'lodash'
 import {CardPackType} from "../../../types/entities";
-import CardPack from "./cardPack";
 import CardPacks from "./CardPacks";
 
 
@@ -14,7 +12,7 @@ const CardPacksContainer = () => {
   const [cardPacksOrdered, setCardPacksOrdered] = useState<Array<CardPackType>>([])
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getCardPacks(1, 3))
+    dispatch(getCardPacks(1, 10))
   }, [])
   useEffect(() => {
     setCardPacksOrdered(cardPacks)

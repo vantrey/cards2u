@@ -8,10 +8,10 @@ type CardPackType = {
 
 const CardPack: React.FC<CardPackType> = (props) => {
   return (
-    <tr>
+    <>
       <td> {props.name} </td>
       <td> {props.grade} </td>
-    </tr>
+    </>
   )
 }
 
