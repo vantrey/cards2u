@@ -8,6 +8,7 @@ import RestorePswPage from "../../../auth/restorePsw/RestorePswPage";
 import NewPswPage from "../../../auth/newPsw/NewPswPage";
 import GetUsersContainer from "../../../getUser/ui/getUsersContainer";
 import CardPacksContainer from "../../../features/cardsPacks/ui/CardPacksContainer";
+import CardsContainer from "../../../features/Cards/ui/CardsContainer";
 
 export const LOGIN_PATH = '/login'
 export const REGISTRATION_PATH = '/registration'
@@ -29,7 +30,7 @@ const Routs = () => {
         <Route path={PROFILE_PATH} render={() => <Profile/>}/>
         <Route path={ROOT_PATH} render={() => <Root/>}/>
         <Route path={CARD_PACKS_PATH} render={() => <CardPacksContainer/>}/>
-        <Route path={`${CARDS_PATH}/:pack_id?`} render={() => <Profile/>}/>
+        <Route path={`${CARDS_PATH}/:pack_id?`} render={() => <CardsContainer/>}/>
     </div>
 }
 export default Routs

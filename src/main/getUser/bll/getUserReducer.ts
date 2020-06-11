@@ -2,7 +2,7 @@ import {AppStateType, InferActionTypes} from "../../bll/store/store";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {UserType} from "../../types/entities";
 import {api} from "../../dal/api";
-import {repository} from "../../helpers/repos_localStorrage/Token";
+import {repository} from "../../helpers/repos_localStorage/Token";
 
 const initialState = {
     users: [] as Array<UserType>
@@ -33,9 +33,15 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
 export const getUser = (): ThunkType =>
     async (dispatch: DispatchType) => {
-        let token = repository.getToken()
-        const result = await api.getUsers(token)
-        dispatch(actions.getUserSuccess(result.users));
-        repository.saveToken(result.token, result.tokenDeathTime)
+        try {
+            let token = repository.getToken()
+            if (!token) token = ''
+            const result = await api.getUsers(token)
+            dispatch(actions.getUserSuccess(result.users));
+            repository.saveToken(result.token, result.tokenDeathTime)
+        } catch (e) {
+            repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+
+        }
     }
 

@@ -28,14 +28,14 @@ type AddCardType = {
 
 export const CardsApi = {
     getCards(cardsPack_id: string, token: string) {
-        return instance.get<GetCardsType>(`cards/card&cardsPack_id=${cardsPack_id}&token=${token}`)
+        return instance.get<GetCardsType>(`cards/card?cardsPack_id=${cardsPack_id}&token=${token}`)
     },
 
-    addCard(cardsPack_id: string, token: string) {
+    addCard(card:{cardsPack_id: string}, token: string) {
         return instance.post<AddCardType>(`cards/card`,
         {
-            cardsPack_id,
-                token
+            card,
+            token
         }
     )
 
