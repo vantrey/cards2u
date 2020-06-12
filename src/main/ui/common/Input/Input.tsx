@@ -19,7 +19,6 @@ const Input: React.FC<PropsType> = ({register, errors, name, title, type, ...pro
                    ref={register}
                    {...props}
                    name={name}
-                   // onMouseOut={ () => blur()}
             />
             <label className={styles.control__label} htmlFor="input">{title}</label>
             <i className={styles.mtrl__select}> </i>

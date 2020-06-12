@@ -6,15 +6,14 @@ type LoginPropsType = {
     errorServerMessage: string
     register: UseFormRegisterType
     errors: UseFormErrorsType
-    isFetching: boolean
     onSubmit: () => void
 }
 
-const Login: React.FC<LoginPropsType> = ({isFetching, errorServerMessage, ...props}) => {
+const
+    Login: React.FC<LoginPropsType> = ({ errorServerMessage, ...props}) => {
     return (
         <>
             <LoginForm {...props}/>
-            {isFetching && <span>...LOADING</span>}
             {errorServerMessage && <div>{errorServerMessage}</div>}
         </>
     )

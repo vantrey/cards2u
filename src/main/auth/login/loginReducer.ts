@@ -5,7 +5,7 @@ import {api} from "../../dal/api";
 const initialState = {
     email: null,
     login: null,
-    isFetching: false,
+    isFetchingLogin: false,
     isAuth: false,
     token: '',
     rememberMe: false,
@@ -23,7 +23,7 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
         case "cards2u/main/auth/IS_FETCHING":
             return {
                 ...state,
-                isFetching: action.isFetching
+                isFetchingLogin: action.isFetchingLogin
             }
         default:
             return state
@@ -33,9 +33,9 @@ const actions = {
     loginAuthMeSuccess: (isAuth: boolean, errorServerMessage: string) => ({
         type: 'cards2u/main/auth/AUTH_ME', isAuth, errorServerMessage
     } as const),
-    loginIsFetching: (isFetching: boolean) => ({
+    loginIsFetching: (isFetchingLogin: boolean) => ({
         type: 'cards2u/main/auth/IS_FETCHING',
-        isFetching
+        isFetchingLogin
     } as const),
 }
 type ActionsType = InferActionTypes<typeof actions>

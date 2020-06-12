@@ -4,17 +4,32 @@ import LoginContainer from "../../../auth/login/LoginContainer";
 import Scroll from '../../common/scroll/Scroll';
 import RegistrationContainer from '../../../auth/registration/RegirtrationContainer';
 import RestorePswContainer from '../../../auth/restorePsw/RestorePswContainer';
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../../bll/store/store";
 
 export const LOGIN_PATH = '/login'
+export const SET_NEW_PSW__PATH = '/newPsw'
 export const REGISTRATION_PATH = '/registration'
 export const RESTORE_PSW_PATH = '/restorePsw'
 
+
 const FormRoutes = () => {
+
+    const { isFetchingLogin } = useSelector((state: AppStateType) => state.login);
+    const { isFetchingRegistration } = useSelector((state: AppStateType) => state.registration);
+    const {isFetchingRestorePsw} = useSelector((state: AppStateType) => state.restorePsw);
+
     return (
         <>
-            <Route path={LOGIN_PATH} render={() => <Scroll children={<LoginContainer/>} title={'Login'}/>}/>
-            <Route path={REGISTRATION_PATH} render={() => <Scroll children={<RegistrationContainer/>} title={'Registration'}/>}/>
-            <Route path={RESTORE_PSW_PATH} render={() => <Scroll children={<RestorePswContainer/>} title={'Restore pswd'}/>}/>
+
+            {/*<Route path={SET_NEW_PSW__PATH} render={() => <Scroll children={<RestorePswContainer/>} title={'RRRR'}/>}/>*/}
+
+            <Route path={LOGIN_PATH} render={() => <Scroll children={<LoginContainer/>} title={'Login'}
+                                                           isFetching={isFetchingLogin}/>}/>
+            <Route path={REGISTRATION_PATH} render={() => <Scroll children={<RegistrationContainer/>} title={'Registration'}
+                                                                  isFetching={isFetchingRegistration}/>}/>
+            <Route path={RESTORE_PSW_PATH} render={() => <Scroll children={<RestorePswContainer/>} title={'Restore pswd'}
+                                                                 isFetching={isFetchingRestorePsw}/>}/>
         </>
     )
 }

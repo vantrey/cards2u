@@ -11,6 +11,7 @@ import FormRoutes from "./routes/FormRoutes";
 const Main = () => {
 
 	let [ toggleBg, setBg ] = useState (true);
+	// let {skipIntro} = useParams();
 
 	useEffect (() => {
 		let vid = document.getElementById ('intro');
@@ -23,22 +24,20 @@ const Main = () => {
 	return (
 		<div>
 			<Header setBg={setBg} toggleBg={toggleBg}/>
-			<div className={styles.main__wrap}>
-
-				{
-					toggleBg &&
-					<Intro setBg={setBg}/>
-				}
-				{
-					!toggleBg &&
-					<>
-						<Root/>
-						<Loader/>
-					</>
-				}
-				<FormRoutes/>
-				<Menu/>
-			</div>
+				<div className={styles.main__wrap}>
+					{
+						toggleBg &&
+						<Intro setBg={setBg}/>
+					}
+					{
+						!toggleBg &&
+						<>
+							<Root/>
+						</>
+					}
+					<FormRoutes/>
+					<Menu/>
+				</div>
 
 			{/*<Header/>*/}
 			{/*<Test/>*/}

@@ -4,9 +4,10 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppStateType} from '../../bll/store/store'
 import {actions, createUser} from './registrationReducer'
 import {Redirect} from 'react-router-dom'
-import {LOGIN_PATH} from '../../ui/components/routes/Routes'
+
 import Registration from "./Regirtration"
 import {registrationFormSchema} from './registrationFormShema'
+import { LOGIN_PATH } from '../../ui/components/routes/FormRoutes';
 
 type RegistrationFormDataType = {
   email: string
@@ -16,7 +17,7 @@ type RegistrationFormDataType = {
 
 const RegistrationContainer: React.FC = () => {
   const [isFirsRendering, setIsFirstRendering] = useState(true)
-  const {isSuccess, errorServerMessage, isFetching} = useSelector((state: AppStateType) => state.registration)
+  const {isSuccess, errorServerMessage} = useSelector((state: AppStateType) => state.registration)
   const dispatch = useDispatch()
   const {register, handleSubmit, errors, reset} = useForm<RegistrationFormDataType>({
     mode: 'onBlur',
@@ -39,7 +40,6 @@ const RegistrationContainer: React.FC = () => {
       register={register}
       errors={errors}
       onSubmit={onSubmit}
-      isFetching={isFetching}
     />
   )
 }

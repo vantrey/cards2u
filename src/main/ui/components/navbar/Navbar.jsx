@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Navbar.module.css';
 import imgLogin from '../../images/login-shadow.png'
 import { NavLink } from "react-router-dom";
@@ -7,16 +7,26 @@ import { REGISTRATION_PATH, LOGIN_PATH, RESTORE_PSW_PATH } from "../routes/FormR
 
 const Navbar = ({ toggleBg }) => {
 
+	const [checked, setChecked] = React.useState(false);
+
+	const onCloseNavbar = () => {
+		setTimeout( () => {
+			setChecked(false);
+			console.log ("!!!")
+		}, 500);
+	};
+
+
 	const classForNavbar = toggleBg === true ? `${styles.navbar__wrap_notActive}` : `${styles.navbar__wrap}`;
 
 	return (
 		<div className={classForNavbar}>
 			<nav className={styles.nav}>
-				<input type="checkbox" className={styles.nav__cb} id="menu-cb"/>
+				<input type="checkbox"  defaultChecked={checked}  className={styles.nav__cb} id="menu-cb"/>
 				<div className={styles.nav__content}>
 					<ul className={styles.nav__items}>
 						<li className={styles.nav__item}>
-							<NavLink to={LOGIN_PATH} className={styles.nav__item_text}>
+							<NavLink to={LOGIN_PATH} className={styles.nav__item_text} onClick={onCloseNavbar}>
 								Sign in
 							</NavLink>
 						</li>
