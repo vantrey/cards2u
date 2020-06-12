@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store/store";
-import {createCardPack, getCardPacks, cardPacksActions} from "../bll/cardPacksReducer";
+import {createCardsPack, getCardPacks, cardPacksActions} from "../bll/cardPacksReducer";
 import lodash from 'lodash'
 import {CardPackType} from "../../../types/entities";
 import CardPacks from "./CardPacks";
@@ -42,7 +42,7 @@ const CardPacksContainer = () => {
     setCardPacksOrdered(Ordered)
   }
   const onAddDeck = () => {
-    dispatch(createCardPack({name: 'ivan'}))
+    dispatch(createCardsPack({name: 'ivan'}))
   }
   if (isFirstRendering) {
     if (errorFromServer) {
