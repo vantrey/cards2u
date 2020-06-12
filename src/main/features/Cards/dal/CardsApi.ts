@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {CardsType, CardType} from "../../../types/entities";
+import {CardsType} from "../../../types/entities";
 
 
 const instance = axios.create({
@@ -27,11 +27,11 @@ type AddCardType = {
 
 
 export const CardsApi = {
-    getCards(cardsPack_id: string, token: string) {
+    getCards(cardsPack_id: string, token: string | null) {
         return instance.get<GetCardsType>(`cards/card?cardsPack_id=${cardsPack_id}&token=${token}`)
     },
 
-    addCard(card:{cardsPack_id: string}, token: string) {
+    addCard(card:{cardsPack_id: string}, token: string | null) {
         return instance.post<AddCardType>(`cards/card`,
         {
             card,

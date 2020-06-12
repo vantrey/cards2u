@@ -92,7 +92,7 @@ type UpdateNameType = {
         password
       })
   },
-  updateName(token: string, name: string, avatar: string) {
+  updateName(token: string | null, name: string, avatar: string) {
     return instance.put<UpdateNameType>(
       `/auth/me`,
       {
