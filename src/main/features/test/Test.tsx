@@ -4,7 +4,7 @@ import Link from '../../ui/common/Link/Link';
 import {
   GET_USERS,
   CARD_PACKS_PATH,
-  LOGIN_PATH, NEW_PSW_PATH, PROFILE_PATH, REGISTRATION_PATH, RESTORE_PSW_PATH, CARDS_PATH
+  LOGIN_PATH, NEW_PSW_PATH, PROFILE_PATH, REGISTRATION_PATH, RESTORE_PSW_PATH
 } from "../../ui/components/routes/Routes";
 
 const Test = () => {
