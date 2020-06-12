@@ -38,7 +38,7 @@ const CardPacksContainer = () => {
     setCardPacksOrdered(Ordered)
   }
   const onAddDeck = () => {
-    dispatch(createCardPack({name: 'Jeca'}))
+    dispatch(createCardPack({name: 'ivan'}))
   }
   return (
     <CardPacks

@@ -2,7 +2,8 @@ import {AppStateType, InferActionTypes} from "../../bll/store/store";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {UserType} from "../../types/entities";
 import {api} from "../../dal/api";
-import {repository} from "../../helpers/repos_localStorrage/Token";
+import { repository } from "../../helpers/repos_localStorage/Token";
+
 
 const initialState = {
     users: [] as Array<UserType>,
