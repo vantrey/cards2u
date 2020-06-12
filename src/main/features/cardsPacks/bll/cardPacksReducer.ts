@@ -7,8 +7,7 @@ import {repository} from "../../../helpers/repos_localStorage/Token";
 type InitialStateType = {
     cardPacks: Array<CardPackType>
     isFetching: boolean
-    error: string
-    currentPage: number
+    errorFromServer: string
     pageSize: number
     totalCardPacksCount: number
 }
@@ -16,8 +15,7 @@ type InitialStateType = {
 const initialState: InitialStateType = {
     cardPacks: [],
     isFetching: false,
-    error: '',
-    currentPage: 1,
+    errorFromServer: '',
     pageSize: 6,
     totalCardPacksCount: 0,
 }
@@ -37,11 +35,6 @@ export const cardPacksReducer = (state = initialState, action: ActionsType): Ini
                 cardPacks: [...state.cardPacks, action.newCardPack],
                 isFetching: false
             }
-        case "CARD_PACKS_REDUCER/SET_CURRENT_PAGE":
-            return {
-                ...state,
-                currentPage: action.currentPage
-            }
         case "CARD_PACKS_REDUCER/SET_IS_FETCHING":
             return {
                 ...state,
@@ -50,7 +43,7 @@ export const cardPacksReducer = (state = initialState, action: ActionsType): Ini
         case "CARD_PACKS_REDUCER/SET_ERROR":
             return {
                 ...state,
-                error: action.error,
+                errorFromServer: action.error,
                 isFetching: false
             }
         default:
@@ -58,7 +51,7 @@ export const cardPacksReducer = (state = initialState, action: ActionsType): Ini
     }
 }
 
-const cardPacksActions = {
+export const cardPacksActions = {
     getCardPacksSuccess: (cardPacks: Array<CardPackType>, totalCardPacksCount: number) => ({
         type: 'CARD_PACKS_REDUCER/GET_CARD_PACKS',
         cardPacks,
@@ -67,10 +60,6 @@ const cardPacksActions = {
     createCardPacksSuccess: (newCardPack: CardPackType) => ({
         type: 'CARD_PACKS_REDUCER/CREATE_CARD_PACKS',
         newCardPack
-    } as const),
-    setCurrentPage: (currentPage: number) => ({
-        type: 'CARD_PACKS_REDUCER/SET_CURRENT_PAGE',
-        currentPage
     } as const),
     setIsFetching: (isFetching: boolean) => ({
         type: 'CARD_PACKS_REDUCER/SET_IS_FETCHING',
@@ -88,13 +77,11 @@ type ActionsType = InferActionTypes<typeof cardPacksActions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const getCardPacks = (pageNumber: number, pageSize: number): ThunkType => async (dispatch: DispatchType) => {
+export const getCardPacks = (currentPage: number, pageSize: number): ThunkType => async (dispatch: DispatchType) => {
     try {
         dispatch(cardPacksActions.setIsFetching(true))
-        dispatch(cardPacksActions.setCurrentPage(pageNumber))
         let token = repository.getToken()
-        if (!token) token = ''
-        const response = await cardPacksApi.getPacks(token, pageNumber, pageSize)
+        const response = await cardPacksApi.getPacks(token, currentPage, pageSize)
         dispatch(cardPacksActions.getCardPacksSuccess(response.data.cardPacks, response.data.cardPacksTotalCount))
         repository.saveToken(response.data.token, response.data.tokenDeathTime)
     } catch (e) {
@@ -107,7 +94,6 @@ export const createCardPack = (newCardPack: { name: string }): ThunkType => asyn
         dispatch(cardPacksActions.setIsFetching(true))
         let token = repository.getToken()
         let user_id = repository.get_Auth_id()
-        if (!token) token = ''
         const response = await cardPacksApi.createCardPack(token, {...newCardPack, user_id})
         dispatch(cardPacksActions.createCardPacksSuccess(response.data.newCardsPack))
         repository.saveToken(response.data.token, response.data.tokenDeathTime)
