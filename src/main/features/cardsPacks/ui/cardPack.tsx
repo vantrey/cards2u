@@ -1,5 +1,4 @@
 import React from "react";
-import styles from './CardPacks.module.css'
 import Link from "../../../ui/common/Link/Link";
 import {CARDS_PATH} from "../../../ui/components/routes/Routes";
 

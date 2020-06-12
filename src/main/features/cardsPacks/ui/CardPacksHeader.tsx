@@ -2,14 +2,15 @@ import React from 'react'
 
 type CardPacksHeaderPropsType = {
   name: string
-  onSortClickUp: (e: any) => void
-  onSortClickDown: (e: any) => void
+  onSortClickUp: (e: React.MouseEvent<HTMLButtonElement>) => void
+  onSortClickDown: (e: React.MouseEvent<HTMLButtonElement>) => void
+  title: string
 }
 
 const CardPacksHeader: React.FC<CardPacksHeaderPropsType> = (props) => {
   return (
       <th>
-        {props.name}
+        {props.title}
         <button name={props.name} onClick={props.onSortClickUp}>&#8593;</button>
         <button name={props.name} onClick={props.onSortClickDown}>&#8595;</button>
       </th>

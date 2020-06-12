@@ -20,7 +20,7 @@ const CardPacksContainer = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getCardPacks(currentPage, pageSize))
-  }, [])
+  }, [dispatch])
   useEffect(() => {
     setCardPacksOrdered(cardPacks)
   }, [cardPacks])
@@ -29,11 +29,11 @@ const CardPacksContainer = () => {
     dispatch(getCardPacks(pageNumber, pageSize))
   }
 
-  const onSortClickUp = (e: any) => {
+  const onSortClickUp = (e: React.MouseEvent<HTMLButtonElement>) => {
     const Ordered = lodash.orderBy(cardPacks, e.currentTarget.name, 'asc')
     setCardPacksOrdered(Ordered)
   }
-  const onSortClickDown = (e: any) => {
+  const onSortClickDown = (e: React.MouseEvent<HTMLButtonElement>) => {
     const Ordered = lodash.orderBy(cardPacks, e.currentTarget.name, 'desc')
     setCardPacksOrdered(Ordered)
   }
