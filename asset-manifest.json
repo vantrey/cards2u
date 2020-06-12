@@ -1,17 +1,19 @@
 {
   "files": {
-    "main.css": "/Wisemen/static/css/main.3fddd2e4.chunk.css",
-    "main.js": "/Wisemen/static/js/main.630c3841.chunk.js",
-    "main.js.map": "/Wisemen/static/js/main.630c3841.chunk.js.map",
+    "main.css": "/Wisemen/static/css/main.b00d17b0.chunk.css",
+    "main.js": "/Wisemen/static/js/main.2acf992c.chunk.js",
+    "main.js.map": "/Wisemen/static/js/main.2acf992c.chunk.js.map",
     "runtime-main.js": "/Wisemen/static/js/runtime-main.82391f9b.js",
     "runtime-main.js.map": "/Wisemen/static/js/runtime-main.82391f9b.js.map",
-    "static/js/2.2efb80b5.chunk.js": "/Wisemen/static/js/2.2efb80b5.chunk.js",
-    "static/js/2.2efb80b5.chunk.js.map": "/Wisemen/static/js/2.2efb80b5.chunk.js.map",
+    "static/css/2.af3c1da9.chunk.css": "/Wisemen/static/css/2.af3c1da9.chunk.css",
+    "static/js/2.db260c8f.chunk.js": "/Wisemen/static/js/2.db260c8f.chunk.js",
+    "static/js/2.db260c8f.chunk.js.map": "/Wisemen/static/js/2.db260c8f.chunk.js.map",
     "index.html": "/Wisemen/index.html",
-    "precache-manifest.66578475f76303bdb98c41c12672c1a7.js": "/Wisemen/precache-manifest.66578475f76303bdb98c41c12672c1a7.js",
+    "precache-manifest.b672f29acfeaff29123efa6ed4537908.js": "/Wisemen/precache-manifest.b672f29acfeaff29123efa6ed4537908.js",
     "service-worker.js": "/Wisemen/service-worker.js",
-    "static/css/main.3fddd2e4.chunk.css.map": "/Wisemen/static/css/main.3fddd2e4.chunk.css.map",
-    "static/js/2.2efb80b5.chunk.js.LICENSE.txt": "/Wisemen/static/js/2.2efb80b5.chunk.js.LICENSE.txt",
+    "static/css/2.af3c1da9.chunk.css.map": "/Wisemen/static/css/2.af3c1da9.chunk.css.map",
+    "static/css/main.b00d17b0.chunk.css.map": "/Wisemen/static/css/main.b00d17b0.chunk.css.map",
+    "static/js/2.db260c8f.chunk.js.LICENSE.txt": "/Wisemen/static/js/2.db260c8f.chunk.js.LICENSE.txt",
     "static/media/index.css": "/Wisemen/static/media/CSGrimrock.bd07c961.woff",
     "static/media/Intro-53-commpres-webm.webm": "/Wisemen/static/media/Intro-53-commpres-webm.f9da5a9c.webm",
     "static/media/Intro-53-commpres.mp4": "/Wisemen/static/media/Intro-53-commpres.7dbea0cc.mp4",
@@ -31,8 +33,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.82391f9b.js",
-    "static/js/2.2efb80b5.chunk.js",
-    "static/css/main.3fddd2e4.chunk.css",
-    "static/js/main.630c3841.chunk.js"
+    "static/css/2.af3c1da9.chunk.css",
+    "static/js/2.db260c8f.chunk.js",
+    "static/css/main.b00d17b0.chunk.css",
+    "static/js/main.2acf992c.chunk.js"
   ]
 }
