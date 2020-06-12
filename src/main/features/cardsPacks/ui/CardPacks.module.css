@@ -1,7 +1,7 @@
 .cardPacks {
   display: flex;
   justify-content: center;
-  min-height: 220px;
+  min-height: 240px;
 }
 .addDeck {
   margin-left: 20px;

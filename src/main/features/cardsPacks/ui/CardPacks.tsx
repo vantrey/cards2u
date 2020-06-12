@@ -20,17 +20,18 @@ type CardPacksPropsType = {
 const CardPacks: React.FC<CardPacksPropsType> = (props) => {
 
   const CardPacksHeaderEls = [
-    {name: 'name', title: 'Name'},
-    {name: 'grade', title: 'Grade'},
+    {name: 'name', title: 'Name', withSorted: true},
+    {name: 'grade', title: 'Grade', withSorted: false},
   ]
   return (
     <div>
       <div className={styles.cardPacks}>
-        <table>
+        <table cellPadding='3'>
           <tbody>
           <tr>
             {CardPacksHeaderEls.map(h =>
               <CardPacksHeader
+                withSorted={h.withSorted}
                 title={h.title}
                 key={h.name}
                 name={h.name}
