@@ -16,7 +16,6 @@ const Test = () => {
     {title: 'profile', path: PROFILE_PATH},
     {title: 'users', path: GET_USERS},
     {title: 'card packs', path: CARD_PACKS_PATH},
-    {title: 'cards', path: CARDS_PATH},
   ].map(l => <Link key={l.title} title={l.title} path={l.path}/>)
 
   return <div className={styles.test}>
