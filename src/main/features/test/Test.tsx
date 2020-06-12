@@ -4,7 +4,7 @@ import Link from '../../ui/common/Link/Link';
 import {
   GET_USERS,
   CARD_PACKS_PATH,
-  LOGIN_PATH, NEW_PSW_PATH, PROFILE_PATH, REGISTRATION_PATH, RESTORE_PSW_PATH
+  LOGIN_PATH, NEW_PSW_PATH, PROFILE_PATH, REGISTRATION_PATH, RESTORE_PSW_PATH, CARDS_PATH
 } from "../../ui/components/routes/Routes";
 
 const Test = () => {
@@ -16,6 +16,7 @@ const Test = () => {
     {title: 'profile', path: PROFILE_PATH},
     {title: 'users', path: GET_USERS},
     {title: 'card packs', path: CARD_PACKS_PATH},
+    {title: 'cards', path: CARDS_PATH},
   ].map(l => <Link key={l.title} title={l.title} path={l.path}/>)
 
   return <div className={styles.test}>

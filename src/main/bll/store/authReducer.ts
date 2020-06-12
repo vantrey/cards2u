@@ -1,7 +1,7 @@
 import {AppStateType, InferActionTypes} from "./store";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {api} from "../../dal/api";
-import {repository} from "../../helpers/repos_localStorrage/Token";
+import {repository} from "../../helpers/repos_localStorage/Token";
 
 const initialState = {
     _id: '',

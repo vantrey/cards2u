@@ -29,7 +29,7 @@ export const cardPacksApi = {
       `?token=${token}&page=${currentPage}&pageCount=${pageSize}`
     )
   },
-  createCardPack(token: string, cardsPack: {name: string, user_id: string} ) {
+  createCardPack(token: string, cardsPack: {name: string, user_id: string|null} ) {
     return instance.post<CreateCardPackType>(
       ``,
       {
