@@ -60,7 +60,6 @@ type ActionsType = InferActionTypes<typeof actions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-
 export const getUser = (page: number, pageCount: number): ThunkType =>
     async (dispatch: DispatchType) => {
         dispatch(actions.setIsFetching(true))
