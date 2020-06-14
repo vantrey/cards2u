@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../bll/store/store";
-import GetUsers from "./getUsers";
-import {actions, getUser} from "../bll/getUserReducer";
-import s from "./getUser.module.css";
+import {AppStateType} from "../../../bll/store/store";
+import Users from "./Users";
+import {actions, getUser} from "../bll/UserReducer";
+import s from "./User.module.css";
 // @ts-ignore
 import _ from 'lodash'
-import {UserType} from "../../types/entities";
+import {UserType} from "../../../types/entities";
 // @ts-ignore
 import ReactPaginate from 'react-paginate';
 
@@ -17,8 +17,8 @@ type UsersPropsType = {
     sortField: string
 }
 
-const GetUsersContainer: React.FC = (props) => {
-        const {users, pageCount, page, totalUsersCount} = useSelector((state: AppStateType) => state.getUserReducer)
+const UsersContainer: React.FC = (props) => {
+        const {users, pageCount, page, totalUsersCount, isFetching} = useSelector((state: AppStateType) => state.getUserReducer)
         const dispatch = useDispatch()
         const [data, setOrderedUser] = useState<UsersPropsType>({
             data: [],
@@ -54,6 +54,7 @@ const GetUsersContainer: React.FC = (props) => {
 
         return (
             <div className={s.get_users_container}>
+                {isFetching && <span>...LOADING</span>}
                 <ReactPaginate
                     previousLabel={'<'}
                     nextLabel={'>'}
@@ -72,16 +73,15 @@ const GetUsersContainer: React.FC = (props) => {
                     previousLinkClassName="page-link"
                     nextLinkClassName="page-link"
                 />
-                <GetUsers
+                <Users
                     users={data.data}
                     onSort={onSort}
                     sort={data.sort}
                     sortField={data.sortField}
-
                 />
             </div>
         );
     }
 ;
 
-export default GetUsersContainer;
+export default UsersContainer;

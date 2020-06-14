@@ -16,7 +16,7 @@ type InitialStateType = typeof initialState
 
 export const loginReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
-    case 'cards2u/main/auth/AUTH_ME':
+    case 'cards2u/main/auth/LOGIN':
       return {
         ...state,
         isAuth: action.isAuth, errorServerMessage: action.errorServerMessage
@@ -37,7 +37,7 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
 }
 const loginActions = {
   loginAuthMeSuccess: (isAuth: boolean, errorServerMessage: string) => ({
-    type: 'cards2u/main/auth/AUTH_ME', isAuth, errorServerMessage
+    type: 'cards2u/main/auth/LOGIN', isAuth, errorServerMessage
   } as const),
   logoutSuccess: (isAuth: boolean) => ({
     type: 'cards2u/main/auth/LOGOUT',
