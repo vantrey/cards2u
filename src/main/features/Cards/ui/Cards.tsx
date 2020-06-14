@@ -1,30 +1,41 @@
 import React from 'react';
-import {CardsType} from "../../../types/entities";
+import {CardType} from "../../../types/entities";
 import Card from "./Card";
-import Button from "../../../ui/common/Button/Button";
+import styles from './Cards.module.css'
 
 type OwnProps = {
     isFetching: boolean,
-    cards: Array<CardsType>
+    cards: Array<CardType>
     onAddNewCard: () => void
+    onDeleteCard: (card_id:string) => void
+    onUpdateCard: (_id:string) => void
 }
 
-const Cards: React.FC<OwnProps> = ({isFetching, cards,onAddNewCard}) => {
+const Cards: React.FC<OwnProps> = ({isFetching, cards, onAddNewCard, onDeleteCard, onUpdateCard}) => {
 
     return (
-        <div>
+        <div className={styles.Cards}>
+            <table >
+                <tbody className={styles.tbodyTag}>
             {isFetching && <div>...Loading please wait</div> ||
             cards.map(c =>
-                <div key={c._id}>
+                    <div className={styles.wrapCard} key={c._id}>
                     <Card
-                          answer={c.answer}
-                          question={c.question}
-                          grade={c.grade}
+                        answer={c.answer}
+                        question={c.question}
+                        grade={c.grade}
+                        onDeleteCard={()=>{onDeleteCard(c._id)}}
+                        onUpdateCard={()=>{onUpdateCard(c._id)}}
                     />
                 </div>
             )
             }
-            <button onClick={onAddNewCard}>Add Card</button>
+                </tbody>
+            </table>
+            <div>
+                <button onClick={onAddNewCard}>Add Card</button>
+            </div>
+
         </div>
     );
 };

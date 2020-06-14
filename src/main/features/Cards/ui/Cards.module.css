@@ -1,0 +1,14 @@
+.Cards {
+    display: flex;
+    justify-content: center;
+}
+
+.tbodyTag{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.wrapCard{
+    padding-left: 5px;
+}

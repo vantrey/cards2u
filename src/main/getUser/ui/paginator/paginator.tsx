@@ -1,5 +1,5 @@
 import React from "react";
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from 'react-paginate'
 
 
 const Paginator:React.FC = ()=>{

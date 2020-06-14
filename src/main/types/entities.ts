@@ -12,7 +12,7 @@ export type UserType = {
     _id: string
 };
 
-export type CardsType = {
+export type CardType = {
     answer: string
     question: string
     cardsPack_id: string
@@ -26,10 +26,7 @@ export type CardsType = {
     _id: string
 }
 
-export type CardType={
 
-
-}
 export type CardPackType = {
   cardsCount: number
   private: boolean

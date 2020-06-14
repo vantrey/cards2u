@@ -1,4 +1,4 @@
-import {CardsType} from "../../../types/entities";
+import {CardType} from "../../../types/entities";
 import {AppStateType, InferActionTypes} from "../../../bll/store/store";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {CardsApi} from "../dal/CardsApi";
@@ -6,10 +6,14 @@ import {repository} from "../../../helpers/repos_localStorage/Token";
 
 
 const initialState = {
-    cards: [] as Array<CardsType>,
+    cards: [] as Array<CardType>,
     isFetching: false,
-    newCard: {} as object,
-    isSuccess: false
+    isSuccess: false,
+    page:1,
+    pageCount: 10,
+    cardsTotalCount: 0
+
+
 }
 
 type initialStateType = typeof initialState;
@@ -26,16 +30,18 @@ export const CardsReducer = (state: initialStateType = initialState, action: Act
                 ...state,
                 isFetching: action.isFetching
             }
-        case "CARDS_REDUCER/ADD_CARD":
-            return {
-                ...state,
-                newCard: action.newCard
-            }
+
         case  "CARDS_REDUCER/SET_SUCCESS":
             return {
                 ...state,
                 isSuccess: action.isSuccess
             }
+     /*       case  "CARDS_REDUCER/SET_CARDS_DATA":
+            return {
+                ...state,
+...action.payload
+            }*/
+
         default:
             return state;
 
@@ -44,10 +50,12 @@ export const CardsReducer = (state: initialStateType = initialState, action: Act
 }
 
 const actions = {
-    setCards: (cards: Array<CardsType>) => ({type: 'CARDS_REDUCER/SET_CARDS', cards} as const),
+    setCards: (cards: Array<CardType>) => ({type: 'CARDS_REDUCER/SET_CARDS', cards} as const),
     set_Fetching: (isFetching: boolean) => ({type: "CARDS_REDUCER/IS_FETCHING", isFetching} as const),
-    addCard: (newCard: object) => ({type: "CARDS_REDUCER/ADD_CARD", newCard} as const),
     set_Success: (isSuccess: boolean) => ({type: "CARDS_REDUCER/SET_SUCCESS", isSuccess} as const),
+   /* set_Cards_Count: (cardsTotalCount:number ,page:number,pageCount:number) =>
+        ({type: "CARDS_REDUCER/SET_CARDS_DATA", payload:{cardsTotalCount,page,pageCount}} as const),
+*/
 }
 
 type ActionsType = InferActionTypes<typeof actions>
@@ -56,7 +64,7 @@ type ActionsType = InferActionTypes<typeof actions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const set_Cards = (cardsPack_id: string): ThunkType =>
+export const get_Cards = (cardsPack_id: string): ThunkType =>
     async (dispatch: DispatchType, getState: () => AppStateType) => {
         try {
             dispatch(actions.set_Fetching(true));
@@ -71,16 +79,47 @@ export const set_Cards = (cardsPack_id: string): ThunkType =>
         }
 
     }
+type Card = { cardsPack_id: string }
+type UpdateType = { _id: string, answer: string }
 
-export const add_Card = (newCard: { cardsPack_id: string }): ThunkType =>
+
+export const add_Card = ({cardsPack_id}: Card): ThunkType =>
     async (dispatch: DispatchType, getState: () => AppStateType) => {
         try {
             let token = repository.getToken();
             if (!token) token = ''
-            const res = await CardsApi.addCard({...newCard}, token);
-            dispatch(actions.set_Success(res.data.success))
-            dispatch(actions.addCard(res.data.newCard));
+            const res = await CardsApi.addCard({cardsPack_id}, token);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
+            dispatch(actions.set_Success(res.data.success))
+            dispatch(get_Cards(cardsPack_id))
+        } catch (e) {
+            repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+        }
+    }
+
+export const delete_Card = (card_id: string, cardsPack_id: string): ThunkType =>
+    async (dispatch: DispatchType, getState: () => AppStateType) => {
+        try {
+            let token = repository.getToken();
+            if (!token) token = ''
+            const res = await CardsApi.deleteCard(card_id, token);
+            repository.saveToken(res.data.token, res.data.tokenDeathTime);
+            dispatch(actions.set_Success(res.data.success))
+            dispatch(get_Cards(cardsPack_id))
+        } catch (e) {
+            repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+        }
+    }
+
+export const update_Card = ({_id, answer}: UpdateType, cardsPack_id: string): ThunkType =>
+    async (dispatch: DispatchType, getState: () => AppStateType) => {
+        try {
+            let token = repository.getToken();
+            if (!token) token = ''
+            const res = await CardsApi.updateCard({_id, answer}, token);
+            repository.saveToken(res.data.token, res.data.tokenDeathTime);
+            dispatch(actions.set_Success(res.data.success))
+            dispatch(get_Cards(cardsPack_id))
         } catch (e) {
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
         }
