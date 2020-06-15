@@ -51,6 +51,7 @@ export const cardPacksApi = {
       })
   },
   deleteCardsPack(token: string | null, cardsPackId: string) {
+    debugger
     return instance.delete<DelCardPackType>(
       `?token=${token}&id=${cardsPackId}`
     )

@@ -10,6 +10,7 @@ type InitialStateType = {
     errorFromServer: string
     pageSize: number
     totalCardPacksCount: number
+    cardsPackId:''
 }
 
 const initialState: InitialStateType = {
@@ -18,6 +19,8 @@ const initialState: InitialStateType = {
     errorFromServer: '',
     pageSize: 6,
     totalCardPacksCount: 0,
+    cardsPackId:''
+
 }
 
 export const cardPacksReducer = (state = initialState, action: ActionsType): InitialStateType => {
@@ -46,6 +49,12 @@ export const cardPacksReducer = (state = initialState, action: ActionsType): Ini
                 errorFromServer: action.error,
                 isFetching: false
             }
+        case "CARD_PACKS_REDUCER/DELETED_CARDS_PACK":
+            debugger
+            return {
+                ...state,
+                cardPacks: state.cardPacks.filter(tl => tl.user_id !== action.cardsPackId)
+            };
         default:
             return state
     }
@@ -68,6 +77,11 @@ export const cardPacksActions = {
     setError: (error: string) => ({
         type: 'CARD_PACKS_REDUCER/SET_ERROR',
         error
+    } as const),
+    deletedCardsPack: (cardsPackId: string) => ({
+        type: 'CARD_PACKS_REDUCER/DELETED_CARDS_PACK',
+         cardsPackId
+
     } as const)
 }
 
@@ -97,6 +111,21 @@ export const createCardsPack = (newCardsPack: { name: string }): ThunkType => as
         const response = await cardPacksApi.createCardsPack(token, {...newCardsPack, user_id})
         dispatch(cardPacksActions.createCardsPackSuccess(response.data.newCardsPack))
         repository.saveToken(response.data.token, response.data.tokenDeathTime)
+    } catch (e) {
+        dispatch(cardPacksActions.setError(e.response.data.error))
+        repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+    }
+}
+
+export const deletedCardsPacks = (cardsPackId: string): ThunkType=> async (dispatch: DispatchType) => {
+    try {
+        dispatch(cardPacksActions.setIsFetching(true))
+        let token = repository.getToken()
+        debugger
+        const response = await cardPacksApi.deleteCardsPack(token, cardsPackId)
+        dispatch(cardPacksActions.deletedCardsPack(response.data.deletedCardsPack.user_id))
+        repository.saveToken(response.data.token, response.data.tokenDeathTime)
+        debugger
     } catch (e) {
         dispatch(cardPacksActions.setError(e.response.data.error))
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
