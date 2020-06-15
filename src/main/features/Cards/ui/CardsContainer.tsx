@@ -3,13 +3,17 @@ import Cards from "./Cards";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store/store";
 import {add_Card, delete_Card, get_Cards, update_Card} from "../bll/cardsReducer";
-import {useParams} from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
+import LearnPage from "./LearnPage";
+import {CARDS_PATH, LEARN_PATH} from "../../../ui/components/routes/Routes";
+import Link from "../../../ui/common/Link/Link";
 
 
 const CardsContainer: React.FC = () => {
     const {pack_id} = useParams();
     const {cards, isFetching} = useSelector((state: AppStateType) => state.cards);
     const dispatch = useDispatch();
+
 
     useEffect(() => {
         dispatch(get_Cards(pack_id))
@@ -35,6 +39,7 @@ const CardsContainer: React.FC = () => {
                 onDeleteCard={onDeleteCard}
                 onUpdateCard={onUpdateCard}
             />
+            <Link title={'learn'} path={`${LEARN_PATH}`}/>
         </div>
     );
 };

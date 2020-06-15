@@ -46,7 +46,7 @@ type AddPostDeleteResponseType = {
     token: string
     tokenDeathTime: number
 }
-export const CardsApi = {
+export const cardsApi = {
     getCards(cardsPack_id: string, token: string | null) {
         return instance.get<GetCardsType>(`?cardsPack_id=${cardsPack_id}&token=${token}`)
     },
@@ -71,6 +71,13 @@ export const CardsApi = {
                 token
             }
         )
-
-    }
+    },
+    setGradeCard(newGradeCard: { _id: string, grade: number, shots: number }, token: string | null) {
+        return instance.put<AddPostDeleteResponseType>(``,
+          {
+              newGradeCard,
+              token
+          }
+        )
+    },
 }

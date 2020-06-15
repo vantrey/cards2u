@@ -9,6 +9,7 @@ type PropsType = OwnPropsType & ButtonType
 const Button: React.FC<PropsType> = ({...props}) => {
   return (
     <button
+      {...props}
       className={styles.button}
     >
       <span

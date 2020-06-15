@@ -12,8 +12,8 @@ type CardType = {
 const Card: React.FC<CardType> = ({...props}) => {
     return (
         <>
-            <div>{props.answer}</div>
             <div>{props.question}</div>
+            <div>{props.answer}</div>
             <div>{props.grade}</div>
             <button onClick={props.onDeleteCard}>Delete Card</button>
             <button onClick={props.onUpdateCard}>Update Card</button>
