@@ -2,29 +2,31 @@ import React, {useState} from 'react'
 import style from './Modal.module.css'
 // @ts-ignore
 import Modal from 'react-modal'
+import styles from "../CardPacks.module.css";
 
 type ModalPackType = {
-    deletedPacksCards: (cardsPackId: string) => void
-    user_id: string
-    id: string
+    onAddDeck: () => void
 }
 
 Modal.setAppElement('#root')
-const Modals: React.FC<ModalPackType> = (props) => {
+const ModalOnAddPack: React.FC<ModalPackType> = (props) => {
     const [modalIsOpen, setModalIsOpen] = useState(false)
     return (
         <div className={style.delete_item}>
-            <span className={style.delete} onClick={() => setModalIsOpen(true)}>💣</span>
+            <button className={style.delete} onClick={() => setModalIsOpen(true)}>Add Deck</button>
+            {/*<button onClick={props.onAddDeck}> Add Deck</button>*/}
+
             <Modal
                 className={style.modal}
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
             >
-                <h2>Delete item</h2>
-                <div>Are you sure you want to delete this item?</div>
+                <h2>Create pack</h2>
+                <input type="text" placeholder={'name user'}/>
+                <input type="text" placeholder={'name pack'}/>
                 <div className={style.button_modals}>
-                    <button onClick={() => props.deletedPacksCards(props.id)}>Да</button>
-                    <button onClick={() => setModalIsOpen(false)}>Нет</button>
+                    <button onClick={props.onAddDeck}>Create Pack</button>
+                    <button onClick={() => setModalIsOpen(false)}>Cancel</button>
                     {/*<span onClick={() => setModalIsOpen(false)}>x</span>*/}
                 </div>
             </Modal>
@@ -32,4 +34,4 @@ const Modals: React.FC<ModalPackType> = (props) => {
     )
 }
 
-export default Modals
+export default ModalOnAddPack

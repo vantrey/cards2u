@@ -2,8 +2,8 @@ import React from "react";
 import Link from "../../../ui/common/Link/Link";
 import {CARDS_PATH} from "../../../ui/components/routes/Routes";
 import {repository} from "../../../helpers/repos_localStorage/Token";
-import Modals from "./Моdal/Modal";
-import styles from './CardPacks.module.css'
+import ModalonDeletePack from "./Моdal/ModalonADDPack";
+import ModalOnDeletePack from "./Моdal/ModalonDeletePack";
 type CardPackType = {
     name: string
     grade: number
@@ -21,7 +21,7 @@ const CardPack: React.FC<CardPackType> = (props) => {
             <td> {props.grade} </td>
             <td ><Link title={'cards'} path={`${CARDS_PATH}/${props.id}`}/> </td>
             <td>{repository.get_Auth_id() == props.user_id ?
-                <Modals deletedPacksCards={props.deletedPacksCards} user_id={props.user_id}
+                <ModalOnDeletePack deletedPacksCards={props.deletedPacksCards} user_id={props.user_id}
                         id={props.id}/>
                 : ''
             }</td>

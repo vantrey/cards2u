@@ -63,7 +63,6 @@ const CardPacksContainer: React.FC = () => {
         }
     }
     const deletedPacksCards = (cardsPackId: string) => {
-        debugger
         dispatch(deleteCardsPacks(cardsPackId))
     };
     return (

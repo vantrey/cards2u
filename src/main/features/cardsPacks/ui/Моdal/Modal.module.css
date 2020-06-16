@@ -11,6 +11,7 @@
     text-align: center;
     transform: 'translate(-40%, -10%)';
 }
+
 .delete {
     color: red;
     font-weight: bold;
@@ -19,5 +20,7 @@
 
 .delete_item {
     display: flex;
+    justify-content: center;
+    align-items: baseline;
 }
 

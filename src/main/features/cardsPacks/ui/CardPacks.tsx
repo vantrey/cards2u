@@ -4,6 +4,7 @@ import CardPack from "./cardPack";
 import {CardPackType} from "../../../types/entities";
 import CardPacksHeader from "./CardPacksHeader";
 import Pagination from "./Pagination/Pagination";
+import ModalOnAddPack from "./Моdal/ModalonADDPack";
 
 type CardPacksPropsType = {
     onSortClickUp: (e: React.MouseEvent<HTMLButtonElement>) => void
@@ -57,7 +58,8 @@ const CardPacks: React.FC<CardPacksPropsType> = (props) => {
                     )}
                     </tbody>
                 </table>
-                <button onClick={props.onAddDeck} className={styles.addDeck}> Add Deck</button>
+                <ModalOnAddPack  onAddDeck={props.onAddDeck}/>
+                {/*<button onClick={props.onAddDeck} className={styles.addDeck}> Add Deck</button>*/}
             </div>
             {(props.isFetching && <div>...loading</div>) ||
             <Pagination

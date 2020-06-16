@@ -52,7 +52,6 @@ export const cardPacksReducer = (state = initialState, action: ActionsType): Ini
                 isFetching: false
             }
         case "CARD_PACKS_REDUCER/DELETE_CARDS_PACK":
-            debugger
             return {
                 ...state,
                 cardPacks: state.cardPacks.filter(tl => tl.user_id !== action.cardsPackId)
@@ -123,11 +122,9 @@ export const deleteCardsPacks = (cardsPackId: string): ThunkType=> async (dispat
     try {
         dispatch(cardPacksActions.setIsFetching(true))
         let token = repository.getToken()
-        debugger
         const response = await cardPacksApi.deleteCardsPack(token, cardsPackId)
         dispatch(cardPacksActions.deleteCardsPack(response.data.deletedCardsPack.user_id))
         repository.saveToken(response.data.token, response.data.tokenDeathTime)
-        debugger
     } catch (e) {
         dispatch(cardPacksActions.setError(e.response.data.error))
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
