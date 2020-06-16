@@ -69,7 +69,6 @@ export const get_Cards = (cardsPack_id: string): ThunkType =>
     try {
       dispatch(actions.set_Fetching(true));
       let token = repository.getToken();
-      if (!token) token = ''
       const res = await cardsApi.getCards(cardsPack_id, token);
       dispatch(actions.setCards(res.data.cards));
       dispatch(actions.set_Fetching(false));

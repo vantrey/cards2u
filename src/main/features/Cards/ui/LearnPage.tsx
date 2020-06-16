@@ -3,8 +3,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store/store";
 import {CardType} from "../../../types/entities";
 import Button from "../../../ui/common/Button/Button";
-import {setCardGrade} from "../bll/cardsReducer";
+import {get_Cards, setCardGrade} from "../bll/cardsReducer";
 import {repository} from "../../../helpers/repos_localStorage/Token";
+import {useHistory, useParams} from 'react-router-dom';
 
 const getCard = (cards: Array<CardType>) => {
 
@@ -15,7 +16,6 @@ const getCard = (cards: Array<CardType>) => {
       return {sum: newSum, id: newSum < rand ? i : acc.id}
     }
     , {sum: 0, id: -1});
-  console.log('test: ', sum, rand, res)
 
   return cards[res.id + 1];
 }
@@ -27,6 +27,8 @@ const getGrade = (gradePrev: number, gradeNext: number, shots: number) => {
 const LearnPage: React.FC = () => {
   const {cards} = useSelector((state: AppStateType) => state.cards);
   const dispatch = useDispatch()
+  const history = useHistory()
+  const {pack_id} = useParams()
 
   const [card, setCard] = useState<CardType>({
     answer: '',
@@ -47,6 +49,11 @@ const LearnPage: React.FC = () => {
 
   const [isGraded, setIsGraded] = useState<boolean>(false)
 
+
+  useEffect(() => {
+    dispatch(get_Cards(pack_id))
+  }, [pack_id, dispatch])
+
   useEffect(() => {
     setCard(getCard(cards))
   }, [cards])
@@ -61,6 +68,10 @@ const LearnPage: React.FC = () => {
     const newGrade = getGrade(card.grade, Number(e.currentTarget.name), card.shots)
     dispatch(setCardGrade({_id: card._id, grade: newGrade, shots: card.shots + 1}))
     setIsGraded(true)
+  }
+
+  const onBackClick = () => {
+    history.goBack()
   }
 
   return (
@@ -105,9 +116,6 @@ const LearnPage: React.FC = () => {
             />
           </div>
 
-
-
-
         </div>
       </div>
 
@@ -119,6 +127,8 @@ const LearnPage: React.FC = () => {
           <Button disabled={isGraded} name={'4'} tittle={'very hard'} onClick={setGrade}/>
           <Button disabled={isGraded} name={'5'} tittle={'I have no idea'} onClick={setGrade}/>
         </div>)}
+
+      <div style={{cursor: "pointer", color: "blue"}} onClick={onBackClick}>back to deck summary</div>
 
     </div>
   );

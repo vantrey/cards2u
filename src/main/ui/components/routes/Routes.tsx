@@ -33,7 +33,7 @@ const Routs = () => {
         <Route path={ROOT_PATH} render={() => <Root/>}/>
         <Route path={CARD_PACKS_PATH} render={() => <CardPacksContainer/>}/>
         <Route path={`${CARDS_PATH}/:pack_id?`} render={() => <CardsContainer/>}/>
-        <Route path={`${LEARN_PATH}`} render={() => <LearnPage/>}/>
+        <Route path={`${LEARN_PATH}/:pack_id?`} render={() => <LearnPage/>}/>
     </div>
 }
 export default Routs
