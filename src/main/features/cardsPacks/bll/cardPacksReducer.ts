@@ -49,7 +49,7 @@ export const cardPacksReducer = (state = initialState, action: ActionsType): Ini
                 errorFromServer: action.error,
                 isFetching: false
             }
-        case "CARD_PACKS_REDUCER/DELETED_CARDS_PACK":
+        case "CARD_PACKS_REDUCER/DELETE_CARDS_PACK":
             debugger
             return {
                 ...state,
@@ -78,8 +78,8 @@ export const cardPacksActions = {
         type: 'CARD_PACKS_REDUCER/SET_ERROR',
         error
     } as const),
-    deletedCardsPack: (cardsPackId: string) => ({
-        type: 'CARD_PACKS_REDUCER/DELETED_CARDS_PACK',
+    deleteCardsPack: (cardsPackId: string) => ({
+        type: 'CARD_PACKS_REDUCER/DELETE_CARDS_PACK',
          cardsPackId
 
     } as const)
@@ -117,13 +117,13 @@ export const createCardsPack = (newCardsPack: { name: string }): ThunkType => as
     }
 }
 
-export const deletedCardsPacks = (cardsPackId: string): ThunkType=> async (dispatch: DispatchType) => {
+export const deleteCardsPacks = (cardsPackId: string): ThunkType=> async (dispatch: DispatchType) => {
     try {
         dispatch(cardPacksActions.setIsFetching(true))
         let token = repository.getToken()
         debugger
         const response = await cardPacksApi.deleteCardsPack(token, cardsPackId)
-        dispatch(cardPacksActions.deletedCardsPack(response.data.deletedCardsPack.user_id))
+        dispatch(cardPacksActions.deleteCardsPack(response.data.deletedCardsPack.user_id))
         repository.saveToken(response.data.token, response.data.tokenDeathTime)
         debugger
     } catch (e) {

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store/store";
-import {cardPacksActions, createCardsPack, deletedCardsPacks, getCardPacks} from "../bll/cardPacksReducer";
+import {cardPacksActions, createCardsPack, deleteCardsPacks, getCardPacks} from "../bll/cardPacksReducer";
 import lodash from 'lodash'
 import {CardPackType} from "../../../types/entities";
 import CardPacks from "./CardPacks";
@@ -63,7 +63,7 @@ const CardPacksContainer: React.FC = () => {
     }
     const deletedPacksCards = (cardsPackId: string) => {
         debugger
-        dispatch(deletedCardsPacks(cardsPackId))
+        dispatch(deleteCardsPacks(cardsPackId))
     };
     return (
         <CardPacks

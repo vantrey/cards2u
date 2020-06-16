@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "../../../ui/common/Link/Link";
 import {CARDS_PATH} from "../../../ui/components/routes/Routes";
+import {repository} from "../../../helpers/repos_localStorage/Token";
 
 type CardPackType = {
     name: string
@@ -8,6 +9,7 @@ type CardPackType = {
     id: string
     deletedPacksCards:(cardsPackId:string)=>void
     cardsPackId:string
+    // user_id:string
 }
 
 const CardPack: React.FC<CardPackType> = (props) => {
@@ -17,10 +19,10 @@ const CardPack: React.FC<CardPackType> = (props) => {
             <td> {props.name} </td>
             <td> {props.grade} </td>
             <td><Link title={'cards'} path={`${CARDS_PATH}/${props.id}`}/>
-                { props.cardsPackId ?
+                {/*{repository.save_Auth_id(user_id)==props.user_id ?*/}
                     <button onClick={()=>props.deletedPacksCards(props.id)}>del</button>
-                    :''
-                }
+                {/*    :''*/}
+
                 </td>
 
         </>
