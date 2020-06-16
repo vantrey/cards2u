@@ -2,7 +2,7 @@ import React from 'react';
 import {repository} from "../../../helpers/repos_localStorage/Token";
 
 
-type CardType = {
+type CardPropsType = {
   answer: string
   question: string
   grade: number
@@ -12,7 +12,7 @@ type CardType = {
   onUpdateCard: () => void
 }
 
-const Card: React.FC<CardType> = ({...props}) => {
+const Card: React.FC<CardPropsType> = ({...props}) => {
   return (
     <>
       <div>{props.question}</div>
