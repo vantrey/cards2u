@@ -45,8 +45,8 @@ const CardPacksContainer: React.FC = () => {
         const Ordered = lodash.orderBy(cardPacks, e.currentTarget.name, 'desc')
         setCardPacksOrdered(Ordered)
     }
-    const onAddDeck = () => {
-        dispatch(createCardsPack({name: 'ivan'}))
+    const onAddDeck = (name:string) => {
+        dispatch(createCardsPack({name}))
     }
     if (isFirstRendering) {
         if (errorFromServer) {

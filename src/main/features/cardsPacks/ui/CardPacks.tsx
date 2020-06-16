@@ -10,7 +10,7 @@ type CardPacksPropsType = {
     onSortClickUp: (e: React.MouseEvent<HTMLButtonElement>) => void
     onSortClickDown: (e: React.MouseEvent<HTMLButtonElement>) => void
     cardPacksOrdered: Array<CardPackType>
-    onAddDeck: () => void
+    onAddDeck: (name:string) => void
     onPageChanged: (pageNumber: number) => void
     totalCardPacksCount: number
     pageSize: number
@@ -59,7 +59,6 @@ const CardPacks: React.FC<CardPacksPropsType> = (props) => {
                     </tbody>
                 </table>
                 <ModalOnAddPack  onAddDeck={props.onAddDeck}/>
-                {/*<button onClick={props.onAddDeck} className={styles.addDeck}> Add Deck</button>*/}
             </div>
             {(props.isFetching && <div>...loading</div>) ||
             <Pagination

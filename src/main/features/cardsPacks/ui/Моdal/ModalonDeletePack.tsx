@@ -23,8 +23,8 @@ const ModalonADDPack: React.FC<ModalPackType> = (props) => {
                 <h2>Delete item</h2>
                 <div>Are you sure you want to delete this item?</div>
                 <div className={style.button_modals}>
-                    <button onClick={() => props.deletedPacksCards(props.id)}>Да</button>
-                    <button onClick={() => setModalIsOpen(false)}>Нет</button>
+                    <button className={style.button_yes_no} onClick={() => props.deletedPacksCards(props.id)}>Yes</button>
+                    <button className={style.button_yes_no} onClick={() => setModalIsOpen(false)}>No</button>
                     {/*<span onClick={() => setModalIsOpen(false)}>x</span>*/}
                 </div>
             </Modal>
