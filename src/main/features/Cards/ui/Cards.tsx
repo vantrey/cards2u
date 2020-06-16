@@ -24,6 +24,7 @@ const Cards: React.FC<OwnProps> = ({isFetching, cards, onAddNewCard, onDeleteCar
                         answer={c.answer}
                         question={c.question}
                         grade={c.grade}
+                        shots={c.shots}
                         onDeleteCard={()=>{onDeleteCard(c._id)}}
                         onUpdateCard={()=>{onUpdateCard(c._id)}}
                     />

@@ -33,17 +33,21 @@ const CardPacksContainer = () => {
   const onPageChanged = (pageNumber: number) => {
     setCurrentPage(pageNumber)
   }
+
   const onSortClickUp = (e: React.MouseEvent<HTMLButtonElement>) => {
     const Ordered = lodash.orderBy(cardPacks, e.currentTarget.name, 'asc')
     setCardPacksOrdered(Ordered)
   }
+
   const onSortClickDown = (e: React.MouseEvent<HTMLButtonElement>) => {
     const Ordered = lodash.orderBy(cardPacks, e.currentTarget.name, 'desc')
     setCardPacksOrdered(Ordered)
   }
+
   const onAddDeck = () => {
     dispatch(createCardsPack({name: 'ivan'}))
   }
+
   if (isFirstRendering) {
     if (errorFromServer) {
       dispatch(cardPacksActions.setError(''))
@@ -58,6 +62,7 @@ const CardPacksContainer = () => {
       return <div style={{'color': 'red'}}>server error</div>
     }
   }
+
   return (
     <CardPacks
       onPageChanged={onPageChanged}

@@ -72,10 +72,10 @@ export const cardsApi = {
             }
         )
     },
-    setGradeCard(newGradeCard: { _id: string, grade: number, shots: number }, token: string | null) {
+    setGradeCard(card: { _id: string, grade: number, shots: number }, token: string | null) {
         return instance.put<AddPostDeleteResponseType>(``,
           {
-              newGradeCard,
+              card,
               token
           }
         )

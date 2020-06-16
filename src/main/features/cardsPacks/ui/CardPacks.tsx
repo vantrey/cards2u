@@ -23,11 +23,14 @@ const CardPacks: React.FC<CardPacksPropsType> = (props) => {
     {name: 'name', title: 'Name', withSorted: true},
     {name: 'grade', title: 'Grade', withSorted: false},
   ]
+
   return (
     <div>
       <div className={styles.cardPacks}>
+
         <table cellPadding='3'>
           <tbody>
+
           <tr>
             {CardPacksHeaderEls.map(h =>
               <CardPacksHeader
@@ -39,6 +42,7 @@ const CardPacks: React.FC<CardPacksPropsType> = (props) => {
                 onSortClickDown={props.onSortClickDown}
               />)}
           </tr>
+
           {props.cardPacksOrdered.map(p =>
             <tr key={p._id}>
               <CardPack
@@ -48,10 +52,14 @@ const CardPacks: React.FC<CardPacksPropsType> = (props) => {
               />
             </tr>
           )}
+
           </tbody>
         </table>
+
         <button onClick={props.onAddDeck} className={styles.addDeck}> Add Deck</button>
+
       </div>
+
       {(props.isFetching && <div>...loading</div>) ||
       <Pagination
         onPageChanged={props.onPageChanged}
@@ -59,6 +67,7 @@ const CardPacks: React.FC<CardPacksPropsType> = (props) => {
         pageSize={props.pageSize}
         currentPage={props.currentPage}
       />}
+
     </div>
   )
 }
