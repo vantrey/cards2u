@@ -13,11 +13,11 @@ const LearnPageGrades: React.FC<LearnPageGradesPropsType> = ({
                                                                setGrade
                                                              }) => {
   const gradeEls = [
-    {name: '1', title: 'easy'},
-    {name: '2', title: 'medium'},
+    {name: '5', title: 'easy'},
+    {name: '4', title: 'medium'},
     {name: '3', title: 'hard'},
-    {name: '4', title: 'very hard'},
-    {name: '5', title: 'I have no idea'}
+    {name: '2', title: 'very hard'},
+    {name: '1', title: 'I have no idea'}
   ].map(g =>
     <Button
       key={g.name}

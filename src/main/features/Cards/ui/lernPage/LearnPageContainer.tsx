@@ -9,10 +9,10 @@ import LearnPage from "./LearnPage";
 
 const getCard = (cards: Array<CardType>) => {
 
-  const sum = cards.reduce((acc, card) => acc + (card.grade) * (card.grade), 0);
+  const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0);
   const rand = Math.random() * sum;
   const res = cards.reduce((acc: { sum: number, id: number }, card, i) => {
-      const newSum = acc.sum + (card.grade) * (card.grade);
+      const newSum = acc.sum + (6 - card.grade) * (6 - card.grade);
       return {sum: newSum, id: newSum < rand ? i : acc.id}
     }
     , {sum: 0, id: -1});

@@ -32,7 +32,7 @@ const Routs = () => {
         <Route path={PROFILE_PATH} render={() => <Profile/>}/>
         <Route path={ROOT_PATH} render={() => <Root/>}/>
         <Route path={CARD_PACKS_PATH} render={() => <CardPacksContainer/>}/>
-        <Route path={`${CARDS_PATH}/:pack_id?`} render={() => <CardsContainer/>}/>
+        <Route path={`${CARDS_PATH}/:pack_id?/:user_id`} render={() => <CardsContainer/>}/>
         <Route path={`${LEARN_PATH}/:pack_id?`} render={() => <LearnPageContainer/>}/>
     </div>
 }

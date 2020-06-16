@@ -49,6 +49,7 @@ const CardPacks: React.FC<CardPacksPropsType> = (props) => {
                 id={p._id}
                 name={p.name}
                 grade={p.grade}
+                userId={p.user_id}
               />
             </tr>
           )}
