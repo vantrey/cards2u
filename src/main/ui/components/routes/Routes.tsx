@@ -9,7 +9,7 @@ import NewPswPage from "../../../auth/newPsw/NewPswPage";
 import GetUsersContainer from "../../../getUser/ui/getUsersContainer";
 import CardPacksContainer from "../../../features/cardsPacks/ui/CardPacksContainer";
 import CardsContainer from "../../../features/Cards/ui/CardsContainer";
-import LearnPage from "../../../features/Cards/ui/LearnPage";
+import LearnPageContainer from "../../../features/Cards/ui/lernPage/LearnPageContainer";
 
 export const LOGIN_PATH = '/login'
 export const REGISTRATION_PATH = '/registration'
@@ -33,7 +33,7 @@ const Routs = () => {
         <Route path={ROOT_PATH} render={() => <Root/>}/>
         <Route path={CARD_PACKS_PATH} render={() => <CardPacksContainer/>}/>
         <Route path={`${CARDS_PATH}/:pack_id?`} render={() => <CardsContainer/>}/>
-        <Route path={`${LEARN_PATH}/:pack_id?`} render={() => <LearnPage/>}/>
+        <Route path={`${LEARN_PATH}/:pack_id?`} render={() => <LearnPageContainer/>}/>
     </div>
 }
 export default Routs
