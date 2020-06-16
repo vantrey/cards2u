@@ -11,6 +11,7 @@ type InitialStateType = {
     pageSize: number
     totalCardPacksCount: number
     cardsPackId:''
+    user_id:string
 }
 
 const initialState: InitialStateType = {
@@ -19,7 +20,8 @@ const initialState: InitialStateType = {
     errorFromServer: '',
     pageSize: 6,
     totalCardPacksCount: 0,
-    cardsPackId:''
+    cardsPackId:'',
+    user_id:''
 
 }
 

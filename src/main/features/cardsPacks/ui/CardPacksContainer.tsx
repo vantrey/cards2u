@@ -14,7 +14,8 @@ const CardPacksContainer: React.FC = () => {
         totalCardPacksCount,
         pageSize,
         errorFromServer,
-        cardsPackId
+        cardsPackId,
+        user_id
     } = useSelector((state: AppStateType) => state.cardPacks)
 
     const [isFirstRendering, setIsFirstRendering] = useState<boolean>(true)
@@ -78,6 +79,7 @@ const CardPacksContainer: React.FC = () => {
             isFetching={isFetching}
             deletedPacksCards={deletedPacksCards}
             cardsPackId={cardsPackId}
+            user_id={user_id}
                  />
     )
 }

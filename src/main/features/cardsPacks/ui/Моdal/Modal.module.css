@@ -1,0 +1,23 @@
+.modal {
+    width: 300px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #8e8ace;
+    margin: 200px auto;
+    padding: 5px;
+    text-align: center;
+    transform: 'translate(-40%, -10%)';
+}
+.delete {
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.delete_item {
+    display: flex;
+}
+

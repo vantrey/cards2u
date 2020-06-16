@@ -17,6 +17,7 @@ type CardPacksPropsType = {
     isFetching: boolean
     deletedPacksCards: (cardsPackId: string) => void
     cardsPackId:string
+    user_id:string
 
 }
 
@@ -50,6 +51,7 @@ const CardPacks: React.FC<CardPacksPropsType> = (props) => {
                                 grade={p.grade}
                                 deletedPacksCards={props.deletedPacksCards}
                                 cardsPackId={props.cardsPackId}
+                                user_id={p.user_id}
                             />
                         </tr>
                     )}
