@@ -16,7 +16,7 @@ const CardsContainer: React.FC = () => {
 
     useEffect(() => {
         dispatch(get_Cards(pack_id))
-    }, [])
+    }, [dispatch, pack_id])
 
     const onAddNewCard = () => {
         dispatch(add_Card({cardsPack_id: pack_id}))

@@ -1,7 +1,7 @@
 import {CardType} from "../../../types/entities";
 import {AppStateType, InferActionTypes} from "../../../bll/store/store";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
-import {cardsApi} from "../dal/CardsApi";
+import {ardsApi} from "../dal/сardsApi";
 import {repository} from "../../../helpers/repos_localStorage/Token";
 
 
@@ -69,7 +69,7 @@ export const get_Cards = (cardsPack_id: string): ThunkType =>
     try {
       dispatch(actions.set_Fetching(true));
       let token = repository.getToken();
-      const res = await cardsApi.getCards(cardsPack_id, token);
+      const res = await ardsApi.getCards(cardsPack_id, token);
       dispatch(actions.setCards(res.data.cards));
       dispatch(actions.set_Fetching(false));
       repository.saveToken(res.data.token, res.data.tokenDeathTime);
@@ -81,12 +81,11 @@ export const get_Cards = (cardsPack_id: string): ThunkType =>
 type Card = { cardsPack_id: string }
 type UpdateType = { _id: string, answer: string }
 
-
 export const add_Card = ({cardsPack_id}: Card): ThunkType =>
   async (dispatch: DispatchType, getState: () => AppStateType) => {
     try {
       let token = repository.getToken();
-      const res = await cardsApi.addCard({cardsPack_id}, token);
+      const res = await ardsApi.addCard({cardsPack_id}, token);
       repository.saveToken(res.data.token, res.data.tokenDeathTime);
       dispatch(actions.set_Success(res.data.success))
       dispatch(get_Cards(cardsPack_id))
@@ -99,7 +98,7 @@ export const delete_Card = (card_id: string, cardsPack_id: string): ThunkType =>
   async (dispatch: DispatchType, getState: () => AppStateType) => {
     try {
       let token = repository.getToken();
-      const res = await cardsApi.deleteCard(card_id, token);
+      const res = await ardsApi.deleteCard(card_id, token);
       repository.saveToken(res.data.token, res.data.tokenDeathTime);
       dispatch(actions.set_Success(res.data.success))
       dispatch(get_Cards(cardsPack_id))
@@ -112,7 +111,7 @@ export const update_Card = ({_id, answer}: UpdateType, cardsPack_id: string): Th
   async (dispatch: DispatchType, getState: () => AppStateType) => {
     try {
       let token = repository.getToken();
-      const res = await cardsApi.updateCard({_id, answer}, token);
+      const res = await ardsApi.updateCard({_id, answer}, token);
       repository.saveToken(res.data.token, res.data.tokenDeathTime);
       dispatch(actions.set_Success(res.data.success))
       dispatch(get_Cards(cardsPack_id))
@@ -124,7 +123,7 @@ export const setCardGrade = (newCardGrade: { _id: string, grade: number, shots: 
   async (dispatch: DispatchType) => {
     try {
       let token = repository.getToken();
-      const res = await cardsApi.setGradeCard(newCardGrade, token);
+      const res = await ardsApi.updateCard(newCardGrade, token);
       repository.saveToken(res.data.token, res.data.tokenDeathTime);
       dispatch(actions.set_Success(res.data.success))
     } catch (e) {
