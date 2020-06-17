@@ -10,6 +10,8 @@ type InitialStateType = {
     errorFromServer: string
     pageSize: number
     totalCardPacksCount: number
+    cardsPackId:''
+    user_id:string
 }
 
 const initialState: InitialStateType = {
@@ -18,6 +20,9 @@ const initialState: InitialStateType = {
     errorFromServer: '',
     pageSize: 6,
     totalCardPacksCount: 0,
+    cardsPackId:'',
+    user_id:''
+
 }
 
 export const cardPacksReducer = (state = initialState, action: ActionsType): InitialStateType => {
@@ -46,6 +51,11 @@ export const cardPacksReducer = (state = initialState, action: ActionsType): Ini
                 errorFromServer: action.error,
                 isFetching: false
             }
+        case "CARD_PACKS_REDUCER/DELETE_CARDS_PACK":
+            return {
+                ...state,
+                cardPacks: state.cardPacks.filter(tl => tl.user_id !== action.cardsPackId)
+            };
         default:
             return state
     }
@@ -68,6 +78,11 @@ export const cardPacksActions = {
     setError: (error: string) => ({
         type: 'CARD_PACKS_REDUCER/SET_ERROR',
         error
+    } as const),
+    deleteCardsPack: (cardsPackId: string) => ({
+        type: 'CARD_PACKS_REDUCER/DELETE_CARDS_PACK',
+         cardsPackId
+
     } as const)
 }
 
@@ -96,6 +111,19 @@ export const createCardsPack = (newCardsPack: { name: string }): ThunkType => as
         let user_id = repository.get_Auth_id()
         const response = await cardPacksApi.createCardsPack(token, {...newCardsPack, user_id})
         dispatch(cardPacksActions.createCardsPackSuccess(response.data.newCardsPack))
+        repository.saveToken(response.data.token, response.data.tokenDeathTime)
+    } catch (e) {
+        dispatch(cardPacksActions.setError(e.response.data.error))
+        repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+    }
+}
+
+export const deleteCardsPacks = (cardsPackId: string): ThunkType=> async (dispatch: DispatchType) => {
+    try {
+        dispatch(cardPacksActions.setIsFetching(true))
+        let token = repository.getToken()
+        const response = await cardPacksApi.deleteCardsPack(token, cardsPackId)
+        dispatch(cardPacksActions.deleteCardsPack(response.data.deletedCardsPack.user_id))
         repository.saveToken(response.data.token, response.data.tokenDeathTime)
     } catch (e) {
         dispatch(cardPacksActions.setError(e.response.data.error))

@@ -6,7 +6,7 @@ import {restorePswReducer} from "../../auth/restorePsw/restorePswReducer";
 import {newPswReducer} from "../../auth/newPsw/newPswReducer";
 import {profileReducer} from "../../auth/profile/profileReducer";
 import {CardsReducer} from "../../features/Cards/bll/cardsReducer";
-import {getUserReducer} from "../../getUser/bll/getUserReducer";
+import {userReducer} from "../../features/users/bll/UserReducer";
 import {cardPacksReducer} from "../../features/cardsPacks/bll/cardPacksReducer";
 import {authReducer} from "./authReducer";
 
@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
     newPsw: newPswReducer,
     profile: profileReducer,
     cards: CardsReducer,
-  getUserReducer:getUserReducer,
+  getUserReducer:userReducer,
   cardPacks: cardPacksReducer,
   auth:authReducer
 

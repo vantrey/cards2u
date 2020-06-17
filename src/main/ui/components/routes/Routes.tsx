@@ -6,7 +6,7 @@ import LoginContainer from "../../../auth/login/LoginContainer";
 import Root from "../root/Root";
 import RestorePswPage from "../../../auth/restorePsw/RestorePswPage";
 import NewPswPage from "../../../auth/newPsw/NewPswPage";
-import GetUsersContainer from "../../../getUser/ui/getUsersContainer";
+import UsersContainer from "../../../features/users/ui/UsersContainer";
 import CardPacksContainer from "../../../features/cardsPacks/ui/CardPacksContainer";
 import CardsContainer from "../../../features/Cards/ui/CardsContainer";
 import LearnPageContainer from "../../../features/Cards/ui/lernPage/LearnPageContainer";
@@ -28,7 +28,7 @@ const Routs = () => {
         <Route path={REGISTRATION_PATH} render={() => <RegistrationPage/>}/>
         <Route path={RESTORE_PSW_PATH} render={() => <RestorePswPage/>}/>
         <Route path={`${NEW_PSW_PATH}/:resetPswToken?`} render={() => <NewPswPage/>}/>
-        <Route path={GET_USERS} render={() => <GetUsersContainer/>}/>
+        <Route path={GET_USERS} render={() => <UsersContainer/>}/>
         <Route path={PROFILE_PATH} render={() => <Profile/>}/>
         <Route path={ROOT_PATH} render={() => <Root/>}/>
         <Route path={CARD_PACKS_PATH} render={() => <CardPacksContainer/>}/>
