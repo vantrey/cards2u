@@ -25,8 +25,6 @@ const CardPack: React.FC<CardPackType> = (props) => {
                                    id={props.id}/>
                 : ''
             }</td>
-
-
         </>
     )
 }
