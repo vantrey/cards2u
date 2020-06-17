@@ -7,23 +7,23 @@ import {useParams} from "react-router-dom";
 import {actions} from "../../../getUser/bll/getUserReducer";
 import ReactPaginate from "react-paginate";
 import styles from './Cards.module.css'
+import {LEARN_PATH} from "../../../ui/components/routes/Routes";
+import Link from "../../../ui/common/Link/Link";
 
 
 const CardsContainer: React.FC = () => {
-    const {pack_id} = useParams();
+    const {pack_id,user_id} = useParams();
     const {cards, isFetching,page,pageCount,cardsTotalCount} = useSelector((state: AppStateType) => state.cards);
     const dispatch = useDispatch();
-
 
     const pageChangedHandler = (page: { selected: number }) => {
         dispatch(actions.setPage(page.selected + 1))
     }
 
 
-
     useEffect(() => {
         dispatch(get_Cards(pack_id))
-    }, [])
+    }, [dispatch, pack_id])
 
     const onAddNewCard = () => {
         dispatch(add_Card({cardsPack_id: pack_id}))
@@ -37,7 +37,14 @@ const CardsContainer: React.FC = () => {
 
     const pageCountSize = Math.ceil(cardsTotalCount / pageCount)
     return (
-        <div className={styles.Cards_container}>
+        <div>
+            {(cards.length === 0 &&
+                <div
+                    style={{color: "red"}}>
+                    'there are no any cards'
+                </div>) ||
+
+            <div className={styles.Cards_container}>
             <ReactPaginate
                 previousLabel={'<'}
                 nextLabel={'>'}
@@ -63,6 +70,8 @@ const CardsContainer: React.FC = () => {
                 onDeleteCard={onDeleteCard}
                 onUpdateCard={onUpdateCard}
             />
+                <Link title={'learn'} path={`${LEARN_PATH}/${pack_id}`}/>
+            </div>}
         </div>
     );
 };

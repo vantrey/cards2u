@@ -10,6 +10,8 @@ type InitialStateType = {
     errorFromServer: string
     pageSize: number
     totalCardPacksCount: number
+    cardsPackId:''
+    user_id:string
 }
 
 const initialState: InitialStateType = {
@@ -18,6 +20,9 @@ const initialState: InitialStateType = {
     errorFromServer: '',
     pageSize: 6,
     totalCardPacksCount: 0,
+    cardsPackId:'',
+    user_id:''
+
 }
 
 export const cardPacksReducer = (state = initialState, action: ActionsType): InitialStateType => {
@@ -26,14 +31,12 @@ export const cardPacksReducer = (state = initialState, action: ActionsType): Ini
             return {
                 ...state,
                 cardPacks: action.cardPacks,
-                isFetching: false,
                 totalCardPacksCount: action.totalCardPacksCount
             }
         case "CARD_PACKS_REDUCER/CREATE_CARD_PACKS":
             return {
                 ...state,
                 cardPacks: [...state.cardPacks, action.newCardsPack],
-                isFetching: false
             }
         case "CARD_PACKS_REDUCER/SET_IS_FETCHING":
             return {
@@ -44,8 +47,12 @@ export const cardPacksReducer = (state = initialState, action: ActionsType): Ini
             return {
                 ...state,
                 errorFromServer: action.error,
-                isFetching: false
             }
+        case "CARD_PACKS_REDUCER/DELETE_CARDS_PACK":
+            return {
+                ...state,
+                cardPacks: state.cardPacks.filter(tl => tl.user_id !== action.cardsPackId)
+            };
         default:
             return state
     }
@@ -68,6 +75,11 @@ export const cardPacksActions = {
     setError: (error: string) => ({
         type: 'CARD_PACKS_REDUCER/SET_ERROR',
         error
+    } as const),
+    deleteCardsPack: (cardsPackId: string) => ({
+        type: 'CARD_PACKS_REDUCER/DELETE_CARDS_PACK',
+         cardsPackId
+
     } as const)
 }
 
@@ -84,12 +96,14 @@ export const getCardPacks = (currentPage: number, pageSize: number): ThunkType =
         const response = await cardPacksApi.getPacks(token, currentPage, pageSize)
         dispatch(cardPacksActions.getCardPacksSuccess(response.data.cardPacks, response.data.cardPacksTotalCount))
         repository.saveToken(response.data.token, response.data.tokenDeathTime)
+        dispatch(cardPacksActions.setIsFetching(false))
     } catch (e) {
         dispatch(cardPacksActions.setError(e.response.data.error))
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+        dispatch(cardPacksActions.setIsFetching(false))
     }
 }
-export const createCardsPack = (newCardsPack: { name: string }): ThunkType => async (dispatch: DispatchType, getState: () => AppStateType) => {
+export const createCardsPack = (newCardsPack: { name: string }): ThunkType => async (dispatch: DispatchType) => {
     try {
         dispatch(cardPacksActions.setIsFetching(true))
         let token = repository.getToken()
@@ -97,8 +111,25 @@ export const createCardsPack = (newCardsPack: { name: string }): ThunkType => as
         const response = await cardPacksApi.createCardsPack(token, {...newCardsPack, user_id})
         dispatch(cardPacksActions.createCardsPackSuccess(response.data.newCardsPack))
         repository.saveToken(response.data.token, response.data.tokenDeathTime)
+        dispatch(cardPacksActions.setIsFetching(false))
     } catch (e) {
         dispatch(cardPacksActions.setError(e.response.data.error))
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+        dispatch(cardPacksActions.setIsFetching(false))
+    }
+}
+
+export const deleteCardsPacks = (cardsPackId: string): ThunkType=> async (dispatch: DispatchType) => {
+    try {
+        dispatch(cardPacksActions.setIsFetching(true))
+        let token = repository.getToken()
+        const response = await cardPacksApi.deleteCardsPack(token, cardsPackId)
+        dispatch(cardPacksActions.deleteCardsPack(response.data.deletedCardsPack.user_id))
+        repository.saveToken(response.data.token, response.data.tokenDeathTime)
+        dispatch(cardPacksActions.setIsFetching(false))
+    } catch (e) {
+        dispatch(cardPacksActions.setError(e.response.data.error))
+        repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+        dispatch(cardPacksActions.setIsFetching(false))
     }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import {UserType} from "../../types/entities";
-import s from "./getUser.module.css"
+import {UserType} from "../../../types/entities";
+import s from "./User.module.css"
 
 
 type UsersPropsType = {
@@ -10,7 +10,7 @@ type UsersPropsType = {
     sortField: string
 }
 
-const GetUsers: React.FC<UsersPropsType> = (props) => {
+const Users: React.FC<UsersPropsType> = (props) => {
     return (
         <div className={s.get_users}>
             <table className="table">
@@ -58,4 +58,4 @@ const GetUsers: React.FC<UsersPropsType> = (props) => {
         </div>
     )
 }
-export default GetUsers;
+export default Users;
