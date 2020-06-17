@@ -55,7 +55,7 @@ type setGradeCardObjType = {
     grade: number
     shots: number
 }
-export const ardsApi = {
+export const cardsApi = {
     getCards(cardsPack_id: string, token: string | null) {
         return instance.get<GetCardsType>(`?cardsPack_id=${cardsPack_id}&token=${token}`)
     },
