@@ -8,7 +8,7 @@ type CardPackType = {
     name: string
     grade: number
     id: string
-    deletedPacksCards: (cardsPackId: string) => void
+    deletePacksCards: (cardsPackId: string) => void
     cardsPackId: string
     user_id: string
 }
@@ -21,7 +21,7 @@ const CardPack: React.FC<CardPackType> = (props) => {
             <td> {props.grade}</td>
             <td><Link title={'cards'} path={`${CARDS_PATH}/${props.id}/${props.user_id}`}/></td>
             <td>{repository.get_Auth_id() === props.user_id ?
-                <ModalOnDeletePack deletedPacksCards={props.deletedPacksCards} user_id={props.user_id}
+                <ModalOnDeletePack deletePacksCards={props.deletePacksCards} user_id={props.user_id}
                                    id={props.id}/>
                 : ''
             }</td>

@@ -62,7 +62,7 @@ const CardPacksContainer: React.FC = () => {
             return <div style={{'color': 'red'}}>server error</div>
         }
     }
-    const deletedPacksCards = (cardsPackId: string) => {
+    const deletePacksCards = (cardsPackId: string) => {
         dispatch(deleteCardsPacks(cardsPackId))
     };
     return (
@@ -76,7 +76,7 @@ const CardPacksContainer: React.FC = () => {
             totalCardPacksCount={totalCardPacksCount}
             currentPage={currentPage}
             isFetching={isFetching}
-            deletedPacksCards={deletedPacksCards}
+            deletePacksCards={deletePacksCards}
             cardsPackId={cardsPackId}
             user_id={user_id}
                  />

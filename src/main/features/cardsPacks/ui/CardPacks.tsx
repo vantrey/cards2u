@@ -16,7 +16,7 @@ type CardPacksPropsType = {
     pageSize: number
     currentPage: number
     isFetching: boolean
-    deletedPacksCards: (cardsPackId: string) => void
+    deletePacksCards: (cardsPackId: string) => void
     cardsPackId:string
     user_id:string
 
@@ -50,7 +50,7 @@ const CardPacks: React.FC<CardPacksPropsType> = (props) => {
                                 id={p._id}
                                 name={p.name}
                                 grade={p.grade}
-                                deletedPacksCards={props.deletedPacksCards}
+                                deletePacksCards={props.deletePacksCards}
                                 cardsPackId={props.cardsPackId}
                                 user_id={p.user_id}
                             />
