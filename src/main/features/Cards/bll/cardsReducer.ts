@@ -86,16 +86,18 @@ export const get_Cards = (cardsPack_id: string): ThunkType =>
         }
 
     }
-type Card = { cardsPack_id: string }
+type Card = { cardsPack_id: string
+    question:string,
+    answer:string}
 type UpdateType = { _id: string, answer: string }
 
 
-export const add_Card = ({cardsPack_id}: Card): ThunkType =>
+export const add_Card = ({cardsPack_id,question,answer}: Card): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
             let token = repository.getToken();
             if (!token) token = ''
-            const res = await cardsApi.addCard({cardsPack_id}, token);
+            const res = await cardsApi.addCard({cardsPack_id,question,answer}, token);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
             dispatch(actions.set_Success(res.data.success))
             dispatch(get_Cards(cardsPack_id))

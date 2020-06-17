@@ -7,7 +7,7 @@ import {useParams} from "react-router-dom";
 import {actions} from '../bll/cardsReducer'
 import ReactPaginate from "react-paginate";
 import styles from './Cards.module.css'
-import {LEARN_PATH} from "../../../ui/components/routes/Routes";
+import {CARD_PACKS_PATH, LEARN_PATH} from "../../../ui/components/routes/Routes";
 import Link from "../../../ui/common/Link/Link";
 
 
@@ -25,8 +25,8 @@ const CardsContainer: React.FC = () => {
         dispatch(get_Cards(pack_id))
     }, [dispatch, pack_id])
 
-    const onAddNewCard = () => {
-        dispatch(add_Card({cardsPack_id: pack_id}))
+    const onAddNewCard = (valueQuestion:string,valueAnswer:string) => {
+        dispatch(add_Card({cardsPack_id: pack_id,question:valueQuestion,answer:valueAnswer}))
     }
     const onDeleteCard = (card_id:string) => {
         dispatch(delete_Card( card_id,pack_id))
@@ -38,11 +38,7 @@ const CardsContainer: React.FC = () => {
     const pageCountSize = Math.ceil(cardsTotalCount / pageCount)
     return (
         <div className={styles.Cards_container}>
-       {/*     {(cards.length === 0 &&
-                <div
-                    style={{color: "red"}}>
-                    'there are no any cards'
-                </div>) ||*/}
+            {(isFetching && <div>...Loading please wait</div>) ||
 
             <div className={styles.Cards_container}>
             <ReactPaginate
@@ -65,13 +61,14 @@ const CardsContainer: React.FC = () => {
             />
             <Cards
                 userId={user_id}
-                isFetching={isFetching}
                 cards={cards}
                 onAddNewCard={onAddNewCard}
                 onDeleteCard={onDeleteCard}
                 onUpdateCard={onUpdateCard}
             />
-                <Link title={'learn'} path={`${LEARN_PATH}/${pack_id}`}/>
+                {cards.length === 0 &&
+                <Link title={'beck to card packs'} path={`${CARD_PACKS_PATH}`}/> ||
+                <Link title={'learn'} path={`${LEARN_PATH}/${pack_id}`}/>}
             </div>}
         </div>
     );
