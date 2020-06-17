@@ -4,7 +4,7 @@ import style from './Modal.module.css'
 import Modal from 'react-modal'
 
 type ModalPackType = {
-    deletedPacksCards: (cardsPackId: string) => void
+    deletePacksCards: (cardsPackId: string) => void
     user_id: string
     id: string
 }
@@ -23,7 +23,7 @@ const ModalonADDPack: React.FC<ModalPackType> = (props) => {
                 <h2>Delete item</h2>
                 <div>Are you sure you want to delete this item?</div>
                 <div className={style.button_modals}>
-                    <button className={style.button_yes_no} onClick={() => props.deletedPacksCards(props.id)}>Yes</button>
+                    <button className={style.button_yes_no} onClick={() => props.deletePacksCards(props.id)}>Yes</button>
                     <button className={style.button_yes_no} onClick={() => setModalIsOpen(false)}>No</button>
                     {/*<span onClick={() => setModalIsOpen(false)}>x</span>*/}
                 </div>
