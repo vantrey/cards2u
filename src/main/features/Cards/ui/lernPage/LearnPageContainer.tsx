@@ -2,11 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../../bll/store/store";
 import {CardType} from "../../../../types/entities";
-import {cardsActions, get_Cards, setCardGrade, update_Card} from "../../bll/cardsReducer";
+import {cardsActions, get_Cards, setCardGrade} from "../../bll/cardsReducer";
 import {repository} from "../../../../helpers/repos_localStorage/Token";
 import {useHistory, useParams} from 'react-router-dom';
 import LearnPage from "./LearnPage";
-import {actions} from "../../../../auth/registration/registrationReducer";
 
 const getCard = (cards: Array<CardType>) => {
 
@@ -26,6 +25,7 @@ const getGrade = (gradePrev: number, gradeNext: number, shots: number) => {
 }
 
 const LearnPageContainer: React.FC = () => {
+
   const {cards, isSuccess} = useSelector((state: AppStateType) => state.cards);
   const dispatch = useDispatch()
   const history = useHistory()
