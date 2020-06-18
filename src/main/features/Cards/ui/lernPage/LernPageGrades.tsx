@@ -4,13 +4,13 @@ import Button from "../../../../ui/common/Button/Button";
 type LearnPageGradesPropsType = {
   isGraded: boolean
   isMyDeck: boolean
-  setGrade: (e: React.MouseEvent<HTMLButtonElement>) => void
+  onSetGrade: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 const LearnPageGrades: React.FC<LearnPageGradesPropsType> = ({
                                                                isMyDeck,
                                                                isGraded,
-                                                               setGrade
+                                                               onSetGrade
                                                              }) => {
   const gradeEls = [
     {name: '5', title: 'easy'},
@@ -24,7 +24,7 @@ const LearnPageGrades: React.FC<LearnPageGradesPropsType> = ({
       disabled={isGraded}
       name={g.name}
       tittle={g.title}
-      onClick={setGrade}
+      onClick={onSetGrade}
     />
   )
 

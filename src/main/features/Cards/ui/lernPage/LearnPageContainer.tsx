@@ -69,13 +69,13 @@ const LearnPageContainer: React.FC = () => {
     }
   }, [isSuccess])
 
-  const nextQuestion = () => {
+  const onNextQuestion = () => {
     setCard(getCard(cards))
     setIsShowAnswer(false)
     setIsGraded(false)
   }
 
-  const setGrade = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onSetGrade = (e: React.MouseEvent<HTMLButtonElement>) => {
     const newGrade = getGrade(card.grade, Number(e.currentTarget.name), card.shots)
     dispatch(setCardGrade({_id: card._id, grade: newGrade, shots: card.shots + 1}))
     setIsGraded(true)
@@ -90,10 +90,10 @@ const LearnPageContainer: React.FC = () => {
      isShowAnswer={isShowAnswer}
      setIsShowAnswer={setIsShowAnswer}
      card={card}
-     nextQuestion={nextQuestion}
+     onNextQuestion={onNextQuestion}
      isMyDeck={isMyDeck}
      isGraded={isGraded}
-     setGrade={setGrade}
+     onSetGrade={onSetGrade}
      onBackClick={onBackClick}/>
   );
 };
