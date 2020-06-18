@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../../bll/store/store";
 import {CardType} from "../../../../types/entities";
-import {get_Cards, setCardGrade, update_Card} from "../../bll/cardsReducer";
+import {cardsActions, get_Cards, setCardGrade} from "../../bll/cardsReducer";
 import {repository} from "../../../../helpers/repos_localStorage/Token";
 import {useHistory, useParams} from 'react-router-dom';
 import LearnPage from "./LearnPage";
@@ -25,7 +25,8 @@ const getGrade = (gradePrev: number, gradeNext: number, shots: number) => {
 }
 
 const LearnPageContainer: React.FC = () => {
-  const {cards} = useSelector((state: AppStateType) => state.cards);
+
+  const {cards, isSuccess, isFetching} = useSelector((state: AppStateType) => state.cards);
   const dispatch = useDispatch()
   const history = useHistory()
   const {pack_id} = useParams()
@@ -48,24 +49,33 @@ const LearnPageContainer: React.FC = () => {
   const [isShowAnswer, setIsShowAnswer] = useState<boolean>(false)
 
   const [isGraded, setIsGraded] = useState<boolean>(false)
-
+  const [isFirsRendering, setIsFirstRendering] = useState<boolean>(true)
   const isMyDeck = repository.get_Auth_id() === card?.user_id
+
+  if (isFirsRendering) {
+    if (isSuccess) {
+      dispatch(cardsActions.set_Success(false))
+    }
+    setIsFirstRendering(false)
+  }
 
   useEffect(() => {
     dispatch(get_Cards(pack_id))
   }, [pack_id, dispatch])
 
   useEffect(() => {
-    setCard(getCard(cards))
-  }, [cards])
+    if (isSuccess) {
+      setCard(getCard(cards))
+    }
+  }, [isSuccess])
 
-  const nextQuestion = () => {
+  const onNextQuestion = () => {
     setCard(getCard(cards))
     setIsShowAnswer(false)
     setIsGraded(false)
   }
 
-  const setGrade = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onSetGrade = (e: React.MouseEvent<HTMLButtonElement>) => {
     const newGrade = getGrade(card.grade, Number(e.currentTarget.name), card.shots)
     dispatch(setCardGrade({_id: card._id, grade: newGrade, shots: card.shots + 1}))
     setIsGraded(true)
@@ -76,15 +86,19 @@ const LearnPageContainer: React.FC = () => {
   }
 
   return (
-   <LearnPage
-     isShowAnswer={isShowAnswer}
-     setIsShowAnswer={setIsShowAnswer}
-     card={card}
-     nextQuestion={nextQuestion}
-     isMyDeck={isMyDeck}
-     isGraded={isGraded}
-     setGrade={setGrade}
-     onBackClick={onBackClick}/>
+    <div>
+      {(isFetching && <div>...Loading</div>) ||
+      <LearnPage
+        isShowAnswer={isShowAnswer}
+        setIsShowAnswer={setIsShowAnswer}
+        card={card}
+        onNextQuestion={onNextQuestion}
+        isMyDeck={isMyDeck}
+        isGraded={isGraded}
+        onSetGrade={onSetGrade}
+        onBackClick={onBackClick}
+      />}
+    </div>
   );
 };
 

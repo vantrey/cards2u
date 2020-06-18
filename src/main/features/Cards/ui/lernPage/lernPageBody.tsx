@@ -6,7 +6,7 @@ type LearnPageBodyPropsType = {
   isShowAnswer: boolean
   setIsShowAnswer: (isShowAnswer: boolean) => void
   card: CardType
-  nextQuestion: () => void
+  onNextQuestion: () => void
   isMyDeck: boolean
   isGraded: boolean
 }
@@ -15,7 +15,7 @@ const LearnPageBody: React.FC<LearnPageBodyPropsType> = ({
                                                            isShowAnswer,
                                                            card,
                                                            setIsShowAnswer,
-                                                           nextQuestion,
+                                                           onNextQuestion,
                                                            isMyDeck,
                                                            isGraded,
                                                          }) => {
@@ -55,7 +55,7 @@ const LearnPageBody: React.FC<LearnPageBodyPropsType> = ({
           />}
 
           <NextCard
-            nextQuestion={nextQuestion}
+            onNextQuestion={onNextQuestion}
             isDisabled={isMyDeck ? !isGraded : undefined}
           />
         </div>
@@ -67,14 +67,14 @@ const LearnPageBody: React.FC<LearnPageBodyPropsType> = ({
 
 type NextButtonPropsType = {
   isDisabled: boolean | undefined
-  nextQuestion: () => void
+  onNextQuestion: () => void
 }
 
 const NextCard: React.FC<NextButtonPropsType> = (props) => {
   return (
     <Button
       disabled={props.isDisabled}
-      onClick={props.nextQuestion}
+      onClick={props.onNextQuestion}
       tittle={'next'}
     />
   )

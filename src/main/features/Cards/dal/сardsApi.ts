@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {CardType} from "../../../types/entities";
+import {AddCardType, CardType, NewCardGradeType, UpdateCardType} from "../../../types/entities";
 
 
 const instance = axios.create({
@@ -24,22 +24,13 @@ type AddPostDeleteResponseType = {
     token: string
     tokenDeathTime: number
 }
-type UpdateCardObjType = {
-    _id: string
-    question:string
-    answer: string
-}
-type setGradeCardObjType = {
-    _id: string
-    grade: number
-    shots: number
-}
+
 export const cardsApi = {
     getCards(cardsPack_id: string, token: string | null) {
         return instance.get<GetCardsType>(`?cardsPack_id=${cardsPack_id}&token=${token}`)
     },
 
-    addCard(card: { cardsPack_id: string, question: string, answer: string }, token: string | null) {
+    addCard(card: AddCardType, token: string | null) {
         return instance.post<AddPostDeleteResponseType>(``,
             {
                 card,
@@ -52,7 +43,7 @@ export const cardsApi = {
         return instance.delete<AddPostDeleteResponseType>(`?token=${token}&id=${id}`)
 
     },
-    updateCard(card: UpdateCardObjType | setGradeCardObjType, token: string | null) {
+    updateCard(card: UpdateCardType | NewCardGradeType, token: string | null) {
         return instance.put<AddPostDeleteResponseType>(``,
             {
                 card,

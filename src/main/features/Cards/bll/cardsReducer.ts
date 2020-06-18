@@ -9,7 +9,7 @@ const initialState = {
     cards: [] as Array<CardType>,
     isFetching: false,
     isSuccess: false,
-    page: 2,
+    page: 1,
     pageCount: 10,
     cardsTotalCount: 0
 
@@ -58,8 +58,17 @@ export const actions = {
     setCards: (cards: Array<CardType>) => ({type: 'CARDS_REDUCER/SET_CARDS', cards} as const),
     set_Fetching: (isFetching: boolean) => ({type: "CARDS_REDUCER/IS_FETCHING", isFetching} as const),
     set_Success: (isSuccess: boolean) => ({type: "CARDS_REDUCER/SET_SUCCESS", isSuccess} as const),
-    setFirstPage: (page: number) => ({type: 'CARDS_REDUCER/SET_PAGE', page} as const)
+    /* set_Cards_Count: (cardsTotalCount:number ,page:number,pageCount:number) =>
+         ({type: "CARDS_REDUCER/SET_CARDS_DATA", payload:{cardsTotalCount,page,pageCount}} as const),
+ */
+    setFirstPage: (page: number) => ({type: 'CARDS_REDUCER/SET_PAGE', page} as const),
+    setCardGradeSuccess: (newCardGrade: NewCardGradeType) => ({
+        type: 'CARDS_REDUCER/SET_GRADE_CARD_SUCCESS',
+        newCardGrade
+    } as const)
 }
+
+
 
 type ActionsType = InferActionTypes<typeof actions>
 
