@@ -25,15 +25,29 @@
 }
 
 .delete {
-    color: greenyellow;
     font-weight: bold;
     cursor: pointer;
+    color: blue;
+    width: 60px;
+    margin-top: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 2px;
+    background-color: red;
+    border:2px solid greenyellow;
 }
 
 .update {
-    color: black;
     font-weight: bold;
     cursor: pointer;
+    color: blue;
+    width: 60px;
+    margin-top: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 2px;
+    background-color: green;
+    border:2px solid blue;
 }
 
 .add_Card {
@@ -46,6 +60,7 @@
     display: flex;
     justify-content: center;
     align-items: baseline;
+
 }
 
 .delete_Card {

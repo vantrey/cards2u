@@ -32,7 +32,7 @@ const ModalWindowUpdateCard: React.FC<ModalUpdateType> = (props) => {
 
     return (
         <div className={style.update_Card}>
-            <button className={style.update} onClick={() => setModalIsOpen(true)}>Update Card</button>
+            <button className={style.update} onClick={() => setModalIsOpen(true)}>Update</button>
             <Modal
                 className={style.modal}
                 isOpen={modalIsOpen}

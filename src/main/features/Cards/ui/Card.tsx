@@ -2,7 +2,7 @@ import React from 'react';
 import {repository} from "../../../helpers/repos_localStorage/Token";
 import ModalWindowDeleteCard from "./ModalWindowCards/ModalWindowDeleteCard";
 import ModalWindowUpdateCard from "./ModalWindowCards/ModalWindowUpdateCard";
-
+import styles from './Cards.module.css'
 
 type CardPropsType = {
     answer: string
@@ -18,10 +18,10 @@ type CardPropsType = {
 const Card: React.FC<CardPropsType> = ({...props}) => {
     return (
         <>
-            <div>{props.question}</div>
-            <div>{props.answer}</div>
-            <div style={{'color': 'green'}}>grade:{props.grade}</div>
-            <div style={{'color': 'blue'}}>shots:{props.shots}</div>
+            <div className={styles.question}>{props.question}</div>
+            <div className={styles.answer}>{props.answer}</div>
+            <div className={styles.grade}>grade:{props.grade}</div>
+            <div className={styles.shots}>shots:{props.shots}</div>
 
             {repository.get_Auth_id() === props.userId &&
             <div>
