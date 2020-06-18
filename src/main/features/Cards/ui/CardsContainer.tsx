@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store/store";
 import {add_Card, delete_Card, get_Cards, update_Card} from "../bll/cardsReducer";
 import {useParams} from "react-router-dom";
-import {actions} from '../bll/cardsReducer'
+import {cardsActions} from '../bll/cardsReducer'
 import ReactPaginate from "react-paginate";
 import styles from './Cards.module.css'
 import {CARD_PACKS_PATH, LEARN_PATH} from "../../../ui/components/routes/Routes";
@@ -17,7 +17,7 @@ const CardsContainer: React.FC = () => {
     const dispatch = useDispatch();
 
     const pageChangedHandler = (page: { selected: number }) => {
-        dispatch(actions.setPage(page.selected + 1))
+        dispatch(cardsActions.setPage(page.selected + 1))
     }
 
 

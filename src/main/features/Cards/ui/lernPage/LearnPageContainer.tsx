@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../../bll/store/store";
 import {CardType} from "../../../../types/entities";
-import {get_Cards, setCardGrade, update_Card} from "../../bll/cardsReducer";
+import {cardsActions, get_Cards, setCardGrade, update_Card} from "../../bll/cardsReducer";
 import {repository} from "../../../../helpers/repos_localStorage/Token";
 import {useHistory, useParams} from 'react-router-dom';
 import LearnPage from "./LearnPage";
+import {actions} from "../../../../auth/registration/registrationReducer";
 
 const getCard = (cards: Array<CardType>) => {
 
@@ -25,7 +26,7 @@ const getGrade = (gradePrev: number, gradeNext: number, shots: number) => {
 }
 
 const LearnPageContainer: React.FC = () => {
-  const {cards} = useSelector((state: AppStateType) => state.cards);
+  const {cards, isSuccess} = useSelector((state: AppStateType) => state.cards);
   const dispatch = useDispatch()
   const history = useHistory()
   const {pack_id} = useParams()
@@ -48,16 +49,25 @@ const LearnPageContainer: React.FC = () => {
   const [isShowAnswer, setIsShowAnswer] = useState<boolean>(false)
 
   const [isGraded, setIsGraded] = useState<boolean>(false)
-
+  const [isFirsRendering, setIsFirstRendering] = useState<boolean>(true)
   const isMyDeck = repository.get_Auth_id() === card?.user_id
+
+  if (isFirsRendering) {
+    if (isSuccess) {
+      dispatch(cardsActions.set_Success(false))
+    }
+    setIsFirstRendering(false)
+  }
 
   useEffect(() => {
     dispatch(get_Cards(pack_id))
   }, [pack_id, dispatch])
 
   useEffect(() => {
-    setCard(getCard(cards))
-  }, [cards])
+    if (isSuccess) {
+      setCard(getCard(cards))
+    }
+  }, [isSuccess])
 
   const nextQuestion = () => {
     setCard(getCard(cards))
