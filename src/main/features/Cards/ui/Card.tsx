@@ -17,8 +17,8 @@ const Card: React.FC<CardPropsType> = ({...props}) => {
     <>
       <div>{props.question}</div>
       <div>{props.answer}</div>
-      <div style={{'color': 'green'}}>{props.grade}</div>
-      <div style={{'color': 'blue'}}>{props.shots}</div>
+      <div style={{'color': 'green'}}>grade:{props.grade}</div>
+      <div style={{'color': 'blue'}}>shots:{props.shots}</div>
 
       { repository.get_Auth_id() === props.userId &&
       <div>

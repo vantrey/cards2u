@@ -3,12 +3,20 @@
     justify-content: center;
 }
 
-.tbodyTag{
+.tbodyTag {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 
-.wrapCard{
+.wrapCard {
     padding-left: 5px;
+}
+
+.Cards_container div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 30px;
+    align-items: center
 }
