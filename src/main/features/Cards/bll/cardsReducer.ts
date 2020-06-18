@@ -82,22 +82,29 @@ export const get_Cards = (cardsPack_id: string): ThunkType =>
             dispatch(actions.set_Fetching(false));
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
         } catch (e) {
+            dispatch(actions.set_Fetching(false));
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
         }
 
     }
-type Card = { cardsPack_id: string
-    question:string,
-    answer:string}
-type UpdateType = { _id: string, answer: string }
+type Card = {
+    cardsPack_id: string
+    question: string,
+    answer: string
+}
+type UpdateType = {
+    _id: string,
+    answer: string,
+    question: string
+}
 
 
-export const add_Card = ({cardsPack_id,question,answer}: Card): ThunkType =>
+export const add_Card = ({cardsPack_id, question, answer}: Card): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
             let token = repository.getToken();
             if (!token) token = ''
-            const res = await cardsApi.addCard({cardsPack_id,question,answer}, token);
+            const res = await cardsApi.addCard({cardsPack_id, question, answer}, token);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
             dispatch(actions.set_Success(res.data.success))
             dispatch(get_Cards(cardsPack_id))
@@ -120,12 +127,12 @@ export const delete_Card = (card_id: string, cardsPack_id: string): ThunkType =>
         }
     }
 
-export const update_Card = ({_id, answer}: UpdateType, cardsPack_id: string): ThunkType =>
+export const update_Card = ({_id, question, answer}: UpdateType, cardsPack_id: string): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
             let token = repository.getToken();
             if (!token) token = ''
-            const res = await cardsApi.updateCard({_id, answer}, token);
+            const res = await cardsApi.updateCard({_id,question, answer}, token);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
             dispatch(actions.set_Success(res.data.success))
             dispatch(get_Cards(cardsPack_id))

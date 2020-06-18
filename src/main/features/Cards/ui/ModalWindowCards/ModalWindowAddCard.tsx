@@ -9,7 +9,7 @@ type ModalCardType = {
 }
 
 Modal.setAppElement('#root')
-const ModalOnWindowAddCard: React.FC<ModalCardType> = (props) => {
+const ModalWindowAddCard: React.FC<ModalCardType> = (props) => {
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [valueQuestion, setValueQuestion] = useState('')
        const [valueAnswer, setValueAnswer] = useState('')
@@ -52,4 +52,4 @@ const ModalOnWindowAddCard: React.FC<ModalCardType> = (props) => {
     )
 }
 
-export default ModalOnWindowAddCard
+export default ModalWindowAddCard

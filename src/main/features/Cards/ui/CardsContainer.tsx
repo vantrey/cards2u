@@ -31,8 +31,8 @@ const CardsContainer: React.FC = () => {
     const onDeleteCard = (card_id:string) => {
         dispatch(delete_Card( card_id,pack_id))
     }
-    const onUpdateCard = (_id:string) => {
-        dispatch(update_Card({_id,answer:'wtf?' },pack_id))
+    const onUpdateCard = (_id:string,question:string,answer:string) => {
+        dispatch(update_Card({_id,question,answer},pack_id))
     }
 
     const pageCountSize = Math.ceil(cardsTotalCount / pageCount)

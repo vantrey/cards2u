@@ -13,12 +13,25 @@
     border-radius: 20px;
     box-shadow: 0 0 10px 5px rgb(80, 73, 73);
 }
+
 .modal:hover {
-    border:none;
+    border: none;
 }
 
 .add {
     color: red;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.delete {
+    color: greenyellow;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.update {
+    color: black;
     font-weight: bold;
     cursor: pointer;
 }
@@ -28,9 +41,23 @@
     justify-content: center;
     align-items: baseline;
 }
+
+.update_Card {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.delete_Card {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
 .button_modals {
     margin: 10px;
 }
+
 .button_yes_no {
     display: inline-block;
     color: white;
@@ -45,6 +72,12 @@
     transition: 0.2s;
     margin: 2px;
 }
-.button_yes_no:hover { background: linear-gradient(#f5ae00, #f59500) #f5ae00; }
-.button_yes_no:active { background: linear-gradient(#f59500, #f5ae00) #f59500; }
+
+.button_yes_no:hover {
+    background: linear-gradient(#f5ae00, #f59500) #f5ae00;
+}
+
+.button_yes_no:active {
+    background: linear-gradient(#f59500, #f5ae00) #f59500;
+}
 

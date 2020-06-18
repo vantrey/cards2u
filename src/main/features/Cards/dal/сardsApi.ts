@@ -18,28 +18,6 @@ type GetCardsType = {
 }
 
 
-/*type AddCardType = {
-    newCard: CardType
-    success: boolean,
-    token: string
-    tokenDeathTime: number
-}
-
-type DeleteCardType = {
-    deletedCard: CardType
-    success: boolean
-    token: string
-    tokenDeathTime: number
-}
-
-type UpdateCardType = {
-    updatedCard: CardType
-    success: boolean
-    token: string
-    tokenDeathTime: number
-
-}*/
-
 type AddPostDeleteResponseType = {
     Card: CardType
     success: boolean
@@ -48,6 +26,7 @@ type AddPostDeleteResponseType = {
 }
 type UpdateCardObjType = {
     _id: string
+    question:string
     answer: string
 }
 type setGradeCardObjType = {

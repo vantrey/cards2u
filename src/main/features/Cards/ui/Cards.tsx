@@ -3,13 +3,13 @@ import {CardType} from "../../../types/entities";
 import Card from "./Card";
 import styles from './Cards.module.css'
 import {repository} from "../../../helpers/repos_localStorage/Token";
-import ModalOnWindowAddCard from "./ModalWindowCards/ModalOnWindowAddCard";
+import ModalWindowAddCard from "./ModalWindowCards/ModalWindowAddCard";
 
 type OwnProps = {
     cards: Array<CardType>
     onAddNewCard: (valueQuestion: string, valueAnswer: string) => void
     onDeleteCard: (card_id: string) => void
-    onUpdateCard: (_id: string) => void
+    onUpdateCard: (_id: string,question: string, answer: string) => void
     userId: string
 }
 
@@ -29,12 +29,9 @@ const Cards: React.FC<OwnProps> = ({
                 grade={c.grade}
                 shots={c.shots}
                 userId={c.user_id}
-                onDeleteCard={() => {
-                    onDeleteCard(c._id)
-                }}
-                onUpdateCard={() => {
-                    onUpdateCard(c._id)
-                }}
+                _id={c._id}
+                onDeleteCard={onDeleteCard}
+                onUpdateCard={onUpdateCard}
             />
         </div>
     )
@@ -57,7 +54,7 @@ const Cards: React.FC<OwnProps> = ({
 
             {repository.get_Auth_id() === userId &&
             <div>
-                <ModalOnWindowAddCard onAddNewCard={onAddNewCard} />
+                <ModalWindowAddCard onAddNewCard={onAddNewCard} />
             </div>}
 
         </div>
