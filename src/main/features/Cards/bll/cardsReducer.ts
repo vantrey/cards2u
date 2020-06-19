@@ -1,4 +1,4 @@
-import {CardType} from "../../../types/entities";
+import {CardType, NewCardGradeType} from "../../../types/entities";
 import {AppStateType, InferActionTypes} from "../../../bll/store/store";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {repository} from "../../../helpers/repos_localStorage/Token";
@@ -11,7 +11,8 @@ const initialState = {
     isSuccess: false,
     page: 1,
     pageCount: 10,
-    cardsTotalCount: 0
+    cardsTotalCount: 0,
+
 
 
 }
@@ -54,7 +55,7 @@ export const CardsReducer = (state: initialStateType = initialState, action: Act
 
 }
 
-export const actions = {
+export const cardsActions = {
     setCards: (cards: Array<CardType>) => ({type: 'CARDS_REDUCER/SET_CARDS', cards} as const),
     set_Fetching: (isFetching: boolean) => ({type: "CARDS_REDUCER/IS_FETCHING", isFetching} as const),
     set_Success: (isSuccess: boolean) => ({type: "CARDS_REDUCER/SET_SUCCESS", isSuccess} as const),
@@ -63,30 +64,31 @@ export const actions = {
  */
     setFirstPage: (page: number) => ({type: 'CARDS_REDUCER/SET_PAGE', page} as const),
     setCardGradeSuccess: (newCardGrade: NewCardGradeType) => ({
-        type: 'CARDS_REDUCER/SET_GRADE_CARD_SUCCESS',
+         type: 'CARDS_REDUCER/SET_GRADE_CARD_SUCCESS',
         newCardGrade
     } as const)
+
 }
 
 
 
-type ActionsType = InferActionTypes<typeof actions>
+type ActionsType = InferActionTypes<typeof cardsActions>
 
 
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const get_Cards = (cardsPack_id: string): ThunkType =>
+export const get_Cards = (cardsPack_id: string,sortCards=`grade`,direction='1'): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
-            dispatch(actions.set_Fetching(true));
+            dispatch(cardsActions.set_Fetching(true));
             let token = repository.getToken();
-            const res = await cardsApi.getCards(cardsPack_id, token);
-            dispatch(actions.setCards(res.data.cards));
-            dispatch(actions.set_Fetching(false));
+            const res = await cardsApi.getCards(cardsPack_id, token,sortCards+direction);
+            dispatch(cardsActions.setCards(res.data.cards));
+            dispatch(cardsActions.set_Fetching(false));
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
         } catch (e) {
-            dispatch(actions.set_Fetching(false));
+            dispatch(cardsActions.set_Fetching(false));
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
         }
 
@@ -110,7 +112,7 @@ export const add_Card = ({cardsPack_id, question, answer}: Card): ThunkType =>
             if (!token) token = ''
             const res = await cardsApi.addCard({cardsPack_id, question, answer}, token);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
-            dispatch(actions.set_Success(res.data.success))
+            dispatch(cardsActions.set_Success(res.data.success))
             dispatch(get_Cards(cardsPack_id))
         } catch (e) {
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
@@ -124,7 +126,7 @@ export const delete_Card = (card_id: string, cardsPack_id: string): ThunkType =>
             if (!token) token = ''
             const res = await cardsApi.deleteCard(card_id, token);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
-            dispatch(actions.set_Success(res.data.success))
+            dispatch(cardsActions.set_Success(res.data.success))
             dispatch(get_Cards(cardsPack_id))
         } catch (e) {
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
@@ -138,7 +140,7 @@ export const update_Card = ({_id, question, answer}: UpdateType, cardsPack_id: s
             if (!token) token = ''
             const res = await cardsApi.updateCard({_id,question, answer}, token);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
-            dispatch(actions.set_Success(res.data.success))
+            dispatch(cardsActions.set_Success(res.data.success))
             dispatch(get_Cards(cardsPack_id))
         } catch (e) {
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
@@ -150,7 +152,7 @@ export const setCardGrade = (newCardGrade: { _id: string, grade: number, shots: 
             let token = repository.getToken();
             const res = await cardsApi.updateCard(newCardGrade, token);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
-            dispatch(actions.set_Success(res.data.success))
+            dispatch(cardsActions.set_Success(res.data.success))
         } catch (e) {
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
         }

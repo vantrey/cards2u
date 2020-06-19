@@ -3,13 +3,24 @@
     justify-content: center;
 }
 
-.tbodyTag {
+.cardsEls {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
+.wrapHeader{
+    padding-right: 30px;
+    display: flex;
+    justify-content: center;
+}
+.cardsHeaders{
+    margin-right: 70px;
+    display: flex;
+    justify-content: center;
+}
 
 .wrapCard {
+    justify-content: space-between;
     display: flex;
     width: 400px;
     border: 1px solid;

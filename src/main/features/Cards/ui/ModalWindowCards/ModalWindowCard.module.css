@@ -19,9 +19,16 @@
 }
 
 .add {
-    color: red;
     font-weight: bold;
     cursor: pointer;
+    color: red;
+    width: 60px;
+    margin-top: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 2px;
+    background-color: cornflowerblue;
+    border:2px solid #f59500;
 }
 
 .delete {
@@ -40,7 +47,7 @@
 .update {
     font-weight: bold;
     cursor: pointer;
-    color: blue;
+    color: greenyellow;
     width: 60px;
     margin-top: 5px;
     font-weight: bold;

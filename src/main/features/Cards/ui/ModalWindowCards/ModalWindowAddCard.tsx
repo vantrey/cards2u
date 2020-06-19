@@ -32,7 +32,7 @@ const ModalWindowAddCard: React.FC<ModalCardType> = (props) => {
 
     return (
         <div className={style.add_Card}>
-            <button className={style.add} onClick={() => setModalIsOpen(true)}>Add Card</button>
+            <button className={style.add} onClick={() => setModalIsOpen(true)}>Add</button>
             <Modal
                 className={style.modal}
                 isOpen={modalIsOpen}

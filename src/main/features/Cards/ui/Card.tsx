@@ -19,7 +19,7 @@ const Card: React.FC<CardPropsType> = ({...props}) => {
     return (
         <>
             <div className={styles.question}>{props.question}</div>
-            <div className={styles.answer}>{props.answer}</div>
+        {/*    <div className={styles.answer}>{props.answer}</div>*/}
             <div className={styles.grade}>grade:{props.grade}</div>
             <div className={styles.shots}>shots:{props.shots}</div>
 

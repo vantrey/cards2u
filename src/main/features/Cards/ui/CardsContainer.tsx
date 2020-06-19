@@ -1,29 +1,41 @@
-import React, {useEffect} from 'react';
+import React, {Dispatch, useEffect, useState} from 'react';
 import Cards from "./Cards";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store/store";
-import {add_Card, delete_Card, get_Cards, update_Card} from "../bll/cardsReducer";
+import {add_Card, cardsActions, delete_Card, get_Cards, update_Card} from "../bll/cardsReducer";
 import {useParams} from "react-router-dom";
-import {actions} from '../bll/cardsReducer'
 import ReactPaginate from "react-paginate";
 import styles from './Cards.module.css'
 import {CARD_PACKS_PATH, LEARN_PATH} from "../../../ui/components/routes/Routes";
 import Link from "../../../ui/common/Link/Link";
-
+/*type sortCardsType={
+    sortCards:string
+    setSortCards:(sortCards:string)=>void
+}*/
 
 const CardsContainer: React.FC = () => {
     const {pack_id,user_id} = useParams();
     const {cards, isFetching,pageCount,cardsTotalCount} = useSelector((state: AppStateType) => state.cards);
     const dispatch = useDispatch();
 
+
     const pageChangedHandler = (page: { selected: number }) => {
-        dispatch(cardsActions.setPage(page.selected + 1))
+        dispatch(cardsActions.setFirstPage(page.selected + 1))
     }
 
 
     useEffect(() => {
         dispatch(get_Cards(pack_id))
     }, [dispatch, pack_id])
+
+    const sortUp=(e: React.MouseEvent<HTMLButtonElement>)=>{
+        dispatch(get_Cards(pack_id,e.currentTarget.value,'1'))
+    }
+
+    const sortDown=(e: React.MouseEvent<HTMLButtonElement>)=>{
+        dispatch(get_Cards(pack_id,e.currentTarget.value,'0'))
+    }
+
 
     const onAddNewCard = (valueQuestion:string,valueAnswer:string) => {
         dispatch(add_Card({cardsPack_id: pack_id,question:valueQuestion,answer:valueAnswer}))
@@ -65,6 +77,8 @@ const CardsContainer: React.FC = () => {
                 onAddNewCard={onAddNewCard}
                 onDeleteCard={onDeleteCard}
                 onUpdateCard={onUpdateCard}
+                sortDown={sortDown}
+                sortUp={sortUp}
             />
                 {cards.length === 0 &&
                 <Link title={'beck to card packs'} path={`${CARD_PACKS_PATH}`}/> ||
