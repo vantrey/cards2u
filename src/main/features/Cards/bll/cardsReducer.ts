@@ -36,11 +36,7 @@ export const CardsReducer = (state: initialStateType = initialState, action: Act
                 ...state,
                 isSuccess: action.isSuccess
             }
-        /*       case  "CARDS_REDUCER/SET_CARDS_DATA":
-               return {
-                   ...state,
-   ...action.payload
-               }*/
+
         case  "CARDS_REDUCER/SET_PAGE":
             return {
                 ...state,
@@ -67,9 +63,6 @@ export const cardsActions = {
     setCards: (cards: Array<CardType>) => ({type: 'CARDS_REDUCER/SET_CARDS', cards} as const),
     set_Fetching: (isFetching: boolean) => ({type: "CARDS_REDUCER/IS_FETCHING", isFetching} as const),
     set_Success: (isSuccess: boolean) => ({type: "CARDS_REDUCER/SET_SUCCESS", isSuccess} as const),
-    /* set_Cards_Count: (cardsTotalCount:number ,page:number,pageCount:number) =>
-         ({type: "CARDS_REDUCER/SET_CARDS_DATA", payload:{cardsTotalCount,page,pageCount}} as const),
- */
     setPage: (page: number) => ({
         type: 'CARDS_REDUCER/SET_PAGE', page
     } as const),
