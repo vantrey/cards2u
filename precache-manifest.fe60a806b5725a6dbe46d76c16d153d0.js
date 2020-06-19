@@ -1,31 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6a2389b7a4732aaeb577732d601ad727",
+    "revision": "84a7d48d4f6d786ded031d74098d2f63",
     "url": "/cards2u/index.html"
   },
   {
-    "revision": "9eccdaaa5352b7bf6094",
-    "url": "/cards2u/static/css/2.af3c1da9.chunk.css"
+    "revision": "3bd15a9d3dd9f48d43bc",
+    "url": "/cards2u/static/css/main.712728d8.chunk.css"
   },
   {
-    "revision": "5b7335fcf912576b9fb7",
-    "url": "/cards2u/static/css/main.d5f0dc4a.chunk.css"
+    "revision": "837984ef7852c5f2713c",
+    "url": "/cards2u/static/js/2.4942daae.chunk.js"
   },
   {
-    "revision": "9eccdaaa5352b7bf6094",
-    "url": "/cards2u/static/js/2.ff529285.chunk.js"
+    "revision": "8503aa6dc0746a928258d15b355b5936",
+    "url": "/cards2u/static/js/2.4942daae.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "3e6933cf6bd44f8f91c7aa725d75c668",
-    "url": "/cards2u/static/js/2.ff529285.chunk.js.LICENSE.txt"
+    "revision": "3bd15a9d3dd9f48d43bc",
+    "url": "/cards2u/static/js/main.f0aa458c.chunk.js"
   },
   {
-    "revision": "5b7335fcf912576b9fb7",
-    "url": "/cards2u/static/js/main.eb5a618f.chunk.js"
-  },
-  {
-    "revision": "c0bf73b1960fcde7824e",
-    "url": "/cards2u/static/js/runtime-main.29585c8f.js"
+    "revision": "4237de5b5ac7b64b6ec1",
+    "url": "/cards2u/static/js/runtime-main.a72c6623.js"
   },
   {
     "revision": "106a1379dae3231365ac7d6269374f26",

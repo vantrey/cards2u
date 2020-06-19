@@ -1,19 +1,17 @@
 {
   "files": {
-    "main.css": "/cards2u/static/css/main.d5f0dc4a.chunk.css",
-    "main.js": "/cards2u/static/js/main.eb5a618f.chunk.js",
-    "main.js.map": "/cards2u/static/js/main.eb5a618f.chunk.js.map",
-    "runtime-main.js": "/cards2u/static/js/runtime-main.29585c8f.js",
-    "runtime-main.js.map": "/cards2u/static/js/runtime-main.29585c8f.js.map",
-    "static/css/2.af3c1da9.chunk.css": "/cards2u/static/css/2.af3c1da9.chunk.css",
-    "static/js/2.ff529285.chunk.js": "/cards2u/static/js/2.ff529285.chunk.js",
-    "static/js/2.ff529285.chunk.js.map": "/cards2u/static/js/2.ff529285.chunk.js.map",
+    "main.css": "/cards2u/static/css/main.712728d8.chunk.css",
+    "main.js": "/cards2u/static/js/main.f0aa458c.chunk.js",
+    "main.js.map": "/cards2u/static/js/main.f0aa458c.chunk.js.map",
+    "runtime-main.js": "/cards2u/static/js/runtime-main.a72c6623.js",
+    "runtime-main.js.map": "/cards2u/static/js/runtime-main.a72c6623.js.map",
+    "static/js/2.4942daae.chunk.js": "/cards2u/static/js/2.4942daae.chunk.js",
+    "static/js/2.4942daae.chunk.js.map": "/cards2u/static/js/2.4942daae.chunk.js.map",
     "index.html": "/cards2u/index.html",
-    "precache-manifest.9b3ed1cc460230cb7451257557cea946.js": "/cards2u/precache-manifest.9b3ed1cc460230cb7451257557cea946.js",
+    "precache-manifest.fe60a806b5725a6dbe46d76c16d153d0.js": "/cards2u/precache-manifest.fe60a806b5725a6dbe46d76c16d153d0.js",
     "service-worker.js": "/cards2u/service-worker.js",
-    "static/css/2.af3c1da9.chunk.css.map": "/cards2u/static/css/2.af3c1da9.chunk.css.map",
-    "static/css/main.d5f0dc4a.chunk.css.map": "/cards2u/static/css/main.d5f0dc4a.chunk.css.map",
-    "static/js/2.ff529285.chunk.js.LICENSE.txt": "/cards2u/static/js/2.ff529285.chunk.js.LICENSE.txt",
+    "static/css/main.712728d8.chunk.css.map": "/cards2u/static/css/main.712728d8.chunk.css.map",
+    "static/js/2.4942daae.chunk.js.LICENSE.txt": "/cards2u/static/js/2.4942daae.chunk.js.LICENSE.txt",
     "static/media/index.css": "/cards2u/static/media/CSGrimrock.bd07c961.woff",
     "static/media/Intro-53-commpres-webm.webm": "/cards2u/static/media/Intro-53-commpres-webm.f9da5a9c.webm",
     "static/media/Intro-53-commpres.mp4": "/cards2u/static/media/Intro-53-commpres.7dbea0cc.mp4",
@@ -32,10 +30,9 @@
     "static/media/taverna-shadow2.png": "/cards2u/static/media/taverna-shadow2.24dd3426.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.29585c8f.js",
-    "static/css/2.af3c1da9.chunk.css",
-    "static/js/2.ff529285.chunk.js",
-    "static/css/main.d5f0dc4a.chunk.css",
-    "static/js/main.eb5a618f.chunk.js"
+    "static/js/runtime-main.a72c6623.js",
+    "static/js/2.4942daae.chunk.js",
+    "static/css/main.712728d8.chunk.css",
+    "static/js/main.f0aa458c.chunk.js"
   ]
 }
