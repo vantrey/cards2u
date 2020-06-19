@@ -82,6 +82,7 @@ export const get_Cards = (cardsPack_id: string,sortCards=`grade`,direction='1'):
     async (dispatch: DispatchType) => {
         try {
             dispatch(cardsActions.set_Fetching(true));
+            dispatch(cardsActions.set_Success(true))
             let token = repository.getToken();
             const res = await cardsApi.getCards(cardsPack_id, token,sortCards+direction);
             dispatch(cardsActions.setCards(res.data.cards));
@@ -93,6 +94,7 @@ export const get_Cards = (cardsPack_id: string,sortCards=`grade`,direction='1'):
         }
 
     }
+
 type Card = {
     cardsPack_id: string
     question: string,
