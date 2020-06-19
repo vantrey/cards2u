@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/wisemen/static/css/main.f39e6b6b.chunk.css",
-    "main.js": "/wisemen/static/js/main.3734434b.chunk.js",
-    "main.js.map": "/wisemen/static/js/main.3734434b.chunk.js.map",
+    "main.js": "/wisemen/static/js/main.c6068c8c.chunk.js",
+    "main.js.map": "/wisemen/static/js/main.c6068c8c.chunk.js.map",
     "runtime-main.js": "/wisemen/static/js/runtime-main.f2c8196c.js",
     "runtime-main.js.map": "/wisemen/static/js/runtime-main.f2c8196c.js.map",
     "static/js/2.4942daae.chunk.js": "/wisemen/static/js/2.4942daae.chunk.js",
     "static/js/2.4942daae.chunk.js.map": "/wisemen/static/js/2.4942daae.chunk.js.map",
     "index.html": "/wisemen/index.html",
-    "precache-manifest.21294ed42daf7dd98ce3db2100628b06.js": "/wisemen/precache-manifest.21294ed42daf7dd98ce3db2100628b06.js",
+    "precache-manifest.9ab2f5d7641e81105494f33e1a742595.js": "/wisemen/precache-manifest.9ab2f5d7641e81105494f33e1a742595.js",
     "service-worker.js": "/wisemen/service-worker.js",
     "static/css/main.f39e6b6b.chunk.css.map": "/wisemen/static/css/main.f39e6b6b.chunk.css.map",
     "static/js/2.4942daae.chunk.js.LICENSE.txt": "/wisemen/static/js/2.4942daae.chunk.js.LICENSE.txt",
@@ -33,6 +33,6 @@
     "static/js/runtime-main.f2c8196c.js",
     "static/js/2.4942daae.chunk.js",
     "static/css/main.f39e6b6b.chunk.css",
-    "static/js/main.3734434b.chunk.js"
+    "static/js/main.c6068c8c.chunk.js"
   ]
 }

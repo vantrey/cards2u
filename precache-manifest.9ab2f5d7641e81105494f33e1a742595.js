@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d3f142fe99168bf04128faba983a7ffd",
+    "revision": "252a545df32af0d9302cbfff697c3cf8",
     "url": "/wisemen/index.html"
   },
   {
-    "revision": "4f4aa166a855fc28ec06",
+    "revision": "16e893c4c5ba6c8b4753",
     "url": "/wisemen/static/css/main.f39e6b6b.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/wisemen/static/js/2.4942daae.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "4f4aa166a855fc28ec06",
-    "url": "/wisemen/static/js/main.3734434b.chunk.js"
+    "revision": "16e893c4c5ba6c8b4753",
+    "url": "/wisemen/static/js/main.c6068c8c.chunk.js"
   },
   {
     "revision": "323edd54d923fcdce6f1",
