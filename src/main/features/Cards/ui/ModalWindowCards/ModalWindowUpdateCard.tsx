@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import style from './ModalWindowCard.module.css'
 // @ts-ignore
 import Modal from 'react-modal'
+import Input from "../../../../ui/common/Input/Input";
+import Button from "../../../../ui/common/Button/Button";
 
 type ModalUpdateType = {
     onUpdateCard: (_id: string,question: string, answer: string) => void
@@ -39,10 +41,10 @@ const ModalWindowUpdateCard: React.FC<ModalUpdateType> = (props) => {
                 onRequestClose={() => setModalIsOpen(false)}
             >
                 <h2>Change Card</h2>
-                <input name='question' type="text" placeholder={'change your question'} value={question}
-                       onChange={onValueChange}/>
-                <input name='answer' type="text" placeholder={'change your answer'} value={answer}
-                       onChange={onValueChange}/>
+                <Input name='question' type="text" placeholder={'change your question'} value={question}
+                       onChange={onValueChange} register={undefined} errors={undefined}/>
+                <Input name='answer' type="text" placeholder={'change your answer'} value={answer}
+                       onChange={onValueChange} register={undefined} errors={undefined}/>
                 <div className={style.button_modals}>
                     <button className={style.button_yes_no} onClick={UpdateCard}>Change Card</button>
                     <button className={style.button_yes_no} onClick={() => setModalIsOpen(false)}>Cancel</button>
