@@ -64,8 +64,9 @@ export const cardsActions = {
     setFirstPage: (page: number) => ({type: 'CARDS_REDUCER/SET_PAGE', page} as const),
     setCardGradeSuccess: (newCardGrade: NewCardGradeType) => ({
         type: 'CARDS_REDUCER/SET_GRADE_CARD_SUCCESS',
-      newCardGrade
+        newCardGrade
     } as const)
+
 }
 
 type ActionsType = InferActionTypes<typeof cardsActions>
@@ -73,12 +74,12 @@ type ActionsType = InferActionTypes<typeof cardsActions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const get_Cards = (cardsPack_id: string,sortCards=`grade`,direction='1'): ThunkType =>
+export const get_Cards = (cardsPack_id: string, sortCards = `grade`, direction = '0'): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
             dispatch(cardsActions.set_Fetching(true));
             let token = repository.getToken();
-            const res = await cardsApi.getCards(cardsPack_id, token,sortCards+direction);
+            const res = await cardsApi.getCards(cardsPack_id, token, direction + sortCards);
             dispatch(cardsActions.setCards(res.data.cards));
             dispatch(cardsActions.set_Fetching(false));
             dispatch(cardsActions.set_Success(true))
@@ -123,7 +124,7 @@ export const update_Card = ({_id, question, answer}: UpdateCardType, cardsPack_i
         try {
             let token = repository.getToken();
             if (!token) token = ''
-            const res = await cardsApi.updateCard({_id,question, answer}, token);
+            const res = await cardsApi.updateCard({_id, question, answer}, token);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
             dispatch(cardsActions.set_Success(res.data.success))
             dispatch(get_Cards(cardsPack_id))

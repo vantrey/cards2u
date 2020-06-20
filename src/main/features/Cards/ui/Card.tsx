@@ -11,7 +11,7 @@ type CardPropsType = {
     shots: number
     userId: string
     onDeleteCard: (_id: string) => void
-    onUpdateCard: (_id: string,question: string, answer: string) => void
+    onUpdateCard: (_id: string, question: string, answer: string) => void
     _id: string
 }
 
@@ -19,7 +19,7 @@ const Card: React.FC<CardPropsType> = ({...props}) => {
     return (
         <>
             <div className={styles.question}>{props.question}</div>
-        {/*    <div className={styles.answer}>{props.answer}</div>*/}
+            {/*    <div className={styles.answer}>{props.answer}</div>*/}
             <div className={styles.grade}>grade:{props.grade}</div>
             <div className={styles.shots}>shots:{props.shots}</div>
 
