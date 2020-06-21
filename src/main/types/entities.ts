@@ -45,5 +45,21 @@ export type CardPackType = {
   __v: number
 }
 
+export type AddCardType = {
+  cardsPack_id: string
+  question: string,
+  answer: string
+}
+export type UpdateCardType = {
+  _id: string,
+  answer: string,
+  question: string
+}
+export type NewCardGradeType = {
+  _id: string
+  grade: number
+  shots: number
+}
+
 export type UseFormRegisterType = ReturnType<typeof useForm>['register']
 export type UseFormErrorsType = ReturnType<typeof useForm>['errors']

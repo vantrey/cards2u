@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from "../../../../ui/common/Button/Button";
 import {CardType} from "../../../../types/entities";
 import LearnPageBody from "./lernPageBody";
 import LearnPageGrades from "./LernPageGrades";
@@ -8,10 +7,10 @@ type LearnPagePropsType = {
   isShowAnswer: boolean
   setIsShowAnswer: (isShowAnswer: boolean) => void
   card: CardType
-  nextQuestion: () => void
+  onNextQuestion: () => void
   isMyDeck: boolean
   isGraded: boolean
-  setGrade: (e: React.MouseEvent<HTMLButtonElement>) => void
+  onSetGrade: (e: React.MouseEvent<HTMLButtonElement>) => void
   onBackClick: () => void
 }
 
@@ -19,10 +18,10 @@ const LearnPage: React.FC<LearnPagePropsType> = ({
                                                    isShowAnswer,
                                                    card,
                                                    setIsShowAnswer,
-                                                   nextQuestion,
+                                                   onNextQuestion,
                                                    isMyDeck,
                                                    isGraded,
-                                                   setGrade,
+                                                   onSetGrade,
                                                    onBackClick
                                                  }) => {
 
@@ -33,7 +32,7 @@ const LearnPage: React.FC<LearnPagePropsType> = ({
         isShowAnswer={isShowAnswer}
         setIsShowAnswer={setIsShowAnswer}
         card={card}
-        nextQuestion={nextQuestion}
+        onNextQuestion={onNextQuestion}
         isMyDeck={isMyDeck}
         isGraded={isGraded}
       />
@@ -41,7 +40,7 @@ const LearnPage: React.FC<LearnPagePropsType> = ({
       <LearnPageGrades
         isGraded={isGraded}
         isMyDeck={isMyDeck}
-        setGrade={setGrade}
+        onSetGrade={onSetGrade}
       />
 
       <div

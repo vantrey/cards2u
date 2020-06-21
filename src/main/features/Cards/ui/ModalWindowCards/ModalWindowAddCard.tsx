@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import style from './ModalWindowCard.module.css'
 // @ts-ignore
 import Modal from 'react-modal'
+import Button from "../../../../ui/common/Button/Button";
+import Input from "../../../../ui/common/Input/Input";
 
 type ModalCardType = {
     onAddNewCard: (valueQuestion: string,
@@ -9,7 +11,7 @@ type ModalCardType = {
 }
 
 Modal.setAppElement('#root')
-const ModalOnWindowAddCard: React.FC<ModalCardType> = (props) => {
+const ModalWindowAddCard: React.FC<ModalCardType> = (props) => {
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [valueQuestion, setValueQuestion] = useState('')
        const [valueAnswer, setValueAnswer] = useState('')
@@ -32,17 +34,17 @@ const ModalOnWindowAddCard: React.FC<ModalCardType> = (props) => {
 
     return (
         <div className={style.add_Card}>
-            <button className={style.add} onClick={() => setModalIsOpen(true)}>Add Card</button>
+            <Button onClick={() => setModalIsOpen(true)} tittle={'Add'}/>
             <Modal
                 className={style.modal}
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
             >
                 <h2>Add Card</h2>
-                <input name='question' type="text" placeholder={'enter your question'} value={valueQuestion}
-                       onChange={onValueChange}/>
-                <input name='answer' type="text" placeholder={'enter your answer'} value={valueAnswer}
-                       onChange={onValueChange}/>
+                <Input name='question' type="text" placeholder={'enter your question'} value={valueQuestion}
+                       onChange={onValueChange} register={undefined} errors={undefined}/>
+                <Input name='answer' type="text" placeholder={'enter your answer'} value={valueAnswer}
+                       onChange={onValueChange} register={undefined} errors={undefined}/>
                 <div className={style.button_modals}>
                     <button className={style.button_yes_no} onClick={onAddCard}>Create Card</button>
                     <button className={style.button_yes_no} onClick={() => setModalIsOpen(false)}>Cancel</button>
@@ -52,4 +54,4 @@ const ModalOnWindowAddCard: React.FC<ModalCardType> = (props) => {
     )
 }
 
-export default ModalOnWindowAddCard
+export default ModalWindowAddCard

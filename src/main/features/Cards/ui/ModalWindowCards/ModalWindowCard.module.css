@@ -1,6 +1,6 @@
 .modal {
     width: 300px;
-    height: 150px;
+    height: 180px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,14 +14,48 @@
     box-shadow: 0 0 10px 5px rgb(80, 73, 73);
     z-index: 3;
 }
+
 .modal:hover {
-    border:none;
+    border: none;
 }
 
 .add {
-    color: red;
     font-weight: bold;
     cursor: pointer;
+    color: red;
+    width: 60px;
+    margin-top: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 2px;
+    background-color: cornflowerblue;
+    border:2px solid #f59500;
+}
+
+.delete {
+    font-weight: bold;
+    cursor: pointer;
+    color: blue;
+    width: 60px;
+    margin-top: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 2px;
+    background-color: red;
+    border:2px solid greenyellow;
+}
+
+.update {
+    font-weight: bold;
+    cursor: pointer;
+    color: greenyellow;
+    width: 60px;
+    margin-top: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 2px;
+    background-color: green;
+    border:2px solid blue;
 }
 
 .add_Card {
@@ -29,9 +63,24 @@
     justify-content: center;
     align-items: baseline;
 }
+
+.update_Card {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+
+}
+
+.delete_Card {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
 .button_modals {
     margin: 10px;
 }
+
 .button_yes_no {
     display: inline-block;
     color: white;
@@ -46,6 +95,12 @@
     transition: 0.2s;
     margin: 2px;
 }
-.button_yes_no:hover { background: linear-gradient(#f5ae00, #f59500) #f5ae00; }
-.button_yes_no:active { background: linear-gradient(#f59500, #f5ae00) #f59500; }
+
+.button_yes_no:hover {
+    background: linear-gradient(#f5ae00, #f59500) #f5ae00;
+}
+
+.button_yes_no:active {
+    background: linear-gradient(#f59500, #f5ae00) #f59500;
+}
 
