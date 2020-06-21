@@ -12,7 +12,6 @@ const Navbar = ({ toggleBg }) => {
 	const onCloseNavbar = () => {
 		setTimeout( () => {
 			setChecked(false);
-			console.log ("!!!")
 		}, 500);
 	};
 
@@ -22,7 +21,7 @@ const Navbar = ({ toggleBg }) => {
 	return (
 		<div className={classForNavbar}>
 			<nav className={styles.nav}>
-				<input type="checkbox"  defaultChecked={checked}  className={styles.nav__cb} id="menu-cb"/>
+				<input type="checkbox"   checked={checked}  onChange={ () => {setChecked(!checked)}}  className={styles.nav__cb} id="menu-cb"/>
 				<div className={styles.nav__content}>
 					<ul className={styles.nav__items}>
 						<li className={styles.nav__item}>
@@ -31,12 +30,12 @@ const Navbar = ({ toggleBg }) => {
 							</NavLink>
 						</li>
 						<li className={styles.nav__item}>
-							<NavLink to={REGISTRATION_PATH} className={styles.nav__item_text}>
+							<NavLink to={REGISTRATION_PATH} className={styles.nav__item_text}  onClick={onCloseNavbar}>
 								Registration
 							</NavLink>
 						</li>
 						<li className={styles.nav__item}>
-							<NavLink to={RESTORE_PSW_PATH} className={styles.nav__item_text}>
+							<NavLink to={RESTORE_PSW_PATH} className={styles.nav__item_text} onClick={onCloseNavbar}>
 								Restore
 							</NavLink>
 						</li>

@@ -4,7 +4,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
     background-image: url('../../images/cтена-218.png');
     background-size: cover;
     background-repeat: no-repeat;

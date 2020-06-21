@@ -35,9 +35,9 @@ const Main = () => {
 							<Root/>
 						</>
 					}
-					<FormRoutes/>
-					<Menu/>
 				</div>
+			<FormRoutes/>
+			<Menu/>
 
 			{/*<Header/>*/}
 			{/*<Test/>*/}
