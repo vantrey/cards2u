@@ -1,12 +1,15 @@
+import {UserType} from "../../types/entities";
+
 type JSONObjectType = {
     tokenDeathTime: number,
-    token: string|null
+    token: string | null
     user_id: string
+    user: UserType
 }
 
 
 export const repository = {
-    saveToken(token: string|null, tokenDeathTime: number) {
+    saveToken(token: string | null, tokenDeathTime: number) {
         let tokenLS = {
             token, tokenDeathTime
         }
@@ -44,7 +47,26 @@ export const repository = {
         console.log('login error');
         return null;
 
+    },
+
+    save_UserInLS(user: UserType) {
+        const userLS = {
+            user
+        }
+        const userAsString = JSON.stringify(userLS);
+        localStorage.setItem('user', userAsString);
+    },
+    get_UserFromLS() {
+        const getUserLS: string | null = localStorage.getItem('user');
+        if (getUserLS) {
+            console.log('user is success')
+            const objUserFromLS = JSON.parse(getUserLS) as JSONObjectType;
+            return objUserFromLS.user
+        }
+        console.log('not found user');
+        return null;
     }
+
 
 }
 
