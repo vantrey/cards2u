@@ -12,6 +12,7 @@
     transform: 'translate(-40%, -10%)';
     border-radius: 20px;
     box-shadow: 0 0 10px 5px rgb(80, 73, 73);
+    z-index: 3;
 }
 .modal:hover {
     border:none;
