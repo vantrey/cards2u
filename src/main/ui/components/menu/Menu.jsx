@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './Menu.module.css'
 import imgTaverna from '../../images/taverna-shadow2.png';
 import imgPoint from '../../images/point-shadow2.png';
@@ -7,12 +7,15 @@ import imgClose from "../../images/clouse-shadow2.png";
 import Taverna from "./taverna/Taverna";
 
 
-const Menu: React.FC = (): any => {
+const Menu = () => {
+
+    let [ toggleMenu, setMenu ] = useState (false);
+
     return (
         <>
             <div className={styles.menu}>
                 <div className={styles.menu__wrap}>
-                    <div className={styles.menu__taverna}>
+                    <div className={styles.menu__taverna} onClick={ () => setMenu(!toggleMenu)}>
                         <img src={imgTaverna} alt="logo"/>
                     </div>
                     <div className={styles.menu__point}>
@@ -28,7 +31,7 @@ const Menu: React.FC = (): any => {
                 </div>
 
             </div>
-            <Taverna/>
+            <Taverna toggleMenu={toggleMenu}/>
         </>
     )
 }

@@ -2,9 +2,11 @@ import React from 'react';
 import styles from './Taverna.module.css'
 
 
-const Taverna: React.FC = (): any => {
+const Taverna = ({toggleMenu}) => {
+    const classForMenu = toggleMenu === true ? `${styles.taverna__wrap} ${styles.taverna__wrap_active}` : `${styles.taverna__wrap}`;
+
     return (
-        <div className={styles.taverna__wrap}>
+        <div className={ classForMenu }>
             <div className={styles.taverna__left}> </div>
             <div className={styles.taverna__main}>
                 <div className={`${styles.main__item} ${ styles.main__item_pack}`}>
