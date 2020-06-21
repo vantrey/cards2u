@@ -6,6 +6,9 @@
     position: absolute;
     z-index: 200;
     top: 100px;
+    font-family: 'CS Grimrock', sans-serif;
+    font-weight: bold;
+
 
 }
 
@@ -36,7 +39,8 @@
 .main__item {
     display: flex;
     justify-content: center;
-    align-items: center;
+    position: relative;
+    /*align-items: flex-start;*/
     width: 24%;
     border-right: 1px solid #004d40;
     border-left: 1px solid #004d40;
@@ -44,13 +48,27 @@
     -webkit-transform: perspective(1px) translateZ(0);
     transform: perspective(1px) translateZ(0);
     box-shadow: 0 2px 2px #000;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    mix-blend-mode: color-dodge;
+
+    overflow: hidden;
 
 
-    background-color: #088dcd;
     cursor: pointer;
 }
 
-/*==== анимация кнопок в header*/
+.main__item h1 {
+    mix-blend-mode: color-dodge;
+    font-size: 36px;
+    position: absolute;
+    top: 100%;
+    transition: top ease 0.5s;
+
+
+}
+
+/*==== анимация левитации для блоков меню*/
 
 @-webkit-keyframes hvr-bob {
     0% {
@@ -96,32 +114,110 @@
     }
 }
 
-/*.header_buttons__item {*/
-/*    display: inline-block;*/
-/*    vertical-align: middle;*/
-/*    -webkit-transform: perspective(1px) translateZ(0);*/
-/*    transform: perspective(1px) translateZ(0);*/
-/*    box-shadow: 0 0 1px rgba(0, 0, 0, 0);*/
-/*}*/
+
+/*====== */
+
+.main__item_game {
+    background: url("../../../images/menu-green-450-2.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.main__item_card {
+    background: url("../../../images/menu-blue-600.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.main__item_pack {
+    background: url("../../../images/menu-red.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.main__item_home {
+    background: url("../../../images/menu-white-600-1.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/*анимация перехода от чб до цветного*/
+
+
+@keyframes toColour {
+    0% {
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+
+    }
+    25% {
+        -webkit-filter: grayscale(75%);
+        filter: grayscale(75%);
+    }
+    50% {
+        -webkit-filter: grayscale(50%);
+        filter: grayscale(50%);
+    }
+    50% {
+        -webkit-filter: grayscale(25%);
+        filter: grayscale(25%);
+    }
+    100% {
+        -webkit-filter: grayscale(0);
+        filter: grayscale(0);
+    }
+}
+
+/*=====*/
+
 
 .main__item:hover, .main__item:focus {
     -webkit-animation-name: hvr-bob-float, hvr-bob;
-    animation-name: hvr-bob-float, hvr-bob;
+    animation-name: hvr-bob-float, hvr-bob, toColour;
     border-color: transparent;
     box-shadow: 0 8px 8px #000;
 
-    -webkit-animation-duration: .3s, 1.5s;
-    animation-duration: .3s, 1.5s;
-    -webkit-animation-delay: 0s, .3s;
-    animation-delay: 0s, .3s;
-    -webkit-animation-timing-function: ease-out, ease-in-out;
-    animation-timing-function: ease-out, ease-in-out;
-    -webkit-animation-iteration-count: 1, infinite;
-    animation-iteration-count: 1, infinite;
+    -webkit-animation-duration: .3s, 1.5s, 0.7s;
+    animation-duration: .3s, 1.5s, 0.7s;
+    -webkit-animation-delay: 0s, .3s, 0s;
+    animation-delay: 0s, .3s, 0s;
+    -webkit-animation-timing-function: ease-out, ease-in-out, ease-in;
+    animation-timing-function: ease-out, ease-in-out, ease-in;
+    -webkit-animation-iteration-count: 1, infinite, 1;
+    animation-iteration-count: 1, infinite, 1;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
-    -webkit-animation-direction: normal, alternate;
-    animation-direction: normal, alternate;
+    -webkit-animation-direction: normal, alternate, normal;
+    animation-direction: normal, alternate, normal;
+
+
 }
 
-/*====== */
+.main__item:hover h1, .main__item:focus h1 {
+    top: 66%;
+    transition: top ease 0.5s;
+
+}
+
+.main__item_pack h1 {
+    color: #ffb07a;
+
+}
+
+.main__item_card h1 {
+    color: #40c4ff;
+
+}
+
+.main__item_game h1 {
+    color: #4caf50;
+
+}
+
+.main__item_home h1 {
+    color: #3f51b5;
+
+}
+
+/**=====*!*/
