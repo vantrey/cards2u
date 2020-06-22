@@ -8,11 +8,22 @@ const initialState = {
     isSuccess: false,
     errorServerMessage: '',
     isFetching: false,
-    user: {} as UserType
-
+    user: {
+        avatar: '',
+        created: '',
+        email: '',
+        isAdmin: false,
+        name: '',
+        publicCardPacksCount: 0,
+        updated: '',
+        verified: false,
+        _id: ''
+    } as UserType | undefined
 }
 
-export const profileReducer = (state: typeof initialState = initialState, action: ActionsType) => {
+type InitialStateType = typeof initialState
+
+export const profileReducer = (state: typeof initialState = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
 
         case "PROFILE_REDUCER/SET_SUCCESS":
@@ -48,9 +59,9 @@ export const profileReducer = (state: typeof initialState = initialState, action
 }
 
 export const profileActions = {
-    setSuccess: (isSuccess: boolean) => ({type: "PROFILE_REDUCER/SET_SUCCESS", isSuccess} as const),
-    setFetching: (isFetching: boolean) => ({type: 'PROFILE_REDUCER/SET_FETCHING', isFetching} as const),
-    setError: (error: boolean) => ({type: 'PROFILE_REDUCER/SET_ERROR', error} as const),
+    setIsSuccess: (isSuccess: boolean) => ({type: "PROFILE_REDUCER/SET_SUCCESS", isSuccess} as const),
+    setIsFetching: (isFetching: boolean) => ({type: 'PROFILE_REDUCER/SET_FETCHING', isFetching} as const),
+    setErrorFromServer: (error: string) => ({type: 'PROFILE_REDUCER/SET_ERROR', error} as const),
     getUserSuccess: (user: UserType | undefined) => ({type: 'PROFILE_REDUCER/SET_USER_SUCCESS', user} as const)
 }
 type ActionsType = InferActionTypes<typeof profileActions>
@@ -62,18 +73,18 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 export const getUserFromServer = (): ThunkType => async (dispatch: DispatchType, getState: () => AppStateType) => {
     debugger
     try {
-        dispatch(profileActions.setFetching(true))
+        dispatch(profileActions.setIsFetching(true))
         const token = repository.getToken()
         const userId = repository.get_Auth_id()
         const res = await api.getUsers(token, null, null)
         const user = res.users.find(user => user._id === userId)
         dispatch(profileActions.getUserSuccess(user))
-        dispatch(profileActions.setSuccess(true))
-        dispatch(profileActions.setFetching(false))
+        dispatch(profileActions.setIsSuccess(true))
+        dispatch(profileActions.setIsFetching(false))
     } catch (e) {
-        dispatch(profileActions.setError(e.response.data.error))
+        dispatch(profileActions.setErrorFromServer(e.response.data.error))
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
-        dispatch(profileActions.setFetching(false))
+        dispatch(profileActions.setIsFetching(false))
 
     }
 }
