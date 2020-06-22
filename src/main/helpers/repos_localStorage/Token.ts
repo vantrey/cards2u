@@ -49,7 +49,7 @@ export const repository = {
 
     },
 
-    save_UserInLS(user: UserType) {
+    save_UserToLS(user: UserType | undefined) {
         const userLS = {
             user
         }
