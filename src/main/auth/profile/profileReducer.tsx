@@ -77,11 +77,15 @@ export const getUserFromServer = (): ThunkType => async (dispatch: DispatchType,
         const userId = repository.get_Auth_id()
         const res = await api.getUsers(token, 1, 100)
         const user = res.users.find(user => user._id === userId)
+
         if (user) {
             dispatch(profileActions.getUserSuccess(user))
-        } else dispatch(profileActions.getUserSuccess(null))
+            repository.save_UserToLS(user)
+        } else {
+            dispatch(profileActions.getUserSuccess(null))
+            repository.save_UserToLS(null)
+        }
 
-        repository.save_UserToLS(user)
         dispatch(profileActions.setIsSuccess(true))
         dispatch(profileActions.setIsFetching(false))
     } catch (e) {
