@@ -6,6 +6,8 @@ import Menu from './menu/Menu';
 import Intro from "./intro/Intro";
 import Loader from "../common/loader/Loader";
 import FormRoutes from "./routes/FormRoutes";
+import MainRoutes from "./routes/MainRoutes";
+import Profile from "./profile/Profile";
 
 
 const Main = () => {
@@ -34,9 +36,10 @@ const Main = () => {
 						<Root/>
 					}
 				</div>
+			{/*<Profile />*/}
+			<MainRoutes/>
 			<FormRoutes/>
 			<Menu/>
-
 			{/*<Header/>*/}
 			{/*<Test/>*/}
 			{/*<Routs/>*/}

@@ -44,3 +44,10 @@
     height: auto;
     display: block;
 }
+
+.header__link {
+    outline: none;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+}
