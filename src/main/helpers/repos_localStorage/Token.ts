@@ -50,12 +50,13 @@ export const repository = {
     },
 
     save_UserToLS(user: UserType) {
+
         let users = this._get_UsersFromLS();
         if (users) {
             const existingUser = users.find(u => u._id === user._id);
 
             if (existingUser) {
-                users.map(u => {
+               users = users.map(u => {
                     if (user._id === u._id) {
                         return user
                     }
@@ -69,7 +70,7 @@ export const repository = {
             users = [user]
         }
         const userAsString = JSON.stringify(users);
-        localStorage.setItem('user', userAsString);
+        localStorage.setItem('users', userAsString);
     },
 
     _get_UsersFromLS() {

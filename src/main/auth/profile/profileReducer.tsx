@@ -70,6 +70,7 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
 export const getUser = (): ThunkType => async (dispatch: DispatchType, getState: () => AppStateType) => {
     try {
+
         const token = repository.getToken();
         const userId = repository.get_Auth_id();
         let userFromLs: UserType | null = null;
