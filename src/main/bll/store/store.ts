@@ -17,9 +17,9 @@ const rootReducer = combineReducers({
     newPsw: newPswReducer,
     profile: profileReducer,
     cards: CardsReducer,
-  getUserReducer:userReducer,
-  cardPacks: cardPacksReducer,
-  auth:authReducer
+    getUserReducer: userReducer,
+    cardPacks: cardPacksReducer,
+    auth: authReducer
 
 })
 export type AppStateType = ReturnType<typeof rootReducer>
@@ -27,5 +27,5 @@ export type InferActionTypes<T> = T extends { [keys: string]: (...args: any[]) =
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 // @ts-ignore
-window.store  = store
+window.store = store
 export default store

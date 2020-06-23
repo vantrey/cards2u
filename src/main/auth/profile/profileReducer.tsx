@@ -18,7 +18,7 @@ const initialState = {
         updated: '',
         verified: false,
         _id: ''
-    } as UserType | null
+    } as UserType
 }
 
 type InitialStateType = typeof initialState
@@ -48,8 +48,6 @@ export const profileReducer = (state: typeof initialState = initialState, action
             return {
                 ...state,
                 user: action.user
-
-
             }
 
 
@@ -62,7 +60,7 @@ export const profileActions = {
     setIsSuccess: (isSuccess: boolean) => ({type: "PROFILE_REDUCER/SET_SUCCESS", isSuccess} as const),
     setIsFetching: (isFetching: boolean) => ({type: 'PROFILE_REDUCER/SET_FETCHING', isFetching} as const),
     setErrorFromServer: (error: string) => ({type: 'PROFILE_REDUCER/SET_ERROR', error} as const),
-    getUserSuccess: (user: UserType | null) => ({type: 'PROFILE_REDUCER/SET_USER_SUCCESS', user} as const)
+    setUser: (user: UserType) => ({type: 'PROFILE_REDUCER/SET_USER_SUCCESS', user} as const),
 }
 type ActionsType = InferActionTypes<typeof profileActions>
 
@@ -70,28 +68,44 @@ type ActionsType = InferActionTypes<typeof profileActions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const getUserFromServer = (): ThunkType => async (dispatch: DispatchType, getState: () => AppStateType) => {
+export const getUser = (): ThunkType => async (dispatch: DispatchType, getState: () => AppStateType) => {
     try {
-        dispatch(profileActions.setIsFetching(true))
-        const token = repository.getToken()
-        const userId = repository.get_Auth_id()
-        const res = await api.getUsers(token, 1, 100)
-        const user = res.users.find(user => user._id === userId)
+        const token = repository.getToken();
+        const userId = repository.get_Auth_id();
+        let userFromLs: UserType | null = null;
 
-        if (user) {
-            dispatch(profileActions.getUserSuccess(user))
-            repository.save_UserToLS(user)
-        } else {
-            dispatch(profileActions.getUserSuccess(null))
-            repository.save_UserToLS(null)
+        if (userId) {
+            userFromLs = repository.get_UserFromLS(userId)
         }
 
+        if (userFromLs) {
+            dispatch(profileActions.setUser(userFromLs))
+
+        } else {
+            dispatch(profileActions.setIsFetching(true))
+            const res = await api.getUser(token, userId) // userId & token can be null -> server will response error
+            dispatch(profileActions.setUser(res.data.user))
+            repository.save_UserToLS(res.data.user)
+            dispatch(profileActions.setIsFetching(false))
+        }
         dispatch(profileActions.setIsSuccess(true))
-        dispatch(profileActions.setIsFetching(false))
+
     } catch (e) {
         dispatch(profileActions.setErrorFromServer(e.response.data.error))
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
         dispatch(profileActions.setIsFetching(false))
-
+    }
+}
+export const updateUser = (name: string, avatar: string | null = null): ThunkType => async (dispatch: DispatchType) => {
+    try {
+        const token = repository.getToken()
+        const res = await api.updateUser(token, name, avatar)
+        dispatch(profileActions.setUser(res.data.updatedUser))
+        repository.saveToken(res.data.token, res.data.tokenDeathTime);
+        repository.save_UserToLS(res.data.updatedUser)
+    } catch (e) {
+        dispatch(profileActions.setErrorFromServer(e.response.data.error))
+        repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+        dispatch(profileActions.setIsFetching(false))
     }
 }

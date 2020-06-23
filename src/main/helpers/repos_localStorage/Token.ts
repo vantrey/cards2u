@@ -49,14 +49,48 @@ export const repository = {
 
     },
 
-    save_UserToLS(user: UserType | null) {
-        const userLS = {
-            user
+    save_UserToLS(user: UserType) {
+        let users = this._get_UsersFromLS();
+        if (users) {
+            const existingUser = users.find(u => u._id === user._id);
+
+            if (existingUser) {
+                users.map(u => {
+                    if (user._id === u._id) {
+                        return user
+                    }
+                    return u
+                });
+            } else {
+                users.push(user)
+            }
+
+        } else {
+            users = [user]
         }
-        const userAsString = JSON.stringify(userLS);
+        const userAsString = JSON.stringify(users);
         localStorage.setItem('user', userAsString);
     },
-    get_UserFromLS() {
+
+    _get_UsersFromLS() {
+        const users: string | null = localStorage.getItem('users');
+        if (users) {
+            return JSON.parse(users) as Array<UserType>;
+        }
+        return null;
+    },
+
+    get_UserFromLS(userId: string) {
+        const users: string | null = localStorage.getItem('users');
+        if (users) {
+            const usersFromLS = JSON.parse(users) as Array<UserType>;
+            const user = usersFromLS.find(u => u._id === userId)
+            if (user) return user
+        }
+        return null;
+    }
+}
+/*    get_UserFromLS() {
         const getUserLS: string | null = localStorage.getItem('user');
         if (getUserLS) {
             console.log('user is success')
@@ -65,10 +99,9 @@ export const repository = {
         }
         console.log('not found user');
         return null;
-    }
+    }*/
 
 
-}
 
 
 
