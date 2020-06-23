@@ -18,7 +18,7 @@ const ProfileContainer = () => {
 
     useEffect(() => {
         setNameValue(user.name)
-    },[user])
+    }, [user])
 
     const onEditMode = () => {
         setIsEditMode(!isEditMode)
@@ -35,16 +35,20 @@ const ProfileContainer = () => {
 
     return (
         <div className={styles.profile}>
-            {isEditMode &&
+
             <div>
-                <input value={nameValue} onChange={onNameValueChange}/>
-                <button onClick={updateName}>apply</button>
-            </div>
-            }
-            <div>
-                NAME:
-                {user.name}
-                <button onClick={onEditMode}>change</button>
+                {(isEditMode &&
+                    <div>
+                        <input value={nameValue} onChange={onNameValueChange}/>
+                        <button onClick={updateName}>apply</button>
+                        <button onClick={onEditMode}>cancel</button>
+                    </div>) ||
+
+                <div>
+                    NAME:
+                    {user.name}
+                    <button onClick={onEditMode}>change</button>
+                </div>}
             </div>
             <div>
                 EMAIL:

@@ -86,6 +86,7 @@ export const getUser = (): ThunkType => async (dispatch: DispatchType, getState:
             const res = await api.getUser(token, userId) // userId & token can be null -> server will response error
             dispatch(profileActions.setUser(res.data.user))
             repository.save_UserToLS(res.data.user)
+            repository.saveToken(res.data.token, res.data.tokenDeathTime)
             dispatch(profileActions.setIsFetching(false))
         }
         dispatch(profileActions.setIsSuccess(true))
