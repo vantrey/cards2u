@@ -26,8 +26,8 @@
 }
 
 .about__main {
-    width: 1200px;
-    max-width: 1200px;
+    width: 1140px;
+    max-width: 1140px;
     height: 100%;
     display: flex;
     flex-wrap: nowrap;
@@ -35,7 +35,7 @@
     align-items: center;
     flex-direction: column;
 
-    flex-basis: 1200px;
+    flex-basis: 1140px;
     background: url("../../../images/777.jpg");
     background-size: cover;
     background-repeat: no-repeat;

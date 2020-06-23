@@ -3,6 +3,7 @@ import styles from './About.module.css'
 
 
 const About = ({toggleAbout}) => {
+
     const classForAbout = toggleAbout === true ? `${styles.about__wrap} ${styles.about__wrap_active}` : `${styles.about__wrap}`;
 
     return (

@@ -31,9 +31,7 @@ const Main = () => {
 					}
 					{
 						!toggleBg &&
-						<>
-							<Root/>
-						</>
+						<Root/>
 					}
 				</div>
 			<FormRoutes/>
