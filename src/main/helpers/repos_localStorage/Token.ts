@@ -7,7 +7,6 @@ type JSONObjectType = {
     user: UserType
 }
 
-
 export const repository = {
     saveToken(token: string | null, tokenDeathTime: number) {
         let tokenLS = {

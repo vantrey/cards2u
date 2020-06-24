@@ -1,8 +1,8 @@
-import {AppStateType, InferActionTypes} from '../../bll/store/store';
+import {AppStateType, InferActionTypes} from '../../../bll/store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {UserType} from "../../types/entities";
-import {repository} from "../../helpers/repos_localStorage/Token";
-import {api} from "../../dal/api";
+import {UserType} from "../../../types/entities";
+import {repository} from "../../../helpers/repos_localStorage/Token";
+import {api} from "../../../dal/api";
 
 const initialState = {
     isSuccess: false,
@@ -68,7 +68,7 @@ type ActionsType = InferActionTypes<typeof profileActions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const getUser = (): ThunkType => async (dispatch: DispatchType, getState: () => AppStateType) => {
+export const getUser = (): ThunkType => async (dispatch: DispatchType) => {
     try {
 
         const token = repository.getToken();
@@ -101,10 +101,12 @@ export const getUser = (): ThunkType => async (dispatch: DispatchType, getState:
 export const updateUser = (name: string, avatar: string | null = null): ThunkType => async (dispatch: DispatchType) => {
     try {
         const token = repository.getToken()
+        dispatch(profileActions.setIsFetching(true))
         const res = await api.updateUser(token, name, avatar)
         dispatch(profileActions.setUser(res.data.updatedUser))
         repository.saveToken(res.data.token, res.data.tokenDeathTime);
         repository.save_UserToLS(res.data.updatedUser)
+        dispatch(profileActions.setIsFetching(false))
     } catch (e) {
         dispatch(profileActions.setErrorFromServer(e.response.data.error))
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
