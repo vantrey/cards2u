@@ -6,11 +6,11 @@ import Navbar from "../navbar/Navbar";
 import { NavLink } from "react-router-dom";
 import { PROFILE_PATH, ROOT_PATH } from "../routes/MainRoutes";
 
-const Header = ({ setModal, setBg, toggleBg }) => {
+const Header = ({ setModal,  toggleBg }) => {
 
-	const switchBg = () => {
-		setBg (!toggleBg);
-	}
+	// const switchBg = () => {
+	// 	setBg (!toggleBg);
+	// }
 
 	const [ openProfile, setProfile ] = useState (false);
 	let pathProfile = openProfile === false ? PROFILE_PATH : ROOT_PATH;
@@ -19,7 +19,7 @@ const Header = ({ setModal, setBg, toggleBg }) => {
 		<div className={styles.header}>
 			<div className={styles.header__wrap}>
 				<NavLink to={ROOT_PATH} className={styles.header__link}>
-					<div className={styles.header__logo} onClick={switchBg}>
+					<div className={styles.header__logo} >
 						<img src={imgLogo} alt="logo"/>
 					</div>
 				</NavLink>

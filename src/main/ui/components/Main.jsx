@@ -22,7 +22,7 @@ const Main = () => {
 
 	return (
 		<div>
-			<Header setBg={setBg} toggleBg={toggleBg}/>
+			<Header  toggleBg={toggleBg}/>
 				<div className={styles.main__wrap}>
 					{
 						toggleBg &&
