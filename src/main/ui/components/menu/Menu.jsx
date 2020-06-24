@@ -60,7 +60,7 @@ const Menu = () => {
 					</div>
 				</div>
 			</div>
-			<Taverna toggleMenu={toggleMenu}/>
+			<Taverna toggleMenu={toggleMenu} setMenu={setMenu}/>
 			<About toggleAbout={toggleAbout}/>
 		</>
 	)

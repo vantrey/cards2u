@@ -21,15 +21,11 @@ const FormRoutes = () => {
 
     return (
         <>
-
-            {/*<Route path={SET_NEW_PSW__PATH} render={() => <Scroll children={<RestorePswContainer/>} title={'RRRR'}/>}/>*/}
-
             <Route path={LOGIN_PATH} render={() => <Scroll children={<LoginContainer/>} title={'Login'}
                                                            isFetching={isFetchingLogin}/>}/>
             <Route path={REGISTRATION_PATH} render={() => <Scroll children={<RegistrationContainer/>} title={'Registration'}
                                                                   isFetching={isFetchingRegistration}/>}/>
-            <Route path={RESTORE_PSW_PATH} render={() => <Scroll children={<RestorePswContainer/>} title={'Restore pswd'}
-                                                                 isFetching={isFetchingRestorePsw}/>}/>
+            <Route path={RESTORE_PSW_PATH} render={() => <Scroll children={<RestorePswContainer/>} title={'Restore pswd'} isFetching={isFetchingRestorePsw}/>}/>
         </>
     )
 }

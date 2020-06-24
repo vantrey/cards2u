@@ -11,15 +11,15 @@ import poster from '../../images/main-bg.webp'
 const Intro = ({ setBg }) => {
 
 	let [ sound, setSound ] = useState (true);
-	let [ iconFlash, setIconlash ] = useState (false);
+	let [ iconFlash, setIconFlash ] = useState (false);
 
 	useEffect (() => {
 		let vid = document.getElementById ('intro');
 		vid.volume = 0.25;
 		vid.addEventListener ('playing', () => {
-			setIconlash (true);
+			setIconFlash (true);
 			setTimeout (() => {
-				setIconlash (false);
+				setIconFlash (false);
 			}, 3000);
 		}, true);
 
