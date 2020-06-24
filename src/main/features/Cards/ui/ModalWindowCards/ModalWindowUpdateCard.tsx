@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import style from './ModalWindowCard.module.css'
 // @ts-ignore
 import Modal from 'react-modal'
-import Input from "../../../../ui/common/Input/Input";
+import Input from "../../../../ui/common/Input/Input_123";
 import Button from "../../../../ui/common/Button/Button";
 
 type ModalUpdateType = {

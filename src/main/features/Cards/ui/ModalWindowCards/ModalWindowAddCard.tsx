@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import style from './ModalWindowCard.module.css'
 // @ts-ignore
 import Modal from 'react-modal'
-import Button from "../../../../ui/common/Button/Button";
-import Input from "../../../../ui/common/Input/Input";
+import Button from "../../../../ui/common/Button/Button_123";
+import Input from "../../../../ui/common/Input/Input_123";
 
 type ModalCardType = {
     onAddNewCard: (valueQuestion: string,

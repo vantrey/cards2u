@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from "../../../../ui/common/Button/Button";
+import Button from "../../../../ui/common/Button/Button_123";
 
 type LearnPageGradesPropsType = {
   isGraded: boolean
