@@ -46,7 +46,7 @@ const Users: React.FC<UsersPropsType> = (props) => {
                 {props.users.map(u => (
                     <tr key={u._id}>
                         <td>{u._id}</td>
-                        <td><img src={u.avatar} alt='photoUser' height='50px' width={50}/></td>
+                        <td><img className={s.user__avatar} src={u.avatar} alt='photoUser' height='50px' width={50}/></td>
                         <td>{u.name}</td>
                         <td>{u.email}</td>
                         <td>{u.isAdmin}</td>
