@@ -1,23 +1,7 @@
-.newPsw {
-  display: flex;
-  flex-direction: column;
+.form {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  transform: translateX(-50%);
+  overflow: hidden;
 }
-
-.newPsw__form {
-  composes: newPsw;
-  align-items: center;
-}
-
-.newPsw__form_errorMessage {
-  color: red;
-}
-
-.newPsw__form_successMessage {
-  color: blue;
-}
-
-.newPsw__form_button {
-  margin-top: 10px;
-}
-
-

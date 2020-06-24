@@ -7,15 +7,13 @@ type RegistrationPropsType = {
   errorServerMessage: string
   register: UseFormRegisterType
   errors: UseFormErrorsType
-  isFetching: boolean
   onSubmit: () => void
 }
 
-const Registration: React.FC<RegistrationPropsType> = ({isFetching, errorServerMessage, ...props}) => {
+const Registration: React.FC<RegistrationPropsType> = ({ errorServerMessage, ...props}) => {
 
   return <div className={styles.registration}>
     <RegistrationForm {...props}/>
-    {isFetching && <span>...LOADING</span>}
     {errorServerMessage && <div className={styles.registration__form_errorMessage}>{errorServerMessage}</div>}
   </div>
 }

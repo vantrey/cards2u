@@ -1,16 +1,14 @@
 import {AppStateType, InferActionTypes} from "../../bll/store/store";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {api} from "../../dal/api";
-import {repository} from "../../helpers/repos_localStorage/Token";
-
 
 const initialState = {
-  email: null,
-  login: null,
-  isFetching: false,
-  isAuth: false,
-  rememberMe: false,
-  errorServerMessage: '',
+    email: null,
+    login: null,
+    isFetchingLogin: false,
+    isAuth: false,
+    rememberMe: false,
+    errorServerMessage: ''
 }
 type InitialStateType = typeof initialState
 
@@ -29,7 +27,7 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
     case "cards2u/main/auth/IS_FETCHING":
       return {
         ...state,
-        isFetching: action.isFetching
+          isFetchingLogin: action.isFetchingLogin
       }
     default:
       return state
@@ -43,9 +41,9 @@ const loginActions = {
     type: 'cards2u/main/auth/LOGOUT',
     isAuth
   } as const),
-  loginIsFetching: (isFetching: boolean) => ({
+  loginIsFetching: (isFetchingLogin: boolean) => ({
     type: 'cards2u/main/auth/IS_FETCHING',
-    isFetching
+      isFetchingLogin
   } as const),
 
 }
@@ -71,6 +69,6 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
 export const logout = (): ThunkType =>
   (dispatch: DispatchType) => {
     dispatch(loginActions.logoutSuccess(false))
-    repository.saveToken('', 0)
+    repository.saveToken(null, 0)
   }
 
