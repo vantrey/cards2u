@@ -7,4 +7,9 @@
     align-items: center;
     font-family: 'CS Grimrock', sans-serif;
     color: whitesmoke;
+
+    background: url("../../images/game-bg1.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+
 }

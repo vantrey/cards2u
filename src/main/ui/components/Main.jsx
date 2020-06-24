@@ -21,9 +21,9 @@ const Main = () => {
 	}, []);
 
 	return (
-		<div>
+		<>
 			<Header  toggleBg={toggleBg}/>
-				<div className={styles.main__wrap}>
+				<>
 					{
 						toggleBg &&
 						<Intro setBg={setBg}/>
@@ -32,10 +32,10 @@ const Main = () => {
 						!toggleBg &&
 						<MainRoutes/>
 					}
-				</div>
+				</>
 			<FormRoutes/>
 			<Menu/>
-		</div>
+		</>
 	)
 }
 export default Main

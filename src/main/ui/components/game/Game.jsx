@@ -22,6 +22,7 @@ const Game = () => {
 				<span className={classForEffect}>A</span>
 				<span className={classForEffect}>R</span>
 				<span className={classForEffect}>D</span>
+
 			</div>
 
 		</div>

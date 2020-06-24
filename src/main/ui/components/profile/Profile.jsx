@@ -6,7 +6,7 @@ const Profile = () => {
 
 	return (
 		<div className={ styles.profile__wrap}>
-			<div className={styles.profile__main}> 123 </div>
+			<div className={styles.profile__main}> PROFILE </div>
 		</div>
 	)
 }
