@@ -11,7 +11,7 @@ const initialState = {
     rememberMe: false,
     errorServerMessage: '',
     userId: null as string | null
-}
+};
 type InitialStateType = typeof initialState
 
 export const loginReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -20,26 +20,26 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
             return {
                 ...state,
                 isAuth: action.isAuth, userId: action.userId
-            }
+            };
         case "LOGIN_REDUCER/LOGOUT":
             return {
                 ...state,
                 isAuth: false
-            }
+            };
         case "LOGIN_REDUCER/IS_FETCHING":
             return {
                 ...state,
                 isFetchingLogin: action.isFetchingLogin
-            }
+            };
         case "LOGIN_REDUCER/SET_ERROR":
             return {
                 ...state,
                 errorServerMessage: action.error
-            }
+            };
         default:
             return state
     }
-}
+};
 const loginActions = {
     loginAuthMeSuccess: (isAuth: boolean, userId: string | null) => ({
         type: 'LOGIN_REDUCER/LOGIN', isAuth, userId
@@ -55,7 +55,7 @@ const loginActions = {
         isFetchingLogin
     } as const),
 
-}
+};
 type ActionsType = InferActionTypes<typeof loginActions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
@@ -63,24 +63,24 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 export const login = (email: string, password: string, rememberMe: boolean): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
-            dispatch(loginActions.loginIsFetching(true))
-            const result = await api.login(email, password, rememberMe)
+            dispatch(loginActions.loginIsFetching(true));
+            const result = await api.login(email, password, rememberMe);
             dispatch(loginActions.loginAuthMeSuccess(result.data.success, result.data._id));
-            repository.save_Auth_id(result.data._id)
-            repository.saveToken(result.data.token, result.data.tokenDeathTime)
-            dispatch(loginActions.loginIsFetching(false))
+            repository.save_Auth_id(result.data._id);
+            repository.saveToken(result.data.token, result.data.tokenDeathTime);
+            dispatch(loginActions.loginIsFetching(false));
 
         } catch (e) {
-            dispatch(loginActions.setErrorFromServer(e.response.data.error))
-            dispatch(loginActions.loginAuthMeSuccess(false, null))
-            dispatch(loginActions.loginIsFetching(false))
+            dispatch(loginActions.setErrorFromServer(e.response.data.error));
+            dispatch(loginActions.loginAuthMeSuccess(false, null));
+            dispatch(loginActions.loginIsFetching(false));
         }
     };
 
 export const logout = (): ThunkType =>
     (dispatch: DispatchType) => {
-        dispatch(loginActions.logoutSuccess())
-        repository.saveToken(null, 0)
+        dispatch(loginActions.logoutSuccess());
+        repository.saveToken(null, 0);
         repository.save_Auth_id(null)
     };
 
@@ -92,7 +92,7 @@ export const localAuthMe = (): ThunkType =>
         if (token && userId) {
             dispatch(loginActions.loginAuthMeSuccess(true, userId));
         } else {
-            dispatch(loginActions.logoutSuccess())
+            dispatch(loginActions.logoutSuccess());
         }
     };
 
