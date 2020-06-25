@@ -1,8 +1,8 @@
-import {AppStateType, InferActionTypes} from '../../../bll/store/store';
+import {AppStateType, InferActionTypes} from '../../../../bll/store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {UserType} from "../../../types/entities";
-import {repository} from "../../../helpers/repos_localStorage/Token";
-import {api} from "../../../dal/api";
+import {UserType} from "../../../../types/entities";
+import {repository} from "../../../../helpers/repos_localStorage/Token";
+import {api} from "../../../../dal/api";
 
 const initialState = {
     isSuccess: false,

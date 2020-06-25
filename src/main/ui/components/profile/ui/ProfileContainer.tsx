@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Profile.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../../bll/store/store";
+import {AppStateType} from "../../../../bll/store/store";
 import {getUser, updateUser} from "../bll/profileReducer";
 import Profile from "./Profile";
 
@@ -19,7 +19,7 @@ const ProfileContainer = () => {
 
     useEffect(() => {
         setNameValue(user.name)
-    }, [user]);
+    }, [user.name]);
 
     const onEditMode = () => {
         setIsEditMode(!isEditMode)
