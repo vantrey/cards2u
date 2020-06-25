@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Deck_blue.module.css';
+import styles from './Deck_green.module.css';
 import img1 from '../../../images/shirt 2.png'
 
 

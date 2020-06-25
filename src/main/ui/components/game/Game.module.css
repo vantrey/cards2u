@@ -69,10 +69,14 @@
 }
 
 .main__deck {
-    width: 250px;
-    max-width: 250px;
+    /*width: 250px;*/
+    /*max-width: 250px;*/
     max-height: 400px;
     min-height: 300px;
+
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
 }
 .content__buttons {
     width: 100%;

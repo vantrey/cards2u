@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './Deck_blue.module.css';
-import img1 from '../../../images/shirt 2.png'
+import styles from './Deck_yellow.module.css';
+import img1 from '../../../images/shirt-4.png'
 
 
 const Deck_blue = () => {
