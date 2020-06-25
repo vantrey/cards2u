@@ -15,12 +15,10 @@ type LoginFormDataType = {
     email: string
     password: string
     rememberMe: boolean
-    history : any
 }
 
 const LoginContainer: React.FC = () => {
 
-    let history = useHistory();
     const {isAuth, errorServerMessage} = useSelector((state: AppStateType) => state.login)
     const dispatch = useDispatch()
     const {register, handleSubmit, errors, reset} = useForm<LoginFormDataType>({
