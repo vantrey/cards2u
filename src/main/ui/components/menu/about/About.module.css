@@ -36,9 +36,11 @@
     flex-direction: column;
 
     flex-basis: 1140px;
-    background: url("../../../images/777.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: url("../../../images/about-bg-2.png") no-repeat bottom left,
+                  url("../../../images/about-bg-1.png") repeat;
+
+    background-size: auto;
+
 }
 
 .about__main h2 {
