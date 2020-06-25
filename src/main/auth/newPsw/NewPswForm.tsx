@@ -6,33 +6,33 @@ import {UseFormErrorsType, UseFormRegisterType} from "../../types/entities";
 
 
 type NewPswFormPropsType = {
-  register: UseFormRegisterType
-  errors: UseFormErrorsType
-  onSubmit: () => void
+    register: UseFormRegisterType
+    errors: UseFormErrorsType
+    onSubmit: () => void
 }
 
 const NewPswForm: React.FC<NewPswFormPropsType> = ({onSubmit, register, ...props}) => {
-  return <div>
-    <form onSubmit={onSubmit} className={styles.newPsw__form}>
-      <Input
-        register={register}
-        type='password'
-        name='password'
-        {...props}
-        placeholder='new password'
-      />
-      <Input
-        register={register}
-        type='password'
-        name='passwordConfirmation'
-        {...props}
-        placeholder='confirm password'
-      />
-      <div className={styles.newPsw__form_button}>
-        <Button tittle='set new password'/>
-      </div>
-    </form>
-  </div>
+    return (
+        <div>
+            <form onSubmit={onSubmit} className={styles.form}>
+                <Input
+                    register={register}
+                    type='password'
+                    name='password'
+                    {...props}
+                    title={'password'}
+                />
+                <Input
+                    register={register}
+                    type='password'
+                    name='passwordConfirmation'
+                    {...props}
+                    title={'password'}
+                />
+                <Button/>
+            </form>
+        </div>
+    )
 }
 
-export default NewPswForm
+export default NewPswForm;

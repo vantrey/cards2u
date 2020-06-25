@@ -7,7 +7,6 @@ type JSONObjectType = {
     user: UserType
 }
 
-
 export const repository = {
     saveToken(token: string | null, tokenDeathTime: number) {
         let tokenLS = {
@@ -29,7 +28,7 @@ export const repository = {
         console.log('token not valid');
         return null
     },
-    save_Auth_id(user_id: string) {
+    save_Auth_id(user_id: string | null) {
         let idLS = {
             user_id
         }
@@ -49,14 +48,49 @@ export const repository = {
 
     },
 
-    save_UserInLS(user: UserType) {
-        const userLS = {
-            user
+    save_UserToLS(user: UserType) {
+
+        let users = this._get_UsersFromLS();
+        if (users) {
+            const existingUser = users.find(u => u._id === user._id);
+
+            if (existingUser) {
+               users = users.map(u => {
+                    if (user._id === u._id) {
+                        return user
+                    }
+                    return u
+                });
+            } else {
+                users.push(user)
+            }
+
+        } else {
+            users = [user]
         }
-        const userAsString = JSON.stringify(userLS);
-        localStorage.setItem('user', userAsString);
+        const userAsString = JSON.stringify(users);
+        localStorage.setItem('users', userAsString);
     },
-    get_UserFromLS() {
+
+    _get_UsersFromLS() {
+        const users: string | null = localStorage.getItem('users');
+        if (users) {
+            return JSON.parse(users) as Array<UserType>;
+        }
+        return null;
+    },
+
+    get_UserFromLS(userId: string) {
+        const users: string | null = localStorage.getItem('users');
+        if (users) {
+            const usersFromLS = JSON.parse(users) as Array<UserType>;
+            const user = usersFromLS.find(u => u._id === userId)
+            if (user) return user
+        }
+        return null;
+    }
+}
+/*    get_UserFromLS() {
         const getUserLS: string | null = localStorage.getItem('user');
         if (getUserLS) {
             console.log('user is success')
@@ -65,10 +99,9 @@ export const repository = {
         }
         console.log('not found user');
         return null;
-    }
+    }*/
 
 
-}
 
 
 

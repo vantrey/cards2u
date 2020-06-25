@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Root.module.css'
 import videomp4 from '../../video/main-bg-video-20.mp4'
-import videowebm from '../../video/main-bg-video-20.mp4'
+import videowebm from '../../video/main-bg-video-20.webm'
 import soundOf from '../../icons/sound-of.svg'
 import soundOn from '../../icons/sound-on.svg'
-import poster from '../../images/main-bg.png'
+import poster from '../../images/main-bg.webp'
 
 
 const Root = () => {
@@ -45,7 +45,8 @@ const Root = () => {
 					<img src={soundOn} alt='soundOf'/>
 				</div>
 			}
-			We are sorry that you cannot see the video
+			<p>Your browser doesn't support HTML5 video.</p>
+			<p>We are sorry that you cannot see the video.</p>
 		</div>
 	)
 }

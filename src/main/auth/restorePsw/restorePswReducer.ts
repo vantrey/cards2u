@@ -6,7 +6,7 @@ import {api} from "../../dal/api";
 const initialState = {
     isSuccess: false,
     messageAboutError: '',
-    isFetching: false
+    isFetchingRestorePsw: false
 }
 
 type  initialStateType = typeof initialState;
@@ -23,7 +23,7 @@ export const restorePswReducer = (state: initialStateType = initialState, action
         case "RESTORE_PASSWORD_REDUCER/IS_FETCHING":
             return {
                 ...state,
-                isFetching: action.isFetching
+                isFetchingRestorePsw: action.isFetchingRestorePsw
             };
         default:
             return state;
@@ -34,8 +34,8 @@ export const restorePswReducer = (state: initialStateType = initialState, action
 const actions = {
     sendEmail: (isSuccess: boolean, messageAboutError: string) =>
         ({type: "RESTORE_PASSWORD_REDUCER/SEND_EMAIL_SUCCESS", isSuccess, messageAboutError} as const),
-    set_Fetching: (isFetching: boolean) =>
-        ({type: "RESTORE_PASSWORD_REDUCER/IS_FETCHING", isFetching} as const)
+    set_Fetching: (isFetchingRestorePsw: boolean) =>
+        ({type: "RESTORE_PASSWORD_REDUCER/IS_FETCHING", isFetchingRestorePsw} as const)
 }
 
 type ActionsType = InferActionTypes<typeof actions>

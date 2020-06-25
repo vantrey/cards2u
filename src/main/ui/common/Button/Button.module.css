@@ -1,15 +1,17 @@
-.button {
-  height: 30px;
-  border-radius: 1px;
+
+.form__button {
+  background-color: transparent;
+  border: 1px solid #795548;
+  outline: none;
+  padding: 4px 10px;
+  -webkit-transition: all 0.33s ease;
+  transition: all 0.33s ease;
+  font-size: 10px;
 }
 
-.button:focus {
- outline: none;
-}
-
-.buttonTitle {
-  font-size: 100%;
-  font-family: fantasy;
-  font-style: italic;
-  padding: 3px;
+.form__button:hover {
+  background-color: #3e2723;
+  color: wheat;
+  -webkit-transition: all 0.33s ease;
+  transition: all 0.33s ease;
 }

@@ -13,30 +13,29 @@ type RegistrationFormPropsType = {
 
 const RegistrationForm: React.FC<RegistrationFormPropsType> = ({onSubmit, register, ...props}) => {
   return <div>
-    <form onSubmit={onSubmit} className={styles.registration__form}>
+    <form onSubmit={onSubmit} className={styles.form}>
       <Input
         register={register}
         name='email'
         {...props}
-        placeholder='email'
+        type='email'
+        title={'email'}
       />
       <Input
         register={register}
         type='password'
         name='password'
         {...props}
-        placeholder='password'
+        title={'password'}
       />
       <Input
         register={register}
         type='password'
         name='passwordConfirmation'
         {...props}
-        placeholder='confirm password'
+        title={'password'}
       />
-      <div className={styles.registration__form_button}>
-        <Button tittle='sign up free'/>
-      </div>
+        <Button/>
     </form>
   </div>
 }

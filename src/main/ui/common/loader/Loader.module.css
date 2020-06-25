@@ -3,7 +3,7 @@
     height: 19px;
     position: absolute;
     z-index: 130;
-    top: 76%;
+    bottom: 17%;
     left: 49%;
     transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
@@ -11,11 +11,12 @@
     -webkit-transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
 }
+
 .loader > div {
     content: " ";
     width: 12px;
     height: 12px;
-    background: rgb(33,150,243);
+    background: rgb(33, 150, 243);
     border-radius: 100%;
     position: absolute;
     animation: cssload-shift 2.3s linear infinite;
@@ -24,6 +25,7 @@
     -webkit-animation: cssload-shift 2.3s linear infinite;
     -moz-animation: cssload-shift 2.3s linear infinite;
 }
+
 .loader > div:nth-of-type(1) {
     animation-delay: -0.46s;
     -o-animation-delay: -0.46s;
@@ -31,6 +33,7 @@
     -webkit-animation-delay: -0.46s;
     -moz-animation-delay: -0.46s;
 }
+
 .loader > div:nth-of-type(2) {
     animation-delay: -0.92s;
     -o-animation-delay: -0.92s;
@@ -38,6 +41,7 @@
     -webkit-animation-delay: -0.92s;
     -moz-animation-delay: -0.92s;
 }
+
 .loader > div:nth-of-type(3) {
     animation-delay: -1.38s;
     -o-animation-delay: -1.38s;
@@ -45,6 +49,7 @@
     -webkit-animation-delay: -1.38s;
     -moz-animation-delay: -1.38s;
 }
+
 .loader > div:nth-of-type(4) {
     animation-delay: -1.84s;
     -o-animation-delay: -1.84s;
@@ -52,7 +57,6 @@
     -webkit-animation-delay: -1.84s;
     -moz-animation-delay: -1.84s;
 }
-
 
 
 @keyframes cssload-shift {
@@ -80,7 +84,7 @@
     0% {
         left: -58px;
         opacity: 0;
-        background-color: rgb(255,255,0);
+        background-color: rgb(255, 255, 0);
     }
     10% {
         left: 0;
@@ -92,7 +96,7 @@
     }
     100% {
         left: 156px;
-        background-color: rgb(255,0,0);
+        background-color: rgb(255, 0, 0);
         opacity: 0;
     }
 }
@@ -101,7 +105,7 @@
     0% {
         left: -58px;
         opacity: 0;
-        background-color: rgb(255,255,0);
+        background-color: rgb(255, 255, 0);
     }
     10% {
         left: 0;
@@ -113,7 +117,7 @@
     }
     100% {
         left: 156px;
-        background-color: rgb(255,0,0);
+        background-color: rgb(255, 0, 0);
         opacity: 0;
     }
 }
@@ -122,7 +126,7 @@
     0% {
         left: -58px;
         opacity: 0;
-        background-color: rgb(255,255,0);
+        background-color: rgb(255, 255, 0);
     }
     10% {
         left: 0;
@@ -134,7 +138,7 @@
     }
     100% {
         left: 156px;
-        background-color: rgb(255,0,0);
+        background-color: rgb(255, 0, 0);
         opacity: 0;
     }
 }
@@ -143,7 +147,7 @@
     0% {
         left: -58px;
         opacity: 0;
-        background-color: rgb(255,255,0);
+        background-color: rgb(255, 255, 0);
     }
     10% {
         left: 0;
@@ -155,7 +159,7 @@
     }
     100% {
         left: 156px;
-        background-color: rgb(255,0,0);
+        background-color: rgb(255, 0, 0);
         opacity: 0;
     }
 }

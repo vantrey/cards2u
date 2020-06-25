@@ -5,7 +5,7 @@ import {api} from "../../dal/api";
 const initialState = {
   isSuccess: false,
   errorServerMessage: '',
-  isFetching: false
+  isFetchingRegistration: false
 }
 
 export const registrationReducer = (state: typeof initialState = initialState, action: ActionsType) => {
@@ -19,7 +19,7 @@ export const registrationReducer = (state: typeof initialState = initialState, a
     case "REGISTRATION_REDUCER/IS_FETCHING":
       return {
         ...state,
-        isFetching: action.isFetching
+        isFetchingRegistration: action.isFetchingRegistration
       }
     case "REGISTRATION_REDUCER/SET_IS_SUCCESS":
       return {
@@ -37,9 +37,9 @@ export const actions = {
     isSuccess,
     errorServerMessage
   } as const),
-  setIsFetching: (isFetching: boolean) => ({
+  setIsFetching: (isFetchingRegistration: boolean) => ({
     type: 'REGISTRATION_REDUCER/IS_FETCHING',
-    isFetching
+    isFetchingRegistration
   } as const),
   setIsRegistrationSuccess: (isSuccess: boolean) => ({
     type: 'REGISTRATION_REDUCER/SET_IS_SUCCESS',
