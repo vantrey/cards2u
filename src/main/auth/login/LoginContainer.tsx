@@ -6,6 +6,7 @@ import {loginFormSchema} from "./loginFormShema";
 import {login} from "./loginReducer";
 import Login from "./Login";
 import {useHistory} from "react-router";
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -33,7 +34,9 @@ const LoginContainer: React.FC = () => {
     })
 
     if (isAuth) {
-        history.push('/');
+        return (
+            <Redirect to='/'/>
+        )
     }
 
     return <Login
