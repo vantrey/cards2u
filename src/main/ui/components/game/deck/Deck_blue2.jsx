@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './Deck_green.module.css';
-import img1 from '../../../images/shirt 2.png'
+import styles from './Deck_blue2.module.css';
+import img1 from '../../../images/shirt6.png'
 
 
-const Deck_green = () => {
+const Deck_blue2 = () => {
 
 	return (
 		<div className={styles.deck__wrap}>
@@ -18,4 +18,4 @@ const Deck_green = () => {
 		</div>
 	)
 }
-export default Deck_green;
+export default Deck_blue2;
