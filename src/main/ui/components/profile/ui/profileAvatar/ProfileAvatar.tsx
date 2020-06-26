@@ -10,19 +10,19 @@ type ProfilePropsType = {
     updateAvatar: () => void
     onChangeClick: () => void
     isFetching: boolean
-    isShowApply:boolean
+    isShowApply: boolean
 }
 
-const ProfileAvatar: React.FC<ProfilePropsType> = ({
-                                                       user,
-                                                       inRef,
-                                                       upload,
-                                                       newAvatar,
-                                                       updateAvatar,
-                                                       onChangeClick,
-                                                       isFetching,
-                                                       isShowApply,
-                                                   }) => {
+const ProfileAvatar: React.FC<ProfilePropsType> = React.memo(({
+                                                                  user,
+                                                                  inRef,
+                                                                  upload,
+                                                                  newAvatar,
+                                                                  updateAvatar,
+                                                                  onChangeClick,
+                                                                  isFetching,
+                                                                  isShowApply,
+                                                              }) => {
 
     return (
 
@@ -33,7 +33,7 @@ const ProfileAvatar: React.FC<ProfilePropsType> = ({
                     <div className={styles.avatar__avatarImg}>
                         <img alt='avatar' src={newAvatar ? newAvatar : undefined}/>
 
-                        { isShowApply &&
+                        {isShowApply &&
                         <div className={styles.avatarImg__apply}>
                             <button onClick={updateAvatar}>apply</button>
                         </div>}
@@ -72,5 +72,5 @@ const ProfileAvatar: React.FC<ProfilePropsType> = ({
         </div>
 
     )
-}
+});
 export default ProfileAvatar

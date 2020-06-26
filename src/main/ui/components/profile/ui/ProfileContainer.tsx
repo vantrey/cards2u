@@ -5,7 +5,7 @@ import {AppStateType} from "../../../../bll/store/store";
 import {getUser} from "../bll/profileReducer";
 import ProfileAvatarContainer from "./profileAvatar/ProfileAvatarContainer";
 import ProfileInfoContainer from './profileInfo/ProfileInfoContainer';
-import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
+import {withAuthRedirect} from "../../../../features/hoc/withAuthRedirect";
 
 const ProfileContainer = () => {
 
@@ -37,4 +37,4 @@ const ProfileContainer = () => {
         </div>
     )
 };
-export default withAuthRedirect(ProfileContainer)
+export default withAuthRedirect<{}>(ProfileContainer)

@@ -12,7 +12,7 @@ type ProfileInfoPropsType = {
     isFetching: boolean
 }
 
-const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
+const ProfileInfo: React.FC<ProfileInfoPropsType> = React.memo(({
                                                          onEditMode,
                                                          isEditMode,
                                                          nameValue,
@@ -69,5 +69,5 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
             </div>
         </div>
     )
-}
+});
 export default ProfileInfo

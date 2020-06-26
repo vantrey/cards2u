@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
 import {updateUser} from "../../bll/profileReducer";
 import ProfileInfo from "./ProfileInfo";
@@ -9,10 +9,10 @@ type ProfileInfoContainerPropsType = {
     isFetching: boolean
 }
 
-const ProfileInfoContainer: React.FC<ProfileInfoContainerPropsType> = ({
-                                                                           user,
-                                                                           isFetching
-                                                                       }) => {
+const ProfileInfoContainer: React.FC<ProfileInfoContainerPropsType> = React.memo(({
+                                                                                      user,
+                                                                                      isFetching
+                                                                                  }) => {
 
     const dispatch = useDispatch();
 
@@ -24,29 +24,29 @@ const ProfileInfoContainer: React.FC<ProfileInfoContainerPropsType> = ({
         setNameValue(user.name)
     }, [user.name]);
 
-    const onEditMode = () => {
+    const onEditModeCallBack = useCallback(() => {
         setIsEditMode(!isEditMode)
-    };
+    }, [setIsEditMode, isEditMode]);
 
-    const onNameValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onNameValueChangeUseCallBack = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setNameValue(e.currentTarget.value)
-    };
+    }, [setNameValue]);
 
-    const updateName = () => {
+    const updateNameCAllBack = useCallback(() => {
         dispatch(updateUser(nameValue));
         setIsEditMode(false)
-    };
+    }, [dispatch, nameValue, setIsEditMode]);
 
     return (
-                 <ProfileInfo
-                    user={user}
-                    isEditMode={isEditMode}
-                    nameValue={nameValue}
-                    onEditMode={onEditMode}
-                    onNameValueChange={onNameValueChange}
-                    updateName={updateName}
-                    isFetching={isFetching}
-                />
+        <ProfileInfo
+            user={user}
+            isEditMode={isEditMode}
+            nameValue={nameValue}
+            onEditMode={onEditModeCallBack}
+            onNameValueChange={onNameValueChangeUseCallBack}
+            updateName={updateNameCAllBack}
+            isFetching={isFetching}
+        />
     )
-};
+});
 export default ProfileInfoContainer
