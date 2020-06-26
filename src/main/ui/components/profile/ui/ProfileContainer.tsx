@@ -5,6 +5,7 @@ import {AppStateType} from "../../../../bll/store/store";
 import {getUser} from "../bll/profileReducer";
 import ProfileAvatarContainer from "./profileAvatar/ProfileAvatarContainer";
 import ProfileInfoContainer from './profileInfo/ProfileInfoContainer';
+import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
 
 const ProfileContainer = () => {
 
@@ -15,16 +16,19 @@ const ProfileContainer = () => {
         dispatch(getUser())
     }, [dispatch]);
 
+
     return (
         <div className={styles.profile__wrap}>
             <div className={styles.profile__main}>
 
                 <div className={styles.main__body}>
-                    <ProfileInfoContainer
-                    user={user}
-                    isFetching={isFetching}
-                />
+
                     <ProfileAvatarContainer
+                        user={user}
+                        isFetching={isFetching}
+                    />
+
+                    <ProfileInfoContainer
                         user={user}
                         isFetching={isFetching}
                     />
@@ -33,4 +37,4 @@ const ProfileContainer = () => {
         </div>
     )
 };
-export default ProfileContainer
+export default withAuthRedirect(ProfileContainer)

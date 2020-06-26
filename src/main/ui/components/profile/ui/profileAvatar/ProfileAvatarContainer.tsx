@@ -17,6 +17,7 @@ const ProfileAvatarContainer: React.FC<ProfilePropsType> = ({
     const dispatch = useDispatch();
 
     const [newAvatar, setNewAvatar] = useState<string | null>(null);
+    const [isShowApply, setIsShowApply] = useState(false);
 
 
     const inRef = useRef<HTMLInputElement>(null);
@@ -29,7 +30,8 @@ const ProfileAvatarContainer: React.FC<ProfilePropsType> = ({
             reader.readAsDataURL(newFile);
             reader.onloadend = () => {
                 if (typeof reader.result === 'string') {
-                    setNewAvatar(reader.result)
+                    setNewAvatar(reader.result);
+                    setIsShowApply(true);
                 }
             }
         }
@@ -41,16 +43,14 @@ const ProfileAvatarContainer: React.FC<ProfilePropsType> = ({
 
     const updateAvatar = () => {
         dispatch(updateUser(user.name, newAvatar));
-        setNewAvatar(null)
+        setIsShowApply(false)
     };
 
     return (
         <>
-            {(isFetching &&
 
-                <div>
-                    ...LOADING
-                </div>) ||
+
+
 
             <ProfileAvatar
                 upload={upload}
@@ -60,7 +60,8 @@ const ProfileAvatarContainer: React.FC<ProfilePropsType> = ({
                 updateAvatar={updateAvatar}
                 user={user}
                 isFetching={isFetching}
-            />}
+                isShowApply={isShowApply}
+            />
         </>
     )
 }

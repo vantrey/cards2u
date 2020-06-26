@@ -10,6 +10,7 @@ type ProfilePropsType = {
     updateAvatar: () => void
     onChangeClick: () => void
     isFetching: boolean
+    isShowApply:boolean
 }
 
 const ProfileAvatar: React.FC<ProfilePropsType> = ({
@@ -19,7 +20,8 @@ const ProfileAvatar: React.FC<ProfilePropsType> = ({
                                                        newAvatar,
                                                        updateAvatar,
                                                        onChangeClick,
-                                                       isFetching
+                                                       isFetching,
+                                                       isShowApply,
                                                    }) => {
 
     return (
@@ -28,19 +30,31 @@ const ProfileAvatar: React.FC<ProfilePropsType> = ({
 
             <div className={styles.avatarWrap__avatar}>
                 {(newAvatar &&
-                    <div style={{width: '50px', height: '50px'}}>
-                        <img src={newAvatar ? newAvatar : undefined}/>
-                        <button onClick={updateAvatar}>apply</button>
+                    <div className={styles.avatar__avatarImg}>
+                        <img alt='avatar' src={newAvatar ? newAvatar : undefined}/>
+
+                        { isShowApply &&
+                        <div className={styles.avatarImg__apply}>
+                            <button onClick={updateAvatar}>apply</button>
+                        </div>}
+
                     </div>) ||
+
                 (user.avatar &&
                     <div className={styles.avatar__avatarImg}>
                         <img src={user.avatar} alt='avatar'/>
                     </div>) ||
+
                 <div className={styles.avatar__avatarNoImg}>
                     NO AVATAR
                 </div>}
+
                 <div className={styles.avatarWrap__setNewAvatar}>
-                    <button onClick={onChangeClick}>Change</button>
+                    <button
+                        disabled={isFetching}
+                        onClick={onChangeClick}
+                    >Change
+                    </button>
                 </div>
             </div>
 
