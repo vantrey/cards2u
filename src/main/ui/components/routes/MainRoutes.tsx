@@ -21,7 +21,7 @@ const MainRoutes = () => {
         <>
             <Route exact path={ROOT_PATH}  render={() => <Root/>} />
             <Route exact path={PROFILE_PATH} render={() => <Profile />} />
-            <Route exact path={GAME_PATH} render={() => <Game />} />
+            <Route path={GAME_PATH} render={() => <Game />} />
             <Route exact path={CREATE_CARDS_PATH} render={() => <Create />} />
             <Route exact path={FIND_DECK_PATH} render={() => <Find />} />
             <Route exact path={HOME_PATH} render={() => <Home />} />

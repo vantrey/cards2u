@@ -17,7 +17,6 @@
     max-width: 1360px;
     display: flex;
 
-    border: 1px solid darkblue;
 }
 
 .game__left {
@@ -42,7 +41,7 @@
     flex-direction: column;
     width: 80%;
     height: 100%;
-    border: 1px solid green;
+    margin-left: 70px;
 }
 
 .content__header {
@@ -50,12 +49,9 @@
     height: 220px;
     display: flex;
     align-items: center;
-
-
     /*max-height: 150px;*/
     /*min-height: 120px;*/
     /*margin-bottom: 50px;*/
-    border: 1px solid orange;
 }
 
 .header__avatar {
@@ -64,8 +60,10 @@
     border-radius: 50%;
     margin: 0 70px;
     overflow: hidden;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 
-    border: 1px solid red;
 }
 
 .header__info {
@@ -74,12 +72,20 @@
     display: flex;
     flex-direction: column;
 }
+.header__info h3 {
+    text-shadow: 5px 5px 5px  rgba(0,0,0,0.75);
+}
 
 .header__title {
     color: orange;
     text-transform: uppercase;
     margin-top: 15px;
     margin-bottom: 10px;
+}
+
+.header__link {
+    cursor: pointer;
+    outline: none;
 }
 
 .header__decks {
@@ -101,10 +107,7 @@
     -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
     transition: all 0.3s ease;
-
-
     position: relative;
-
 }
 .decks__item:hover {
     transition: all 0.3s ease;
@@ -115,8 +118,6 @@
     box-shadow: 9px 9px 5px 0px rgba(0,0,0,0.75);
 
 }
-
-
 
 .decks__item_1 {
     background: url('../../images/shirt 1.png') no-repeat;
@@ -210,16 +211,7 @@
 
 }
 
-
 /*========*/
-
-
-
-
-
-
-
-
 
 .content__main {
     width: 100%;
@@ -227,7 +219,6 @@
     display: flex;
     align-items: center;
     margin-bottom: 50px;
-    border: 1px solid darkblue;
     z-index: 1;
 }
 
@@ -237,7 +228,6 @@
     max-width: 500px;
     max-height: 400px;
     min-height: 300px;
-    border: 1px solid darkblue;
     margin-right: 80px;
 }
 
