@@ -24,16 +24,19 @@
     flex-grow: 1;
     background: transparent;
 }
+
 .game__right {
     flex-grow: 1;
     background: transparent;
 }
+
 .game__analytics {
     width: 20%;
     max-width: 400px;
     height: 100%;
     border: 1px solid red;
 }
+
 .game__content {
     display: flex;
     flex-direction: column;
@@ -44,11 +47,83 @@
 
 .content__header {
     width: 100%;
-    max-height: 150px;
-    min-height: 120px;
-    margin-bottom: 50px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+
+
+    /*max-height: 150px;*/
+    /*min-height: 120px;*/
+    /*margin-bottom: 50px;*/
     border: 1px solid orange;
 }
+
+.header__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 70px;
+    overflow: hidden;
+
+    border: 1px solid red;
+}
+
+.header__info {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header__title {
+    color: orange;
+    text-transform: uppercase;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.header__decks {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.decks__item {
+    width: 79px;
+    height: 135px;
+    margin: 0 10px;
+    border-radius: 1px;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+
+
+}
+
+.decks__item_1 {
+    background: url('../../images/shirt 1.png') no-repeat;
+    background-size: contain;
+}
+.decks__item_2 {
+    background: url('../../images/shirt 2.png') no-repeat;
+    background-size: contain;
+}
+.decks__item_3 {
+    background: url('../../images/shirt 3.png') no-repeat;
+    background-size: contain;
+}
+.decks__item_4 {
+    background: url('../../images/shirt-4.png') no-repeat;
+    background-size: contain;
+}
+.decks__item_5 {
+    background: url('../../images/shirt5.png') no-repeat;
+    background-size: contain;
+}
+
 .content__main {
     width: 100%;
     height: 50%;
@@ -61,6 +136,7 @@
 
 .main__card {
     width: 500px;
+    min-width: 500px;
     max-width: 500px;
     max-height: 400px;
     min-height: 300px;
@@ -78,18 +154,14 @@
     width: 100%;
     flex-wrap: wrap;
 }
+
 .content__buttons {
     width: 100%;
     min-height: 80px;
+
+
     border: 1px solid orange;
 }
-
-
-
-
-
-
-
 
 
 .game__chat {
