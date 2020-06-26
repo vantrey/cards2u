@@ -19,7 +19,6 @@
     background-size: auto;
     background-repeat: repeat;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -28,3 +27,59 @@
     border: 1px solid red;
 
 }
+
+
+.main__body {
+    display: flex;
+    flex-direction: column;
+    font-size: small;
+}
+
+.body__info {
+    width: 500px;
+    padding: 10px;
+
+
+    border: 1px solid white;
+}
+
+.info__item{
+    padding: 5px;
+}
+
+.body__avatarWrap {
+    padding: 10px;
+
+    border: 1px solid blue;
+}
+
+.avatar__avatarImg {
+    width: 70px;
+}
+
+.avatarWrap__setNewAvatar {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

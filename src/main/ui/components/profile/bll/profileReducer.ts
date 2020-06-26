@@ -98,7 +98,8 @@ export const getUser = (): ThunkType => async (dispatch: DispatchType, getState:
         dispatch(profileActions.setIsFetching(false));
     }
 };
-export const updateUser = (name: string, avatar: string | null = null): ThunkType => async (dispatch: DispatchType) => {
+export const updateUser = (name: string, avatar: string | null = null): ThunkType =>
+    async (dispatch: DispatchType) => {
     try {
         const token = repository.getToken();
         dispatch(profileActions.setIsFetching(true));
