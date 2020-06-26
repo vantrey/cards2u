@@ -75,7 +75,7 @@ export const getUser = (): ThunkType => async (dispatch: DispatchType, getState:
         const userId = getState().login.userId;
         let userFromLs: UserType | null = null;
 
-        if (userId) {
+        if (userId) {  // to prevent userId null
             userFromLs = repository.get_UserFromLS(userId);
         }
 

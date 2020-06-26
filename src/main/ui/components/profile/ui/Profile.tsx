@@ -23,7 +23,7 @@ const Profile: React.FC<ProfilePropsType> = ({
                                              }) => {
 
     return (
-        <div className={ styles.profile__wrap}>
+        <div className={styles.profile__wrap}>
 
             <div className={styles.profile__main}>
                 <div>
@@ -45,8 +45,8 @@ const Profile: React.FC<ProfilePropsType> = ({
                             >
                                 cancel
                             </button>
-                        </div>) ||
-
+                        </div>)
+                    ||
                     <div>
                         NAME:
                         {user.name}
@@ -63,6 +63,10 @@ const Profile: React.FC<ProfilePropsType> = ({
                     {(user.avatar &&
                         <img src={user.avatar} alt='avatar'/>) ||
                     <div> NO AVATAR </div>}
+                </div>
+
+                <div>
+                    <input type='file'/>
                 </div>
 
                 <div>
