@@ -9,6 +9,8 @@ import DecksRoutes, {
 } from "../routes/DecksRoutes";
 import { NavLink } from "react-router-dom";
 import Card from "./card/Card";
+import CardDownside from "./card/CardDownside";
+import Buttons from "./buttons/Buttons";
 
 
 const Game = () => {
@@ -86,12 +88,16 @@ const Game = () => {
 					<div className={styles.content__main}>
 						<div className={styles.main__card}>
 							<Card/>
+							{/*<CardDownside/>*/}
+							<div className={styles.content__buttons}>
+								<Buttons/>
+							</div>
 						</div>
 						<div className={styles.main__deck}>
 							<DecksRoutes/>
 						</div>
 					</div>
-					<div className={styles.content__buttons}>buttons</div>
+
 				</div>
 				{/*<div className={styles.game__chat}>chat</div>*/}
 			</div>
