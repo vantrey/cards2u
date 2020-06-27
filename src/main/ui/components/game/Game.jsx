@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Game.module.css';
-import ava from '../../images/shirt6.png';
+import ava from '../../images/ava.jpg';
 import DecksRoutes, {
 	GAME_PATH_DECK_BLUE, GAME_PATH_DECK_BLUE2,
 	GAME_PATH_DECK_GREEN, GAME_PATH_DECK_GREEN2,
@@ -22,8 +22,13 @@ const Game = () => {
 				<div className={styles.game__analytics}>analytics</div>
 				<div className={styles.game__content}>
 					<div className={styles.content__header}>
-						<div className={styles.header__avatar}>
-							<img src={ava} alt="avatar"/>
+						<div className={styles.header__user}>
+							<div className={styles.user__avatar}>
+								<img src={ava} alt="avatar"/>
+							</div>
+							<div className={styles.user__nick}>
+								<span>Natasha</span>
+							</div>
 						</div>
 						<div className={styles.header__info}>
 							<h3 className={styles.header__title}>your favourite decks</h3>
@@ -87,8 +92,8 @@ const Game = () => {
 					</div>
 					<div className={styles.content__main}>
 						<div className={styles.main__card}>
-							<Card/>
-							{/*<CardDownside/>*/}
+							{/*<Card/>*/}
+							<CardDownside/>
 							<div className={styles.content__buttons}>
 								<Buttons/>
 							</div>
