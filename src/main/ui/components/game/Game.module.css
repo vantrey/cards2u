@@ -1,12 +1,14 @@
 .game__wrap {
     width: 100%;
     height: 100vh;
-    background-color: #607d8b;
+    /*background-color: #607d8b;*/
     font-family: 'CS Grimrock', sans-serif;
     min-width: 100%;
     min-height: 100vh;
     display: flex;
 
+    background: #607d8b url('../../images/game-bg-2.jpg') center center no-repeat;
+    background-size: cover;
 }
 
 .game__container {
@@ -16,6 +18,8 @@
     margin-top: 100px;
     max-width: 1360px;
     display: flex;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(6px);
 
 }
 
@@ -33,7 +37,7 @@
     width: 20%;
     max-width: 400px;
     height: 100%;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 
 .game__content {

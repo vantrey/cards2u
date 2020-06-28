@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Game.module.css';
 import ava from '../../images/ava.jpg';
 import DecksRoutes, {
@@ -14,6 +14,8 @@ import Buttons from "./buttons/Buttons";
 
 
 const Game = () => {
+
+	const [ cardface , setCardFace ] = useState(true);
 
 	return (
 		<div className={styles.game__wrap}>
@@ -92,10 +94,10 @@ const Game = () => {
 					</div>
 					<div className={styles.content__main}>
 						<div className={styles.main__card}>
-							{/*<Card/>*/}
-							<CardDownside/>
+							{ cardface && 	<Card/> }
+							{ !cardface && 	<CardDownside/> }
 							<div className={styles.content__buttons}>
-								<Buttons/>
+								<Buttons setCardFace={setCardFace} cardface={cardface}/>
 							</div>
 						</div>
 						<div className={styles.main__deck}>
