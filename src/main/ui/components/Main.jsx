@@ -14,7 +14,6 @@ const Main = () => {
 
     useEffect(() => {
         dispatch(localAuthMe());
-        console.log("useEffectAuthMe")
     }, [dispatch]);
 
     let [toggleBg, setBg] = useState(true);
