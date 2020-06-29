@@ -24,6 +24,9 @@ const Main = () => {
             setBg(!toggleBg);
         }, true);
 
+        return () => {
+
+        }
     }, []);
 
     return (

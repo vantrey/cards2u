@@ -6,14 +6,16 @@ import bg_4  from './../../images/card-bg/card-bg-4.jpg';
 
 
 let bgArray = [bg_1, bg_2, bg_3, bg_4];
-let maxNumber = bgArray.length;
+export let maxNumber = bgArray.length;
+export let cardBG;
 
-const getRandomInt = ( maxNumber ) => {
-	return Math.floor(Math.random() * (maxNumber + 1)) ;
+export const getRandomBg = ( maxNumber ) => {
+	console.log ("random func")
+	 let number = Math.floor(Math.random() * (maxNumber)) ;
+	cardBG = bgArray[number];
+	console.log (cardBG)
 }
 
-let number = getRandomInt(maxNumber);
+getRandomBg(maxNumber);
 
-console.log (number)
 
-export let cardBG = bgArray[number];

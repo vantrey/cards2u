@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 import Card from "./card/Card";
 import CardDownside from "./card/CardDownside";
 import Buttons from "./buttons/Buttons";
+import { cardBG } from "../../common/random_bg/Random_bg";
 
 
 const Game = () => {
@@ -94,7 +95,7 @@ const Game = () => {
 					</div>
 					<div className={styles.content__main}>
 						<div className={styles.main__card}>
-							{ cardface && 	<Card/> }
+							{ cardface && 	<Card cardBG={cardBG}/> }
 							{ !cardface && 	<CardDownside/> }
 							<div className={styles.content__buttons}>
 								<Buttons setCardFace={setCardFace} cardface={cardface}/>
