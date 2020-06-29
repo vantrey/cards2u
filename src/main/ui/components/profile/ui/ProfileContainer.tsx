@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import styles from './Profile.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../../bll/store/store";
-import {getUser} from "../bll/profileReducer";
+import {getUser} from "../../../../bll/profile/profileReducer";
 import ProfileAvatarContainer from "./profileAvatar/ProfileAvatarContainer";
 import ProfileInfoContainer from './profileInfo/ProfileInfoContainer';
 import {withAuthRedirect} from "../../../../features/hoc/withAuthRedirect";
@@ -13,9 +13,9 @@ const ProfileContainer = () => {
     const {user, isFetching} = useSelector((state: AppStateType) => state.profile);
     const dispatch = useDispatch();
 
-    useEffect(() => {
+/*    useEffect(() => {
         dispatch(getUser())
-    }, [dispatch]);
+    }, [dispatch]);*/
 
 
     return (

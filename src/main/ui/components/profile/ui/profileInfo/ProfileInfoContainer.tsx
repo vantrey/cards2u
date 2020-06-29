@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
-import {updateUser} from "../../bll/profileReducer";
+import {updateUser} from "../../../../../bll/profile/profileReducer";
 import ProfileInfo from "./ProfileInfo";
 import {UserType} from "../../../../../types/entities";
 

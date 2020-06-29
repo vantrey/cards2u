@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useCallback, useRef, useState} from 'react';
 import {UserType} from "../../../../../types/entities";
 import {useDispatch} from "react-redux";
-import {updateUser} from "../../bll/profileReducer";
+import {updateUser} from "../../../../../bll/profile/profileReducer";
 import ProfileAvatar from "./ProfileAvatar";
 import MyEditor from "../avaEditor/AvaEditor";
 
