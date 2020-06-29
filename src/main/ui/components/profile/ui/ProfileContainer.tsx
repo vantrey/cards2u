@@ -6,6 +6,7 @@ import {getUser} from "../bll/profileReducer";
 import ProfileAvatarContainer from "./profileAvatar/ProfileAvatarContainer";
 import ProfileInfoContainer from './profileInfo/ProfileInfoContainer';
 import {withAuthRedirect} from "../../../../features/hoc/withAuthRedirect";
+import FeedbackContainer from "./feedBack/FeedbackContainer";
 
 const ProfileContainer = () => {
 
@@ -32,6 +33,9 @@ const ProfileContainer = () => {
                         user={user}
                         isFetching={isFetching}
                     />
+
+                    <FeedbackContainer/>
+
                 </div>
             </div>
         </div>

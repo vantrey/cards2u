@@ -3,6 +3,8 @@ import {UserType} from "../../../../../types/entities";
 import {useDispatch} from "react-redux";
 import {updateUser} from "../../bll/profileReducer";
 import ProfileAvatar from "./ProfileAvatar";
+import MyEditor from "../../Profile";
+
 
 type ProfilePropsType = {
     user: UserType
@@ -61,9 +63,14 @@ const ProfileAvatarContainer: React.FC<ProfilePropsType> = React.memo(({
                 isFetching={isFetching}
                 isShowApply={isShowApply}
             />
+            {/*<MyEditor/>*/}
         </>
     )
 });
+
+
+
+
 
 
 export default ProfileAvatarContainer;
