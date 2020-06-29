@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import {updateUser} from "../../bll/profileReducer";
 import ProfileAvatar from "./ProfileAvatar";
 import MyEditor from "../../Profile";
+import any = jasmine.any;
 
 
 type ProfilePropsType = {
@@ -21,12 +22,16 @@ const ProfileAvatarContainer: React.FC<ProfilePropsType> = React.memo(({
     const [newAvatar, setNewAvatar] = useState<string | null>(null);
     const [isShowApply, setIsShowApply] = useState(false);
 
+    const [file, setFile] = useState()
+
 
     const inRef = useRef<HTMLInputElement>(null);
 
     const uploadCallback = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const reader = new FileReader();
         const newFile = e.target.files && e.target.files[0];
+
+        setFile(newFile)
 
         if (newFile) {
             reader.onloadend = () => {
@@ -63,7 +68,7 @@ const ProfileAvatarContainer: React.FC<ProfilePropsType> = React.memo(({
                 isFetching={isFetching}
                 isShowApply={isShowApply}
             />
-            {/*<MyEditor/>*/}
+            <MyEditor img64={newAvatar} file={file}/>
         </>
     )
 });
