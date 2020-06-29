@@ -68,48 +68,48 @@ type ActionsType = InferActionTypes<typeof profileActions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const getUser = (): ThunkType => async (dispatch: DispatchType) => {
+export const getUser = (): ThunkType => async (dispatch: DispatchType, getState: () => AppStateType) => {
     try {
 
         const token = repository.getToken();
-        const userId = repository.get_Auth_id();
+        const userId = getState().login.userId;
         let userFromLs: UserType | null = null;
 
         if (userId) {
-            userFromLs = repository.get_UserFromLS(userId)
+            userFromLs = repository.get_UserFromLS(userId);
         }
 
         if (userFromLs) {
-            dispatch(profileActions.setUser(userFromLs))
+            dispatch(profileActions.setUser(userFromLs));
 
         } else {
-            dispatch(profileActions.setIsFetching(true))
-            const res = await api.getUser(token, userId) // userId & token can be null -> server will response error
-            dispatch(profileActions.setUser(res.data.user))
-            repository.save_UserToLS(res.data.user)
-            repository.saveToken(res.data.token, res.data.tokenDeathTime)
-            dispatch(profileActions.setIsFetching(false))
+            dispatch(profileActions.setIsFetching(true));
+            const res = await api.getUser(token, userId);// userId & token can be null -> server will response error
+            dispatch(profileActions.setUser(res.data.user));
+            repository.save_UserToLS(res.data.user);
+            repository.saveToken(res.data.token, res.data.tokenDeathTime);
+            dispatch(profileActions.setIsFetching(false));
         }
-        dispatch(profileActions.setIsSuccess(true))
+        dispatch(profileActions.setIsSuccess(true));
 
     } catch (e) {
-        dispatch(profileActions.setErrorFromServer(e.response.data.error))
+        dispatch(profileActions.setErrorFromServer(e.response.data.error));
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
-        dispatch(profileActions.setIsFetching(false))
+        dispatch(profileActions.setIsFetching(false));
     }
-}
+};
 export const updateUser = (name: string, avatar: string | null = null): ThunkType => async (dispatch: DispatchType) => {
     try {
-        const token = repository.getToken()
-        dispatch(profileActions.setIsFetching(true))
-        const res = await api.updateUser(token, name, avatar)
-        dispatch(profileActions.setUser(res.data.updatedUser))
+        const token = repository.getToken();
+        dispatch(profileActions.setIsFetching(true));
+        const res = await api.updateUser(token, name, avatar);
+        dispatch(profileActions.setUser(res.data.updatedUser));
         repository.saveToken(res.data.token, res.data.tokenDeathTime);
-        repository.save_UserToLS(res.data.updatedUser)
-        dispatch(profileActions.setIsFetching(false))
+        repository.save_UserToLS(res.data.updatedUser);
+        dispatch(profileActions.setIsFetching(false));
     } catch (e) {
-        dispatch(profileActions.setErrorFromServer(e.response.data.error))
+        dispatch(profileActions.setErrorFromServer(e.response.data.error));
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
-        dispatch(profileActions.setIsFetching(false))
+        dispatch(profileActions.setIsFetching(false));
     }
-}
+};

@@ -28,7 +28,7 @@ export const repository = {
         console.log('token not valid');
         return null
     },
-    save_Auth_id(user_id: string) {
+    save_Auth_id(user_id: string | null) {
         let idLS = {
             user_id
         }
