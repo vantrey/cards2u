@@ -1,16 +1,18 @@
 import React from 'react';
 import {UserType} from "../../../../../types/entities";
 import styles from "../Profile.module.css"
+import AvaEditor from "../avaEditor/AvaEditor";
 
 type ProfilePropsType = {
     user: UserType
     inRef: React.RefObject<HTMLInputElement>
     upload: (e: React.ChangeEvent<HTMLInputElement>) => void
     newAvatar: string | null
-    updateAvatar: () => void
+    updateAvatar: (newAvatarScaled: string) => void
     onChangeClick: () => void
     isFetching: boolean
-    isShowApply: boolean
+    isShowAvaEditor: boolean
+    cancelAvaEditor: () => void
 }
 
 const ProfileAvatar: React.FC<ProfilePropsType> = React.memo(({
@@ -21,7 +23,8 @@ const ProfileAvatar: React.FC<ProfilePropsType> = React.memo(({
                                                                   updateAvatar,
                                                                   onChangeClick,
                                                                   isFetching,
-                                                                  isShowApply,
+                                                                  isShowAvaEditor,
+                                                                  cancelAvaEditor,
                                                               }) => {
 
     return (
@@ -29,14 +32,19 @@ const ProfileAvatar: React.FC<ProfilePropsType> = React.memo(({
         <div className={styles.body__avatarWrap}>
 
             <div className={styles.avatarWrap__avatar}>
-                {(newAvatar &&
+                {(newAvatar && !isShowAvaEditor &&
+
                     <div className={styles.avatar__avatarImg}>
                         <img alt='avatar' src={newAvatar ? newAvatar : undefined}/>
+                    </div>) ||
 
-                        {isShowApply &&
-                        <div className={styles.avatarImg__apply}>
-                            <button onClick={updateAvatar}>apply</button>
-                        </div>}
+                (isShowAvaEditor &&
+                    <div className={styles.avatarImg__apply}>
+                        <AvaEditor
+                            cancelAvaEditor={cancelAvaEditor}
+                            updateAvatar={updateAvatar}
+                            newAvatar={newAvatar}
+                        />
 
                     </div>) ||
 
@@ -50,11 +58,13 @@ const ProfileAvatar: React.FC<ProfilePropsType> = React.memo(({
                 </div>}
 
                 <div className={styles.avatarWrap__setNewAvatar}>
-                    <button
-                        disabled={isFetching}
-                        onClick={onChangeClick}
-                    >Change
-                    </button>
+
+                    { !isShowAvaEditor &&
+                        <button
+                            disabled={isFetching}
+                            onClick={onChangeClick}
+                        >Change
+                        </button>}
                 </div>
             </div>
 

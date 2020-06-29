@@ -3,8 +3,7 @@ import {UserType} from "../../../../../types/entities";
 import {useDispatch} from "react-redux";
 import {updateUser} from "../../bll/profileReducer";
 import ProfileAvatar from "./ProfileAvatar";
-import MyEditor from "../../Profile";
-import any = jasmine.any;
+import MyEditor from "../avaEditor/AvaEditor";
 
 
 type ProfilePropsType = {
@@ -19,11 +18,8 @@ const ProfileAvatarContainer: React.FC<ProfilePropsType> = React.memo(({
 
     const dispatch = useDispatch();
 
-    const [newAvatar, setNewAvatar] = useState<string | null>(null);
-    const [isShowApply, setIsShowApply] = useState(false);
-
-    const [file, setFile] = useState()
-
+    const [newAvatar, setNewAvatar] = useState<string | null>(null); // base 64
+    const [isShowAvaEditor, setIsShowAvaEditor] = useState(false);
 
     const inRef = useRef<HTMLInputElement>(null);
 
@@ -31,29 +27,31 @@ const ProfileAvatarContainer: React.FC<ProfilePropsType> = React.memo(({
         const reader = new FileReader();
         const newFile = e.target.files && e.target.files[0];
 
-        setFile(newFile)
-
         if (newFile) {
             reader.onloadend = () => {
                 if (typeof reader.result === 'string') {
                     setNewAvatar(reader.result);
-                    setIsShowApply(true);
+                    setIsShowAvaEditor(true);
                 }
             };
             reader.readAsDataURL(newFile);
         }
-    }, [setNewAvatar, setIsShowApply]); // ??
-
+    }, [setNewAvatar, setIsShowAvaEditor]);
 
     const onChangeClickCallBack = useCallback(() => {
         inRef && inRef.current && inRef.current.click()
-    }, [inRef]);  //??
+    }, [inRef]);
 
+    const updateAvatarCallBack = useCallback((newAvatarScaled: string) => {
+        setNewAvatar(newAvatarScaled);
+        dispatch(updateUser(user.name, newAvatarScaled));
+        setIsShowAvaEditor(false);
+    }, [user.name, newAvatar]);
 
-    const updateAvatarCallBack = useCallback(() => {
-        dispatch(updateUser(user.name, newAvatar));
-        setIsShowApply(false)
-    }, [user.name, newAvatar]); //??
+    const cancelAvaEditor = useCallback(() => {
+        setNewAvatar(user.avatar);
+        setIsShowAvaEditor(false);
+    }, [setIsShowAvaEditor]);
 
 
     return (
@@ -66,9 +64,9 @@ const ProfileAvatarContainer: React.FC<ProfilePropsType> = React.memo(({
                 updateAvatar={updateAvatarCallBack}
                 user={user}
                 isFetching={isFetching}
-                isShowApply={isShowApply}
+                isShowAvaEditor={isShowAvaEditor}
+                cancelAvaEditor={cancelAvaEditor}
             />
-            <MyEditor img64={newAvatar} file={file}/>
         </>
     )
 });
