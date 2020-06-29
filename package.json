@@ -17,6 +17,7 @@
     "gh-pages": "^2.2.0",
     "lodash": "^4.17.15",
     "normalize.css": "^8.0.1",
+    "radium": "^0.26.0",
     "react": "^16.13.1",
     "react-avatar-editor": "^11.0.9",
     "react-dom": "^16.13.1",

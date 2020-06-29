@@ -4,9 +4,9 @@
     height: 100%;
     cursor: pointer;
     font-family: 'CS Grimrock', sans-serif;
-    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
 .card {
@@ -51,7 +51,7 @@
 }
 
 .card:before {
-    background-image: url('../../../images/card-bg/card-bg-1.jpg');
+    /*background-image: url('../../../images/card-bg/card-bg-1.jpg');*/
 }
 
 .card__content {

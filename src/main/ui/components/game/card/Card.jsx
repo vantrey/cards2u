@@ -1,12 +1,25 @@
 import React from 'react';
 import styles from './Card.module.css';
 
+import Radium from 'radium';
+import { cardBG } from "../../../common/random_bg/Random_bg";
 
-const Card = () => {
+
+let Card = () => {
+
+	let stylesRadium = {
+		card: {
+			':before': {
+				backgroundImage: 'url('+ cardBG +')'
+			}
+		}
+	}
+
+	console.log (cardBG)
 
 	return (
 		<div className={styles.card__wrap}>
-			<div className={styles.card}>
+			 <div className={styles.card}  style={ stylesRadium.card }>
 				<div className={styles.card__content}>
 					<h2 className={styles.card__title}>Mountain View</h2>
 					<p className={styles.card__text}>Check out all of these gorgeous mountain trips with beautiful views
@@ -18,4 +31,9 @@ const Card = () => {
 		</div>
 	)
 }
+
+
+Card = Radium (Card);
+
+
 export default Card;
