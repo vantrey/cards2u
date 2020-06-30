@@ -1,6 +1,6 @@
 import {AppStateType, InferActionTypes} from '../store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {UserType} from "../../types/entities";
+import {CardType, UserFavoriteDecks, UserType} from "../../types/entities";
 import {repository} from "../../helpers/repos_localStorage/Token";
 import {api} from "../../dal/api";
 
@@ -18,8 +18,9 @@ const initialState = {
         updated: '',
         verified: false,
         _id: ''
-    } as UserType
-}
+    } as UserType,
+    userFavoriteDecks: {} as UserFavoriteDecks
+};
 
 type InitialStateType = typeof initialState
 
@@ -113,4 +114,5 @@ export const updateUser = (name: string, avatar: string | null = null): ThunkTyp
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
         dispatch(profileActions.setIsFetching(false));
     }
+
 };
