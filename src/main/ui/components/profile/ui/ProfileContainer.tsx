@@ -13,11 +13,6 @@ const ProfileContainer = () => {
     const {user, isFetching} = useSelector((state: AppStateType) => state.profile);
     const dispatch = useDispatch();
 
-/*    useEffect(() => {
-        dispatch(getUser())
-    }, [dispatch]);*/
-
-
     return (
         <div className={styles.profile__wrap}>
             <div className={styles.profile__main}>
