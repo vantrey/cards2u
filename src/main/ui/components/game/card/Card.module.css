@@ -67,10 +67,6 @@
     transition: transform calc(700ms * 2) cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-/*.card:before {*/
-/*    background-image: url('../../../images/card-bg/card-bg-1.jpg');*/
-/*}*/
-
 .card__content {
     position: relative;
     display: flex;
