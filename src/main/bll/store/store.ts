@@ -4,7 +4,7 @@ import {loginReducer} from "../../auth/login/loginReducer";
 import {registrationReducer} from "../../auth/registration/registrationReducer";
 import {restorePswReducer} from "../../auth/restorePsw/restorePswReducer";
 import {newPswReducer} from "../../auth/newPsw/newPswReducer";
-import {profileReducer} from "../../auth/profile/bll/profileReducer";
+import {profileReducer} from "../profile/profileReducer";
 import {CardsReducer} from "../../features/Cards/bll/cardsReducer";
 import {userReducer} from "../../features/users/bll/UserReducer";
 import {cardPacksReducer} from "../../features/cardsPacks/bll/cardPacksReducer";

@@ -1,8 +1,8 @@
-import {AppStateType, InferActionTypes} from '../../../bll/store/store';
+import {AppStateType, InferActionTypes} from '../store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {UserType} from "../../../types/entities";
-import {repository} from "../../../helpers/repos_localStorage/Token";
-import {api} from "../../../dal/api";
+import {UserType} from "../../types/entities";
+import {repository} from "../../helpers/repos_localStorage/Token";
+import {api} from "../../dal/api";
 
 const initialState = {
     isSuccess: false,
@@ -75,7 +75,7 @@ export const getUser = (): ThunkType => async (dispatch: DispatchType, getState:
         const userId = getState().login.userId;
         let userFromLs: UserType | null = null;
 
-        if (userId) {
+        if (userId) {  // to prevent userId null
             userFromLs = repository.get_UserFromLS(userId);
         }
 
@@ -98,7 +98,8 @@ export const getUser = (): ThunkType => async (dispatch: DispatchType, getState:
         dispatch(profileActions.setIsFetching(false));
     }
 };
-export const updateUser = (name: string, avatar: string | null = null): ThunkType => async (dispatch: DispatchType) => {
+export const updateUser = (name: string, avatar: string | null = null): ThunkType =>
+    async (dispatch: DispatchType) => {
     try {
         const token = repository.getToken();
         dispatch(profileActions.setIsFetching(true));
