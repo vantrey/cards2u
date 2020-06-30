@@ -17,10 +17,19 @@ const Root = () => {
 		vid.volume = 0.4;
 		vid.addEventListener ('playing', () => {
 			setIconlash (true);
-			setTimeout (() => {
+			let IDtime= setTimeout (() => {
 				setIconlash (false);
 			}, 3000);
 		}, true);
+
+		return () => {
+			vid.removeEventListener ('playing', () => {
+				setIconlash (true);
+				setTimeout (() => {
+					setIconlash (false);
+				}, 3000);
+			}, true);
+		}
 
 	}, []);
 

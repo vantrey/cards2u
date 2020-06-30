@@ -25,6 +25,9 @@ const Main = () => {
         }, true);
 
         return () => {
+            vid.removeEventListener('ended', () => {
+                setBg(!toggleBg);
+            }, true);
 
         }
     }, []);
@@ -35,7 +38,7 @@ const Main = () => {
             <>
                 {
                     toggleBg &&
-                    <Intro setBg={setBg}/>
+                    <Intro setBg={setBg} toggleBg={toggleBg} />
                 }
                 {
                     !toggleBg &&

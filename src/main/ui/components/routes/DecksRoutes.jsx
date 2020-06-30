@@ -16,16 +16,17 @@ export const GAME_PATH_DECK_GREEN2 = '/game/deckgreen2';
 export const GAME_PATH_DECK_BLUE2 = '/game/deckblue2';
 
 
-const DecksRoutes = () => {
+
+const DecksRoutes = ({ setCardBg }) => {
 
     return (
         <>
-            <Route exact path={GAME_PATH_DECK_BLUE} render={() => <Deck_blue/>}/>
-            <Route exact path={GAME_PATH_DECK_BLUE2} render={() => <Deck_blue2/>}/>
-            <Route exact path={GAME_PATH_DECK_GREEN} render={() => <Deck_green/>}/>
-            <Route exact path={GAME_PATH_DECK_GREEN2} render={() => <Deck_green2/>}/>
-            <Route exact path={GAME_PATH_DECK_RED} render={() => <Deck_red/>}/>
-            <Route exact path={GAME_PATH_DECK_YELLOW} render={() => <Deck_yellow/>}/>
+            <Route exact path={GAME_PATH_DECK_BLUE} render={() => <Deck_blue setCardBg={setCardBg}/>} />
+            <Route exact path={GAME_PATH_DECK_BLUE2} render={() => <Deck_blue2 setCardBg={setCardBg}/>} />
+            <Route exact path={GAME_PATH_DECK_GREEN} render={() => <Deck_green setCardBg={setCardBg}/>}/>
+            <Route exact path={GAME_PATH_DECK_GREEN2} render={() => <Deck_green2 setCardBg={setCardBg}/>}/>
+            <Route exact path={GAME_PATH_DECK_RED} render={() => <Deck_red setCardBg={setCardBg}/>}/>
+            <Route exact path={GAME_PATH_DECK_YELLOW} render={() => <Deck_yellow setCardBg={setCardBg}/>}/>
         </>
     )
 }

@@ -23,7 +23,20 @@
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1);
 }
 
-.card:before {
+/*.card:before {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 110%;*/
+/*    background-size: cover;*/
+/*    background-position: 0 0;*/
+/*    transition: transform calc(700ms * 1.5) cubic-bezier(0.19, 1, 0.22, 1);*/
+/*    pointer-events: none;*/
+/*}*/
+/*--------------------*/
+.card .card__background {
     content: '';
     position: absolute;
     top: 0;
@@ -36,6 +49,10 @@
     pointer-events: none;
 }
 
+.card:hover .card__background {
+    transform: translateY(-7%);
+}
+/*-----------------------*/
 .card:after {
     content: '';
     display: block;
@@ -92,17 +109,23 @@
     letter-spacing: 0.025rem;
     text-transform: uppercase;
     color: white;
-    background-color: black;
+    background-color: transparent;
     border: none;
+    outline: none;
+    border-bottom: 1px solid whitesmoke;
+    transition: all 0.5s ease;
 }
 
 .card__btn:hover {
-    background-color: #0d0d0d;
+    color: orange;
+    border-bottom: 1px solid orange;
+    background-color: transparent;
+    transition: all 0.5s ease;
 }
 
 .card__btn:focus {
-    outline: 1px dashed yellow;
-    outline-offset: 3px;
+    color: orange;
+    border-bottom: 1px solid orange;
 }
 
 

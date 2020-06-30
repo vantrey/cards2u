@@ -4,12 +4,11 @@ import img1 from '../../../images/shirt 1.png'
 import { cardBG, getRandomBg, maxNumber } from "../../../common/random_bg/Random_bg";
 
 
-
-const Deck_blue = () => {
+const Deck_blue = ({ setCardBg }) => {
 
 	const onChangeBG = () => {
 		getRandomBg (maxNumber);
-		console.log (cardBG)
+		setCardBg(cardBG);
 	}
 
 	return (

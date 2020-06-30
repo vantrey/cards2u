@@ -61,6 +61,12 @@
     box-shadow: 0 0 0 -.25rem #1f5e25;
 }
 
+.buttons__group button:focus, .buttons__group button:active {
+    outline: none;
+}
+.buttons__group button:active {
+    transform: translate(1px, 1px);
+}
 .buttons__group button:hover {
     background: red;
     color: black;
