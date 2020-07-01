@@ -1,4 +1,4 @@
-import {CardPackType, CardType, UserFavoriteDecks, UserType} from "../../types/entities";
+import {CardPackType, CardType, UserFavoriteDecksType, UserType} from "../../types/entities";
 
 type JSONObjectType = {
     tokenDeathTime: number,
@@ -93,7 +93,7 @@ export const repository = {
     get_UserFavoriteDecksFromLS(userId: string) {
         const allFavoriteDecks: string | null = localStorage.getItem('allFavoriteDecks');
         if (allFavoriteDecks) {
-            const allFavoriteDecksFromLS = JSON.parse(allFavoriteDecks) as Array<UserFavoriteDecks>;
+            const allFavoriteDecksFromLS = JSON.parse(allFavoriteDecks) as Array<UserFavoriteDecksType>;
 
             const userFavoriteDecks = allFavoriteDecksFromLS.find(ufds => ufds.userId === userId);
 
@@ -105,7 +105,7 @@ export const repository = {
     _get_AllFavoriteDecksFromLS() {
         const allFavoriteDecks: string | null = localStorage.getItem('allFavoriteDecks');
         if (allFavoriteDecks) {
-            return JSON.parse(allFavoriteDecks) as Array<UserFavoriteDecks>;
+            return JSON.parse(allFavoriteDecks) as Array<UserFavoriteDecksType>;
         }
         return null;
     },
