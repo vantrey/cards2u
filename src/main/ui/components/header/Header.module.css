@@ -31,6 +31,7 @@
 }
 
 .header__home {
+    position: relative;
     display: flex;
     align-items: center;
     width: 40px;
@@ -51,3 +52,72 @@
     padding: 0;
     margin: 0;
 }
+
+
+/*===== стили для tooltip*/
+.tooltip {
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    justify-content: center;
+    z-index: 300;
+    opacity: .40;
+    /*padding: 3px;*/
+    background: #393939;
+    color: #088dcd;
+    position: absolute;
+    font-size: 10px;
+    box-sizing: border-box;
+    transform: translateY(9px);
+    transition: all 0.3s ease-in-out;
+
+    box-shadow: 0 0 3px rgba(56, 54, 54, 0.86);
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+
+    top: -30%;
+    left: -75%;
+    width: 250%;
+}
+
+.tooltip_wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+
+}
+
+.tooltip_title {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.header__home:hover .tooltip {
+    visibility: visible;
+    transform: translateY(-10px);
+    opacity: 1;
+    box-shadow: rgb(49, 56, 60) 0px 8px 8px;
+    border-color: transparent;
+    transition: all 0.15s linear 0s;
+
+    animation: tooltip 1s ease-in-out infinite alternate;
+
+}
+
+/*========*/

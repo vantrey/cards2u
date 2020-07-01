@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './Card.module.css';
-// import { StyleRoot } from "radium";
 
 
 let Card = ({ cardBg, setCardFace, cardface }) => {
