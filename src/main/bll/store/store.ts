@@ -8,7 +8,7 @@ import {profileReducer} from "../profile/profileReducer";
 import {CardsReducer} from "../../features/Cards/bll/cardsReducer";
 import {userReducer} from "../../features/users/bll/UserReducer";
 import {cardPacksReducer} from "../../features/cardsPacks/bll/cardPacksReducer";
-import {authReducer} from "./authReducer";
+import {favoriteDecksReducer} from "../favoriteDecks/favoriteDecksReducer";
 
 const rootReducer = combineReducers({
     login: loginReducer,
@@ -19,13 +19,15 @@ const rootReducer = combineReducers({
     cards: CardsReducer,
     getUserReducer: userReducer,
     cardPacks: cardPacksReducer,
-    auth: authReducer
+    favoriteDecks: favoriteDecksReducer
 
-})
+});
+
 export type AppStateType = ReturnType<typeof rootReducer>
 export type InferActionTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
-const store = createStore(rootReducer, applyMiddleware(thunk))
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 // @ts-ignore
-window.store = store
+window.store = store;
 export default store

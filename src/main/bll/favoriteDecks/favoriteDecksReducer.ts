@@ -39,7 +39,7 @@ type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
 export const createUserFavoriteDecks = (userId: string): ThunkType =>
-    (dispatch: DispatchType, getState: () => AppStateType) => {
+    (dispatch: DispatchType) => {
 
         let userFavoriteDecks = repository.get_UserFavoriteDecksFromLS(userId);
 
@@ -54,7 +54,7 @@ export const createUserFavoriteDecks = (userId: string): ThunkType =>
 
 export const updateUserFavoriteDecks =
     (userId: string, favoriteDeckId: string, deckName: string, deck: Array<CardType>): ThunkType =>
-        (dispatch: DispatchType, getState: () => AppStateType) => {
+        (dispatch: DispatchType) => {
 
             repository.updateUserFavoriteDeck(userId, favoriteDeckId, deckName, deck);
             const updatedUserFavoriteDecks = repository.get_UserFavoriteDecksFromLS(userId);
@@ -66,7 +66,7 @@ export const updateUserFavoriteDecks =
 
 export const delUserFavoriteDecks =
     (userId: string, favoriteDeckId: string): ThunkType =>
-        (dispatch: DispatchType, getState: () => AppStateType) => {
+        (dispatch: DispatchType) => {
 
             repository.delUserFavoriteDeck(userId, favoriteDeckId);
             const updatedUserFavoriteDecks = repository.get_UserFavoriteDecksFromLS(userId);

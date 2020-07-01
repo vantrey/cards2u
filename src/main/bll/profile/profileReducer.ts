@@ -1,6 +1,6 @@
 import {AppStateType, InferActionTypes} from '../store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {CardType, UserFavoriteDecks, UserType} from "../../types/entities";
+import {UserType} from "../../types/entities";
 import {repository} from "../../helpers/repos_localStorage/Token";
 import {api} from "../../dal/api";
 
@@ -19,7 +19,6 @@ const initialState = {
         verified: false,
         _id: ''
     } as UserType,
-    userFavoriteDecks: {} as UserFavoriteDecks
 };
 
 type InitialStateType = typeof initialState
