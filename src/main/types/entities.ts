@@ -61,9 +61,15 @@ export type NewCardGradeType = {
     shots: number
 }
 
+type UserFavoriteDeck = {
+    favoriteDeckId: string
+    deckName: string
+    deck: Array<CardType>
+}
+
 export type UserFavoriteDecks = {
     userId: string
-    favoriteDecks: [{deckColor: string, deckName: string, deck: Array<CardType>}]
+    favoriteDecks: Array<UserFavoriteDeck>
 }
 
 export type UseFormRegisterType = ReturnType<typeof useForm>['register']

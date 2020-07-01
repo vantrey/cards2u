@@ -110,56 +110,105 @@ export const repository = {
         return null;
     },
 
-    addUserFavoriteDeck(userId: string, deckColor: string, deckName: string, deck: Array<CardType>) {
-        let allFavoriteDecks = this._get_AllFavoriteDecksFromLS();
-        let updatedUserFavoriteDecks = {} as UserFavoriteDecks;
-
-        if (allFavoriteDecks) {
-
-            const userFavoriteDecks = allFavoriteDecks.find(fd => fd.userId === userId);
-
-            if (userFavoriteDecks) {
-                updatedUserFavoriteDecks = {
-                    ...userFavoriteDecks,
-                    favoriteDecks: [...userFavoriteDecks.favoriteDecks, {deckColor, deckName, deck}]
-                } as UserFavoriteDecks;
-                allFavoriteDecks.push(updatedUserFavoriteDecks);
-
-            } else {    // if user doesnt have favorite decks
-                allFavoriteDecks.push({userId, favoriteDecks: [{deckColor, deckName, deck}]})
-            }
-
-        } else {
-            allFavoriteDecks = [
-                {userId, favoriteDecks: [{deckColor, deckName, deck}]}
-            ]
-        }
-
-        const updatedAllFavoriteDecksAsString = JSON.stringify(allFavoriteDecks);
-        localStorage.setItem('allFavoriteDecks', updatedAllFavoriteDecksAsString);
-    },
-
-    delUserFavoriteDeck(userId: string, deckColor: string) {
+    updateUserFavoriteDeck(userId: string, favoriteDeckId: string, deckName: string, deck: Array<CardType>) {
         let allFavoriteDecks = this._get_AllFavoriteDecksFromLS();
 
         if (allFavoriteDecks) {
 
-            const updatedAllFavoriteDecks = allFavoriteDecks.map(ufds => {
-                    if (ufds.userId === userId) {
-
-                        return {
-                            ...ufds,
-                            favoriteDecks: ufds.favoriteDecks.filter(fd => fd.deckColor === deckColor)
-                        }
+            const updatedAllFavoriteDecks = allFavoriteDecks.map(afd => {
+                if (afd.userId === userId) {
+                    return {
+                        userId,
+                        favoriteDecks: afd.favoriteDecks.map(fd => {
+                            if (fd.favoriteDeckId === favoriteDeckId) {
+                                return {
+                                    favoriteDeckId,
+                                    deckName,
+                                    deck
+                                }
+                            }
+                            return fd
+                        })
                     }
-
-                    return ufds
                 }
-            );
+                return afd
+            });
 
             const updatedAllFavoriteDecksAsString = JSON.stringify(updatedAllFavoriteDecks);
             localStorage.setItem('allFavoriteDecks', updatedAllFavoriteDecksAsString);
         }
+    },
+
+    delUserFavoriteDeck(userId: string, favoriteDeckId: string) {
+        let allFavoriteDecks = this._get_AllFavoriteDecksFromLS();
+
+        if (allFavoriteDecks) {
+
+            const updatedAllFavoriteDecks = allFavoriteDecks.map(afd => {
+                if (afd.userId === userId) {
+                    return {
+                        userId,
+                        favoriteDecks: afd.favoriteDecks.map(fd => {
+                            if (fd.favoriteDeckId === favoriteDeckId) {
+                                return {
+                                    favoriteDeckId,
+                                    deckName: '',
+                                    deck: []
+                                }
+                            }
+                            return fd
+                        })
+                    }
+                }
+                return afd
+            });
+
+            const updatedAllFavoriteDecksAsString = JSON.stringify(updatedAllFavoriteDecks);
+            localStorage.setItem('allFavoriteDecks', updatedAllFavoriteDecksAsString);
+        }
+    },
+
+    createUserFavoriteDecks(userId: string) {
+        let allFavoriteDecks = this._get_AllFavoriteDecksFromLS();
+
+        if (allFavoriteDecks) {
+
+            const userFavoriteDecks = allFavoriteDecks.find(ufd => ufd.userId === userId);
+
+            if (!userFavoriteDecks) {
+
+                allFavoriteDecks = [
+                    ...allFavoriteDecks,
+                    {
+                        userId,
+                        favoriteDecks: [
+                            {favoriteDeckId: '1', deckName: '', deck: []},
+                            {favoriteDeckId: '2', deckName: '', deck: []},
+                            {favoriteDeckId: '3', deckName: '', deck: []},
+                            {favoriteDeckId: '4', deckName: '', deck: []},
+                            {favoriteDeckId: '5', deckName: '', deck: []},
+                        ]
+                    }
+                ]
+            }
+        }
+
+        if (!allFavoriteDecks) {
+
+            allFavoriteDecks = [
+                {
+                    userId,
+                    favoriteDecks: [
+                        {favoriteDeckId: '1', deckName: '', deck: []},
+                        {favoriteDeckId: '2', deckName: '', deck: []},
+                        {favoriteDeckId: '3', deckName: '', deck: []},
+                        {favoriteDeckId: '4', deckName: '', deck: []},
+                        {favoriteDeckId: '5', deckName: '', deck: []},
+                    ]
+                }
+            ]
+        }
+        localStorage.setItem('allFavoriteDecks', JSON.stringify(allFavoriteDecks));
     },
 };
 
