@@ -15,17 +15,74 @@
     max-width: 1140px;
     height: calc(100vh - 150px);
     margin: 100px auto 0 auto;
-    background-image: url("../../../images/profile-bg-1.png");
-    background-size: auto;
-    background-repeat: repeat;
     display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 30px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 50px;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(6px);
     color: whitesmoke;
-    border: 1px solid red;
+
+}
+.main__title {
+    width: 100%;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    color: orange;
+    padding-left: 33px;
+}
+.main__wrap {
+    width: 100%;
+    display: flex;
 
 }
 
+.main__user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
 
+    border: 1px solid  red;
+}
+
+
+.user__avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+
+    border: 1px solid  green;
+}
+
+
+.user__nick {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+
+    border: 1px solid  green;
+}
+
+
+.user__feedback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+
+    border: 1px solid  green;
+}
+
+.main__rest {
+    width: 60%;
+
+
+    border: 1px solid  cornflowerblue;
+}
