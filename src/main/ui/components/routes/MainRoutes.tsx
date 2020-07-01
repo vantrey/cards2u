@@ -1,11 +1,11 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
 import Root from '../root/Root';
-import Profile from '../profile/Profile';
 import Game from "../game/Game";
 import Create from "../create_cards/Create";
 import Find from "../find_deck/Find";
 import Home from "../home/Home";
+import ProfileContainer from "../profile/ui/ProfileContainer";
 
 
 export const ROOT_PATH = '/';
@@ -20,7 +20,7 @@ const MainRoutes = () => {
     return (
         <>
             <Route exact path={ROOT_PATH}  render={() => <Root/>} />
-            <Route exact path={PROFILE_PATH} render={() => <Profile />} />
+            <Route exact path={PROFILE_PATH} render={() => <ProfileContainer />} />
             <Route path={GAME_PATH} render={() => <Game />} />
             <Route exact path={CREATE_CARDS_PATH} render={() => <Create />} />
             <Route exact path={FIND_DECK_PATH} render={() => <Find />} />
