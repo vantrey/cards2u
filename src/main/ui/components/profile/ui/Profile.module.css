@@ -2,7 +2,7 @@
     width: 100%;
     height: 100vh;
     display: flex;
-    background: url("../../../images/main-bg.png");
+    background: url("../../images/main-bg.png");
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
@@ -15,7 +15,7 @@
     max-width: 1140px;
     height: calc(100vh - 150px);
     margin: 100px auto 0 auto;
-    background: url("../../../images/profile-bg.png");
+    background: url("../../images/profile-bg-1.png");
     background-size: auto;
     background-repeat: repeat;
     display: flex;
@@ -27,59 +27,5 @@
     border: 1px solid red;
 
 }
-
-
-.main__body {
-    display: flex;
-    flex-direction: column;
-    font-size: small;
-}
-
-.body__info {
-    width: 500px;
-    padding: 10px;
-
-
-    border: 1px solid white;
-}
-
-.info__item{
-    padding: 5px;
-}
-
-.body__avatarWrap {
-    padding: 10px;
-
-    border: 1px solid blue;
-}
-
-.avatar__avatarImg {
-    width: 70px;
-}
-
-.avatarWrap__setNewAvatar {
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

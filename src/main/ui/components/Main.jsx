@@ -14,7 +14,6 @@ const Main = () => {
 
     useEffect(() => {
         dispatch(localAuthMe());
-        console.log("useEffectAuthMe")
     }, [dispatch]);
 
     let [toggleBg, setBg] = useState(true);
@@ -25,6 +24,12 @@ const Main = () => {
             setBg(!toggleBg);
         }, true);
 
+        return () => {
+            vid.removeEventListener('ended', () => {
+                setBg(!toggleBg);
+            }, true);
+
+        }
     }, []);
 
     return (
@@ -33,7 +38,7 @@ const Main = () => {
             <>
                 {
                     toggleBg &&
-                    <Intro setBg={setBg}/>
+                    <Intro setBg={setBg} toggleBg={toggleBg} />
                 }
                 {
                     !toggleBg &&

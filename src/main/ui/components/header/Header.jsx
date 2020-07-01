@@ -7,22 +7,18 @@ import {NavLink} from "react-router-dom";
 import {PROFILE_PATH, ROOT_PATH} from "../routes/MainRoutes";
 import {useDispatch, useSelector} from "react-redux"
 import {logout} from "../../../auth/login/loginReducer"
+import Logout from "../logout/Logout";
 
 const Header = ({setModal, toggleBg}) => {
 
-    // const switchBg = () => {
-    // 	setBg (!toggleBg);
-    // }
-
     const [openProfile, setProfile] = useState(false);
     let pathProfile = openProfile === false ? PROFILE_PATH : ROOT_PATH;
-
     const {isAuth} = useSelector((state) => state.login)
-    const dispatch = useDispatch()
-
-    const onLogout = () => {
-        dispatch(logout())
-    }
+    // const dispatch = useDispatch()
+    //
+    // const onLogout = () => {
+    //     dispatch(logout())
+    // }
 
     return (
         <div className={styles.header}>
@@ -32,7 +28,7 @@ const Header = ({setModal, toggleBg}) => {
                         <img src={imgLogo} alt="logo"/>
                     </div>
                 </NavLink>
-                {(isAuth && <div onClick={onLogout}>LOGOUT</div>) || <Navbar setModal={setModal} toggleBg={toggleBg}/>}
+                {(isAuth && <Logout />) || <Navbar setModal={setModal} toggleBg={toggleBg}/>}
 
                 <NavLink to={pathProfile} className={styles.header__link} onClick={() => {
                     setProfile(!openProfile)

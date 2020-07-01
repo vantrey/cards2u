@@ -15,6 +15,9 @@ https://www.npmjs.com/package/normalize.css?activeTab=versions
 <link rel="preload" href="./src/main/ui/video/main-bg-video-20.mp4" as="video" type="video/mp4">
 <link rel="preload" href="./src/main/ui/video/main-bg-video-20.mp4" as="video" type="video/webm">
 
+// для установки и настройки аватара
+https://github.com/mosch/react-avatar-editor
+
 //сортировка по таблице
 https://lodash.com/docs/4.17.15#orderBy
 
@@ -28,6 +31,3 @@ https://github.com/AdeleD/react-paginate/blob/master/demo/js/demo.js - шабл�
 
 // модальные окна
 https://www.npmjs.com/package/react-modal
-
-// библиотека настройки аватара
-https://github.com/mosch/react-avatar-editor

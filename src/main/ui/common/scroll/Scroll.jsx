@@ -14,9 +14,13 @@ const Scroll = ({ title, children, isFetching }) => {
 	let [ modal, setModal ] = useState (false);
 
 	useEffect (() => {
-		setTimeout (() => {
+		let timerId = setTimeout (() => {
 			setModal (true);
 		}, 300)
+
+		return () => {
+			clearTimeout (timerId)
+		}
 
 	}, []);
 
