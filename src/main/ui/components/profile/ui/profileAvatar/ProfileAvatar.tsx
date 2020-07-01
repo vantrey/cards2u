@@ -1,7 +1,9 @@
 import React from 'react';
 import {UserType} from "../../../../../types/entities";
 import styles from './ProfileAvatar.module.css';
+import avaDefault from '../../../../images/ava-default.png';
 import AvaEditor from "../avaEditor/AvaEditor";
+
 
 type ProfilePropsType = {
     user: UserType
@@ -43,16 +45,16 @@ const ProfileAvatar: React.FC<ProfilePropsType> = React.memo(({
 							<img src={user.avatar} alt='avatar'/>
 						</div>) ||
 
-					<div className={styles.avatar__default}>
-						NO AVATAR
-					</div>}
+                    (<div className={styles.avatar__default}>
+						<img src={avaDefault} alt='avatar'/>
+					</div>)}
 				</div>
 				<div className={styles.avatar__button}>
                     {!isShowAvaEditor &&
 					<button className={styles.button__change}
 							disabled={isFetching}
 							onClick={onChangeClick}
-					>Change
+					>change
 					</button>}
 				</div>
 				<div className={styles.avatar__input}>

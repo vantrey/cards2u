@@ -5,6 +5,7 @@
     align-items: center;
     flex-direction: column;
 }
+
 .editor__imgBlock, .editor__canvasblock {
     width: 300px;
     height: 300px;
@@ -16,6 +17,7 @@
     justify-content: center;
     flex-direction: column;
 }
+
 .imgBlock, .canvasblock {
     width: 200px;
     height: 200px;
@@ -40,6 +42,12 @@
     overflow: hidden;
 }
 
+.avatar__base64 {
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
 .avatar__button, .canvasblock__buttons {
     display: flex;
     justify-content: center;
@@ -57,7 +65,6 @@
 }
 
 
-
 .button__change, .button__apply, .button__cansel {
     width: 100px;
     height: 30px;
@@ -65,9 +72,9 @@
     margin: 10px;
     outline: none;
     border: 1px solid #0b3b63;
-    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
     font-size: 10px;
     background-color: #0b3b63;
     color: orange;
@@ -86,6 +93,7 @@
     -webkit-transition-property: color, background-color;
     transition-property: color, background-color;
 }
+
 .button__change:hover, .button__change:disabled, .button__apply:hover,
 .button__apply:disabled, .button__cansel:hover, .button__cansel:disabled {
     background-color: #1260a1;

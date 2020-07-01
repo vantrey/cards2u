@@ -12,6 +12,7 @@
     background-color: #0b3b63;
     color: orange;
     border-radius: 5px;
+    text-shadow: 5px 5px 5px  rgba(0,0,0,0.75);
 }
 
 .button__center {

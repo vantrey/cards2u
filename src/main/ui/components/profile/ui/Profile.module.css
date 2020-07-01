@@ -17,8 +17,6 @@
     margin: 100px auto 0 auto;
     display: flex;
     flex-direction: column;
-    padding: 50px;
-    padding-top: 25px;
     position: relative;
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(6px);
@@ -43,8 +41,6 @@
     flex-direction: column;
     align-items: center;
     width: 40%;
-
-    border: 1px solid  red;
 }
 
 
@@ -53,9 +49,6 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin-bottom: 50px;
-
-    border: 1px solid  green;
 }
 
 
@@ -65,8 +58,6 @@
     align-items: center;
     width: 100%;
     margin-bottom: 10px;
-
-    border: 1px solid  green;
 }
 
 
