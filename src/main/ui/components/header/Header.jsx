@@ -33,7 +33,7 @@ const Header = ({setModal, toggleBg}) => {
                             {
                                 !isAuth &&
                                 <div className={styles.tooltip_wrap}>
-                                    <h4 className={styles.tooltip_title}>Sign in, please</h4>
+                                    <h4 className={styles.tooltip_title}>Sign in! </h4>
                                 </div>
                             }
                         </div>

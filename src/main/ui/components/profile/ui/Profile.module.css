@@ -1,14 +1,14 @@
-.profile__wrap {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    background-image: url("../../../images/main-bg.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: relative;
-    font-family: 'CS Grimrock', sans-serif;
+/*.profile__wrap {*/
+/*    width: 100%;*/
+/*    height: 100vh;*/
+/*    display: flex;*/
+/*    background-image: url("../../../images/main-bg.png");*/
+/*    background-size: cover;*/
+/*    background-repeat: no-repeat;*/
+/*    position: relative;*/
+/*    */
+/*}*/
 
-}
 
 .profile__main {
     width: 1140px;
@@ -21,6 +21,7 @@
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(6px);
     color: whitesmoke;
+    font-family: 'CS Grimrock', sans-serif;
 
 }
 .main__title {
@@ -29,6 +30,7 @@
     margin-bottom: 25px;
     color: orange;
     padding-left: 33px;
+    text-shadow: 5px 5px 5px  rgba(0,0,0,0.75);
 }
 .main__wrap {
     width: 100%;
