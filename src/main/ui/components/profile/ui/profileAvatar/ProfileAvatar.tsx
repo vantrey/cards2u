@@ -1,6 +1,6 @@
 import React from 'react';
 import {UserType} from "../../../../../types/entities";
-import styles from "../Profile.module.css"
+import styles from './ProfileAvatar.module.css';
 import AvaEditor from "../avaEditor/AvaEditor";
 
 type ProfilePropsType = {
@@ -28,57 +28,51 @@ const ProfileAvatar: React.FC<ProfilePropsType> = React.memo(({
                                                               }) => {
 
     return (
+        <div className={styles.editor__wrap}>
+            {!isShowAvaEditor &&
+			<div className={styles.editor__imgBlock}>
+				<div className={styles.imgBlock}>
+                    {(newAvatar && !isShowAvaEditor &&
 
-        <div className={styles.body__avatarWrap}>
+						<div className={styles.avatar__base64}>
+							<img src={newAvatar} alt='avatar'/>
+						</div>) ||
 
-            <div className={styles.avatarWrap__avatar}>
-                {(newAvatar && !isShowAvaEditor &&
+                    (user.avatar &&
+						<div className={styles.avatar__user}>
+							<img src={user.avatar} alt='avatar'/>
+						</div>) ||
 
-                    <div className={styles.avatar__avatarImg}>
-                        <img alt='avatar' src={newAvatar ? newAvatar : undefined}/>
-                    </div>) ||
-
-                (isShowAvaEditor &&
-                    <div className={styles.avatarImg__apply}>
-                        <AvaEditor
-                            cancelAvaEditor={cancelAvaEditor}
-                            updateAvatar={updateAvatar}
-                            newAvatar={newAvatar}
-                        />
-
-                    </div>) ||
-
-                (user.avatar &&
-                    <div className={styles.avatar__avatarImg}>
-                        <img src={user.avatar} alt='avatar'/>
-                    </div>) ||
-
-                <div className={styles.avatar__avatarNoImg}>
-                    NO AVATAR
-                </div>}
-
-                <div className={styles.avatarWrap__setNewAvatar}>
-
-                    { !isShowAvaEditor &&
-                        <button
-                            disabled={isFetching}
-                            onClick={onChangeClick}
-                        >Change
-                        </button>}
-                </div>
-            </div>
-
-            <div>
-                <input
-                    ref={inRef}
-                    type='file'
-                    accept=".jpg, .jpeg, .png"
-                    onChange={upload}
-                    style={{display: 'none'}}
-                />
-            </div>
-
-
+					<div className={styles.avatar__default}>
+						NO AVATAR
+					</div>}
+				</div>
+				<div className={styles.avatar__button}>
+                    {!isShowAvaEditor &&
+					<button className={styles.button__change}
+							disabled={isFetching}
+							onClick={onChangeClick}
+					>Change
+					</button>}
+				</div>
+				<div className={styles.avatar__input}>
+					<input
+						ref={inRef}
+						type='file'
+						accept=".jpg, .jpeg, .png"
+						onChange={upload}
+						style={{display: 'none'}}
+					/>
+				</div>
+			</div>
+            }
+            {isShowAvaEditor &&
+			<AvaEditor
+				cancelAvaEditor={cancelAvaEditor}
+				updateAvatar={updateAvatar}
+				newAvatar={newAvatar}
+			/>
+            }
         </div>
 
     )
