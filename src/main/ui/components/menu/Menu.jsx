@@ -8,7 +8,7 @@ import Taverna from "./taverna/Taverna";
 import About from "./about/About";
 
 
-const Menu = ({toggleMenu, setMenu, toggleAbout, setAbout, setProfile, openProfile}) => {
+const Menu = ({toggleMenu, setMenu, toggleAbout, setAbout, setProfile, openProfile, toggleBg}) => {
 
 	const openAbout = () => {
 		setProfile(true);
@@ -33,9 +33,11 @@ const Menu = ({toggleMenu, setMenu, toggleAbout, setAbout, setProfile, openProfi
         }
     }
 
+	const classForMenu = toggleBg === true ? `${styles.menu} ${styles.menu_notActive}` : `${styles.menu}`;
+
 	return (
 		<>
-			<div className={styles.menu}>
+			<div className={classForMenu}>
 				<div className={styles.menu__wrap}>
 					{!toggleMenu &&
 

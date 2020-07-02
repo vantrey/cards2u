@@ -53,7 +53,7 @@ const Main = () => {
             <FormRoutes/>
             <Menu toggleMenu={toggleMenu} setMenu={setMenu} toggleAbout={toggleAbout}
                   setAbout={setAbout} openProfile={openProfile}
-                  setProfile={setProfile} />
+                  setProfile={setProfile} toggleBg={toggleBg} />
         </>
     )
 }

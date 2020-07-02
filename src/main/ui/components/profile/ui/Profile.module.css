@@ -43,6 +43,7 @@
     flex-direction: column;
     align-items: center;
     width: 40%;
+    border-right: 1px solid  #795548;
 }
 
 
@@ -70,12 +71,10 @@
     width: 100%;
     margin-bottom: 10px;
 
-    border: 1px solid  green;
 }
 
 .main__rest {
     width: 60%;
 
-
-    border: 1px solid  cornflowerblue;
+    /*border: 1px solid  cornflowerblue;*/
 }

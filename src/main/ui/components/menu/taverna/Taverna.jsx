@@ -5,6 +5,7 @@ import { CREATE_CARDS_PATH, FIND_DECK_PATH, GAME_PATH, HOME_PATH, PROFILE_PATH }
 
 
 const Taverna = ({toggleMenu, setMenu}) => {
+
     const classForMenu = toggleMenu === true ? `${styles.taverna__wrap} ${styles.taverna__wrap_active}` : `${styles.taverna__wrap}`;
 
     return (
