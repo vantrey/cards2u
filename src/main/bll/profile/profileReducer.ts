@@ -18,8 +18,8 @@ const initialState = {
         updated: '',
         verified: false,
         _id: ''
-    } as UserType
-}
+    } as UserType,
+};
 
 type InitialStateType = typeof initialState
 
@@ -113,4 +113,5 @@ export const updateUser = (name: string, avatar: string | null = null): ThunkTyp
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
         dispatch(profileActions.setIsFetching(false));
     }
+
 };

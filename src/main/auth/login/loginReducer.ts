@@ -3,6 +3,7 @@ import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {api} from "../../dal/api";
 import {repository} from "../../helpers/repos_localStorage/Token";
 import {getUser} from "../../bll/profile/profileReducer";
+import {createUserFavoriteDecks} from "../../bll/favoriteDecks/favoriteDecksReducer";
 
 const initialState = {
     email: null as string | null,
@@ -69,7 +70,7 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
             dispatch(loginActions.loginAuthMeSuccess(result.data.success, result.data._id));
             repository.save_Auth_id(result.data._id);
             repository.saveToken(result.data.token, result.data.tokenDeathTime);
-            dispatch(getUser());
+            dispatch(localAuthMe());
             dispatch(loginActions.loginIsFetching(false));
 
         } catch (e) {
@@ -91,9 +92,12 @@ export const localAuthMe = (): ThunkType =>
         const token = repository.getToken();
         const userId = repository.get_Auth_id();
 
+        dispatch(createUserFavoriteDecks(userId));
+
         if (token && userId) {
             dispatch(loginActions.loginAuthMeSuccess(true, userId));
-            dispatch(getUser())
+            dispatch(getUser());
+
         } else {
             dispatch(loginActions.logoutSuccess());
         }
