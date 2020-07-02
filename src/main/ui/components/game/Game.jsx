@@ -14,7 +14,6 @@ import Buttons from "./buttons/Buttons";
 import bg_1  from './../../images/card-bg/card-bg-1.jpg';
 
 
-
 const Game = () => {
 
 	const [ cardface , setCardFace ] = useState(true);
