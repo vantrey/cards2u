@@ -13,14 +13,14 @@ type ProfileInfoPropsType = {
 }
 
 const ProfileInfo: React.FC<ProfileInfoPropsType> = React.memo(({
-                                                         onEditMode,
-                                                         isEditMode,
-                                                         nameValue,
-                                                         onNameValueChange,
-                                                         updateName,
-                                                         user,
-                                                         isFetching,
-                                                     }) => {
+                                                                    onEditMode,
+                                                                    isEditMode,
+                                                                    nameValue,
+                                                                    onNameValueChange,
+                                                                    updateName,
+                                                                    user,
+                                                                    isFetching,
+                                                                }) => {
 
     return (
         <div className={styles.user__info}>
@@ -32,17 +32,17 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = React.memo(({
                                 value={nameValue}
                                 onChange={onNameValueChange}
                             />
-                            <div  className={styles.setName__buttons}>
-                                <button disabled={nameValue === user.name} onClick={updateName}>apply </button>
+                            <div className={styles.setName__buttons}>
+                                <button disabled={!nameValue} onClick={updateName}>apply</button>
                                 <button onClick={onEditMode}>cancel</button>
-							</div>
+                            </div>
                         </div>
                     </div>)
                 ||
                 <div className={styles.info__item}>
                     <div className={styles.item__name}>Name:&nbsp;&nbsp;{user.name}</div>
-					<div  className={styles.setName__buttons}>
-                        <button onClick={onEditMode}>change</button>
+                    <div className={styles.setName__buttons}>
+                        <button disabled={isFetching} onClick={onEditMode}>change</button>
                     </div>
                 </div>}
             </div>

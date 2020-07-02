@@ -16,7 +16,7 @@ const ProfileInfoContainer: React.FC<ProfileInfoContainerPropsType> = React.memo
 
     const dispatch = useDispatch();
 
-    const [nameValue, setNameValue] = useState<string>(user.name);
+    const [nameValue, setNameValue] = useState<string>('');
     const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
 
@@ -25,7 +25,8 @@ const ProfileInfoContainer: React.FC<ProfileInfoContainerPropsType> = React.memo
     }, [user.name]);
 
     const onEditModeCallBack = useCallback(() => {
-        setIsEditMode(!isEditMode)
+        setIsEditMode(!isEditMode);
+        setNameValue('')
     }, [setIsEditMode, isEditMode]);
 
     const onNameValueChangeUseCallBack = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +35,7 @@ const ProfileInfoContainer: React.FC<ProfileInfoContainerPropsType> = React.memo
 
     const updateNameCAllBack = useCallback(() => {
         dispatch(updateUser(nameValue));
-        setIsEditMode(false)
+        setIsEditMode(false);
     }, [dispatch, nameValue, setIsEditMode]);
 
     return (
