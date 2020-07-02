@@ -19,9 +19,10 @@ const Textarea: React.FC<PropsType> = ({register, errors, name, title, ...props}
                    ref={register}
                    {...props}
                    name={name}
+                   placeholder='message'
             />
-            <label className={styles.control__label} htmlFor="input">{title}</label>
-            <i className={styles.mtrl__select}> </i>
+            {/*<label className={styles.control__label} htmlFor="input">{title}</label>*/}
+            {/*<i className={styles.mtrl__select}> </i>*/}
 
             {errors[name] &&
 

@@ -22,7 +22,7 @@ const Game = () => {
 
 	return (
 		<div className={styles.game__wrap}>
-			<div className={styles.game__left}></div>
+			<div className={styles.game__left}> </div>
 			<div className={styles.game__container}>
 				<div className={styles.game__analytics}>analytics</div>
 				<div className={styles.game__content}>
@@ -111,7 +111,7 @@ const Game = () => {
 				</div>
 				{/*<div className={styles.game__chat}>chat</div>*/}
 			</div>
-			<div className={styles.game__right}></div>
+			<div className={styles.game__right}> </div>
 		</div>
 	)
 }

@@ -9,6 +9,7 @@
     width: 70px;
 }
 
+
 .logout__block {
     position: absolute;
     right: 0;
@@ -25,4 +26,9 @@
     width: 80px;
     height: 40px;
     cursor: pointer;
+}
+
+.logout__wrap_notActive {
+    pointer-events: none;
+    cursor: none;
 }

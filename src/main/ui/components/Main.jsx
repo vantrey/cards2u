@@ -10,13 +10,16 @@ import {localAuthMe} from "../../auth/login/loginReducer"
 
 
 const Main = () => {
+
+    const [toggleBg, setBg] = useState(true);
+    const [ toggleMenu, setMenu ] = useState (false);
+    const [ toggleAbout, setAbout ] = useState (false);
+    const [openProfile, setProfile] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(localAuthMe());
     }, [dispatch]);
-
-    let [toggleBg, setBg] = useState(true);
 
     useEffect(() => {
         let vid = document.getElementById('intro');
@@ -34,7 +37,9 @@ const Main = () => {
 
     return (
         <>
-            <Header toggleBg={toggleBg}/>
+            <Header toggleBg={toggleBg} toggleMenu={toggleMenu} setMenu={setMenu}
+                    toggleAbout={toggleAbout} setAbout={setAbout} openProfile={openProfile}
+                    setProfile={setProfile}/>
             <>
                 {
                     toggleBg &&
@@ -46,7 +51,9 @@ const Main = () => {
                 }
             </>
             <FormRoutes/>
-            <Menu/>
+            <Menu toggleMenu={toggleMenu} setMenu={setMenu} toggleAbout={toggleAbout}
+                  setAbout={setAbout} openProfile={openProfile}
+                  setProfile={setProfile} toggleBg={toggleBg} />
         </>
     )
 }
