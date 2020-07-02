@@ -27,7 +27,7 @@
     align-items: center;
     width: 170px;
     margin-left: 100px;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 .header__home {
@@ -37,7 +37,7 @@
     width: 40px;
     height: 40px;
     margin-right: 100px;
-    cursor: pointer;
+
 }
 
 .header__home img, .header__logo img {
@@ -51,8 +51,12 @@
     text-decoration: none;
     padding: 0;
     margin: 0;
+    cursor: pointer;
 }
-
+.header__link_notActive {
+    pointer-events: none;
+    cursor: none;
+}
 
 /*===== стили для tooltip*/
 .tooltip {

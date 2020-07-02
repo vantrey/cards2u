@@ -20,17 +20,20 @@ const Header = ({setModal, toggleBg, setMenu, setAbout, openProfile, setProfile}
         setProfile(!openProfile);
     }
 
+    const classForProfile = toggleBg === true ? `${styles.header__link} ${styles.header__link_notActive}` : `${styles.header__link}`;
+    const classForLogo = toggleBg === true ? `${styles.header__link} ${styles.header__link_notActive}` : `${styles.header__link}`;
+
     return (
         <div className={styles.header}>
             <div className={styles.header__wrap}>
-                <NavLink to={ROOT_PATH} className={styles.header__link}>
+                <NavLink to={ROOT_PATH} className={classForLogo}>
                     <div className={styles.header__logo}>
                         <img src={imgLogo} alt="logo"/>
                     </div>
                 </NavLink>
-                {(isAuth && <Logout />) || <Navbar setModal={setModal} toggleBg={toggleBg}/>}
+                {(isAuth && <Logout toggleBg={toggleBg}/>) || <Navbar setModal={setModal} toggleBg={toggleBg}/>}
 
-                <NavLink to={pathProfile} className={styles.header__link} onClick={onToggleProfile}>
+                <NavLink to={pathProfile} className={classForProfile} onClick={onToggleProfile}>
                     <div className={styles.header__home} id='login'>
                         <img src={castle} alt="castle"/>
                         <div className={styles.tooltip}>
