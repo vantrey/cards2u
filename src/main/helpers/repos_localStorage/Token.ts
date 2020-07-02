@@ -86,7 +86,16 @@ export const repository = {
         return null;
     },
 
-    get_UserFavoriteDecksFromLS(userId: string) {
+    _isUnknownUser(userId: string | null) {
+        if (!userId) {
+            return 'unknown'
+        }
+        return userId
+    },
+
+    get_UserFavoriteDecksFromLS(userId: string | null) {
+       userId = this._isUnknownUser(userId);
+
         const allFavoriteDecks: string | null = localStorage.getItem('allFavoriteDecks');
         if (allFavoriteDecks) {
             const allFavoriteDecksFromLS = JSON.parse(allFavoriteDecks) as Array<UserFavoriteDecksType>;
@@ -106,7 +115,9 @@ export const repository = {
         return null;
     },
 
-    updateUserFavoriteDeck(userId: string, favoriteDeckId: string, deckName: string, deck: Array<CardType>) {
+    updateUserFavoriteDeck(userId: string | null, favoriteDeckId: string, deckName: string, deck: Array<CardType>) {
+        userId = this._isUnknownUser(userId);
+
         let allFavoriteDecks = this._get_AllFavoriteDecksFromLS();
 
         if (allFavoriteDecks) {
@@ -135,7 +146,9 @@ export const repository = {
         }
     },
 
-    delUserFavoriteDeck(userId: string, favoriteDeckId: string) {
+    delUserFavoriteDeck(userId: string | null, favoriteDeckId: string) {
+        userId = this._isUnknownUser(userId);
+
         let allFavoriteDecks = this._get_AllFavoriteDecksFromLS();
 
         if (allFavoriteDecks) {
@@ -164,7 +177,9 @@ export const repository = {
         }
     },
 
-    createUserFavoriteDecks(userId: string) {
+    createUserFavoriteDecks(userId: string | null) {
+        userId = this._isUnknownUser(userId);
+
         let allFavoriteDecks = this._get_AllFavoriteDecksFromLS();
 
         if (allFavoriteDecks) {

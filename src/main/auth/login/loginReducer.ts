@@ -92,10 +92,11 @@ export const localAuthMe = (): ThunkType =>
         const token = repository.getToken();
         const userId = repository.get_Auth_id();
 
+        dispatch(createUserFavoriteDecks(userId));
+
         if (token && userId) {
             dispatch(loginActions.loginAuthMeSuccess(true, userId));
             dispatch(getUser());
-            dispatch(createUserFavoriteDecks(userId));
 
         } else {
             dispatch(loginActions.logoutSuccess());
