@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
-import Profile from "../../../auth/profile/ui/ProfileContainer";
+import Profile from "../profile/ui/ProfileContainer";
 import RegistrationPage from '../../../auth/registration/RegirtrationPage';
 import LoginContainer from "../../../auth/login/LoginContainer";
 import Root from "../root/Root";

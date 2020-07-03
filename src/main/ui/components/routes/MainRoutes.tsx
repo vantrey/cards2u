@@ -1,11 +1,12 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
 import Root from '../root/Root';
-import Profile from '../profile/Profile';
 import Game from "../game/Game";
 import Create from "../create_cards/Create";
 import FindContainer from './../find_deck/FindContainer'
 import Home from "../home/Home";
+import Profile from '../profile/ui/Profile';
+import ProfileContainer from '../profile/ui/ProfileContainer';
 
 
 export const ROOT_PATH = '/';

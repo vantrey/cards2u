@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Menu.module.css'
 import imgTaverna from '../../images/taverna-shadow2.png';
 import imgPoint from '../../images/point-shadow2.png';
@@ -8,22 +8,22 @@ import Taverna from "./taverna/Taverna";
 import About from "./about/About";
 
 
-const Menu = () => {
-
-	let [ toggleMenu, setMenu ] = useState (false);
-	let [ toggleAbout, setAbout ] = useState (false);
+const Menu = ({toggleMenu, setMenu, toggleAbout, setAbout, setProfile, openProfile, toggleBg}) => {
 
 	const openAbout = () => {
+		setProfile(true);
 
 		if ( toggleMenu ) {
             setMenu(false);
             setAbout (!toggleAbout);
 		} else {
+
 			setAbout (!toggleAbout);
 		}
 	}
 
 	const openMenu = () => {
+		setProfile(true);
 
         if ( toggleAbout ) {
             setAbout (false);
@@ -33,9 +33,11 @@ const Menu = () => {
         }
     }
 
+	const classForMenu = toggleBg === true ? `${styles.menu} ${styles.menu_notActive}` : `${styles.menu}`;
+
 	return (
 		<>
-			<div className={styles.menu}>
+			<div className={classForMenu}>
 				<div className={styles.menu__wrap}>
 					{!toggleMenu &&
 

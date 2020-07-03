@@ -1,0 +1,34 @@
+.logout__wrap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 72px;
+    margin-top: -46px;
+    background: transparent;
+    transform: translate3d(-50%, 0, 0);
+    width: 70px;
+}
+
+
+.logout__block {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 90px;
+    height: 90px;
+    cursor: pointer;
+    padding: 26px 32px;
+}
+
+.logout__img {
+    display: flex;
+    align-items: center;
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.logout__wrap_notActive {
+    pointer-events: none;
+    cursor: none;
+}

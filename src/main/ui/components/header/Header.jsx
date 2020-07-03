@@ -1,44 +1,49 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styles from './Header.module.css'
 import castle from '../../icons/castle-40.png'
 import imgLogo from '../../images/Wisemen-shadow2.png'
 import Navbar from "../navbar/Navbar";
 import {NavLink} from "react-router-dom";
 import {PROFILE_PATH, ROOT_PATH} from "../routes/MainRoutes";
-import {useDispatch, useSelector} from "react-redux"
-import {logout} from "../../../auth/login/loginReducer"
+import {useSelector} from "react-redux"
+import Logout from "../logout/Logout";
 
-const Header = ({setModal, toggleBg}) => {
 
-    // const switchBg = () => {
-    // 	setBg (!toggleBg);
-    // }
+const Header = ({setModal, toggleBg, setMenu, setAbout, openProfile, setProfile}) => {
 
-    const [openProfile, setProfile] = useState(false);
-    let pathProfile = openProfile === false ? PROFILE_PATH : ROOT_PATH;
+    const pathProfile = openProfile === false ? PROFILE_PATH : ROOT_PATH;
+    const {isAuth} = useSelector((state) => state.login);
 
-    const {isAuth} = useSelector((state) => state.login)
-    const dispatch = useDispatch()
-
-    const onLogout = () => {
-        dispatch(logout())
+    const onToggleProfile = () => {
+        setMenu(false);
+        setAbout (false);
+        setProfile(!openProfile);
     }
+
+    const classForProfile = toggleBg === true ? `${styles.header__link} ${styles.header__link_notActive}` : `${styles.header__link}`;
+    const classForLogo = toggleBg === true ? `${styles.header__link} ${styles.header__link_notActive}` : `${styles.header__link}`;
 
     return (
         <div className={styles.header}>
             <div className={styles.header__wrap}>
-                <NavLink to={ROOT_PATH} className={styles.header__link}>
+                <NavLink to={ROOT_PATH} className={classForLogo}>
                     <div className={styles.header__logo}>
                         <img src={imgLogo} alt="logo"/>
                     </div>
                 </NavLink>
-                {(isAuth && <div onClick={onLogout}>LOGOUT</div>) || <Navbar setModal={setModal} toggleBg={toggleBg}/>}
+                {(isAuth && <Logout toggleBg={toggleBg}/>) || <Navbar setModal={setModal} toggleBg={toggleBg}/>}
 
-                <NavLink to={pathProfile} className={styles.header__link} onClick={() => {
-                    setProfile(!openProfile)
-                }}>
+                <NavLink to={pathProfile} className={classForProfile} onClick={onToggleProfile}>
                     <div className={styles.header__home} id='login'>
                         <img src={castle} alt="castle"/>
+                        <div className={styles.tooltip}>
+                            {
+                                !isAuth &&
+                                <div className={styles.tooltip_wrap}>
+                                    <h4 className={styles.tooltip_title}>Sign in! </h4>
+                                </div>
+                            }
+                        </div>
                     </div>
                 </NavLink>
             </div>
