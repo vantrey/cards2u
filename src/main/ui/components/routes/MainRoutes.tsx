@@ -4,7 +4,7 @@ import Root from '../root/Root';
 import Profile from '../profile/Profile';
 import Game from "../game/Game";
 import Create from "../create_cards/Create";
-import Find from "../find_deck/Find";
+import FindContainer from './../find_deck/FindContainer'
 import Home from "../home/Home";
 
 
@@ -23,7 +23,7 @@ const MainRoutes = () => {
             <Route exact path={PROFILE_PATH} render={() => <Profile />} />
             <Route exact path={GAME_PATH} render={() => <Game />} />
             <Route exact path={CREATE_CARDS_PATH} render={() => <Create />} />
-            <Route exact path={FIND_DECK_PATH} render={() => <Find />} />
+            <Route exact path={FIND_DECK_PATH} render={() => <FindContainer />} />
             <Route exact path={HOME_PATH} render={() => <Home />} />
         </>
     )
