@@ -5,7 +5,6 @@ import Game from "../game/Game";
 import Create from "../create_cards/Create";
 import FindContainer from './../find_deck/FindContainer'
 import Home from "../home/Home";
-import Profile from '../profile/ui/Profile';
 import ProfileContainer from '../profile/ui/ProfileContainer';
 
 
@@ -21,7 +20,7 @@ const MainRoutes = () => {
     return (
         <>
             <Route exact path={ROOT_PATH}  render={() => <Root/>} />
-            <Route exact path={PROFILE_PATH} render={() => <Profile />} />
+            <Route exact path={PROFILE_PATH} render={() => <ProfileContainer />} />
             <Route exact path={GAME_PATH} render={() => <Game />} />
             <Route exact path={CREATE_CARDS_PATH} render={() => <Create />} />
             <Route exact path={FIND_DECK_PATH} render={() => <FindContainer />} />
