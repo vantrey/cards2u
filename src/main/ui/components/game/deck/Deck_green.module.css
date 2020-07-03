@@ -13,6 +13,7 @@
     margin: 0 auto;
     border-radius: 4px;
     cursor: pointer;
+    border-left: 1px solid black;
     -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
@@ -30,6 +31,7 @@
     background: #1f5e25;
     transition: 0.5s;
     z-index: -1;
+    /*border-left: 1px solid black;*/
 }
 
 .deck:hover:before {
@@ -52,7 +54,7 @@
     left: 2px;
     bottom: 2px;
     right: 2px;
-    background: white;
+    /*background: white;*/
     transition: 0.5s;
     z-index: 1;
 }

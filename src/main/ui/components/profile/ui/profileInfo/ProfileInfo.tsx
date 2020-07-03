@@ -49,9 +49,6 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = React.memo(({
             <div className={styles.info__item}>
                 <div className={styles.item__email}>Email:&nbsp;&nbsp;{user.email}</div>
             </div>
-            {/*<div className={styles.info__item}>*/}
-            {/*    <div className={styles.item__decksCount}>Decks:&nbsp;&nbsp;{user.publicCardPacksCount}</div>*/}
-            {/*</div>*/}
         </div>
     )
 });

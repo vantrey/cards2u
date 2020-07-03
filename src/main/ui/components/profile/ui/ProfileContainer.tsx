@@ -7,6 +7,7 @@ import ProfileInfoContainer from './profileInfo/ProfileInfoContainer';
 import {withAuthRedirect} from "../../../../features/hoc/withAuthRedirect";
 import FeedbackContainer from "./feedBack/FeedbackContainer";
 import Root from '../../root/Root';
+import PopupSingIn from '../../../common/popUp/PopupSingIn';
 
 const ProfileContainer = () => {
 

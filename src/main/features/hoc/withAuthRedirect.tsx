@@ -8,7 +8,7 @@ export function withAuthRedirect<T>(Component: React.FC) {
 
         const {isAuth} = useSelector((state: AppStateType) => state.login);
 
-        if (!isAuth) return <Redirect to={`/`}/>;
+        if (!isAuth) return <Redirect to={`/redirect`}/>;
         return <Component {...props}/>
     }
 };
