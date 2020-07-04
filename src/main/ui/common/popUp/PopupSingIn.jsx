@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './PopupSingIn.module.css';
-// import decor from '../../images/decor.png';
+import decor from '../../images/decor.png';
 import { NavLink } from "react-router-dom";
 import { LOGIN_PATH, REGISTRATION_PATH, RESTORE_PSW_PATH } from "../../components/routes/FormRoutes";
 
@@ -34,8 +34,7 @@ const PopupSingIn = () => {
 				</div>
 			</NavLink>
 			<div className={styles.popup__decor}>
-				decor
-				{/*<img src={decor} alt='decor'/>*/}
+				<img src={decor} alt='decor'/>
 			</div>
 		</div>
 	)

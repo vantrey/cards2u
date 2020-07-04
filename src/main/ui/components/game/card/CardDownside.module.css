@@ -10,6 +10,9 @@
     box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
 
     border-radius: 5px;
+
+    /*background: #0b3b63 url('../../../images/deck-bg-main1.jpg') center center no-repeat;*/
+    /*background-size: auto;*/
 }
 
 .card {
@@ -21,6 +24,7 @@
     height: 300px;
     color: whitesmoke;
     background-color: #0b3b63;
+
 }
 
 .card__buttons {
