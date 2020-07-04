@@ -1,7 +1,0 @@
-.form {
-  position: absolute;
-  left: 50%;
-  top: 42%;
-  transform: translateX(-50%);
-  overflow: hidden;
-}
