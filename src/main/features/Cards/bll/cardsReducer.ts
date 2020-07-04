@@ -11,7 +11,7 @@ const initialState = {
     isSuccess: false,
     page: 1,
     pageCount: 10,
-    cardsTotalCount: 0,
+    cardsTotalCount: 10,
 }
 
 type initialStateType = typeof initialState;
@@ -22,6 +22,11 @@ export const CardsReducer = (state: initialStateType = initialState, action: Act
             return {
                 ...state,
                 cards: action.cards
+            }
+        case "CARDS_REDUCER/SET_PAGINATION_ITEMS":
+            return {
+                ...state,
+                ...action.payload
             }
         case "CARDS_REDUCER/IS_FETCHING":
             return {
@@ -65,7 +70,10 @@ export const cardsActions = {
     setCardGradeSuccess: (newCardGrade: NewCardGradeType) => ({
         type: 'CARDS_REDUCER/SET_GRADE_CARD_SUCCESS',
         newCardGrade
-    } as const)
+    } as const),
+    getPagination: (page: number, pageCount: number, cardsTotalCount: number) =>
+        ({type: 'CARDS_REDUCER/SET_PAGINATION_ITEMS', payload: {page, pageCount, cardsTotalCount}} as const)
+
 
 }
 
@@ -74,13 +82,18 @@ type ActionsType = InferActionTypes<typeof cardsActions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const get_Cards = (cardsPack_id: string, sortCards = `grade`, direction = '0'): ThunkType =>
+export const get_Cards = (cardsPack_id: string,
+                          sortCards = `grade`,
+                          direction = '0',
+                          page = 1,
+                          pageCount = 100): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
             dispatch(cardsActions.set_Fetching(true));
             let token = repository.getToken();
-            const res = await cardsApi.getCards(cardsPack_id, token, direction + sortCards);
+            const res = await cardsApi.getCards(cardsPack_id, token, direction + sortCards,page, pageCount);
             dispatch(cardsActions.setCards(res.data.cards));
+            dispatch(cardsActions.getPagination(res.data.page, res.data.pageCount, res.data.cardsTotalCount))
             dispatch(cardsActions.set_Fetching(false));
             dispatch(cardsActions.set_Success(true))
             repository.saveToken(res.data.token, res.data.tokenDeathTime);

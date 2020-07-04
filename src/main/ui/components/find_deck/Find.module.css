@@ -1,5 +1,6 @@
 .find__wrap {
     width: 100%;
+    flex-direction: column; /* added 07.02.20*/
     height: 100vh;
     background-color: #000;
     display: flex;
@@ -12,4 +13,15 @@
     background-size: cover;
     background-repeat: no-repeat;
 
+}
+
+
+
+
+
+.pagination {
+    margin: 15px auto;
+    display: flex;
+    list-style: none;
+    outline: none;
 }

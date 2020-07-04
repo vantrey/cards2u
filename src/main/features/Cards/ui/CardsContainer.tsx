@@ -15,7 +15,7 @@ import Link from "../../../ui/common/Link/Link";
 
 const CardsContainer: React.FC = () => {
     const {pack_id, user_id} = useParams();
-    const {cards, isFetching, pageCount, cardsTotalCount} = useSelector((state: AppStateType) => state.cards);
+    const {cards, isFetching,pageCount, cardsTotalCount} = useSelector((state: AppStateType) => state.cards);
     const dispatch = useDispatch();
 
 
@@ -53,24 +53,6 @@ const CardsContainer: React.FC = () => {
             {(isFetching && <div>...Loading please wait</div>) ||
 
             <div className={styles.Cards_container}>
-                <ReactPaginate
-                    previousLabel={'<'}
-                    nextLabel={'>'}
-                    breakLabel={'...'}
-                    breakClassName={'break-me'}
-                    pageCount={pageCountSize}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={pageChangedHandler}
-                    containerClassName={'pagination'}
-                    activeClassName={'active'}
-                    pageClassName='page-item'
-                    pageLinkClassName='page-link'
-                    previousClassName='page-item'
-                    nextClassName='page-item'
-                    previousLinkClassName="page-link"
-                    nextLinkClassName="page-link"
-                />
                 <Cards
                     userId={user_id}
                     cards={cards}
@@ -79,6 +61,8 @@ const CardsContainer: React.FC = () => {
                     onUpdateCard={onUpdateCard}
                     sortDown={sortDown}
                     sortUp={sortUp}
+                    pageCountSize={pageCountSize}
+                    pageChangedHandler={pageChangedHandler}
                 />
                 {cards.length === 0 &&
                 <Link title={'beck to card packs'} path={`${CARD_PACKS_PATH}`}/> ||

@@ -5,6 +5,7 @@ import styles from './Cards.module.css'
 import {repository} from "../../../helpers/repos_localStorage/Token";
 import ModalWindowAddCard from "./ModalWindowCards/ModalWindowAddCard";
 import CardsHeader from "./CardsHeader";
+import ReactPaginate from "react-paginate";
 
 type OwnProps = {
     cards: Array<CardType>
@@ -14,6 +15,9 @@ type OwnProps = {
     userId: string
     sortUp: (e: React.MouseEvent<HTMLButtonElement>) => void
     sortDown: (e: React.MouseEvent<HTMLButtonElement>) => void
+    pageCountSize:number
+    pageChangedHandler:(page: { selected: number })=>void
+
 
 }
 
@@ -24,7 +28,9 @@ const Cards: React.FC<OwnProps> = ({
                                        onUpdateCard,
                                        sortUp,
                                        sortDown,
-                                       userId
+                                       userId,
+                                       pageChangedHandler,
+                                       pageCountSize
                                    }) => {
 
     const Headers = [
@@ -69,9 +75,22 @@ const Cards: React.FC<OwnProps> = ({
                     'there are no any cards'
                 </div>) ||
             <div>
+                <ReactPaginate
+                    previousLabel={"prev"}
+                    nextLabel={"next"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={pageCountSize}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={pageChangedHandler}
+                    containerClassName={styles.pagination}
+                    activeClassName={"active"}/>
+
                 <div className={styles.cardsHeaders}>
                     {cardsHeaders}
                 </div>
+
                 <div>
                     <div className={styles.cardsEls}>
                         {cardsEls}

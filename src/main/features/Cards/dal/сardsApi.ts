@@ -27,8 +27,8 @@ type AddPostDeleteResponseType = {
 }
 
 export const cardsApi = {
-    getCards(cardsPack_id: string, token: string | null,sortCards:string) {
-        return instance.get<GetCardsType>(`?cardsPack_id=${cardsPack_id}&token=${token}&sortCards=${sortCards}&pageCount=${100}`)
+    getCards(cardsPack_id: string, token: string | null,sortCards:string,page: number, pageCount: number) {
+        return instance.get<GetCardsType>(`?cardsPack_id=${cardsPack_id}&token=${token}&sortCards=${sortCards} &page=${page}&pageCount=${pageCount}`)
     },
 
     addCard(card: AddCardType, token: string | null) {
