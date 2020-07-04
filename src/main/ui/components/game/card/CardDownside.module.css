@@ -1,0 +1,164 @@
+
+.card__wrap {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    /*font-family: 'CS Grimrock', sans-serif;*/
+    font-family: sans-serif;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+
+    border-radius: 5px;
+
+    /*background: #0b3b63 url('../../../images/deck-bg-main1.jpg') center center no-repeat;*/
+    /*background-size: auto;*/
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 300px;
+    height: 300px;
+    color: whitesmoke;
+    background-color: #0b3b63;
+
+}
+
+.card__buttons {
+    color: black;
+    position: relative;
+    width: 12%;
+    height: 100%;
+    padding: 10px;
+    background: #0b3b63 url('../../../icons/thinking-face.png') center center no-repeat;
+    background-size: contain;
+
+}
+
+.buttons__group {
+    z-index: -10;
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+    border-radius: 100%;
+    width: 0;
+    height: 0;
+    transform: translate(-50%, -50%);
+    transition: .25s cubic-bezier(0.25, 0, 0, 1);
+}
+
+.buttons__group button {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 100%;
+    background-color: #0b3b63;
+    color: whitesmoke;
+    font-size: 10px;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: .25s cubic-bezier(0.25, 0, 0, 1);
+    box-shadow: 0 0 0 -.25rem #1f5e25;
+}
+
+.buttons__group button:focus, .buttons__group button:active {
+    outline: none;
+}
+.buttons__group button:active {
+    transform: translate(1px, 1px);
+}
+.buttons__group button:hover {
+    background: red;
+    color: black;
+    box-shadow: 0 0 1rem -.25rem black;
+}
+
+.buttons__group button:first-child:nth-last-child(4),
+.buttons__group button:first-child:nth-last-child(4) ~ *:nth-child(2) {
+    left: 37.5%;
+    top: 18.75%;
+}
+
+.buttons__group button:hover:nth-child(2) {
+    background: orange;
+}
+
+.buttons__group button:hover:nth-child(3) {
+    background: greenyellow;
+}
+
+.buttons__group button:hover:nth-child(1) {
+    background: red;
+}
+
+.buttons__group button:hover:nth-child(4) {
+    background: green;
+}
+
+.buttons__group button:first-child:nth-last-child(4),
+.buttons__group button:first-child:nth-last-child(4) ~ *:nth-child(3) {
+    left: 18.75%;
+    top: 37.5%;
+}
+
+.buttons__group button:first-child:nth-last-child(4),
+.buttons__group button:first-child:nth-last-child(4) ~ *:nth-child(4) {
+    left: 18.75%;
+    top: 62.5%;
+}
+
+.buttons__group button:first-child:nth-last-child(4),
+.buttons__group button:first-child:nth-last-child(4) ~ *:nth-child(1) {
+    left: 62.5%;
+    top: 18.75%;
+}
+
+.card__buttons:hover  .buttons__group, .buttons__group:focus-within {
+    width: 150px;
+    height: 150px;
+}
+
+.card__voting {
+    display: flex;
+    width: 100%;
+    height: 20%;
+    border-bottom: 1px dashed  orange;
+}
+
+.card__title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    font-size: 12px;
+    color: whitesmoke;
+}
+
+.card__title p {
+    font-size: 12px;
+    color: whitesmoke;
+}
+.title__icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 20px;
+}
+
+.text__title {
+    text-transform: uppercase;
+    color: orange;
+    margin-bottom: 40px;
+}
+.card__text {
+    padding: 15px;
+    margin-top: 46px;
+}
+
+.text__discr {
+    padding: 0 40px;
+}
+

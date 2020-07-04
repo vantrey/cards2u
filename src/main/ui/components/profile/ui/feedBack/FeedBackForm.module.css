@@ -1,0 +1,45 @@
+.feedback__wrap {
+
+}
+
+.feedback__title {
+    text-transform: uppercase;
+    color: orange;
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.75);
+    font-weight: normal;
+    margin: 10px;
+}
+
+.feedback__form {
+    overflow: hidden;
+}
+.feedback__form input {
+    color: #90a4ae;
+}
+
+/*убираю белый фон при автозаполнении браузером полей */
+.feedback__form input:-webkit-autofill,
+.feedback__form input:-webkit-autofill:hover,
+.feedback__form input:-webkit-autofill:focus,
+.feedback__form input:-webkit-autofill{
+    -webkit-text-fill-color: #90a4ae;
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
+    transition: background-color 5000s ease-in-out 0s;
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(0,174,255,0.04) 50%,rgba(255,255,255,0) 51%,rgba(0,174,255,0.03) 100%);
+}
+/*=====*/
+
+.feedback__form button {
+    color: #795548;
+    -webkit-transition: all 0.33s ease;
+    transition: all 0.33s ease;
+}
+
+.feedback__form button:hover {
+    background-color: #3e2723;
+    color: wheat;
+    -webkit-transition: all 0.33s ease;
+    transition: all 0.33s ease;
+}
+
+

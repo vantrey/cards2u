@@ -1,0 +1,291 @@
+.game__wrap {
+    width: 100%;
+    height: 100vh;
+    /*background-color: #607d8b;*/
+    font-family: 'CS Grimrock', sans-serif;
+    min-width: 100%;
+    min-height: 100vh;
+    display: flex;
+
+    background: #607d8b url('../../images/game-bg-2.jpg') center center no-repeat;
+    background-size: cover;
+}
+
+.game__container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 150px);
+    margin-top: 100px;
+    max-width: 1360px;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(6px);
+
+}
+
+.game__left {
+    flex-grow: 1;
+    background: transparent;
+}
+
+.game__right {
+    flex-grow: 1;
+    background: transparent;
+}
+
+.game__analytics {
+    width: 20%;
+    max-width: 400px;
+    height: 100%;
+    /*border: 1px solid red;*/
+}
+
+.game__content {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    margin-left: 70px;
+}
+
+.content__header {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+    /*max-height: 150px;*/
+    /*min-height: 120px;*/
+    /*margin-bottom: 50px;*/
+}
+.header__user {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+    margin-right: 100px;
+}
+
+.user__avatar {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+
+}
+.user__avatar img {
+    display: block;
+    height: inherit;
+    width: auto;
+    max-width: none;
+}
+.user__nick {
+    font-size: 18px;
+    /*color: #0b3b63;*/
+    color: orange;
+    text-shadow: 5px 5px 5px  rgba(0,0,0,0.75);
+ }
+
+.header__info {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.header__info h3 {
+    text-shadow: 5px 5px 5px  rgba(0,0,0,0.75);
+}
+
+.header__title {
+    color: orange;
+    text-transform: uppercase;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.header__link {
+    cursor: pointer;
+    outline: none;
+}
+
+.header__decks {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /*flex-wrap: wrap;*/
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.decks__item {
+    width: 78px;
+    height: 135px;
+    margin: 0 10px;
+    border-radius: 1px;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    transition: all 0.3s ease;
+    position: relative;
+}
+.decks__item:hover {
+    transition: all 0.3s ease;
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
+    -webkit-box-shadow: 9px 9px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 9px 9px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 9px 9px 5px 0px rgba(0,0,0,0.75);
+
+}
+
+.decks__item_1 {
+    background: url('../../images/card-bg-BR.png') no-repeat;
+    background-size: contain;
+}
+.decks__item_2 {
+    background: url('../../images/card-bg-RR.png') no-repeat;
+    background-size: contain;
+}
+.decks__item_3 {
+    background: url('../../images/card-bg-GR.png') no-repeat;
+    background-size: contain;
+}
+.decks__item_4 {
+    background: url('../../images/card-bg-PR.png') no-repeat;
+    background-size: contain;
+}
+.decks__item_5 {
+    background: url('../../images/card-bg-OR.png') no-repeat;
+    background-size: contain;
+}
+.decks__item_6 {
+    background: url('../../images/card-bg-FR.png') no-repeat;
+    background-size: contain;
+}
+
+
+/*===== стили для tooltip*/
+.tooltip {
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    justify-content: center;
+    z-index: 300;
+    opacity: .40;
+    padding: 3px;
+    background: #393939;
+    color: #088dcd;
+    position: absolute;
+    font-size: 10px;
+    box-sizing: border-box;
+    transform: translateY(9px);
+    transition: all 0.3s ease-in-out;
+
+    box-shadow: 0 0 3px rgba(56, 54, 54, 0.86);
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+
+    top: -30%;
+    left: -75%;
+    width: 250%;
+}
+
+.tooltip_wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+
+}
+
+.tooltip_title {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.decks__item:hover .tooltip {
+    visibility: visible;
+    transform: translateY(-10px);
+    opacity: 1;
+    box-shadow: rgb(49, 56, 60) 0px 8px 8px;
+    border-color: transparent;
+    transition: all 0.15s linear 0s;
+
+    animation: tooltip 1s ease-in-out infinite alternate;
+
+}
+
+/*========*/
+
+.content__main {
+    width: 100%;
+    height: 52%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 1;
+}
+
+.main__card {
+    width: 500px;
+    min-width: 500px;
+    max-width: 500px;
+    /*max-height: 400px;*/
+    min-height: 300px;
+    margin-right: 80px;
+}
+
+.main__deck {
+    width: 250px;
+    /*max-width: 250px;*/
+    max-height: 400px;
+    min-height: 300px;
+
+    display: flex;
+    position: relative;
+}
+
+.content__buttons {
+    min-height: 80px;
+    width: 500px;
+    min-width: 500px;
+    max-width: 500px;
+    margin-right: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+.game__chat {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 400px;
+    height: 200px;
+    background-color: red;
+    border: 1px solid red;
+}

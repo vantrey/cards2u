@@ -1,0 +1,232 @@
+.taverna__wrap {
+    width: 100%;
+    height: calc(100vh - 150px);
+    display: flex;
+    background: transparent;
+    position: absolute;
+    z-index: 200;
+    top: 100px;
+    right: -100%;
+    opacity: 0;
+    font-family: 'CS Grimrock', sans-serif;
+    font-weight: bold;
+    transition: all ease-out 0.6s;
+}
+
+.taverna__wrap_active {
+    right: 0;
+    opacity: 1;
+    transition: all ease-out 0.8s;
+}
+.taverna__left {
+    flex-grow: 1;
+    background: transparent;
+}
+
+.taverna__main {
+    width: 1140px;
+    max-width: 1140px;
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    flex-basis: 1140px;
+}
+
+.taverna__right {
+    flex-grow: 1;
+    background: transparent;
+}
+
+.main__item {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 24%;
+    border-right: 1px solid #004d40;
+    border-left: 1px solid #004d40;
+    height: 100%;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0) ;
+    box-shadow: 0 2px 2px #000;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    mix-blend-mode: color-dodge;
+    overflow: hidden;
+
+    cursor: pointer;
+}
+
+.main__link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    outline: none;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+}
+
+.main__item  .main__link h1 {
+    mix-blend-mode: color-dodge;
+    font-size: 36px;
+    position: absolute;
+    top: 100%;
+    transition: top ease 0.5s;
+
+}
+
+/*==== анимация левитации для блоков меню*/
+
+@-webkit-keyframes hvr-bob {
+    0% {
+        -webkit-transform: translateY(-8px);
+        transform: translateY(-8px);
+    }
+    50% {
+        -webkit-transform: translateY(-4px);
+        transform: translateY(-4px);
+    }
+    100% {
+        -webkit-transform: translateY(-8px);
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes hvr-bob {
+    0% {
+        -webkit-transform: translateY(-8px);
+        transform: translateY(-8px);
+    }
+    50% {
+        -webkit-transform: translateY(-4px);
+        transform: translateY(-4px);
+    }
+    100% {
+        -webkit-transform: translateY(-8px);
+        transform: translateY(-8px);
+    }
+}
+
+@-webkit-keyframes hvr-bob-float {
+    100% {
+        -webkit-transform: translateY(-8px);
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes hvr-bob-float {
+    100% {
+        -webkit-transform: translateY(-8px);
+        transform: translateY(-8px);
+    }
+}
+
+
+/*====== */
+
+.main__item_game {
+    background: url("../../../images/menu-green-450-2-min.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.main__item_card {
+    background: url("../../../images/menu-blue.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.main__item_pack {
+    background: url("../../../images/menu-red-min.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.main__item_home {
+    background: url("../../../images/menu-white-600-1-min.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/*анимация перехода от чб до цветного + увеличение картинки*/
+
+@keyframes toColour {
+    0% {
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+    }
+    25% {
+        -webkit-filter: grayscale(75%);
+        filter: grayscale(75%);
+    }
+    50% {
+        -webkit-filter: grayscale(50%);
+        filter: grayscale(50%);
+    }
+    75% {
+        -webkit-filter: grayscale(25%);
+        filter: grayscale(25%);
+    }
+    100% {
+        -webkit-filter: grayscale(0);
+        filter: grayscale(0);
+    }
+}
+
+/*=====*/
+
+
+.main__item:hover, .main__item:focus {
+    -webkit-animation-name: hvr-bob-float, hvr-bob;
+    animation-name: hvr-bob-float, hvr-bob, toColour;
+    border-color: transparent;
+    box-shadow: 0 8px 8px #000;
+
+    -webkit-animation-duration: .3s, 1.5s, 0.7s;
+    animation-duration: .3s, 1.5s, 0.7s;
+    -webkit-animation-delay: 0s, .3s, 0s;
+    animation-delay: 0s, .3s, 0s;
+    -webkit-animation-timing-function: ease-out, ease-in-out, ease-in;
+    animation-timing-function: ease-out, ease-in-out, ease-in;
+    -webkit-animation-iteration-count: 1, infinite, 1;
+    animation-iteration-count: 1, infinite, 1;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-direction: normal, alternate, normal;
+    animation-direction: normal, alternate, normal;
+
+}
+
+.main__item:hover h1, .main__item:focus h1 {
+    top: 66%;
+    transition: top ease 0.5s;
+
+}
+
+.main__item_pack h1 {
+    color: #ffb07a;
+
+}
+
+.main__item_card h1 {
+    color: #40c4ff;
+
+}
+
+.main__item_game h1 {
+    color: #4caf50;
+
+}
+
+.main__item_home h1 {
+    color: #3f51b5;
+
+}
+
+/**=====*!*/
