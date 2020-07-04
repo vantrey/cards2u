@@ -12,10 +12,10 @@ const UserDecks: React.FC<UserDecksTypeC> = ({id}) => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getCardPacks(null, null, id))
-    },[id])
+    }, [id])
     return (
         <div>
-            {cardPacks.map(cardPack=>
+            {cardPacks.map(cardPack =>
                 <div key={cardPack._id}>
                     {cardPack.name}
                 </div>)

@@ -2,8 +2,9 @@ import {UserType} from "../../../../types/entities";
 import React from "react";
 import styles from "./FindDeck.module.css";
 import UserData from "./user-data/UserData";
-import SortUserData from './sort-user-data/SortUserData'
-import Avatar from "../../../common/avatar/Avatar";
+import Sort from './sort/Sort'
+import UserInfo from "../../../common/user/UserInfo";
+
 
 
 type UsersDeckType = {
@@ -29,12 +30,12 @@ const FindDeck: React.FC<UsersDeckType> = ({
 
     return (
         <div>
-          {/*  <Avatar/>*/}
+            <UserInfo/>
             <div className={styles.find_headers__wrap}>
                 {
                     Headers.map(h =>
                         <div key={h.name}>
-                            <SortUserData
+                            <Sort
                                 name={h.name}
                                 title={h.title}
                                 sortDeckUp={sortDeckUp}

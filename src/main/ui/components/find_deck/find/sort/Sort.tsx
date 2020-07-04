@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './SortUserData.module.css'
+import styles from './Sort.module.css'
 
 
 
@@ -12,7 +12,7 @@ type UsersDeckHeader = {
 
 
 
-const SortUserData: React.FC<UsersDeckHeader> = ({
+const Sort: React.FC<UsersDeckHeader> = ({
                                                            title,
                                                            name,
                                                            sortDeckUp,
@@ -30,5 +30,5 @@ const SortUserData: React.FC<UsersDeckHeader> = ({
         </div>
     )
 }
-export  default SortUserData
+export  default Sort
 
