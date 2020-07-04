@@ -1,0 +1,105 @@
+.modal {
+    width: 300px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #8e8ace;
+    margin: 200px auto;
+    padding: 5px;
+    text-align: center;
+    transform: 'translate(-40%, -10%)';
+    border-radius: 20px;
+    box-shadow: 0 0 10px 5px rgb(80, 73, 73);
+}
+
+.modal:hover {
+    border: none;
+}
+
+.add {
+    font-weight: bold;
+    cursor: pointer;
+    color: red;
+    width: 60px;
+    margin-top: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 2px;
+    background-color: cornflowerblue;
+    border:2px solid #f59500;
+}
+
+.delete {
+    font-weight: bold;
+    cursor: pointer;
+    color: blue;
+    width: 60px;
+    margin-top: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 2px;
+    background-color: red;
+    border:2px solid greenyellow;
+}
+
+.update {
+    font-weight: bold;
+    cursor: pointer;
+    color: greenyellow;
+    width: 60px;
+    margin-top: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 2px;
+    background-color: green;
+    border:2px solid blue;
+}
+
+.add_Card {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.update_Card {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+
+}
+
+.delete_Card {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.button_modals {
+    margin: 10px;
+}
+
+.button_yes_no {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    padding: .5em 2em;
+    outline: none;
+    border-width: 2px 0;
+    border-style: solid none;
+    border-color: #FDBE33 #000 #D77206;
+    border-radius: 6px;
+    background: linear-gradient(#F3AE0F, #E38916) #E38916;
+    transition: 0.2s;
+    margin: 2px;
+}
+
+.button_yes_no:hover {
+    background: linear-gradient(#f5ae00, #f59500) #f5ae00;
+}
+
+.button_yes_no:active {
+    background: linear-gradient(#f59500, #f5ae00) #f59500;
+}
+

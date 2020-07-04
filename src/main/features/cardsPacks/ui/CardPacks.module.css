@@ -1,0 +1,13 @@
+.cardPacks {
+  display: flex;
+  justify-content: center;
+  min-height: 240px;
+}
+.addDeck {
+  margin-left: 20px;
+  height: 30px;
+}
+.modal_container {
+display: flex;
+  justify-content: center;
+}

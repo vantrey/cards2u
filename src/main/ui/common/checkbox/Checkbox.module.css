@@ -1,0 +1,88 @@
+.form__checkbox {
+  position: relative;
+  margin: 12px 0;
+  min-width: 240px;
+  max-width: 300px;
+  height: 20px;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+}
+
+
+/*===== кастомные чекбоксы стили =====*/
+input[type="checkbox"]:checked,
+input[type="checkbox"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+
+input[type="checkbox"]:checked + label,
+input[type="checkbox"]:not(:checked) + label {
+  position: relative;
+  padding-left: 28px;
+  line-height: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+input[type="checkbox"]:checked + label:before,
+input[type="checkbox"]:not(:checked) + label:before {
+  content: "";
+  position: absolute;
+  border: 1px solid #795548;
+  background-color: transparent;
+  border-radius: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  width: 15px;
+  height: 15px;
+  box-sizing: border-box;
+}
+
+input[type="checkbox"]:checked + label:before,
+input[type="checkbox"]:not(:checked) + label:before {
+  border-radius: 2px;
+}
+
+input[type="checkbox"]:checked + label:after,
+input[type="checkbox"]:not(:checked) + label:after {
+  content: "";
+  position: absolute;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+input[type="checkbox"]:checked + label:after,
+input[type="checkbox"]:not(:checked) + label:after {
+  left: 32%;
+  top: 0;
+  width: 15px;
+  height: 9px;
+  border-radius: 1px;
+  border-left: 4px solid #3e2723;
+  border-bottom: 4px solid #3e2723;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+}
+
+input[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+}
+
+input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+}
+
+.form__remember {
+  font-size: 8px;
+}
