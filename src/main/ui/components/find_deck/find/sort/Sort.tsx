@@ -2,7 +2,6 @@ import React from "react";
 import styles from './Sort.module.css'
 
 
-
 type UsersDeckHeader = {
     title: string
     name: string

@@ -5,10 +5,11 @@ import {AppStateType} from "../../../bll/store/store";
 import {actions, getUser} from "../../../features/users/bll/UserReducer";
 import ReactPaginate from "react-paginate";
 import FindDeck from "./find/FindDeck";
-
+import UserInfo from "../../common/user/UserInfo";
 
 
 const FindContainer: React.FC = () => {
+
     const dispatch = useDispatch();
     const {page, pageCount, totalUsersCount, users,isFetching} = useSelector((state: AppStateType) => state.getUserReducer)
     const [showMode, setShowMode] = useState<string>('')
@@ -36,10 +37,19 @@ const FindContainer: React.FC = () => {
         setShowMode(id)
     }
 
-    const pageCountSize = Math.ceil(totalUsersCount / pageCount)
+    const pageCountSize = Math.ceil(totalUsersCount / pageCount);
+
     return (
         <div className={styles.find__wrap}>
-            {(isFetching && <span>...LOADING</span>)||
+
+            <UserInfo/>
+            <FindDeck users={users}
+                      sortDeckUp={sortDeckUp}
+                      sortDeckDown={sortDeckDown}
+                      onShowDecks={onShowDecks}
+                      showMode={showMode}
+                      isFetching={isFetching}
+            />
             <ReactPaginate
                 previousLabel={"prev"}
                 nextLabel={"next"}
@@ -50,15 +60,7 @@ const FindContainer: React.FC = () => {
                 pageRangeDisplayed={5}
                 onPageChange={pageChangedHandler}
                 containerClassName={styles.pagination}
-                activeClassName={"active"}/>}
-
-            <FindDeck users={users}
-                      sortDeckUp={sortDeckUp}
-                      sortDeckDown={sortDeckDown}
-                      onShowDecks={onShowDecks}
-                      showMode={showMode}
-                    /*  isFetching={isFetching}*/
-            />
+                activeClassName={"active"}/>
 
         </div>)
 }

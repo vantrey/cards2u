@@ -4,7 +4,7 @@ import styles from "./FindDeck.module.css";
 import UserData from "./user-data/UserData";
 import Sort from './sort/Sort'
 import UserInfo from "../../../common/user/UserInfo";
-
+import Loader from "../../../common/loader/Loader";
 
 
 type UsersDeckType = {
@@ -13,6 +13,7 @@ type UsersDeckType = {
     sortDeckDown: (e: React.MouseEvent<HTMLButtonElement>) => void
     onShowDecks: (e: React.MouseEvent<HTMLDivElement>) => void
     showMode: string
+    isFetching: boolean
 }
 
 const FindDeck: React.FC<UsersDeckType> = ({
@@ -20,7 +21,8 @@ const FindDeck: React.FC<UsersDeckType> = ({
                                                sortDeckUp,
                                                sortDeckDown,
                                                onShowDecks,
-                                               showMode
+                                               showMode,
+                                               isFetching
                                            }) => {
     const Headers = [
         {name: 'avatar', title: 'Avatar'},
@@ -30,7 +32,6 @@ const FindDeck: React.FC<UsersDeckType> = ({
 
     return (
         <div>
-            <UserInfo/>
             <div className={styles.find_headers__wrap}>
                 {
                     Headers.map(h =>
@@ -42,8 +43,18 @@ const FindDeck: React.FC<UsersDeckType> = ({
                                 sortDeckDown={sortDeckDown}/>
                         </div>)
                 }
+
             </div>
-            <div className={styles.user_data__wrap}>
+
+            {isFetching &&
+			<div>
+				<Loader/>
+			</div>
+            }
+
+            {!isFetching &&
+			<div className={styles.user_data__wrap}>
+
                 {
                     users.map(u =>
                         <div className={styles.user__data} key={u._id}>
@@ -55,12 +66,12 @@ const FindDeck: React.FC<UsersDeckType> = ({
                                 onShowDecks={onShowDecks}
                                 showMode={showMode}
                             />
-
-                        </div>)
+                        </div>
+                    )
                 }
-            </div>
+			</div>
+            }
         </div>
-
     )
 }
 

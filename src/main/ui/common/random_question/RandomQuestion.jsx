@@ -434,5 +434,5 @@ export const getRandomQuestion = (maxNumber) => {
     return cardQuestion = questionArray[number];
 }
 
-getRandomQuestion(maxNumber);
+// getRandomQuestion(maxNumber);
 
