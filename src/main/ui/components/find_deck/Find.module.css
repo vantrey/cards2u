@@ -1,27 +1,34 @@
 .find__wrap {
     width: 100%;
-    flex-direction: column; /* added 07.02.20*/
     height: 100vh;
-    background-color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /*background-color: #607d8b;*/
     font-family: 'CS Grimrock', sans-serif;
-    color: whitesmoke;
+    min-width: 100%;
+    min-height: 100vh;
+    display: flex;
 
-    background: url("../../images/game-bg1.png");
+    background: #607d8b url('../../images/game-bg-2.jpg') center center no-repeat;
     background-size: cover;
-    background-repeat: no-repeat;
+}
+
+.find__container {
+    position: relative;
+    width: 1140px;
+    max-width: 1140px;
+    height: calc(100vh - 150px);
+    margin: 100px auto 0 auto;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(6px);
 
 }
 
+.find__left {
+    flex-grow: 1;
+    background: transparent;
+}
 
-
-
-
-.pagination {
-    margin: 15px auto;
-    display: flex;
-    list-style: none;
-    outline: none;
+.find__right {
+    flex-grow: 1;
+    background: transparent;
 }

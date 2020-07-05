@@ -1,0 +1,12 @@
+.user_data__wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.user__data {
+    display: flex;
+}
+
+.find_headers__wrap {
+    display: flex;
+}
