@@ -9,7 +9,7 @@ const initialState = {
     users: [] as Array<UserType>,
     page: 1,
     pageCount: 10,
-    totalUsersCount: 10,
+    totalUsersCount: 0,
     isFetching: false
 }
 
@@ -60,12 +60,11 @@ type ActionsType = InferActionTypes<typeof actions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const getUser = (page: number|null, pageCount: number|null,sortUsers='avatar',direction='0'): ThunkType =>
-    async (dispatch: DispatchType ) => {
-
+export const getUser = (page: number, pageCount: number): ThunkType =>
+    async (dispatch: DispatchType) => {
         dispatch(actions.setIsFetching(true))
         let token = repository.getToken()
-        const result = await api.getUsers(token, page, pageCount,direction+sortUsers)
+        const result = await api.getUsers(token, page, pageCount)
         dispatch(actions.getUserSuccess(result.users));
         dispatch(actions.setPageCount({
             page: result.page,

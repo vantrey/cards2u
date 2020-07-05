@@ -76,7 +76,7 @@ export const repository = {
         return null;
     },
 
-    get_UserFromLS(userId: string|null) {
+    get_UserFromLS(userId: string) {
         const users: string | null = localStorage.getItem('users');
         if (users) {
             const usersFromLS = JSON.parse(users) as Array<UserType>;

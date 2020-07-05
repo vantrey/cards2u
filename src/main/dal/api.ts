@@ -46,9 +46,9 @@ type UpdateUserType = {
 
 
 export const api = {
-    getUsers(token: string | null, page: number|null, pageCount: number|null,sortUsers:string) {
+    getUsers(token: string | null, page: number, pageCount: number) {
         return instance.get<GetUsersType>(
-            `/social/users?token=${token}&page=${page}&pageCount=${pageCount}&sortUsers=${sortUsers}`
+            `/social/users?token=${token}&page=${page}&pageCount=${pageCount}`
         ).then(r => r.data)
     },
     login(email: string, password: string, rememberMe: boolean) {

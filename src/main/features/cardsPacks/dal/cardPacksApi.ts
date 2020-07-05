@@ -37,9 +37,9 @@ type UpdateCardPackType = {
 }
 
 export const cardPacksApi = {
-  getPacks(token: string | null, currentPage: number|null, pageSize: number|null,user_id:string|null) {
+  getPacks(token: string | null, currentPage: number, pageSize: number) {
     return instance.get<GetPacksType>(
-      `?token=${token}&page=${currentPage}&pageCount=${pageSize}&user_id=${user_id}`
+      `?token=${token}&page=${currentPage}&pageCount=${pageSize}`
     )
   },
   createCardsPack(token: string | null, cardsPack: { name: string, user_id: string | null }) {

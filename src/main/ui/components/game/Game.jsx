@@ -50,7 +50,7 @@ const Game = () => {
 										</div>
 									</div>
 								</NavLink>
-								<NavLink to={GAME_PATH_DECK_RED} className={styles.header__link}>
+								<NavLink to={ GAME_PATH_DECK_RED} className={styles.header__link}>
 									<div className={`${styles.decks__item} ${styles.decks__item_2}`}>
 										<div className={styles.tooltip}>
 											<div className={styles.tooltip_wrap}>
