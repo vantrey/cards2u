@@ -3,6 +3,7 @@ import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {UserType} from "../../types/entities";
 import {repository} from "../../helpers/repos_localStorage/Token";
 import {api} from "../../dal/api";
+import {setIsPreventFetching} from "../preventReques/preventRequestReducer";
 
 const initialState = {
     isSuccess: false,
@@ -30,38 +31,32 @@ export const profileReducer = (state: typeof initialState = initialState, action
             return {
                 ...state,
                 isSuccess: action.isSuccess
-            }
-
-        case "PROFILE_REDUCER/SET_FETCHING":
-            return {
-                ...state,
-                isFetching: action.isFetching
-            }
+            };
 
         case "PROFILE_REDUCER/SET_ERROR":
             return {
                 ...state,
                 errorServerMessage: action.error
-            }
+            };
 
         case "PROFILE_REDUCER/SET_USER_SUCCESS":
             return {
                 ...state,
                 user: action.user
-            }
+            };
 
 
         default:
             return state
     }
-}
+};
 
 export const profileActions = {
     setIsSuccess: (isSuccess: boolean) => ({type: "PROFILE_REDUCER/SET_SUCCESS", isSuccess} as const),
-    setIsFetching: (isFetching: boolean) => ({type: 'PROFILE_REDUCER/SET_FETCHING', isFetching} as const),
     setErrorFromServer: (error: string) => ({type: 'PROFILE_REDUCER/SET_ERROR', error} as const),
     setUser: (user: UserType) => ({type: 'PROFILE_REDUCER/SET_USER_SUCCESS', user} as const),
-}
+};
+
 type ActionsType = InferActionTypes<typeof profileActions>
 
 // thunks
@@ -83,35 +78,35 @@ export const getUser = (): ThunkType => async (dispatch: DispatchType, getState:
             dispatch(profileActions.setUser(userFromLs));
 
         } else {
-            dispatch(profileActions.setIsFetching(true));
+            dispatch(setIsPreventFetching(true));
             const res = await api.getUser(token, userId);// userId & token can be null -> server will response error
             dispatch(profileActions.setUser(res.data.user));
             repository.save_UserToLS(res.data.user);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
-            dispatch(profileActions.setIsFetching(false));
+            dispatch(setIsPreventFetching(false));
         }
         dispatch(profileActions.setIsSuccess(true));
 
     } catch (e) {
         dispatch(profileActions.setErrorFromServer(e.response.data.error));
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
-        dispatch(profileActions.setIsFetching(false));
+        dispatch(setIsPreventFetching(false));
     }
 };
 export const updateUser = (name: string, avatar: string | null = null): ThunkType =>
     async (dispatch: DispatchType) => {
     try {
         const token = repository.getToken();
-        dispatch(profileActions.setIsFetching(true));
+        dispatch(setIsPreventFetching(true));
         const res = await api.updateUser(token, name, avatar);
         dispatch(profileActions.setUser(res.data.updatedUser));
         repository.saveToken(res.data.token, res.data.tokenDeathTime);
         repository.save_UserToLS(res.data.updatedUser);
-        dispatch(profileActions.setIsFetching(false));
+        dispatch(setIsPreventFetching(false));
     } catch (e) {
         dispatch(profileActions.setErrorFromServer(e.response.data.error));
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
-        dispatch(profileActions.setIsFetching(false));
+        dispatch(setIsPreventFetching(false));
     }
 
 };

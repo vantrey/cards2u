@@ -8,32 +8,30 @@ import {useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store/store";
 import PopupSingIn from '../../common/popUp/PopupSingIn';
 
-export const REDIRECT_PATH = '/redirect'
-export const LOGIN_PATH = '/login'
-export const SET_NEW_PSW__PATH = '/newPsw'
-export const REGISTRATION_PATH = '/registration'
-export const RESTORE_PSW_PATH = '/restorePsw'
+export const REDIRECT_PATH = '/redirect';
+export const LOGIN_PATH = '/login';
+export const SET_NEW_PSW__PATH = '/newPsw';
+export const REGISTRATION_PATH = '/registration';
+export const RESTORE_PSW_PATH = '/restorePsw';
 
 
 const FormRoutes = () => {
 
-    const {isFetchingLogin} = useSelector((state: AppStateType) => state.login);
-    const {isFetchingRegistration} = useSelector((state: AppStateType) => state.registration);
-    const {isFetchingRestorePsw} = useSelector((state: AppStateType) => state.restorePsw);
+    const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
 
     return (
         <>
             <Route path={REDIRECT_PATH} render={() => <Scroll children={<PopupSingIn/>} title={'Sing in'}
-                                                              isFetching={isFetchingLogin}/>}/>
+                                                              isFetching={isPreventFetching}/>}/>
             <Route path={LOGIN_PATH} render={() => <Scroll children={<LoginContainer/>} title={'Login'}
-                                                           isFetching={isFetchingLogin}/>}/>
+                                                           isFetching={isPreventFetching}/>}/>
             <Route path={REGISTRATION_PATH}
                    render={() => <Scroll children={<RegistrationContainer/>} title={'Registration'}
-                                         isFetching={isFetchingRegistration}/>}/>
+                                         isFetching={isPreventFetching}/>}/>
             <Route path={RESTORE_PSW_PATH}
                    render={() => <Scroll children={<RestorePswContainer/>} title={'Restore pswd'}
-                                         isFetching={isFetchingRestorePsw}/>}/>
+                                         isFetching={isPreventFetching}/>}/>
         </>
     )
-}
+};
 export default FormRoutes;

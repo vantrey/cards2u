@@ -38,6 +38,6 @@ const RegistrationForm: React.FC<RegistrationFormPropsType> = ({onSubmit, regist
         <Button/>
     </form>
   </div>
-}
+};
 
 export default RegistrationForm

@@ -9,6 +9,7 @@ import {CardsReducer} from "../../features/Cards/bll/cardsReducer";
 import {userReducer} from "../../features/users/bll/UserReducer";
 import {cardPacksReducer} from "../../features/cardsPacks/bll/cardPacksReducer";
 import {favoriteDecksReducer} from "../favoriteDecks/favoriteDecksReducer";
+import {preventRequestReducer} from "../preventReques/preventRequestReducer";
 
 const rootReducer = combineReducers({
     login: loginReducer,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     cards: CardsReducer,
     getUserReducer: userReducer,
     cardPacks: cardPacksReducer,
-    favoriteDecks: favoriteDecksReducer
+    favoriteDecks: favoriteDecksReducer,
+    preventRequest: preventRequestReducer,
 
 });
 

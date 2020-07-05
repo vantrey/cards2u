@@ -7,11 +7,11 @@ import ProfileInfoContainer from './profileInfo/ProfileInfoContainer';
 import {withAuthRedirect} from "../../../../features/hoc/withAuthRedirect";
 import FeedbackContainer from "./feedBack/FeedbackContainer";
 import Root from '../../root/Root';
-import PopupSingIn from '../../../common/popUp/PopupSingIn';
 
 const ProfileContainer = () => {
 
-    const {user, isFetching} = useSelector((state: AppStateType) => state.profile);
+    const {user} = useSelector((state: AppStateType) => state.profile);
+    const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
 
     return (
         <>
@@ -24,13 +24,13 @@ const ProfileContainer = () => {
                             <div className={styles.user__avatar}>
                                 <ProfileAvatarContainer
                                     user={user}
-                                    isFetching={isFetching}
+                                    isFetching={isPreventFetching}
                                 />
                             </div>
                             <div className={styles.user__nick}>
                                 <ProfileInfoContainer
                                     user={user}
-                                    isFetching={isFetching}
+                                    isFetching={isPreventFetching}
                                 />
                             </div>
                             <div className={styles.user__feedback}>

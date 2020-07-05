@@ -15,8 +15,9 @@ type NewPswFormDataType = {
 
 const NewPswContainer: React.FC = () => {
 
-  const {isSuccess, errorServerMessage, isFetching} = useSelector((state: AppStateType) => state.newPsw)
-  const [successWithTiming, setSuccessWithTiming] = useState(false)
+  const {isSuccess, errorServerMessage} = useSelector((state: AppStateType) => state.newPsw);
+  const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
+  const [successWithTiming, setSuccessWithTiming] = useState(false);
 
   useEffect(() => {
     if (isSuccess) {
@@ -24,31 +25,31 @@ const NewPswContainer: React.FC = () => {
         setSuccessWithTiming(true)
       }, 1000)
     }
-  }, [isSuccess])
+  }, [isSuccess]);
 
-  const dispatch = useDispatch()
-  const {resetPswToken} = useParams()
+  const dispatch = useDispatch();
+  const {resetPswToken} = useParams();
   const {register, handleSubmit, errors, reset} = useForm<NewPswFormDataType>({
     mode: 'onBlur',
     validationSchema: newPswFormSchema
-  })
+  });
 
   const onSubmit = handleSubmit((data) => {
-    dispatch(setNewPsw(resetPswToken, data.password))
+    dispatch(setNewPsw(resetPswToken, data.password));
     reset()
-  })
+  });
 
-  if (successWithTiming) return <Redirect to={SET_NEW_PSW__PATH}/>
+  if (successWithTiming) return <Redirect to={SET_NEW_PSW__PATH}/>;
   return (
     <NewPsw
       isSuccess={isSuccess}
-      isFetching={isFetching}
+      isFetching={isPreventFetching}
       errorServerMessage={errorServerMessage}
       register={register}
       errors={errors}
       onSubmit={onSubmit}
     />
   )
-}
+};
 
 export default NewPswContainer
