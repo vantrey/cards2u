@@ -24,8 +24,8 @@ const FindDeck: React.FC<UsersDeckType> = ({
                                            }) => {
     const Headers = [
         {name: 'avatar', title: 'Avatar'},
-        {name: 'nick', title: 'Nick'},
-        {name: 'decks', title: 'Decks'}
+        {name: 'name', title: 'Nick'},
+        {name: 'publicCardPacksCount', title: 'Decks'}
     ]
 
     return (
