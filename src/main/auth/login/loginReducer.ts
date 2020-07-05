@@ -2,7 +2,7 @@ import {AppStateType, InferActionTypes} from "../../bll/store/store";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {api} from "../../dal/api";
 import {repository} from "../../helpers/repos_localStorage/Token";
-import {getUser} from "../../bll/profile/profileReducer";
+import {getUser, profileActions} from "../../bll/profile/profileReducer";
 import {createUserFavoriteDecks} from "../../bll/favoriteDecks/favoriteDecksReducer";
 import {setIsPreventFetching} from "../../bll/preventReques/preventRequestReducer";
 
@@ -52,7 +52,7 @@ const loginActions = {
     } as const),
 };
 
-type ActionsType = InferActionTypes<typeof loginActions>
+type ActionsType = InferActionTypes<typeof loginActions> | InferActionTypes<typeof profileActions> // ??
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
@@ -78,8 +78,22 @@ export const logout = (): ThunkType =>
     (dispatch: DispatchType) => {
         dispatch(loginActions.logoutSuccess());
         repository.saveToken(null, 0);
-        repository.save_Auth_id(null)
+        repository.save_Auth_id(null);
+
+        dispatch(profileActions.setUser({ // reset user data
+            avatar: '',
+            created: '',
+            email: '',
+            isAdmin: false,
+            name: '',
+            publicCardPacksCount: 0,
+            updated: '',
+            verified: false,
+            _id: ''
+        }));
+        dispatch(profileActions.setIsSuccess(false));
     };
+
 
 export const localAuthMe = (): ThunkType =>
     (dispatch: DispatchType) => {
