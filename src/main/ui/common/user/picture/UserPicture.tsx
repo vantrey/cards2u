@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './UserPicture.module.css';
 
 type AvaPictureTypeProps={
     avatar:string,
@@ -8,12 +9,12 @@ type AvaPictureTypeProps={
 
 const UserPicture: React.FC<AvaPictureTypeProps> = ({avatar,nick}) => {
     return (
-        <div>
-            <div >
-                Avatar:<img src={avatar}/>
+        <div className={styles.picture__wrap}>
+            <div className={styles.picture__avatar}>
+                <img src={avatar} alt='avatar'/>
             </div>
-            <div>
-                Nick:{nick}
+            <div className={styles.picture__nick}>
+                {nick}
             </div>
         </div>
     );

@@ -20,13 +20,9 @@ const UserInfo: React.FC = () => {
     }
 
     return (
-        <div className={styles.avatar__wrap}>
-            <div><UserPicture avatar={user.avatar}
-                              nick={user.name}/></div>
-
-            <div><UserDecks cardPacks={cardPacks}
-                            showMyDecks={showMyDecks}
-                            showDecks={showDecks}/></div>
+        <div className={styles.user__wrap}>
+            <UserPicture avatar={user.avatar} nick={user.name}/>
+            <UserDecks cardPacks={cardPacks} showMyDecks={showMyDecks} showDecks={showDecks}/>
         </div>
     );
 };

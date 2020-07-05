@@ -1,0 +1,10 @@
+.sort__wrap {
+    display: flex;
+    align-items: center;
+}
+
+.sort__title {
+    font-family: 'CS Grimrock', sans-serif;
+    margin-right: 10px;
+    color: orange;
+}

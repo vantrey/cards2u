@@ -1,3 +1,10 @@
-.avatar__wrap{
+.user__wrap {
     display: flex;
+    align-items: center;
+    height: max-content;
+    margin-bottom: 15px;
+
+    /*border: 1px solid red;*/
 }
+
+
