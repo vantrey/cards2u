@@ -1,5 +1,6 @@
 import React from "react";
 import UserDecks from "./user-decks/UserDecks";
+import styles from "./UserData.module.css";
 
 
 type UserDecsType = {
@@ -19,19 +20,19 @@ const UserData: React.FC<UserDecsType> = ({
                                               onShowDecks,
                                               showMode
                                           }) => {
-
     return (
-
-        <>
-            <div>avatar:{/*<img src={avatar}/>*/}</div>
-            <div>nick:{name} </div>
-            <div id={id} onClick={onShowDecks}>decks:{decks} </div>
+        <div className={styles.users__data}>
+            <div className={styles.users__avatar}>
+                <img src={avatar} alt='avatar'/>
+            </div>
+            <div className={styles.users__nick}>{name}</div>
+            <div className={styles.users__decks} id={id} onClick={onShowDecks}>{decks}</div>
             {showMode === id &&
             <div>
                 <UserDecks id={id}/>
             </div>
             }
-        </>
+        </div>
 
     )
 

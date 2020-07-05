@@ -20,11 +20,11 @@ const Sort: React.FC<UsersDeckHeader> = ({
                                                        }) => {
 
     return (
-        <div className={styles.header__data}>
-            {title}
+        <div className={styles.sort__wrap}>
+            <h5 className={styles.sort__title}>{title}</h5>
             <>
-                <button onClick={sortDeckUp} name={name}>&#8593;</button>
-                <button onClick={sortDeckDown} name={name}>&#8595;</button>
+                <button className={styles.sort__button} onClick={sortDeckUp} name={name}>&#8593;</button>
+                <button className={styles.sort__button} onClick={sortDeckDown} name={name}>&#8595;</button>
             </>
 
         </div>

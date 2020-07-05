@@ -41,33 +41,39 @@ const FindContainer: React.FC = () => {
         <div className={styles.find__wrap}>
             <div className={styles.find__left}> </div>
             <div className={styles.find__container}>
-                <UserInfo/>
-                {
-                    isFetching &&
-					<div className={styles.find__loader}>
-						<Loader/>
-					</div>
-                }
-                {
-                    !isFetching &&
-					<FindDeck users={users}
-							  sortDeckUp={sortDeckUp}
-							  sortDeckDown={sortDeckDown}
-							  onShowDecks={onShowDecks}
-							  showMode={showMode}/>
-                }
-                <ReactPaginate
-                    previousLabel={"prev"}
-                    nextLabel={"next"}
-                    breakLabel={"..."}
-                    breakClassName={"break-me"}
-                    pageCount={pageCountSize}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={pageChangedHandler}
-                    containerClassName={styles.pagination}
-                    activeClassName={"active"}/>
+                <div className={styles.container__leftBlock}>
+                    <UserInfo/>
+                    {
+                        isFetching &&
+						<div className={styles.find__loader}>
+							<Loader/>
+						</div>
+                    }
+                    {
+                        !isFetching &&
+						<FindDeck users={users}
+								  sortDeckUp={sortDeckUp}
+								  sortDeckDown={sortDeckDown}
+								  onShowDecks={onShowDecks}
+								  showMode={showMode}/>
+                    }
+                    <div className={styles.find__paginate}>
+                    <ReactPaginate
+                        previousLabel={"prev"}
+                        nextLabel={"next"}
+                        breakLabel={"..."}
+                        breakClassName={"break-me"}
+                        pageCount={pageCountSize}
+                        marginPagesDisplayed={1}
+                        pageRangeDisplayed={2}
+                        onPageChange={pageChangedHandler}
+                        containerClassName={styles.pagination}
+                        activeClassName={"active"}/>
+                    </div>
+                </div>
+                <div className={styles.container__rightBlock}> </div>
             </div>
+
             <div className={styles.find__right}> </div>
         </div>)
 }

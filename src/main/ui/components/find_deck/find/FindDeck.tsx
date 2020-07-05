@@ -29,11 +29,11 @@ const FindDeck: React.FC<UsersDeckType> = ({
     ]
 
     return (
-        <div>
-            <div className={styles.find_headers__wrap}>
+        <div className={styles.findDeck__wrap}>
+            <div className={styles.findDeck__header}>
                 {
                     Headers.map(h =>
-                        <div key={h.name}>
+                        <div  className={styles.findDeck__item} key={h.name} >
                             <Sort
                                 name={h.name}
                                 title={h.title}
@@ -42,20 +42,18 @@ const FindDeck: React.FC<UsersDeckType> = ({
                         </div>)
                 }
             </div>
-            <div className={styles.user_data__wrap}>
+            <div className={styles.findDeck__users}>
                 {
                     users.map(u =>
-                        <div className={styles.user__data} key={u._id}>
-                            <UserData
+                            <UserData key={u._id}
                                 avatar={u.avatar}
                                 name={u.name}
                                 decks={u.publicCardPacksCount}
                                 id={u._id}
                                 onShowDecks={onShowDecks}
                                 showMode={showMode}
-                            />
+                            />)
 
-                        </div>)
                 }
             </div>
         </div>

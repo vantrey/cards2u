@@ -20,7 +20,7 @@
     display: flex;
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(6px);
-
+    padding: 20px;
 }
 
 .find__left {
@@ -32,3 +32,41 @@
     flex-grow: 1;
     background: transparent;
 }
+
+.container__leftBlock {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+
+    /*border: 1px solid blue;*/
+}
+
+.find__loader {
+    overflow: hidden;
+    overflow-y: auto;
+    min-height: 300px;
+    max-height: 490px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    border: 1px solid orange;
+}
+
+
+.find__paginate {
+    display: flex;
+    width: 100%;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid green;
+
+}
+
+.pagination {
+    display: flex;
+ }
