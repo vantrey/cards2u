@@ -12,7 +12,7 @@ import Loader from "../../common/loader/Loader";
 const FindContainer: React.FC = () => {
     const dispatch = useDispatch();
     const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer)
-    const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest)
+
 
     const [showMode, setShowMode] = useState<string>('')
 
@@ -45,20 +45,13 @@ const FindContainer: React.FC = () => {
             <div className={styles.find__container}>
                 <div className={styles.container__leftBlock}>
                     <UserInfo/>
-                    {
-                        !isPreventFetching &&
-                        <div className={styles.find__loader}>
-                            <Loader/>
-                        </div>
-                    }
-                    {
-                        isPreventFetching &&
                         <FindDeck users={users}
                                   sortDeckUp={sortDeckUp}
                                   sortDeckDown={sortDeckDown}
                                   onShowDecks={onShowDecks}
-                                  showMode={showMode}/>
-                    }
+                                  showMode={showMode}
+                                  />
+
                     <div className={styles.find__paginate}>
                         <ReactPaginate
                             previousLabel={"prev"}
@@ -70,7 +63,7 @@ const FindContainer: React.FC = () => {
                             pageRangeDisplayed={2}
                             onPageChange={pageChangedHandler}
                             containerClassName={styles.pagination}
-                            activeClassName={"active"}/>
+                            activeClassName={styles.active}/>
                     </div>
                 </div>
                 <div className={styles.container__rightBlock}></div>

@@ -3,7 +3,9 @@ import React from "react";
 import styles from "./FindDeck.module.css";
 import UserData from "./user-data/UserData";
 import Sort from './sort/Sort'
-import UserInfo from "../../../common/user/UserInfo";
+import Loader from "../../../common/loader/Loader";
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../../../bll/store/store";
 
 
 
@@ -14,6 +16,8 @@ type UsersDeckType = {
     onShowDecks: (e: React.MouseEvent<HTMLDivElement>) => void
     showMode: string
 }
+
+
 
 const FindDeck: React.FC<UsersDeckType> = ({
                                                users,
@@ -26,7 +30,8 @@ const FindDeck: React.FC<UsersDeckType> = ({
         {name: 'avatar', title: 'Avatar'},
         {name: 'name', title: 'Nick'},
         {name: 'publicCardPacksCount', title: 'Decks'}
-    ]
+    ];
+    const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest)
 
     return (
         <div className={styles.findDeck__wrap}>
@@ -42,20 +47,29 @@ const FindDeck: React.FC<UsersDeckType> = ({
                         </div>)
                 }
             </div>
-            <div className={styles.findDeck__users}>
-                {
-                    users.map(u =>
+            {
+                isPreventFetching &&
+				<div className={styles.findDeck__loader}>
+					<Loader/>
+				</div>
+            }
+            {
+                !isPreventFetching &&
+				<div className={styles.findDeck__users}>
+                    {
+                        users.map(u =>
                             <UserData key={u._id}
-                                avatar={u.avatar}
-                                name={u.name}
-                                decks={u.publicCardPacksCount}
-                                id={u._id}
-                                onShowDecks={onShowDecks}
-                                showMode={showMode}
+                                      avatar={u.avatar}
+                                      name={u.name}
+                                      decks={u.publicCardPacksCount}
+                                      id={u._id}
+                                      onShowDecks={onShowDecks}
+                                      showMode={showMode}
                             />)
 
-                }
-            </div>
+                    }
+				</div>
+            }
         </div>
 
     )

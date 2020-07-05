@@ -8,3 +8,20 @@
     margin-right: 10px;
     color: orange;
 }
+
+.sort__button {
+    width: 21px;
+    height: 25px;
+    background-color: transparent;
+    border: 1px solid #088dcd;
+    color: #088dcd;
+    cursor: pointer;
+    margin: 1px;
+    transition: all .3s ease;
+}
+
+.sort__button:hover {
+    transition: all .3s ease;
+    border: 1px solid whitesmoke;
+    color: whitesmoke;
+}
