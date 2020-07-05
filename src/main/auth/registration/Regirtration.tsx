@@ -16,6 +16,6 @@ const Registration: React.FC<RegistrationPropsType> = ({ errorServerMessage, ...
     <RegistrationForm {...props}/>
     {errorServerMessage && <div className={styles.registration__form_errorMessage}>{errorServerMessage}</div>}
   </div>
-}
+};
 
 export default Registration

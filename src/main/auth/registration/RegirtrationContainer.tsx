@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useForm} from 'react-hook-form'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppStateType} from '../../bll/store/store'
-import {actions, createUser} from './registrationReducer'
+import {createUser, registerActions} from './registrationReducer'
 import {Redirect} from 'react-router-dom'
 
 import Registration from "./Regirtration"
@@ -16,24 +16,32 @@ type RegistrationFormDataType = {
 }
 
 const RegistrationContainer: React.FC = () => {
-  const [isFirsRendering, setIsFirstRendering] = useState(true)
-  const {isSuccess, errorServerMessage} = useSelector((state: AppStateType) => state.registration)
-  const dispatch = useDispatch()
+
+  const [isFirsRendering, setIsFirstRendering] = useState(true);
+
+  const {isSuccess, errorServerMessage} = useSelector((state: AppStateType) => state.registration);
+
+  const dispatch = useDispatch();
+
   const {register, handleSubmit, errors, reset} = useForm<RegistrationFormDataType>({
     mode: 'onBlur',
     validationSchema: registrationFormSchema
-  })
+  });
+
   const onSubmit = handleSubmit((data) => {
-    dispatch(createUser(data.email, data.password))
+    dispatch(createUser(data.email, data.password));
     reset()
-  })
+  });
+
   if (isFirsRendering) {
     if (isSuccess) {
-      dispatch(actions.setIsRegistrationSuccess(false))
+      dispatch(registerActions.setIsRegistrationSuccess(false))
     }
     setIsFirstRendering(false)
   }
-  if (isSuccess && !isFirsRendering) return <Redirect to={LOGIN_PATH}/>
+
+  if (isSuccess && !isFirsRendering) return <Redirect to={LOGIN_PATH}/>;
+
   return (
     <Registration
       errorServerMessage={errorServerMessage}
@@ -42,6 +50,6 @@ const RegistrationContainer: React.FC = () => {
       onSubmit={onSubmit}
     />
   )
-}
+};
 
 export default RegistrationContainer
