@@ -2,7 +2,7 @@ import React from 'react';
 import {Route} from 'react-router-dom';
 import Root from '../root/Root';
 import Game from "../game/Game";
-import Create from "../create_cards/Create";
+import Create from "../create_cards/CreateContainer";
 import Find from "../find_deck/Find";
 import Home from "../home/Home";
 import Profile from '../profile/ui/Profile';

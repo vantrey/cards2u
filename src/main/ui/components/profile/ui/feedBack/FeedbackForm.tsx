@@ -25,7 +25,6 @@ const FeedbackForm: React.FC<FeedbackFormPropsType> = ({register, errors, onSubm
                         register={register}
                         name='name'
                         errors={errors}
-                        // type
                         title={'name'}
                     />
                     <Input
@@ -39,7 +38,8 @@ const FeedbackForm: React.FC<FeedbackFormPropsType> = ({register, errors, onSubm
                         register={register}
                         name='message'
                         errors={errors}
-                        title={'message'}
+                        placeholder='message'
+                        id='textarea'
                     />
                     <div >
                         <Button/>

@@ -3,13 +3,16 @@ import styles from './Create.module.css';
 
 
 
-const Create = () => {
+const CreateContainer = () => {
+
 
 
 	return (
 		<div className={styles.create__wrap}>
-			CREATE
+
+
+
 		</div>
 	)
-}
-export default Create;
+};
+export default CreateContainer;
