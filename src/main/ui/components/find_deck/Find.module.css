@@ -76,7 +76,7 @@
  }
 
 .pagination > li > a{
-    border: 1px solid orange;
+    border: 1px solid #088dcd;
     padding: 5px 10px;
     outline: none;
     cursor: pointer;
@@ -84,12 +84,17 @@
 }
 
 .pagination > li > a, .pagination > li span {
-    color: orange !important;
+    color: orange;
+}
+
+.pagination > li:hover {
+    transition: all .3s ease;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .pagination .active > a {
     background-color: #088dcd;
-    color: #fff;
+    color: whitesmoke;
 }
 
 
