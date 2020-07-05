@@ -5,7 +5,6 @@
     font-size: 14px;
     min-height: 350px;
     max-height: 410px;
-    overflow: hidden;
     border: 1px solid transparent;
     border-top: 2px solid orange;
 }
@@ -38,11 +37,11 @@
 }
 
 .findDeck__users {
-    min-height: 350px;
-    max-height: 410px;
+    max-height: 338px;
     overflow: hidden;
     overflow-y: auto;
     display: flex;
+    border: 1px solid transparent;
     flex-direction: column;
 }
 
