@@ -44,15 +44,14 @@
 .find__loader {
     overflow: hidden;
     overflow-y: auto;
-    min-height: 300px;
-    max-height: 490px;
+    min-height: 460px;
+    max-height: 460px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
 
-    border: 1px solid orange;
 }
 
 
@@ -62,6 +61,9 @@
     height: 30px;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
+    font-family: sans-serif;
+
 
     border: 1px solid green;
 
@@ -69,4 +71,39 @@
 
 .pagination {
     display: flex;
+    font-size: 16px;
+    list-style: none;
+    outline: none;
+    margin: 15px auto;
  }
+
+.pagination > li > a{
+    border: 1px solid orange;
+    padding: 5px 10px;
+    outline: none;
+    cursor: pointer;
+    color: orange;
+}
+
+.pagination > li > a, .pagination > li span {
+    color: orange !important;
+}
+
+.pagination .active a{
+    background-color: #47ccde !important ;
+    border-color: #47ccde ;
+    color: #fff;
+}
+
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+    background-color: #47ccde ;
+    border-color: #47ccde;
+    outline: none ;
+}
+.pagination > li > a, .pagination > li > span{
+    color: #47ccde
+}
+.pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
+    border-radius: unset
+}

@@ -1,7 +1,7 @@
 .findDeck__wrap {
     padding: 10px;
-    min-height: 300px;
-    max-height: 490px;
+    min-height: 460px;
+    max-height: 460px;
     margin: 10px 0;
     font-family: sans-serif;
     font-size: 14px;
@@ -25,7 +25,7 @@
 }
 
 .findDeck__users {
-    min-height: 300px;
+    min-height: 400px;
     max-height: 400px;
     overflow: hidden;
     overflow-y: auto;
