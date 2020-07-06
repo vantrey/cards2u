@@ -13,7 +13,7 @@ type UsersDeckType = {
     showMode: string
 }
 
-const FindDeck: React.FC<UsersDeckType> = ({
+const FindDeck111: React.FC<UsersDeckType> = ({
                                                users,
                                                sortDeckUp,
                                                sortDeckDown,
@@ -61,4 +61,4 @@ const FindDeck: React.FC<UsersDeckType> = ({
     )
 }
 
-export default FindDeck
+export default FindDeck111

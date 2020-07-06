@@ -37,7 +37,7 @@
 }
 
 .findDeck__users {
-    max-height: 338px;
+    max-height: 300px;
     overflow: hidden;
     overflow-y: auto;
     display: flex;
