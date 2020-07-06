@@ -87,7 +87,6 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
 export const getCardPacks = (currentPage: number | null, pageSize: number | null, user_id: string | null): ThunkType =>
     async (dispatch: DispatchType) => {
-        debugger
         try {
             dispatch(setIsPreventFetching(true));
             let token = repository.getToken();
