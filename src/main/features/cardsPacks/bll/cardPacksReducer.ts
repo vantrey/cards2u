@@ -4,26 +4,20 @@ import {CardPackType} from "../../../types/entities";
 import {cardPacksApi} from "../dal/cardPacksApi";
 import {repository} from "../../../helpers/repos_localStorage/Token";
 
-type InitialStateType = {
-    cardPacks: Array<CardPackType>
-    isFetching: boolean
-    errorFromServer: string
-    pageSize: number
-    totalCardPacksCount: number
-    cardsPackId:''
-    user_id:string
-}
 
-const initialState: InitialStateType = {
-    cardPacks: [],
+
+const initialState = {
+    cardPacks: [] as  Array<CardPackType>,
     isFetching: false,
     errorFromServer: '',
     pageSize: 6,
     totalCardPacksCount: 0,
-    cardsPackId:'',
-    user_id:''
-
+    cardsPackId: '',
+    user_id: '',
+    isSuccess:false
 }
+
+type InitialStateType =typeof initialState
 
 export const cardPacksReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
@@ -53,12 +47,20 @@ export const cardPacksReducer = (state = initialState, action: ActionsType): Ini
                 ...state,
                 cardPacks: state.cardPacks.filter(tl => tl.user_id !== action.cardsPackId)
             };
+            case "CARD_PACKS_REDUCER/SET_SUCCESS":
+            return {
+                ...state,
+               isSuccess: action.isSuccess
+            };
         default:
             return state
     }
 }
 
 export const cardPacksActions = {
+    setIsSuccess: (isSuccess: boolean) => ({
+        type: 'CARD_PACKS_REDUCER/SET_SUCCESS', isSuccess
+    } as const),
     getCardPacksSuccess: (cardPacks: Array<CardPackType>, totalCardPacksCount: number) => ({
         type: 'CARD_PACKS_REDUCER/GET_CARD_PACKS',
         cardPacks,
@@ -78,7 +80,7 @@ export const cardPacksActions = {
     } as const),
     deleteCardsPack: (cardsPackId: string) => ({
         type: 'CARD_PACKS_REDUCER/DELETE_CARDS_PACK',
-         cardsPackId
+        cardsPackId
 
     } as const)
 }
@@ -89,20 +91,23 @@ type ActionsType = InferActionTypes<typeof cardPacksActions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const getCardPacks = (currentPage: number, pageSize: number): ThunkType => async (dispatch: DispatchType) => {
-    try {
-        dispatch(cardPacksActions.setIsFetching(true))
-        let token = repository.getToken()
-        const response = await cardPacksApi.getPacks(token, currentPage, pageSize)
-        dispatch(cardPacksActions.getCardPacksSuccess(response.data.cardPacks, response.data.cardPacksTotalCount))
-        repository.saveToken(response.data.token, response.data.tokenDeathTime)
-        dispatch(cardPacksActions.setIsFetching(false))
-    } catch (e) {
-        dispatch(cardPacksActions.setError(e.response.data.error))
-        repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
-        dispatch(cardPacksActions.setIsFetching(false))
+export const getCardPacks = (currentPage: number | null, pageSize: number | null, user_id: string | null): ThunkType =>
+    async (dispatch: DispatchType) => {
+        try {
+            dispatch(cardPacksActions.setIsFetching(true))
+            let token = repository.getToken()
+            const response = await cardPacksApi.getPacks(token, currentPage, pageSize, user_id)
+            dispatch(cardPacksActions.getCardPacksSuccess(response.data.cardPacks, response.data.cardPacksTotalCount))
+            repository.saveToken(response.data.token, response.data.tokenDeathTime)
+            dispatch(cardPacksActions.setIsFetching(false))
+            dispatch(cardPacksActions.setIsSuccess(true))
+        } catch (e) {
+            dispatch(cardPacksActions.setError(e.response.data.error))
+            repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+            dispatch(cardPacksActions.setIsFetching(false))
+            dispatch(cardPacksActions.setIsSuccess(false))
+        }
     }
-}
 export const createCardsPack = (newCardsPack: { name: string }): ThunkType => async (dispatch: DispatchType) => {
     try {
         dispatch(cardPacksActions.setIsFetching(true))

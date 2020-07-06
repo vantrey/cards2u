@@ -6,13 +6,16 @@ import imgAbout from "../../images/about-shadow2.png";
 import imgClose from "../../images/clouse-shadow2.png";
 import Taverna from "./taverna/Taverna";
 import About from "./about/About";
+import { useHistory } from "react-router";
+import { PROFILE_PATH, ROOT_PATH } from "../routes/MainRoutes";
 
 
 const Menu = ({toggleMenu, setMenu, toggleAbout, setAbout, setProfile, openProfile, toggleBg}) => {
 
-	const openAbout = () => {
-		setProfile(true);
+	const history = useHistory ();
 
+	const openAbout = () => {
+		history.push(`${ROOT_PATH}`);
 		if ( toggleMenu ) {
             setMenu(false);
             setAbout (!toggleAbout);
@@ -23,8 +26,7 @@ const Menu = ({toggleMenu, setMenu, toggleAbout, setAbout, setProfile, openProfi
 	}
 
 	const openMenu = () => {
-		setProfile(true);
-
+		history.push(`${ROOT_PATH}`);
         if ( toggleAbout ) {
             setAbout (false);
             setMenu(true);

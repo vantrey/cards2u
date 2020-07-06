@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styles from './Game.module.css';
-import ava from '../../images/ava.jpg';
 import DecksRoutes, {
 	GAME_PATH_DECK_BLUE,
 	GAME_PATH_DECK_GREEN,
@@ -13,27 +12,44 @@ import { NavLink } from "react-router-dom";
 import Card from "./card/Card";
 import CardDownside from "./card/CardDownside";
 import Buttons from "./buttons/Buttons";
-import bg_1  from './../../images/card-bg/card-bg-1.jpg';
+import bg_1 from './../../images/card-bg/card-bg-1.jpg';
+import { useSelector } from "react-redux";
+import avaDefault from "../../images/ava-default.png";
 
 
 const Game = () => {
 
-	const [ cardface , setCardFace ] = useState(true);
-	const [ cardBg , setCardBg ] = useState(bg_1);
+	const [ cardface, setCardFace ] = useState (true);
+	const [ cardBg, setCardBg ] = useState (bg_1);
+	const { user } = useSelector ((state) => state.profile);
 
 	return (
 		<div className={styles.game__wrap}>
-			<div className={styles.game__left}> </div>
+			<div className={styles.game__left}></div>
 			<div className={styles.game__container}>
 				<div className={styles.game__analytics}>analytics</div>
 				<div className={styles.game__content}>
 					<div className={styles.content__header}>
 						<div className={styles.header__user}>
 							<div className={styles.user__avatar}>
-								<img src={ava} alt="avatar"/>
+								{
+									user.avatar &&
+									<img src={user.avatar} alt="avatar"/>
+								}
+								{
+									!user.avatar &&
+									<img src={avaDefault} alt='avatar'/>
+								}
 							</div>
 							<div className={styles.user__nick}>
-								<span>Leat</span>
+								{
+									user.name &&
+									<span>{user.name}</span>
+								}
+								{
+									!user.name &&
+									<span>john wick</span>
+								}
 							</div>
 						</div>
 						<div className={styles.header__info}>
@@ -48,7 +64,7 @@ const Game = () => {
 										</div>
 									</div>
 								</NavLink>
-								<NavLink to={ GAME_PATH_DECK_RED} className={styles.header__link}>
+								<NavLink to={GAME_PATH_DECK_RED} className={styles.header__link}>
 									<div className={`${styles.decks__item} ${styles.decks__item_2}`}>
 										<div className={styles.tooltip}>
 											<div className={styles.tooltip_wrap}>
@@ -98,8 +114,8 @@ const Game = () => {
 					</div>
 					<div className={styles.content__main}>
 						<div className={styles.main__card}>
-							{ cardface && 	<Card cardBg={cardBg} setCardFace={setCardFace} cardface={cardface}/> }
-							{ !cardface && 	<CardDownside/> }
+							{cardface && <Card cardBg={cardBg} setCardFace={setCardFace} cardface={cardface}/>}
+							{!cardface && <CardDownside/>}
 							<div className={styles.content__buttons}>
 								<Buttons setCardFace={setCardFace} cardface={cardface} setCardBg={setCardBg}/>
 							</div>
@@ -112,7 +128,7 @@ const Game = () => {
 				</div>
 				{/*<div className={styles.game__chat}>chat</div>*/}
 			</div>
-			<div className={styles.game__right}> </div>
+			<div className={styles.game__right}></div>
 		</div>
 	)
 }

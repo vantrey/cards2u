@@ -26,7 +26,7 @@ const CardPacksContainer: React.FC = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getCardPacks(currentPage, pageSize))
+        dispatch(getCardPacks(currentPage, pageSize,user_id))
     }, [dispatch, currentPage, pageSize])
 
 

@@ -63,7 +63,7 @@
     justify-content: flex-end;
     flex-direction: column;
     align-items: center;
-    width: 120px;
+    /*width: 120px;*/
     margin-right: 100px;
 }
 
@@ -73,17 +73,59 @@
     margin-bottom: 15px;
     border-radius: 50%;
     overflow: hidden;
+    position: relative;
     -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 
 }
+
 .user__avatar img {
     display: block;
     height: inherit;
     width: auto;
     max-width: none;
+
 }
+
+.user__avatar {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+.user__avatar:before {
+    font-family: 'CS Grimrock', sans-serif;
+    content: "you can change the avatar or nickname in the profile";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #088dcd;
+    font-size: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    transform: translateY(100%);
+    -webkit-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.user__avatar:hover:before, .user__avatar:focus:before, .user__avatar:active:before {
+    transform: translateY(40%);
+}
+
 .user__nick {
     font-size: 18px;
     /*color: #0b3b63;*/
@@ -117,10 +159,8 @@
     width: 100%;
     height: 100%;
     display: flex;
-    /*flex-wrap: wrap;*/
     justify-content: space-around;
     align-items: center;
-
 }
 
 .decks__item {
@@ -134,6 +174,7 @@
     transition: all 0.3s ease;
     position: relative;
 }
+
 .decks__item:hover {
     transition: all 0.3s ease;
     -webkit-transform: translateY(-4px);

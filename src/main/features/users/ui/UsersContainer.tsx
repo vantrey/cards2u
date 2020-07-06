@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store/store";
 import Users from "./Users";
-import {actions, getUser} from "../bll/UserReducer";
+import {usersActions, getUser} from "../bll/UserReducer";
 import styles from './User.module.css'
 // @ts-ignore
 import _ from 'lodash'
@@ -27,7 +27,7 @@ const UsersContainer: React.FC = (props) => {
         })
 
         const pageChangedHandler = (page: { selected: number }) => {
-            dispatch(actions.setPage(page.selected + 1))
+            dispatch(usersActions.setPage(page.selected + 1))
         }
         useEffect(() => {
             dispatch(getUser(page, pageCount))

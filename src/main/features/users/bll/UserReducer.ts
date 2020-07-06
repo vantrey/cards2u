@@ -3,6 +3,7 @@ import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {UserType} from "../../../types/entities";
 import {api} from "../../../dal/api";
 import {repository} from "../../../helpers/repos_localStorage/Token";
+import {setIsPreventFetching} from "../../../bll/preventReques/preventRequestReducer";
 
 
 const initialState = {
@@ -33,16 +34,12 @@ export const userReducer = (state: InitialStateType = initialState, action: Acti
                 ...state,
                 page: action.page
             }
-        case "cards2u/main/users/IS_FETCHING":
-            return {
-                ...state,
-                isFetching: action.isFetching
-            }
+
         default:
             return state
     }
 }
-export const actions = {
+export const usersActions = {
     getUserSuccess: (users: UserType[]) => ({
         type: 'cards2u/main/users/GET_USERS', users
     } as const),
@@ -52,26 +49,30 @@ export const actions = {
     setPage: (page: number) => ({
         type: 'cards2u/main/users/SET_PAGE', page
     } as const),
-    setIsFetching: (isFetching: boolean) => ({
-        type: 'cards2u/main/users/IS_FETCHING', isFetching
-    } as const)
+
 }
-type ActionsType = InferActionTypes<typeof actions>
+type ActionsType = InferActionTypes<typeof usersActions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const getUser = (page: number, pageCount: number): ThunkType =>
-    async (dispatch: DispatchType) => {
-        dispatch(actions.setIsFetching(true))
-        let token = repository.getToken()
-        const result = await api.getUsers(token, page, pageCount)
-        dispatch(actions.getUserSuccess(result.users));
-        dispatch(actions.setPageCount({
-            page: result.page,
-            pageCount: result.pageCount,
-            totalUsersCount: result.usersTotalCount
-        }));
-        repository.saveToken(result.token, result.tokenDeathTime)
-        dispatch(actions.setIsFetching(false))
+export const getUser = (page: number, pageCount: number, sortUsers = 'name', direction = '0'): ThunkType =>
+    async (dispatch: DispatchType, getState: () => AppStateType) => {
+        try {
+            dispatch(setIsPreventFetching(true))
+            let token = repository.getToken()
+            const result = await api.getUsers(token, page, pageCount, direction + sortUsers)
+            repository.saveToken(result.token, result.tokenDeathTime)
+            dispatch(usersActions.getUserSuccess(result.users));
+            dispatch(usersActions.setPageCount({
+                page: result.page,
+                pageCount: result.pageCount,
+                totalUsersCount: result.usersTotalCount
+            }));
+            dispatch(setIsPreventFetching(false))
+        } catch (e) {
+            repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+            dispatch(setIsPreventFetching(false))
+        }
+
     }
 
