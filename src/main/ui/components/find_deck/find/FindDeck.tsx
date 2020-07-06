@@ -31,10 +31,12 @@ const FindDeck: React.FC<UsersDeckType> = ({
         {name: 'name', title: 'Nick'},
         {name: 'publicCardPacksCount', title: 'Decks'}
     ];
+
     const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest)
 
     return (
         <div className={styles.findDeck__wrap}>
+
             <div className={styles.findDeck__header}>
                 {
                     Headers.map(h =>
@@ -47,14 +49,14 @@ const FindDeck: React.FC<UsersDeckType> = ({
                         </div>)
                 }
             </div>
+            {/*{*/}
+            {/*    isPreventFetching &&*/}
+			{/*	<div className={styles.findDeck__loader}>*/}
+			{/*		<Loader/>*/}
+			{/*	</div>*/}
+            {/*}*/}
             {
-                isPreventFetching &&
-				<div className={styles.findDeck__loader}>
-					<Loader/>
-				</div>
-            }
-            {
-                !isPreventFetching &&
+                // !isPreventFetching &&
 				<div className={styles.findDeck__users}>
                     {
                         users.map(u =>

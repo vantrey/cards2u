@@ -37,20 +37,34 @@
     display: flex;
     flex-direction: column;
     width: 40%;
-
     /*border: 1px solid blue;*/
 }
 
-.find__loader {
-    overflow: hidden;
-    overflow-y: auto;
-    min-height: 460px;
-    max-height: 460px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.find__wrap_block {
     position: relative;
+    width: 100%;
+    height: max-content;
+}
+
+.find__wrap_mirror {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 10;
+}
+
+.find__loader {
+    width: 100%;
+    margin-top: 79px;
+    min-height: 300px;
+    max-height: 300px;
+    background: #607d8b url('../../images/unit.jpg') center center no-repeat;
+    background-size: cover;
 
 }
 
@@ -73,9 +87,9 @@
     list-style: none;
     outline: none;
     margin: 15px auto;
- }
+}
 
-.pagination > li > a{
+.pagination > li > a {
     border: 1px solid #088dcd;
     padding: 5px 10px;
     outline: none;
@@ -98,13 +112,15 @@
 }
 
 
-.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
-    background-color: #088dcd ;
-    outline: none ;
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background-color: #088dcd;
+    outline: none;
 }
+
 .pagination > li > a, .pagination > li > span {
     color: #47ccde
 }
-.pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
+
+.pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span {
     border-radius: unset
 }

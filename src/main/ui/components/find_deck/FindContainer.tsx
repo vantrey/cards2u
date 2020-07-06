@@ -12,7 +12,7 @@ import Loader from "../../common/loader/Loader";
 const FindContainer: React.FC = () => {
     const dispatch = useDispatch();
     const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer)
-
+    const {isAuth} = useSelector((state: AppStateType) => state.login);
 
     const [showMode, setShowMode] = useState<string>('')
 
@@ -45,25 +45,37 @@ const FindContainer: React.FC = () => {
             <div className={styles.find__container}>
                 <div className={styles.container__leftBlock}>
                     <UserInfo/>
+                    <div className={styles.find__wrap_block}>
+
+                        {
+                            !isAuth &&
+							<div className={styles.find__wrap_mirror}>
+								<div className={styles.find__loader}>
+									<Loader/>
+								</div>
+							</div>
+                        }
+
                         <FindDeck users={users}
                                   sortDeckUp={sortDeckUp}
                                   sortDeckDown={sortDeckDown}
                                   onShowDecks={onShowDecks}
                                   showMode={showMode}
-                                  />
+                        />
 
-                    <div className={styles.find__paginate}>
-                        <ReactPaginate
-                            previousLabel={"prev"}
-                            nextLabel={"next"}
-                            breakLabel={"..."}
-                            breakClassName={"break-me"}
-                            pageCount={pageCountSize}
-                            marginPagesDisplayed={1}
-                            pageRangeDisplayed={2}
-                            onPageChange={pageChangedHandler}
-                            containerClassName={styles.pagination}
-                            activeClassName={styles.active}/>
+                        <div className={styles.find__paginate}>
+                            <ReactPaginate
+                                previousLabel={"prev"}
+                                nextLabel={"next"}
+                                breakLabel={"..."}
+                                breakClassName={"break-me"}
+                                pageCount={pageCountSize}
+                                marginPagesDisplayed={1}
+                                pageRangeDisplayed={2}
+                                onPageChange={pageChangedHandler}
+                                containerClassName={styles.pagination}
+                                activeClassName={styles.active}/>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.container__rightBlock}></div>
