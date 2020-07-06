@@ -11,6 +11,7 @@ const UserInfo: React.FC = () => {
 
     const dispatch = useDispatch();
     const {cardPacks, isSuccess} = useSelector((state: AppStateType) => state.cardPacks);
+    const {isPreventFetching} = useSelector((state: AppStateType)=> state.preventRequest)
     const user = useSelector((state: AppStateType) => state.profile.user);
     const [showDecks, setShowDecks] = useState<boolean>(false);
 
@@ -24,7 +25,12 @@ const UserInfo: React.FC = () => {
     return (
         <div className={styles.user__wrap}>
             <UserPicture avatar={user.avatar} nick={user.name}/>
-            <UserDecks cardPacks={cardPacks} showMyDecks={showMyDecks} showDecks={showDecks}/>
+            <UserDecks
+                isFetching={isPreventFetching}
+                cardPacks={cardPacks}
+                showMyDecks={showMyDecks}
+                showDecks={showDecks}
+            />
         </div>
     );
 };

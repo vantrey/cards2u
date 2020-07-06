@@ -14,7 +14,9 @@ const initialState = {
     errorFromServer: '',
     pageSize: 6,
     totalCardPacksCount: 0,
-    isSuccess:false
+    isSuccess:false,
+    cardsPackId: '',
+    user_id: ''
 };
 
 type InitialStateType =typeof initialState
