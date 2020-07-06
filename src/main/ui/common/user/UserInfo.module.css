@@ -1,8 +1,8 @@
 .user__wrap {
     display: flex;
     align-items: center;
-    height: max-content;
-    margin-bottom: 15px;
+    height: 100%;
+
 
     /*border: 1px solid red;*/
 }

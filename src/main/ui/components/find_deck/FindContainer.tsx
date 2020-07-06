@@ -43,42 +43,43 @@ const FindContainer: React.FC = () => {
         <div className={styles.find__wrap}>
             <div className={styles.find__left}></div>
             <div className={styles.find__container}>
-                <div className={styles.container__leftBlock}>
+                <div className={styles.container__top}>
                     <UserInfo/>
-                    <div className={styles.find__wrap_block}>
-
-                        {
-                            !isAuth &&
-							<div className={styles.find__wrap_mirror}>
-								<div className={styles.find__loader}>
-									<Loader/>
+                </div>
+                <div className={styles.container__body}>
+                    <div className={styles.container__leftBlock}>
+                        <div className={styles.find__wrap_block}>
+                            {
+                                !isAuth &&
+								<div className={styles.find__wrap_mirror}>
+									<div className={styles.find__loader}>
+										<Loader/>
+									</div>
 								</div>
-							</div>
-                        }
-
-                        <FindDeck users={users}
-                                  sortDeckUp={sortDeckUp}
-                                  sortDeckDown={sortDeckDown}
-                                  onShowDecks={onShowDecks}
-                                  showMode={showMode}
-                        />
-
-                        <div className={styles.find__paginate}>
-                            <ReactPaginate
-                                previousLabel={"prev"}
-                                nextLabel={"next"}
-                                breakLabel={"..."}
-                                breakClassName={"break-me"}
-                                pageCount={pageCountSize}
-                                marginPagesDisplayed={1}
-                                pageRangeDisplayed={2}
-                                onPageChange={pageChangedHandler}
-                                containerClassName={styles.pagination}
-                                activeClassName={styles.active}/>
+                            }
+                            <FindDeck users={users}
+                                      sortDeckUp={sortDeckUp}
+                                      sortDeckDown={sortDeckDown}
+                                      onShowDecks={onShowDecks}
+                                      showMode={showMode}
+                            />
+                            <div className={styles.find__paginate}>
+                                <ReactPaginate
+                                    previousLabel={"prev"}
+                                    nextLabel={"next"}
+                                    breakLabel={"..."}
+                                    breakClassName={"break-me"}
+                                    pageCount={pageCountSize}
+                                    marginPagesDisplayed={1}
+                                    pageRangeDisplayed={2}
+                                    onPageChange={pageChangedHandler}
+                                    containerClassName={styles.pagination}
+                                    activeClassName={styles.active}/>
+                            </div>
                         </div>
                     </div>
+                    <div className={styles.container__rightBlock}></div>
                 </div>
-                <div className={styles.container__rightBlock}></div>
             </div>
 
             <div className={styles.find__right}></div>
