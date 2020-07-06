@@ -31,7 +31,7 @@ const FindDeck: React.FC<UsersDeckType> = ({
         {name: 'name', title: 'Nick'},
         {name: 'publicCardPacksCount', title: 'Decks'}
     ];
-    const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest)
+    const {isPreventFetching} = useSelector((state: AppStateType)=> state.preventRequest)
 
     return (
         <div className={styles.findDeck__wrap}>

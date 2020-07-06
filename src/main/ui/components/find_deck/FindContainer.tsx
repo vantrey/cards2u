@@ -45,12 +45,12 @@ const FindContainer: React.FC = () => {
             <div className={styles.find__container}>
                 <div className={styles.container__leftBlock}>
                     <UserInfo/>
-                        <FindDeck users={users}
-                                  sortDeckUp={sortDeckUp}
-                                  sortDeckDown={sortDeckDown}
-                                  onShowDecks={onShowDecks}
-                                  showMode={showMode}
-                                  />
+                    <FindDeck users={users}
+                              sortDeckUp={sortDeckUp}
+                              sortDeckDown={sortDeckDown}
+                              onShowDecks={onShowDecks}
+                              showMode={showMode}
+                    />
 
                     <div className={styles.find__paginate}>
                         <ReactPaginate

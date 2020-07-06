@@ -88,13 +88,13 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 export const getCardPacks = (currentPage: number | null, pageSize: number | null, user_id: string | null): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
-            dispatch(setIsPreventFetching(true));
+            /*dispatch(setIsPreventFetching(true))*/
             let token = repository.getToken();
             const response = await cardPacksApi.getPacks(token, currentPage, pageSize, user_id);
             dispatch(cardPacksActions.getCardPacksSuccess(response.data.cardPacks, response.data.cardPacksTotalCount));
             repository.saveToken(response.data.token, response.data.tokenDeathTime);
             dispatch(cardPacksActions.setIsSuccess(true));
-            dispatch(setIsPreventFetching(false));
+            /*dispatch(setIsPreventFetching(false))*/
 
         } catch (e) {
             dispatch(cardPacksActions.setError(e.response.data.error));
