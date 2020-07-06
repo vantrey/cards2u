@@ -93,8 +93,8 @@ export const getCardPacks = (currentPage: number | null, pageSize: number | null
             const response = await cardPacksApi.getPacks(token, currentPage, pageSize, user_id);
             dispatch(cardPacksActions.getCardPacksSuccess(response.data.cardPacks, response.data.cardPacksTotalCount));
             repository.saveToken(response.data.token, response.data.tokenDeathTime);
-            dispatch(setIsPreventFetching(false));
             dispatch(cardPacksActions.setIsSuccess(true));
+            dispatch(setIsPreventFetching(false));
 
         } catch (e) {
             dispatch(cardPacksActions.setError(e.response.data.error));
