@@ -23,7 +23,7 @@ const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks, showMyDecks, showDec
                 :
                 (<div>
                     <div>
-                        You have {cardPacks} decks
+                        You have {cardPacks.length} decks
                     </div>
                     {cardPacks.map(cardPack =>
                         <div key={cardPack._id}>

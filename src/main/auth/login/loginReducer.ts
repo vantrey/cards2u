@@ -5,6 +5,7 @@ import {repository} from "../../helpers/repos_localStorage/Token";
 import {getUser, profileActions} from "../../bll/profile/profileReducer";
 import {createUserFavoriteDecks} from "../../bll/favoriteDecks/favoriteDecksReducer";
 import {setIsPreventFetching} from "../../bll/preventReques/preventRequestReducer";
+import {cardPacksActions} from "../../features/cardsPacks/bll/cardPacksReducer";
 
 const initialState = {
     isAuth: false,
@@ -52,7 +53,10 @@ const loginActions = {
     } as const),
 };
 
-type ActionsType = InferActionTypes<typeof loginActions> | InferActionTypes<typeof profileActions> // ??
+type ActionsType = InferActionTypes<typeof loginActions> |
+    InferActionTypes<typeof profileActions> |
+    InferActionTypes<typeof cardPacksActions>
+
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
@@ -92,6 +96,9 @@ export const logout = (): ThunkType =>
             _id: ''
         }));
         dispatch(profileActions.setIsSuccess(false));
+
+        dispatch(cardPacksActions.getCardPacksSuccess([], 0));  // reset user Decks
+        dispatch(cardPacksActions.setIsSuccess(false));
     };
 
 
