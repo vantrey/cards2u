@@ -1,6 +1,7 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
 import {cardEntersFormSchema} from "./cardEntersFormSchema";
+import CardEntersForm from "./CardEntersForm";
 
 type PropsType = {}
 
@@ -8,8 +9,6 @@ type cardEntersFormType = {
     question: string
     answer: string
 }
-
-
 
 const CardEntersContainer: React.FC<PropsType> = React.memo(({}) => {
 
@@ -26,9 +25,11 @@ const CardEntersContainer: React.FC<PropsType> = React.memo(({}) => {
 
     return (
         <div>
-
-
-
+            <CardEntersForm
+                register={register}
+                errors={errors}
+                onSubmit={onSubmit}
+            />
         </div>
     )
 });
