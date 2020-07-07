@@ -7,6 +7,7 @@ import {createUserFavoriteDecks} from "../../bll/favoriteDecks/favoriteDecksRedu
 import {setIsPreventFetching} from "../../bll/preventReques/preventRequestReducer";
 import {cardPacksActions} from "../../features/cardsPacks/bll/cardPacksReducer";
 import {usersActions} from "../../features/users/bll/UserReducer";
+import {currentUserDecksActions} from "../../bll/currentUserDecks/currentUserDecksReducer";
 
 const initialState = {
     isAuth: false,
@@ -57,7 +58,8 @@ const loginActions = {
 type ActionsType = InferActionTypes<typeof loginActions> |
     InferActionTypes<typeof profileActions> |
     InferActionTypes<typeof cardPacksActions> |
-    InferActionTypes<typeof usersActions>
+    InferActionTypes<typeof usersActions> |
+    InferActionTypes<typeof currentUserDecksActions>
 
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
@@ -102,7 +104,10 @@ export const logout = (): ThunkType =>
         dispatch(cardPacksActions.getCardPacksSuccess([], 0));  // reset user Decks
         dispatch(cardPacksActions.setIsSuccess(false));
 
-        dispatch(usersActions.getUserSuccess([])) // reset array of users
+        dispatch(usersActions.getUserSuccess([])); // reset array of users
+
+        currentUserDecksActions.getDecksSuccess([], 0); // reset curren user decks
+        currentUserDecksActions.setIsSuccess(false);
     };
 
 
