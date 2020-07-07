@@ -19,10 +19,15 @@ const UserInfo: React.FC = () => {
         dispatch(getCardPacks(1, 100, user._id))
     }
 
+    const onSelectDeck = () => {
+        alert('onSelectDeck')
+    }
+
     return (
         <div className={styles.user__wrap}>
             <UserPicture avatar={user.avatar} nick={user.name}/>
-            <UserDecks cardPacks={cardPacks} showMyDecks={showMyDecks} showDecks={showDecks}/>
+            <UserDecks cardPacks={cardPacks} showMyDecks={showMyDecks}
+                       onSelectDeck={onSelectDeck} showDecks={showDecks}/>
         </div>
     );
 };

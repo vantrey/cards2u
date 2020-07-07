@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {getCardPacks} from "../../../../../../features/cardsPacks/bll/cardPacksReducer";
+import React from 'react';
+import  {useSelector} from "react-redux";
 import {AppStateType} from "../../../../../../bll/store/store";
 
 type UserDecksTypeC = {
