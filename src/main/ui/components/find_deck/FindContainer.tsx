@@ -7,12 +7,13 @@ import ReactPaginate from "react-paginate";
 import FindDeck from "./find/FindDeck";
 import UserInfo from "../../common/user/UserInfo";
 import Loader from "../../common/loader/Loader";
+import { getCardPacks } from '../../../features/cardsPacks/bll/cardPacksReducer';
 
 
 const FindContainer: React.FC = () => {
     const dispatch = useDispatch();
     const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer)
-
+    const {isAuth} = useSelector((state: AppStateType) => state.login);
 
     const [showMode, setShowMode] = useState<string>('')
 
@@ -34,7 +35,8 @@ const FindContainer: React.FC = () => {
 
     const onShowDecks = (e: React.MouseEvent<HTMLDivElement>) => {
         const id = e.currentTarget.id
-        setShowMode(id)
+        setShowMode(id);
+        dispatch(getCardPacks(1, 10, id))
     }
 
     const pageCountSize = Math.ceil(totalUsersCount / pageCount)
@@ -43,30 +45,43 @@ const FindContainer: React.FC = () => {
         <div className={styles.find__wrap}>
             <div className={styles.find__left}></div>
             <div className={styles.find__container}>
-                <div className={styles.container__leftBlock}>
+                <div className={styles.container__top}>
                     <UserInfo/>
-                    <FindDeck users={users}
-                              sortDeckUp={sortDeckUp}
-                              sortDeckDown={sortDeckDown}
-                              onShowDecks={onShowDecks}
-                              showMode={showMode}
-                    />
-
-                    <div className={styles.find__paginate}>
-                        <ReactPaginate
-                            previousLabel={"prev"}
-                            nextLabel={"next"}
-                            breakLabel={"..."}
-                            breakClassName={"break-me"}
-                            pageCount={pageCountSize}
-                            marginPagesDisplayed={1}
-                            pageRangeDisplayed={2}
-                            onPageChange={pageChangedHandler}
-                            containerClassName={styles.pagination}
-                            activeClassName={styles.active}/>
-                    </div>
                 </div>
-                <div className={styles.container__rightBlock}></div>
+                <div className={styles.container__body}>
+                    <div className={styles.container__leftBlock}>
+                        <div className={styles.find__wrap_block}>
+                            {
+                                !isAuth &&
+								<div className={styles.find__wrap_mirror}>
+									<div className={styles.find__loader}>
+										<Loader/>
+									</div>
+								</div>
+                            }
+                            <FindDeck users={users}
+                                      sortDeckUp={sortDeckUp}
+                                      sortDeckDown={sortDeckDown}
+                                      onShowDecks={onShowDecks}
+                                      showMode={showMode}
+                            />
+                            <div className={styles.find__paginate}>
+                                <ReactPaginate
+                                    previousLabel={"prev"}
+                                    nextLabel={"next"}
+                                    breakLabel={"..."}
+                                    breakClassName={"break-me"}
+                                    pageCount={pageCountSize}
+                                    marginPagesDisplayed={1}
+                                    pageRangeDisplayed={2}
+                                    onPageChange={pageChangedHandler}
+                                    containerClassName={styles.pagination}
+                                    activeClassName={styles.active}/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.container__rightBlock}></div>
+                </div>
             </div>
 
             <div className={styles.find__right}></div>
