@@ -26,7 +26,7 @@ const UserInfo: React.FC = () => {
         <div className={styles.user__wrap}>
             <UserPicture avatar={user.avatar} nick={user.name}/>
             <UserDecks
-                isFetching={isPreventFetching}
+                /*isFetching={isPreventFetching}*/
                 cardPacks={cardPacks}
                 showMyDecks={showMyDecks}
                 showDecks={showDecks}
