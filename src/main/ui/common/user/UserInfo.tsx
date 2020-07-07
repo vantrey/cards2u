@@ -10,27 +10,19 @@ import {getCardPacks} from "../../../features/cardsPacks/bll/cardPacksReducer";
 const UserInfo: React.FC = () => {
 
     const dispatch = useDispatch();
-    const {cardPacks, isSuccess} = useSelector((state: AppStateType) => state.cardPacks);
-    const {isPreventFetching} = useSelector((state: AppStateType)=> state.preventRequest)
+    const cardPacks = useSelector((state: AppStateType) => state.cardPacks.cardPacks);
     const user = useSelector((state: AppStateType) => state.profile.user);
     const [showDecks, setShowDecks] = useState<boolean>(false);
 
     const showMyDecks = () => {
-        if (!isSuccess) {
-            dispatch(getCardPacks(1, 100, user._id));
-        }
-        setShowDecks(!showDecks);
-    };
+        setShowDecks(!showDecks)
+        dispatch(getCardPacks(1, 100, user._id))
+    }
 
     return (
         <div className={styles.user__wrap}>
             <UserPicture avatar={user.avatar} nick={user.name}/>
-            <UserDecks
-                /*isFetching={isPreventFetching}*/
-                cardPacks={cardPacks}
-                showMyDecks={showMyDecks}
-                showDecks={showDecks}
-            />
+            <UserDecks cardPacks={cardPacks} showMyDecks={showMyDecks} showDecks={showDecks}/>
         </div>
     );
 };
