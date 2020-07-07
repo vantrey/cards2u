@@ -48,11 +48,22 @@ const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks, showMyDecks, showDec
                 {cardPacks.length === 0 ?
                     // <div className={styles.userDecks__none}>You don't have a deck.</div>
                     <div className={styles.userDecks__items} id='drag-X'>
-                        <div className={styles.item} onClick={onSelectDeck}>no Name</div>
-                        <div className={styles.item} onClick={onSelectDeck}>Name Name</div>
-                        <div className={styles.item} onClick={onSelectDeck}>Name Native</div>
-                        <div className={styles.item} onClick={onSelectDeck}>Title</div>
-                        <div className={styles.item} onClick={onSelectDeck}>Title</div>
+                        <div className={styles.item} onClick={onSelectDeck}>
+                            <small className={styles.item__title}>Name Name</small>
+                        </div>
+                         <div className={styles.item} onClick={onSelectDeck}>
+                            <small className={styles.item__title}>Name Native</small>
+                        </div>
+                         <div className={styles.item} onClick={onSelectDeck}>
+                            <small className={styles.item__title}>React Native</small>
+                        </div>
+                         <div className={styles.item} onClick={onSelectDeck}>
+                            <small className={styles.item__title}>My english</small>
+                        </div>
+                         <div className={styles.item} onClick={onSelectDeck}>
+                            <small className={styles.item__title}>Title Title</small>
+                        </div>
+
                     </div>
                     :
                     (
@@ -60,7 +71,7 @@ const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks, showMyDecks, showDec
                             {cardPacks.map(cardPack =>
                                 <div className={styles.decks__wrap} key={cardPack._id} onClick={onSelectDeck}>
                                     <div className={styles.item}>
-                                        <small className={styles.decks__title}>{cardPack.name}</small>
+                                        <small className={styles.item__title}>{cardPack.name}</small>
                                     </div>
                                     {/*<button className={styles.decks__button}>delete</button>*/}
                                 </div>)

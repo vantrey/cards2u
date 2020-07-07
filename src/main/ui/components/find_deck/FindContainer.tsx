@@ -7,7 +7,7 @@ import ReactPaginate from "react-paginate";
 import FindDeck from "./find/FindDeck";
 import UserInfo from "../../common/user/UserInfo";
 import Loader from "../../common/loader/Loader";
-import { getCardPacks } from '../../../features/cardsPacks/bll/cardPacksReducer';
+import {getCardPacks} from '../../../features/cardsPacks/bll/cardPacksReducer';
 
 
 const FindContainer: React.FC = () => {
@@ -80,7 +80,38 @@ const FindContainer: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={styles.container__rightBlock}></div>
+                    <div className={styles.container__rightBlock}>
+                        <div className={styles.deckInfo__wrap}>
+                            <h5 className={styles.deckInfo__title}>Selected deck: &nbsp;React JS</h5>
+                            <div className={styles.deckInfo__data}>
+                                <div className={styles.data__title}>
+                                    <div className={styles.title__question}>1</div>
+                                    <div className={styles.data__border}></div>
+                                    <div className={styles.title__answer}>2</div>
+                                </div>
+                                <div className={styles.data__item}>
+                                    <div className={styles.item__question}>1</div>
+                                    <div className={styles.data__border}></div>
+                                    <div className={styles.item__answer}>2</div>
+                                </div>
+                                <div className={styles.data__item}>
+                                    <div className={styles.item__question}>1</div>
+                                    <div className={styles.data__border}></div>
+                                    <div className={styles.item__answer}>2</div>
+                                </div>
+                                <div className={styles.data__item}>
+                                    <div className={styles.item__question}>1</div>
+                                    <div className={styles.data__border}></div>
+                                    <div className={styles.item__answer}>2</div>
+                                </div>
+                                <div className={styles.data__item}>
+                                    <div className={styles.item__question}>1</div>
+                                    <div className={styles.data__border}></div>
+                                    <div className={styles.item__answer}>2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

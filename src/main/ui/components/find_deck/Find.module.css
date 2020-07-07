@@ -41,15 +41,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 25px;
 
     border: 1px solid red;
+}
+
+.container__body {
+    display: flex;
+    justify-content: space-between;
 }
 
 .container__leftBlock {
     display: flex;
     flex-direction: column;
     width: 40%;
-    /*border: 1px solid blue;*/
+
+    border-top: 2px solid orange;
+    border-bottom: 2px solid orange;
+
+    border: 1px solid blue;
 }
 
 .find__wrap_block {
@@ -72,14 +82,13 @@
 
 .find__loader {
     width: 100%;
-    margin-top: 79px;
+    margin-top: 69px;
     min-height: 300px;
     max-height: 300px;
     background: #607d8b url('../../images/unit.jpg') center center no-repeat;
     background-size: cover;
 
 }
-
 
 .find__paginate {
     display: flex;
@@ -89,8 +98,7 @@
     align-items: center;
     font-family: sans-serif;
     border: 1px solid transparent;
-    border-bottom: 2px solid orange;
-
+    /*border-bottom: 2px solid orange;*/
 }
 
 .pagination {
@@ -135,4 +143,36 @@
 
 .pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span {
     border-radius: unset
+}
+
+.container__rightBlock {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border-top: 2px solid orange;
+    border-bottom: 2px solid orange;
+
+    border: 1px solid blue;
+}
+
+.deckInfo__wrap {
+    width: 100%;
+    padding: 10px;
+}
+
+.deckInfo__title {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    font-size: 16px;
+    color: orange;
+    font-weight: normal;
+    text-shadow: 5px 5px 5px rgba(0,0,0,0.75);
+}
+
+.data__title {
+    width: 100%;
+
 }

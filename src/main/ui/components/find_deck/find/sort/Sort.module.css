@@ -6,7 +6,10 @@
 .sort__title {
     font-family: 'CS Grimrock', sans-serif;
     margin-right: 10px;
+    font-size: 16px;
     color: orange;
+    font-weight: normal;
+    text-shadow: 5px 5px 5px rgba(0,0,0,0.75);
 }
 
 .sort__button {
