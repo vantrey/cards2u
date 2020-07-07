@@ -16,6 +16,7 @@
     "gh-pages": "^2.2.0",
     "lodash": "^4.17.15",
     "normalize.css": "^8.0.1",
+    "popup": "^0.0.3",
     "react": "^16.13.1",
     "react-avatar-editor": "^11.0.9",
     "react-dom": "^16.13.1",

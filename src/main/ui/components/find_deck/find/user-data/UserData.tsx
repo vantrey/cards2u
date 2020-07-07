@@ -1,5 +1,5 @@
 import React from "react";
-import UserDecks from "./user-decks/UserDecks";
+import UserDecksShitCod from "./user_decks(test_content)/UserDecksShitCod";
 import styles from "./UserData.module.css";
 import userAvaDefault from "../../../../icons/face-mask.png";
 
@@ -38,7 +38,7 @@ const UserData: React.FC<UserDecsType> = ({
             <div className={styles.users__decks} id={id} onClick={onShowDecks}>{decks}</div>
             {showMode === id &&
             <div>
-                <UserDecks id={id}/>
+                <UserDecksShitCod id={id}/>
             </div>
             }
         </div>
