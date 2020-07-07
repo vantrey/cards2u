@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {CardPackType} from "../../../../types/entities";
 import styles from './UserDecks.module.css';
+import { dragHandler } from '../../../../helpers/dragHandler/DragHandler';
 
 
 type AvaDecksTypeProps = {
@@ -11,6 +12,11 @@ type AvaDecksTypeProps = {
 
 const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks, showMyDecks, showDecks}) => {
 
+useEffect(() => {
+    document.body.addEventListener('mousedown', dragHandler.start);
+    document.body.addEventListener('mouseup', dragHandler.end);
+}, [])
+
     return (
         <div className={styles.userDecks__wrap}>
             {!showDecks && <button className={styles.userDecks__button} onClick={showMyDecks}>
@@ -20,7 +26,7 @@ const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks, showMyDecks, showDec
 			<>
                 {cardPacks.length === 0 ?
                     // <div className={styles.userDecks__none}>You don't have a deck.</div>
-                    <div className={styles.userDecks__items}>
+                    <div className={styles.userDecks__items} id='drag-X'>
                         <div className={styles.item}>no Name</div>
                         <div className={styles.item}>Name Name</div>
                         <div className={styles.item}>Name Native</div>

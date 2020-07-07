@@ -7,6 +7,7 @@ import ReactPaginate from "react-paginate";
 import FindDeck from "./find/FindDeck";
 import UserInfo from "../../common/user/UserInfo";
 import Loader from "../../common/loader/Loader";
+import { getCardPacks } from '../../../features/cardsPacks/bll/cardPacksReducer';
 
 
 const FindContainer: React.FC = () => {
@@ -34,7 +35,8 @@ const FindContainer: React.FC = () => {
 
     const onShowDecks = (e: React.MouseEvent<HTMLDivElement>) => {
         const id = e.currentTarget.id
-        setShowMode(id)
+        setShowMode(id);
+        dispatch(getCardPacks(1, 10, id))
     }
 
     const pageCountSize = Math.ceil(totalUsersCount / pageCount)

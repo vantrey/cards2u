@@ -10,11 +10,6 @@ type UserDecksTypeC = {
 const UserDecks: React.FC<UserDecksTypeC> = ({id}) => {
 
     const {cardPacks} = useSelector((state: AppStateType) => state.cardPacks)
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getCardPacks(1, 10, id))
-    }, [id])
 
     return (
         <div>
