@@ -12,14 +12,13 @@ type AvaDecksTypeProps = {
     cardPacks: CardPackType[]
     showMyDecks: () => void
     showDecks: boolean
-    onSelectDeck: () => void
-
+    onSelectDeck: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 
 const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks, showMyDecks, showDecks, onSelectDeck}) => {
 
     const {isAuth} = useSelector((state: AppStateType) => state.login);
-    const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest)
+    const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
 
     useEffect(() => {
         const dragBlockElement = document.getElementById('drag-X');
@@ -35,7 +34,7 @@ const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks, showMyDecks, showDec
             }
         }
 
-    }, [])
+    }, []);
 
     return (
         <div className={styles.userDecks__wrap} >
@@ -69,7 +68,12 @@ const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks, showMyDecks, showDec
                     (
                         <div className={styles.userDecks__have}>
                             {cardPacks.map(cardPack =>
-                                <div className={styles.decks__wrap} key={cardPack._id} onClick={onSelectDeck}>
+                                <div
+                                    className={styles.decks__wrap}
+                                    id={cardPack._id}
+                                    key={cardPack._id}
+                                    onClick={onSelectDeck}
+                                >
                                     <div className={styles.item}>
                                         <small className={styles.item__title}>{cardPack.name}</small>
                                     </div>
