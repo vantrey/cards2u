@@ -13,12 +13,18 @@ type AvaDecksTypeProps = {
     showMyDecks: () => void
     showDecks: boolean
     onSelectDeck: (e: React.MouseEvent<HTMLDivElement>) => void
+    isAuth: boolean
+    isPreventFetching: boolean
 }
 
-const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks, showMyDecks, showDecks, onSelectDeck}) => {
+const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks,
+                                                    showMyDecks,
+                                                    showDecks,
+                                                    onSelectDeck,
+                                                    isAuth,
+                                                    isPreventFetching,
 
-    const {isAuth} = useSelector((state: AppStateType) => state.login);
-    const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
+}) => {
 
     useEffect(() => {
         const dragBlockElement = document.getElementById('drag-X');
@@ -38,7 +44,12 @@ const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks, showMyDecks, showDec
 
     return (
         <div className={styles.userDecks__wrap} >
-            {!showDecks && <button className={styles.userDecks__button} disabled={!isAuth} onClick={showMyDecks}>
+            {!showDecks &&
+            <button
+                className={styles.userDecks__button}
+                disabled={!isAuth || isPreventFetching}
+                onClick={showMyDecks}
+            >
 				<strong className={styles.button__text}>Show my decks</strong>
 			</button>}
             {showDecks && isPreventFetching && <Loader/>}

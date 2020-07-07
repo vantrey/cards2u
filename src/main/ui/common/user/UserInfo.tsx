@@ -12,13 +12,18 @@ import {getCurrentUserDecks} from "../../../bll/currentUserDecks/currentUserDeck
 const UserInfo: React.FC = () => {
 
     const dispatch = useDispatch();
-    const {currentUserDecks} = useSelector((state: AppStateType) => state.currentUserDecks);
+    const {currentUserDecks, isSuccess} = useSelector((state: AppStateType) => state.currentUserDecks);
     const user = useSelector((state: AppStateType) => state.profile.user);
+    const {isAuth} = useSelector((state: AppStateType) => state.login);
+    const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
+
     const [showDecks, setShowDecks] = useState<boolean>(false);
 
     const showMyDecks = () => {
         setShowDecks(!showDecks);
-        dispatch(getCurrentUserDecks(user._id));
+        if (!isSuccess) {
+            dispatch(getCurrentUserDecks(user._id));
+        }
     };
 
     const onSelectDeck = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -31,8 +36,14 @@ const UserInfo: React.FC = () => {
     return (
         <div className={styles.user__wrap}>
             <UserPicture avatar={user.avatar} nick={user.name}/>
-            <UserDecks cardPacks={currentUserDecks} showMyDecks={showMyDecks}
-                       onSelectDeck={onSelectDeck} showDecks={showDecks}/>
+            <UserDecks
+                cardPacks={currentUserDecks}
+                showMyDecks={showMyDecks}
+                onSelectDeck={onSelectDeck}
+                showDecks={showDecks}
+                isAuth={isAuth}
+                isPreventFetching={isPreventFetching}
+            />
         </div>
     );
 };
