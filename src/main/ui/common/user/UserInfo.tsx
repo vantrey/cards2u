@@ -7,6 +7,7 @@ import {AppStateType} from "../../../bll/store/store";
 import {getCardPacks} from "../../../features/cardsPacks/bll/cardPacksReducer";
 import {get_Cards} from "../../../features/Cards/bll/cardsReducer";
 import {getCurrentUserDecks} from "../../../bll/currentUserDecks/currentUserDecksReducer";
+import {useLocalFetch} from "../../../helpers/localFetchingHook";
 
 
 const UserInfo: React.FC = () => {
@@ -19,16 +20,19 @@ const UserInfo: React.FC = () => {
 
     const [showDecks, setShowDecks] = useState<boolean>(false);
 
+    const {setIsLocalFetching, isLocalFetching} = useLocalFetch(); // local fetching for Loader
+
     const showMyDecks = () => {
         setShowDecks(!showDecks);
         if (!isSuccess) {
+            setIsLocalFetching(true);
             dispatch(getCurrentUserDecks(user._id));
         }
     };
 
     const onSelectDeck = (e: React.MouseEvent<HTMLDivElement>) => {
         const deckId = e.currentTarget.id;
-        if (deckId) {
+        if (deckId && !isPreventFetching) {  // disabled onClick while request
             dispatch(get_Cards(e.currentTarget.id));
         }
     };
@@ -43,6 +47,7 @@ const UserInfo: React.FC = () => {
                 showDecks={showDecks}
                 isAuth={isAuth}
                 isPreventFetching={isPreventFetching}
+                isLocalFetching={isLocalFetching}
             />
         </div>
     );
