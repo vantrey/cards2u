@@ -15,7 +15,8 @@ const initialState = {
     totalCardPacksCount: 0,
     isSuccess:false,
     cardsPackId: '',
-    user_id: ''
+    user_id: '',
+    isFetching: false
 };
 
 type InitialStateType =typeof initialState

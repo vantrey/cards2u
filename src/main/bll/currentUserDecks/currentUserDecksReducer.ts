@@ -84,7 +84,7 @@ type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
 export const getCurrentUserDecks =
-    (currentPage: number | null = 1, pageSize: number | null = 100, user_id: string | null): ThunkType =>
+    (user_id: string | null, currentPage = 1, pageSize = 100,): ThunkType =>
         async (dispatch: DispatchType) => {
             try {
                 dispatch(setIsPreventFetching(true));
