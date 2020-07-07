@@ -10,6 +10,7 @@ import {userReducer} from "../../features/users/bll/UserReducer";
 import {cardPacksReducer} from "../../features/cardsPacks/bll/cardPacksReducer";
 import {favoriteDecksReducer} from "../favoriteDecks/favoriteDecksReducer";
 import {preventRequestReducer} from "../preventReques/preventRequestReducer";
+import {currentUserDecksReducer} from "../currentUserDecks/currentUserDecksReducer";
 
 const rootReducer = combineReducers({
     login: loginReducer,
@@ -22,7 +23,7 @@ const rootReducer = combineReducers({
     cardPacks: cardPacksReducer,
     favoriteDecks: favoriteDecksReducer,
     preventRequest: preventRequestReducer,
-
+    currentUserDecks: currentUserDecksReducer,
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>

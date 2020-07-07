@@ -49,14 +49,14 @@ const FindDeck: React.FC<UsersDeckType> = ({
                         </div>)
                 }
             </div>
-            {/*{*/}
-            {/*    isPreventFetching &&*/}
-			{/*	<div className={styles.findDeck__loader}>*/}
-			{/*		<Loader/>*/}
-			{/*	</div>*/}
-            {/*}*/}
             {
-                // !isPreventFetching &&
+                isPreventFetching &&
+				<div className={styles.findDeck__loader}>
+					<Loader/>
+				</div>
+            }
+            {
+                !isPreventFetching &&
 				<div className={styles.findDeck__users}>
                     {
                         users.map(u =>
