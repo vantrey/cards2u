@@ -60,7 +60,7 @@ const FindContainer: React.FC = () => {
                                 !isAuth &&
 								<div className={styles.find__wrap_mirror}>
 									<div className={styles.find__loader}>
-										<Loader/>
+										{/*<Loader/>*/}
 									</div>
 								</div>
                             }
@@ -88,8 +88,8 @@ const FindContainer: React.FC = () => {
 
                     { !isAuth &&  <DecksLogout/> }
                     {/*{ isAuth && !selectUser && !decksQuestions && <DecksLogout/> }*/}
-                    { isAuth && !selectUser && !decksQuestions && <DecksNames/> }
-                    {/*{ isAuth && !selectUser &&  !decksQuestions && <DecksQuestions/> }*/}
+                    {/*{ isAuth && !selectUser && !decksQuestions && <DecksNames/> }*/}
+                    { isAuth && !selectUser &&  !decksQuestions && <DecksQuestions/> }
 
                 </div>
             </div>
