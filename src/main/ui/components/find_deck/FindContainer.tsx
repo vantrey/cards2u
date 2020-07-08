@@ -11,16 +11,32 @@ import {getCardPacks} from '../../../features/cardsPacks/bll/cardPacksReducer';
 import DecksQuestions from "./info/decksQuestions/DecksQuestions";
 import DecksNames from './info/decksNames/DecksNames';
 import DecksLogout from "./info/decksLogout/DecksLogout";
+import PopupAuth from '../../common/popUp/popUp_Authorization/PopupAuth';
 
 
 const FindContainer: React.FC = () => {
     const dispatch = useDispatch();
     const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer);
     const {isAuth} = useSelector((state: AppStateType) => state.login);
+    const [ modal, setModal ] = useState (false);
 
     const [showMode, setShowMode] = useState<string>('');
+    const [popupAuth, setpopupAuth] = useState<boolean>(false);
     const [selectUser, setSelectUser] = useState<boolean>(false);
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);
+
+    useEffect (() => {
+        let timerId = setTimeout (() => {
+            setModal (true);
+            setpopupAuth(true)
+        }, 1000)
+
+        return () => {
+            clearTimeout (timerId)
+        }
+
+    }, []);
+
 
     const pageChangedHandler = (page: { selected: number }) => {
         dispatch(usersActions.setPage(page.selected + 1))
@@ -93,8 +109,11 @@ const FindContainer: React.FC = () => {
 
                 </div>
             </div>
-
             <div className={styles.find__right}></div>
+            {
+                !isAuth && popupAuth && <PopupAuth setpopupAuth={setpopupAuth}
+												   modal={modal} setModal={setModal}/>
+            }
         </div>)
 }
 

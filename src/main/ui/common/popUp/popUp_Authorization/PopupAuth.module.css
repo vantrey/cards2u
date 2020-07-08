@@ -1,0 +1,45 @@
+
+.popupAuth__wrap {
+    z-index: 2000;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0);
+    transition: all 0.3s ease;
+    font-family: 'CS Grimrock', sans-serif;
+}
+
+.popupAuth__wrap_active {
+    transform: scale(1);
+    transition: all 0.3s ease;
+}
+
+.popupAuth__img {
+    position: relative;
+    max-width: 500px;
+    min-width: 355px;
+}
+
+.popupAuth__icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+.popupAuth__title {
+    color:  #3e2723;
+    position: absolute;
+    top: 25%;
+    left: 35%;
+    transform: translateX(-50%);
+    font-size: 18px;
+}

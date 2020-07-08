@@ -6,7 +6,7 @@ import RegistrationContainer from '../../../auth/registration/RegirtrationContai
 import RestorePswContainer from '../../../auth/restorePsw/RestorePswContainer';
 import {useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store/store";
-import PopupSingIn from '../../common/popUp/PopupSingIn';
+import PopupSingIn from '../../common/popUp/popUp_SignIn/PopupSingIn';
 
 export const REDIRECT_PATH = '/redirect';
 export const LOGIN_PATH = '/login';
