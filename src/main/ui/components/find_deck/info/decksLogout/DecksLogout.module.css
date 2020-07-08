@@ -1,0 +1,39 @@
+
+.container__rightBlock {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border-top: 2px solid orange;
+    border-bottom: 2px solid orange;
+}
+
+.decksLogout__wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.decksLogout__text {
+    width: 300px;
+    font-size: 16px;
+    color: orange;
+    margin-bottom: 25px;
+    font-family: 'CS Grimrock', sans-serif;
+    font-weight: normal;
+    text-shadow: 5px 5px 5px rgba(0,0,0,0.75);
+}
+
+.decksLogout__img {
+    width: 100px;
+}
+
+
+
+
+
+
+
+
