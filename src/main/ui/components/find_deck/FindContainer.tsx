@@ -8,18 +8,23 @@ import FindDeck from "./find/FindDeck";
 import UserInfo from "../../common/user/UserInfo";
 import Loader from "../../common/loader/Loader";
 import {getCardPacks} from '../../../features/cardsPacks/bll/cardPacksReducer';
+import DecksQuestions from "./info/decksQuestions/DecksQuestions";
+import DecksNames from './info/decksNames/DecksNames';
+import DecksLogout from "./info/decksLogout/DecksLogout";
 
 
 const FindContainer: React.FC = () => {
     const dispatch = useDispatch();
-    const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer)
+    const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer);
     const {isAuth} = useSelector((state: AppStateType) => state.login);
 
-    const [showMode, setShowMode] = useState<string>('')
+    const [showMode, setShowMode] = useState<string>('');
+    const [selectUser, setSelectUser] = useState<boolean>(false);
+    const [decksQuestions, setDecksQuestions] = useState<boolean>(false);
 
     const pageChangedHandler = (page: { selected: number }) => {
         dispatch(usersActions.setPage(page.selected + 1))
-    }
+    };
 
     useEffect(() => {
         dispatch(getUser(page, pageCount))
@@ -27,19 +32,19 @@ const FindContainer: React.FC = () => {
 
     const sortDeckUp = (e: React.MouseEvent<HTMLButtonElement>) => {
         dispatch(getUser(1, 10, e.currentTarget.name, '1'))
-    }
+    };
 
     const sortDeckDown = (e: React.MouseEvent<HTMLButtonElement>) => {
         dispatch(getUser(1, 10, e.currentTarget.name, '0'))
-    }
+    };
 
     const onShowDecks = (e: React.MouseEvent<HTMLDivElement>) => {
         const id = e.currentTarget.id
         setShowMode(id);
         dispatch(getCardPacks(1, 10, id))
-    }
+    };
 
-    const pageCountSize = Math.ceil(totalUsersCount / pageCount)
+    const pageCountSize = Math.ceil(totalUsersCount / pageCount);
 
     return (
         <div className={styles.find__wrap}>
@@ -80,74 +85,80 @@ const FindContainer: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={styles.container__rightBlock}>
-                        <div className={styles.deckInfo__wrap}>
-                            <h5 className={styles.deckInfo__title}>Selected deck: &nbsp;React JS</h5>
-                            <div className={styles.deckInfo__data}>
-                                <div className={styles.data__title}>
-                                    <div className={styles.title__question}>Question</div>
-                                    <div className={styles.data__border}></div>
-                                    <div className={styles.title__answer}>Answer</div>
-                                </div>
-                                <div className={styles.data__item_box}>
-                                    <div className={styles.data__item}>
-                                        <div className={styles.item__question}>
-                                            Область информатики, в которой функции используются для
-                                            создания универсальной модели исчисления.
-                                        </div>
-                                        <div className={styles.data__border}></div>
-                                        <div className={styles.item__answer}>
-                                            Область информатики
-                                        </div>
-                                    </div>
-                                    <div className={styles.data__item}>
-                                        <div className={styles.item__question}>
-                                            Область информатики, в которой функции используются для
-                                            создания универсальной модели исчисления.
-                                        </div>
-                                        <div className={styles.data__border}></div>
-                                        <div className={styles.item__answer}>
-                                            Область информатики
-                                        </div>
-                                    </div>
-                                    <div className={styles.data__item}>
-                                        <div className={styles.item__question}>1</div>
-                                        <div className={styles.data__border}></div>
-                                        <div className={styles.item__answer}>2</div>
-                                    </div>
-                                    <div className={styles.data__item}>
-                                        <div className={styles.item__question}>1</div>
-                                        <div className={styles.data__border}></div>
-                                        <div className={styles.item__answer}>2</div>
-                                    </div>
-                                    <div className={styles.data__item}>
-                                        <div className={styles.item__question}>1</div>
-                                        <div className={styles.data__border}></div>
-                                        <div className={styles.item__answer}>2</div>
-                                    </div>
-                                    <div className={styles.data__item}>
-                                        <div className={styles.item__question}>1</div>
-                                        <div className={styles.data__border}></div>
-                                        <div className={styles.item__answer}>2</div>
-                                    </div>
-                                    <div className={styles.data__item}>
-                                        <div className={styles.item__question}>1</div>
-                                        <div className={styles.data__border}></div>
-                                        <div className={styles.item__answer}>2</div>
-                                    </div>
-                                    <div className={styles.data__item}>
-                                        <div className={styles.item__question}>1</div>
-                                        <div className={styles.data__border}></div>
-                                        <div className={styles.item__answer}>2</div>
-                                    </div>
-                                </div>
-                                <div className={styles.deckInfo__button_wrap}>
-                                    <button className={styles.deckInfo__button}>save to favorites</button>
-                                </div>
+                    {/*<div className={styles.container__rightBlock}>*/}
+                    {/*    <div className={styles.deckInfo__wrap}>*/}
+                    {/*        <h5 className={styles.deckInfo__title}>Selected deck: &nbsp;React JS</h5>*/}
+                    {/*        <div className={styles.deckInfo__data}>*/}
+                    {/*            <div className={styles.data__title}>*/}
+                    {/*                <div className={styles.title__question}>Question</div>*/}
+                    {/*                <div className={styles.data__border}></div>*/}
+                    {/*                <div className={styles.title__answer}>Answer</div>*/}
+                    {/*            </div>*/}
+                    {/*            <div className={styles.data__item_box}>*/}
+                    {/*                <div className={styles.data__item}>*/}
+                    {/*                    <div className={styles.item__question}>*/}
+                    {/*                        Область информатики, в которой функции используются для*/}
+                    {/*                        создания универсальной модели исчисления.*/}
+                    {/*                    </div>*/}
+                    {/*                    <div className={styles.data__border}></div>*/}
+                    {/*                    <div className={styles.item__answer}>*/}
+                    {/*                        Область информатики*/}
+                    {/*                    </div>*/}
+                    {/*                </div>*/}
+                    {/*                <div className={styles.data__item}>*/}
+                    {/*                    <div className={styles.item__question}>*/}
+                    {/*                        Область информатики, в которой функции используются для*/}
+                    {/*                        создания универсальной модели исчисления.*/}
+                    {/*                    </div>*/}
+                    {/*                    <div className={styles.data__border}></div>*/}
+                    {/*                    <div className={styles.item__answer}>*/}
+                    {/*                        Область информатики*/}
+                    {/*                    </div>*/}
+                    {/*                </div>*/}
+                    {/*                <div className={styles.data__item}>*/}
+                    {/*                    <div className={styles.item__question}>1</div>*/}
+                    {/*                    <div className={styles.data__border}></div>*/}
+                    {/*                    <div className={styles.item__answer}>2</div>*/}
+                    {/*                </div>*/}
+                    {/*                <div className={styles.data__item}>*/}
+                    {/*                    <div className={styles.item__question}>1</div>*/}
+                    {/*                    <div className={styles.data__border}></div>*/}
+                    {/*                    <div className={styles.item__answer}>2</div>*/}
+                    {/*                </div>*/}
+                    {/*                <div className={styles.data__item}>*/}
+                    {/*                    <div className={styles.item__question}>1</div>*/}
+                    {/*                    <div className={styles.data__border}></div>*/}
+                    {/*                    <div className={styles.item__answer}>2</div>*/}
+                    {/*                </div>*/}
+                    {/*                <div className={styles.data__item}>*/}
+                    {/*                    <div className={styles.item__question}>1</div>*/}
+                    {/*                    <div className={styles.data__border}></div>*/}
+                    {/*                    <div className={styles.item__answer}>2</div>*/}
+                    {/*                </div>*/}
+                    {/*                <div className={styles.data__item}>*/}
+                    {/*                    <div className={styles.item__question}>1</div>*/}
+                    {/*                    <div className={styles.data__border}></div>*/}
+                    {/*                    <div className={styles.item__answer}>2</div>*/}
+                    {/*                </div>*/}
+                    {/*                <div className={styles.data__item}>*/}
+                    {/*                    <div className={styles.item__question}>1</div>*/}
+                    {/*                    <div className={styles.data__border}></div>*/}
+                    {/*                    <div className={styles.item__answer}>2</div>*/}
+                    {/*                </div>*/}
+                    {/*            </div>*/}
+                    {/*            <div className={styles.deckInfo__button_wrap}>*/}
+                    {/*                <button className={styles.deckInfo__button}>save to favorites</button>*/}
+                    {/*            </div>*/}
 
-                            </div>
-                        </div>
-                    </div>
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+
+                    { !isAuth &&  <DecksLogout/> }
+                    {/*{ isAuth && !selectUser && !decksQuestions && <DecksLogout/> }*/}
+                    { isAuth && !selectUser && !decksQuestions && <DecksNames/> }
+                    {/*{ isAuth && !selectUser &&  !decksQuestions && <DecksQuestions/> }*/}
+
                 </div>
             </div>
 
