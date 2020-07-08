@@ -21,22 +21,9 @@ const FindContainer: React.FC = () => {
     const [ modal, setModal ] = useState (false);
 
     const [showMode, setShowMode] = useState<string>('');
-    const [popupAuth, setpopupAuth] = useState<boolean>(false);
+    const [popupAuth, setPopupAuth] = useState<boolean>(false);
     const [selectUser, setSelectUser] = useState<boolean>(false);
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);
-
-    useEffect (() => {
-        let timerId = setTimeout (() => {
-            setModal (true);
-            setpopupAuth(true)
-        }, 1000)
-
-        return () => {
-            clearTimeout (timerId)
-        }
-
-    }, []);
-
 
     const pageChangedHandler = (page: { selected: number }) => {
         dispatch(usersActions.setPage(page.selected + 1))
@@ -61,6 +48,16 @@ const FindContainer: React.FC = () => {
     };
 
     const pageCountSize = Math.ceil(totalUsersCount / pageCount);
+
+    useEffect (() => {
+        let timerId = setTimeout (() => {
+            setPopupAuth(true)
+        }, 500)
+
+        return () => {
+            clearTimeout (timerId)
+        }
+    }, []);
 
     return (
         <div className={styles.find__wrap}>
@@ -111,7 +108,7 @@ const FindContainer: React.FC = () => {
             </div>
             <div className={styles.find__right}></div>
             {
-                !isAuth && popupAuth && <PopupAuth setpopupAuth={setpopupAuth}
+                !isAuth && popupAuth && <PopupAuth setPopupAuth={setPopupAuth}
 												   modal={modal} setModal={setModal}/>
             }
         </div>)
