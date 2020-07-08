@@ -1,5 +1,6 @@
 import styles from './FindDeckPopup.module.css';
 import React from "react";
+import SelectDeck from "./selectDeck/SelectDeck";
 
 
 export default ({close}) => (
@@ -7,10 +8,9 @@ export default ({close}) => (
         <a className={styles.close} onClick={close}>
             &times;
         </a>
-        <div className={styles.header}> Select the deck to replace</div>
+        <div className={styles.header}> Select a deck for replacement or add a new deck.</div>
         <div className={styles.content}>
-            SelectDeck
-
+            <SelectDeck/>
         </div>
     </div>
 );
