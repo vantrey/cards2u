@@ -1,0 +1,153 @@
+
+.container__rightBlock {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border-top: 2px solid orange;
+    border-bottom: 2px solid orange;
+}
+
+.deckInfo__wrap {
+    width: 100%;
+    padding: 10px;
+}
+
+.deckInfo__title {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    font-size: 16px;
+    color: orange;
+    font-weight: normal;
+    text-shadow: 5px 5px 5px rgba(0,0,0,0.75);
+}
+
+.data__title, .data__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 60px;
+    min-height: 56px;
+    max-height: 56px;
+    color: #088dcd;
+    background-color: transparent;
+    border-bottom: 1px solid #088dcd;
+    border-top: 1px solid #088dcd;
+    -webkit-transition-property: background-color;
+    transition-property: background-color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+.data__item {
+    overflow: hidden;
+    overflow-y: auto;
+    min-height: 90px;
+    max-height: 90px;
+}
+
+.data__item:hover .item__question, .data__item:hover .item__answer{
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: whitesmoke;
+}
+
+.title__question, .item__question {
+    width: 65%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #088dcd;
+    font-size: 14px;
+    padding: 12px;
+}
+
+.title__question {
+    width: 63%;
+}
+
+
+.data__border {
+    width: 2px;
+    height: 50%;
+    padding: 10px 0;
+    border: 1px solid #088dcd;
+}
+
+.title__answer, .item__answer {
+    width: 35%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #088dcd;
+    font-size: 14px;
+    padding: 12px;
+
+}
+
+.data__item_box {
+    width: 100%;
+    min-height: 280px;
+    max-height: 280px;
+    overflow: hidden;
+    overflow-y: auto;
+    display: flex;
+    border: 1px solid transparent;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.deckInfo__button_wrap {
+    display: flex;
+    width: 100%;
+    height: 65px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid transparent;
+}
+
+.deckInfo__button {
+    display: flex;
+    width: 200px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    font-family: 'CS Grimrock', sans-serif;
+    border: 1px solid #088dcd;
+    color: #088dcd;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    background-color: transparent;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    transition: color, background-color;
+}
+
+.deckInfo__button:hover {
+    transition: color, background-color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #088dcd;
+}
+
+.deckInfo__button:active, .deckInfo__button:focus {
+    outline: none;
+
+}
+
+.deckInfo__button:active {
+    transform: translate(1px, 1px);
+}

@@ -5,9 +5,7 @@ import {get_Cards} from "../../../../../../features/Cards/bll/cardsReducer";
 import styles from './UserDecksShitCod.module.css'
 import Popup from "reactjs-popup";
 import FindDeckPopup from "../../../findDeckPopup/FindDeckPopup";
-import {repository} from "../../../../../../helpers/repos_localStorage/Token";
-import {CardPackType, CardType} from "../../../../../../types/entities";
-import AddDeck from "../../../findDeckPopup/addDeck/AddDeck";
+import {updateUserFavoriteDecks} from "../../../../../../bll/favoriteDecks/favoriteDecksReducer";
 
 
 /*type UserDecksTypeC = {
@@ -21,12 +19,17 @@ const UserDecksShitCode: React.FC = () => {
     const {user} = useSelector((state: AppStateType) => state.profile);
     const [showPopup, setShowPopup] = useState<boolean>(false)
     const dispatch = useDispatch();
+    const myDecks = useSelector((state: AppStateType) => state.favoriteDecks.userFavoriteDecks)
 
 
     const handleOpen = () => {
-
-
+        if (isAuth && myDecks !== null && myDecks.favoriteDecks.length === 5) {
             setShowPopup(!showPopup);
+        } else if (isAuth && myDecks !== null && myDecks.favoriteDecks.length < 5) {
+            dispatch(updateUserFavoriteDecks(user._id,'id','noName',[]))
+        } else {
+            close();
+        }
 
     }
 
