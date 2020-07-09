@@ -5,6 +5,7 @@
 
 .modal {
     font-size: 12px;
+
 }
 .modal > .header {
     width: 100%;
@@ -14,6 +15,7 @@
     padding: 5px;
 }
 .modal > .content {
+    height: 100vh;
     width: 100%;
     padding: 10px 5px;
 }

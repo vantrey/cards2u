@@ -1,7 +1,6 @@
 import styles from './FindDeckPopup.module.css';
 import React from "react";
-import SelectDeck from "./selectDeck/SelectDeck";
-
+import UserDecks from '../../../common/user/decks/UserDecks';
 
 export default ({close}) => (
     <div className={styles.modal}>
@@ -10,7 +9,7 @@ export default ({close}) => (
         </a>
         <div className={styles.header}> Select a deck for replacement or add a new deck.</div>
         <div className={styles.content}>
-            <SelectDeck/>
+            <UserDecks/>
         </div>
     </div>
 );

@@ -38,7 +38,7 @@ const UserData: React.FC<UserDecsType> = ({
             <div className={styles.users__decks} id={id} onClick={onShowDecks}>{decks}</div>
             {showMode === id &&
             <div>
-                <UserDecksShitCod id={id}/>
+                <UserDecksShitCod/>
             </div>
             }
         </div>
