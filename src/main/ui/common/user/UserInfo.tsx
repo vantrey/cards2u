@@ -31,8 +31,9 @@ const UserInfo: React.FC = () => {
 
     const onSelectDeck = (e: React.MouseEvent<HTMLDivElement>) => {
         const deckId = e.currentTarget.id;
+        const cardPackName = e.currentTarget.getAttribute('data-cardpackname');
         if (deckId && !isPreventFetching) {  // disabled onClick while request
-            dispatch(get_Cards(e.currentTarget.id));
+            dispatch(get_Cards(e.currentTarget.id, cardPackName));
         }
     };
 

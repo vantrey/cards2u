@@ -53,7 +53,7 @@ export const createUserFavoriteDecks = (userId: string | null): ThunkType =>
     };
 
 export const updateUserFavoriteDecks =
-    (userId: string | null, favoriteDeckId: string, deckName: string, deck: Array<CardType>): ThunkType =>
+(userId: string | null, favoriteDeckId: string, deckName: string, deck: Array<CardType>): ThunkType =>
         (dispatch: DispatchType) => {
 
             repository.updateUserFavoriteDeck(userId, favoriteDeckId, deckName, deck);
