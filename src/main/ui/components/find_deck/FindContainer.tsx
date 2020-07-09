@@ -13,11 +13,17 @@ import DecksNames from './info/decksNames/DecksNames';
 import DecksLogout from "./info/decksLogout/DecksLogout";
 import PopupAuth from '../../common/popUp/popUp_Authorization/PopupAuth';
 import {useLocalFetch} from "../../../helpers/localFetchingHook";
+import { useLocation } from 'react-router-dom';
+import { loginActions } from '../../../auth/login/loginReducer';
+import {get_Cards} from "../../../features/Cards/bll/cardsReducer";
 
 
 const FindContainer: React.FC = () => {
+
     const dispatch = useDispatch();
     const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer);
+    const {cards} = useSelector((state: AppStateType) => state.cards);
+    console.log(cards)
     const {isAuth} = useSelector((state: AppStateType) => state.login);
     const [ modal, setModal ] = useState (false);
     const [ nameUser, setNameUser ] = useState<string | null> ('');
@@ -27,6 +33,14 @@ const FindContainer: React.FC = () => {
     const [selectUser, setSelectUser] = useState<boolean>(false);
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);
     const {setIsLocalFetching, isLocalFetching} = useLocalFetch();
+    const currentLocation = useLocation();
+
+    let currentPath = currentLocation.pathname;
+
+    useEffect(() => {
+        dispatch(loginActions.setCurrentLocation(currentPath));
+    },[currentPath])
+
 
 
     const pageChangedHandler = (page: { selected: number }) => {
@@ -57,6 +71,10 @@ const FindContainer: React.FC = () => {
     };
 
     const pageCountSize = Math.ceil(totalUsersCount / pageCount);
+
+    const onSelectDeck = (e: React.MouseEvent<HTMLDivElement>) => {
+            dispatch(get_Cards(e.currentTarget.id));
+    };
 
     useEffect (() => {
         let timerId = setTimeout (() => {
@@ -109,8 +127,9 @@ const FindContainer: React.FC = () => {
 
                     { !isAuth &&  <DecksLogout/> }
                     { isAuth && !selectUser && !decksQuestions && <DecksLogout/> }
-                    { isAuth && selectUser && !decksQuestions && <DecksNames nameUser={nameUser}/> }
-                    {/*{ isAuth && !selectUser &&  !decksQuestions && <DecksQuestions/> }*/}
+                    { isAuth && selectUser && !decksQuestions && <DecksNames
+                        nameUser={nameUser} onSelectDeck={onSelectDeck}/> }
+                    {/*{ isAuth && !selectUser &&  !decksQuestions && <DecksQuestions /> }*/}
 
                 </div>
             </div>

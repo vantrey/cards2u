@@ -5,7 +5,7 @@ import { AppStateType } from "../../../../../bll/store/store";
 import EmptyDecks from "../emptyDecks/EmptyDecks";
 
 
-const DecksNames = ({nameUser}) => {
+const DecksNames = ({nameUser, onSelectDeck}) => {
 
     const {cardPacks} = useSelector((state) => state.cardPacks);
 
@@ -25,7 +25,7 @@ const DecksNames = ({nameUser}) => {
                         <div className={styles.decksNames__item}
                         id={decksNames._id}
                         key={decksNames._id}
-                        // onClick={onSelectDeck}
+                        onClick={onSelectDeck}
                         >{decksNames.name}
                         </div>))
 
