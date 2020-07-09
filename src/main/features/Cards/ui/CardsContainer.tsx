@@ -25,7 +25,7 @@ const CardsContainer: React.FC = () => {
 
 
     useEffect(() => {
-        dispatch(get_Cards(pack_id))
+        /*dispatch(get_Cards(pack_id))*/
     }, [dispatch, pack_id])
 
     const sortUp = (e: React.MouseEvent<HTMLButtonElement>) => {

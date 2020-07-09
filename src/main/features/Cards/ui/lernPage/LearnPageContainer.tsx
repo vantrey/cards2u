@@ -60,7 +60,7 @@ const LearnPageContainer: React.FC = () => {
   }
 
   useEffect(() => {
-    dispatch(get_Cards(pack_id))
+    /*dispatch(get_Cards(pack_id))*/
   }, [pack_id, dispatch])
 
   useEffect(() => {

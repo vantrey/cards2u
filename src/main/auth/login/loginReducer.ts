@@ -106,8 +106,10 @@ export const logout = (): ThunkType =>
 
         dispatch(usersActions.getUserSuccess([])); // reset array of users
 
-        dispatch(currentUserDecksActions.getDecksSuccess([], 0)); // reset curren user decks
+        dispatch(currentUserDecksActions.getDecksSuccess([], 0)); // reset current user decks
         dispatch(currentUserDecksActions.setIsSuccess(false));
+
+        dispatch(createUserFavoriteDecks(null)); // reset currentUserFavoriteDeck
     };
 
 
