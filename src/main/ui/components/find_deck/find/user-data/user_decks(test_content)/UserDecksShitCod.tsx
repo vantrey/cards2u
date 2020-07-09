@@ -22,7 +22,13 @@ const UserDecksShitCode: React.FC = () => {
     const [showPopup, setShowPopup] = useState<boolean>(false)
     const dispatch = useDispatch();
 
-    const myDecks = repository.get_UserFavoriteDecksFromLS(user._id);
+
+    const handleOpen = () => {
+
+
+            setShowPopup(!showPopup);
+
+    }
 
 
     return (
@@ -31,19 +37,15 @@ const UserDecksShitCode: React.FC = () => {
                 {cardPacks.map(cardPack =>
                     <div onClick={() => dispatch(get_Cards(cardPack._id))} key={cardPack.name}>
                         {cardPack.name}
-                      {/*  {( myDecks!.favoriteDecks.length < 5) && <AddDeck/>
-                        }
-                        {( myDecks!.favoriteDecks.length === 5) &&
-                        setShowPopup(!showPopup)
-                        }*/}
                     </div>)
                 }
 
             </div>
             <div>
-                <Popup open={showPopup} className={styles.shit__popup} modal
+                <Popup open={showPopup} onOpen={handleOpen} className={styles.shit__popup} modal
                        trigger={<button>save as a favorite</button>}>
                     {close => <FindDeckPopup close={close}/>}
+
                 </Popup>
             </div>
             <div>
