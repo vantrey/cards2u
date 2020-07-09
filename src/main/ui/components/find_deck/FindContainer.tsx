@@ -61,7 +61,7 @@ const FindContainer: React.FC = () => {
 
     return (
         <div className={styles.find__wrap}>
-            <div className={styles.find__left}></div>
+            <div className={styles.find__left}> </div>
             <div className={styles.find__container}>
                 <div className={styles.container__top}>
                     <UserInfo/>
@@ -106,7 +106,7 @@ const FindContainer: React.FC = () => {
 
                 </div>
             </div>
-            <div className={styles.find__right}></div>
+            <div className={styles.find__right}> </div>
             {
                 !isAuth && popupAuth && <PopupAuth setPopupAuth={setPopupAuth}
 												   modal={modal} setModal={setModal}/>
