@@ -13,8 +13,10 @@ const initialState = {
     isAuth: false,
     rememberMe: false,
     errorServerMessage: '',
-    userId: null as string | null
+    userId: null as string | null,
+    currentLocation: ''
 };
+
 type InitialStateType = typeof initialState
 
 export const loginReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -38,12 +40,19 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
                 errorServerMessage: action.error
 
             };
+
+        case "LOGIN_REDUCER/CURRENT_LOCATION":
+            return {
+                ...state,
+                currentLocation: action.currentLocation
+            };
+
         default:
             return state
     }
 };
 
-const loginActions = {
+export const loginActions = {
     loginAuthMeSuccess: (isAuth: boolean, userId: string | null) => ({
         type: 'LOGIN_REDUCER/LOGIN', isAuth, userId
     } as const),
@@ -52,6 +61,9 @@ const loginActions = {
     } as const),
     setErrorFromServer: (error: string) => ({
         type: 'LOGIN_REDUCER/SET_ERROR', error
+    } as const),
+    setCurrentLocation: (currentLocation: string) => ({
+        type: 'LOGIN_REDUCER/CURRENT_LOCATION', currentLocation
     } as const),
 };
 

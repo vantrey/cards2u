@@ -8,25 +8,39 @@ import FindDeck from "./find/FindDeck";
 import UserInfo from "../../common/user/UserInfo";
 import Loader from "../../common/loader/Loader";
 import {getCardPacks} from '../../../features/cardsPacks/bll/cardPacksReducer';
-import DecksQuestionsTest from "./info/decksQuestions(test)/DecksQuestions(test)";
+import DecksQuestions from "./info/decksQuestions/DecksQuestions";
 import DecksNames from './info/decksNames/DecksNames';
 import DecksLogout from "./info/decksLogout/DecksLogout";
 import PopupAuth from '../../common/popUp/popUp_Authorization/PopupAuth';
 import {useLocalFetch} from "../../../helpers/localFetchingHook";
+import { useLocation } from 'react-router-dom';
+import { loginActions } from '../../../auth/login/loginReducer';
+import {get_Cards} from "../../../features/Cards/bll/cardsReducer";
 
 
 const FindContainer: React.FC = () => {
+
     const dispatch = useDispatch();
     const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer);
+    const {cards, cardPackName} = useSelector((state: AppStateType) => state.cards);
     const {isAuth} = useSelector((state: AppStateType) => state.login);
     const [ modal, setModal ] = useState (false);
     const [ nameUser, setNameUser ] = useState<string | null> ('');
+    const [ deckscount, setDeckscount ] = useState<string | null> ('');
 
     const [showMode, setShowMode] = useState<string>('');
     const [popupAuth, setPopupAuth] = useState<boolean>(false);
     const [selectUser, setSelectUser] = useState<boolean>(false);
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);
     const {setIsLocalFetching, isLocalFetching} = useLocalFetch();
+    const currentLocation = useLocation();
+
+    let currentPath = currentLocation.pathname;
+
+    useEffect(() => {
+        dispatch(loginActions.setCurrentLocation(currentPath));
+    },[currentPath])
+
 
 
     const pageChangedHandler = (page: { selected: number }) => {
@@ -49,14 +63,23 @@ const FindContainer: React.FC = () => {
     const onShowDecks = (e: React.MouseEvent<HTMLDivElement>) => {
         const id = e.currentTarget.id
         const nameUser = e.currentTarget.getAttribute('data-nameuser');
+        const deckscount = e.currentTarget.getAttribute('data-deckscount');
         setNameUser(nameUser);
+        setDeckscount(deckscount);
         setShowMode(id);
         setIsLocalFetching(true);
         setSelectUser(true);
+        setDecksQuestions(false);
         dispatch(getCardPacks(1, 100, id))
     };
 
     const pageCountSize = Math.ceil(totalUsersCount / pageCount);
+
+    const onSelectDeck = (e: React.MouseEvent<HTMLDivElement>) => {
+        const deckname = e.currentTarget.getAttribute('data-deckname');
+        setDecksQuestions(true);
+            dispatch(get_Cards(e.currentTarget.id, deckname));
+    };
 
     useEffect (() => {
         let timerId = setTimeout (() => {
@@ -73,7 +96,7 @@ const FindContainer: React.FC = () => {
             <div className={styles.find__left}> </div>
             <div className={styles.find__container}>
                 <div className={styles.container__top}>
-                    <UserInfo/>
+                    <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
                 </div>
                 <div className={styles.container__body}>
                     <div className={styles.container__leftBlock}>
@@ -109,8 +132,10 @@ const FindContainer: React.FC = () => {
 
                     { !isAuth &&  <DecksLogout/> }
                     { isAuth && !selectUser && !decksQuestions && <DecksLogout/> }
-                    { isAuth && selectUser && !decksQuestions && <DecksNames nameUser={nameUser}/> }
-                   {/* { isAuth && !selectUser &&  !decksQuestions && <DecksQuestionsTest/> }*/}
+                    { isAuth && selectUser && !decksQuestions && <DecksNames
+                        nameUser={nameUser} onSelectDeck={onSelectDeck} deckscount={deckscount}/> }
+                    { isAuth && selectUser &&  decksQuestions && <DecksQuestions
+						cardPackName={cardPackName} cards={cards}/> }
 
                 </div>
             </div>

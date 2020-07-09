@@ -6,7 +6,6 @@ import {loginFormSchema} from "./loginFormShema";
 import {login} from "./loginReducer";
 import Login from "./Login";
 import {Redirect} from 'react-router-dom';
-import {useHistory} from "react-router";
 
 
 type LoginFormDataType = {
@@ -18,6 +17,7 @@ type LoginFormDataType = {
 const LoginContainer: React.FC = () => {
 
     const {isAuth, errorServerMessage} = useSelector((state: AppStateType) => state.login);
+    const { currentLocation } = useSelector((state: AppStateType) => state.login);
 
     const dispatch = useDispatch();
 
@@ -30,12 +30,10 @@ const LoginContainer: React.FC = () => {
         dispatch(login(data.email, data.password, data.rememberMe));
         reset()
     });
-    // const history = useHistory();
 
     if (isAuth) {
-        // history.goBack();
         return (
-            <Redirect to='/'/>
+            <Redirect to={currentLocation}/>
         )
     }
 
