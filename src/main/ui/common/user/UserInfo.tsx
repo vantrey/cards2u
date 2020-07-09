@@ -27,8 +27,8 @@ const UserInfo: React.FC<UserInfoType> = ({setSelectUser, setDecksQuestions}) =>
     const {setIsLocalFetching, isLocalFetching} = useLocalFetch(); // local fetching for Loader
 
     const showMyDecks = () => {
-        setSelectUser(true);
-        setDecksQuestions(true);
+        setSelectUser(false);
+        setDecksQuestions(false);
         setShowDecks(!showDecks);
         if (!isSuccess) {
             setIsLocalFetching(true);
@@ -37,6 +37,8 @@ const UserInfo: React.FC<UserInfoType> = ({setSelectUser, setDecksQuestions}) =>
     };
 
     const onSelectDeck = (e: React.MouseEvent<HTMLDivElement>) => {
+        setSelectUser(true);
+        setDecksQuestions(true);
         const deckId = e.currentTarget.id;
         const cardPackName = e.currentTarget.getAttribute('data-cardpackname');
         if (deckId && !isPreventFetching) {  // disabled onClick while request

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './DecksQuestions.module.css';
-import EmptyDecks from "../emptyDecks/EmptyDecks";
+import EmptyDeck from "../emptyDeck/EmptyDeck";
 
 
 const DecksQuestions = ({cards, cardPackName}) => {
@@ -17,7 +17,7 @@ const DecksQuestions = ({cards, cardPackName}) => {
 						<div className={styles.title__answer}>Answer</div>
 					</div>
 					<div className={styles.data__item_box}>
-                        {cards.length === 0 ?  <EmptyDecks/>  :
+                        {cards.length === 0 ?  <EmptyDeck/>  :
 
                         (cards.map (cards =>
 								<div className={styles.data__item}>

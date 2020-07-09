@@ -23,7 +23,6 @@ const FindContainer: React.FC = () => {
     const dispatch = useDispatch();
     const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer);
     const {cards, cardPackName} = useSelector((state: AppStateType) => state.cards);
-    console.log(cards)
     const {isAuth} = useSelector((state: AppStateType) => state.login);
     const [ modal, setModal ] = useState (false);
     const [ nameUser, setNameUser ] = useState<string | null> ('');
