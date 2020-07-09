@@ -19,7 +19,6 @@ const UserInfo: React.FC = () => {
     const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
 
     const [showDecks, setShowDecks] = useState<boolean>(false);
-
     const {setIsLocalFetching, isLocalFetching} = useLocalFetch(); // local fetching for Loader
 
     const showMyDecks = () => {

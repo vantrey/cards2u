@@ -22,8 +22,7 @@ const UserData: React.FC<UserDecsType> = ({
                                               showMode
                                           }) => {
     return (
-        <div className={styles.users__data}>
-
+        <div className={styles.users__data} onClick={onShowDecks} id={id} data-nameUser={name}>
             {avatar &&
             <div className={styles.users__avatar}>
                 <img src={avatar} alt='avatar'/>
@@ -35,12 +34,11 @@ const UserData: React.FC<UserDecsType> = ({
             </div>
             }
             <div className={styles.users__nick}>{name}</div>
-            <div className={styles.users__decks} id={id} onClick={onShowDecks}>{decks}</div>
-            {showMode === id &&
-            <div>
-                <UserDecks id={id}/>
-            </div>
-            }
+            <div className={styles.users__decks}>{decks}</div>
+            {/*{showMode === id &&*/}
+            {/*<div>*/}
+            {/*    <UserDecks id={id}/>*/}
+            {/*</div>*/}
         </div>
 
     )
