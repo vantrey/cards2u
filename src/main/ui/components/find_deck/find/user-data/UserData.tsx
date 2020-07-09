@@ -35,10 +35,6 @@ const UserData: React.FC<UserDecsType> = ({
             }
             <div className={styles.users__nick}>{name}</div>
             <div className={styles.users__decks}>{decks}</div>
-            {/*{showMode === id &&*/}
-            {/*<div>*/}
-            {/*    <UserDecks id={id}/>*/}
-            {/*</div>*/}
         </div>
 
     )

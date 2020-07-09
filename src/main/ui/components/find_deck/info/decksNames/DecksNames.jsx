@@ -25,6 +25,7 @@ const DecksNames = ({nameUser, onSelectDeck}) => {
                         <div className={styles.decksNames__item}
                         id={decksNames._id}
                         key={decksNames._id}
+						data-deckname={decksNames.name}
                         onClick={onSelectDeck}
                         >{decksNames.name}
                         </div>))

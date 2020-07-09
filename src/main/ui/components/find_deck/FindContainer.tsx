@@ -22,7 +22,7 @@ const FindContainer: React.FC = () => {
 
     const dispatch = useDispatch();
     const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer);
-    const {cards} = useSelector((state: AppStateType) => state.cards);
+    const {cards, cardPackName} = useSelector((state: AppStateType) => state.cards);
     console.log(cards)
     const {isAuth} = useSelector((state: AppStateType) => state.login);
     const [ modal, setModal ] = useState (false);
@@ -67,13 +67,16 @@ const FindContainer: React.FC = () => {
         setShowMode(id);
         setIsLocalFetching(true);
         setSelectUser(true);
+        setDecksQuestions(false);
         dispatch(getCardPacks(1, 100, id))
     };
 
     const pageCountSize = Math.ceil(totalUsersCount / pageCount);
 
     const onSelectDeck = (e: React.MouseEvent<HTMLDivElement>) => {
-            dispatch(get_Cards(e.currentTarget.id));
+        const deckname = e.currentTarget.getAttribute('data-deckname');
+        setDecksQuestions(true);
+            dispatch(get_Cards(e.currentTarget.id, deckname));
     };
 
     useEffect (() => {
@@ -91,7 +94,7 @@ const FindContainer: React.FC = () => {
             <div className={styles.find__left}> </div>
             <div className={styles.find__container}>
                 <div className={styles.container__top}>
-                    <UserInfo/>
+                    <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
                 </div>
                 <div className={styles.container__body}>
                     <div className={styles.container__leftBlock}>
@@ -129,7 +132,8 @@ const FindContainer: React.FC = () => {
                     { isAuth && !selectUser && !decksQuestions && <DecksLogout/> }
                     { isAuth && selectUser && !decksQuestions && <DecksNames
                         nameUser={nameUser} onSelectDeck={onSelectDeck}/> }
-                    {/*{ isAuth && !selectUser &&  !decksQuestions && <DecksQuestions /> }*/}
+                    { isAuth && selectUser &&  decksQuestions && <DecksQuestions
+						cardPackName={cardPackName} cards={cards}/> }
 
                 </div>
             </div>
