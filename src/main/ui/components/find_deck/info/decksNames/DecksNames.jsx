@@ -7,9 +7,7 @@ import EmptyDecks from "../emptyDecks/EmptyDecks";
 
 const DecksNames = ({nameUser}) => {
 
-	// const {isAuth} = useSelector((state: AppStateType) => state.login);
     const {cardPacks} = useSelector((state) => state.cardPacks);
-    console.log (cardPacks)
 
 	return (
 		<div className={styles.container__rightBlock}>
@@ -31,17 +29,9 @@ const DecksNames = ({nameUser}) => {
                         >{decksNames.name}
                         </div>))
 
-                    }
-                     {/*else {<EmptyDecks/>}*/}
-
-					{/*    <EmptyDecks/>*/}
-					{/*<div className={styles.decksNames__item}>React JS</div>*/}
-					{/*<div className={styles.decksNames__item}>JS Native</div>*/}
-					{/*<div className={styles.decksNames__item}>1</div>*/}
-					{/*<div className={styles.decksNames__item}>2</div>*/}
-					{/*<div className={styles.decksNames__item}>3</div>*/}
-					{/*<div className={styles.decksNames__item}>4</div>*/}
-					{/*<div className={styles.decksNames__item}>5</div>*/}
+                    }					{
+					(cardPacks.length === 0) &&  <EmptyDecks/>
+					}
 				</div>
 			</div>
 		</div>
