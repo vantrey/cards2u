@@ -1,3 +1,4 @@
+/*
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../../../../bll/store/store";
@@ -8,9 +9,9 @@ import FindDeckPopup from "../../../findDeckPopup/FindDeckPopup";
 import {updateUserFavoriteDecks} from "../../../../../../bll/favoriteDecks/favoriteDecksReducer";
 
 
-/*type UserDecksTypeC = {
+/!*type UserDecksTypeC = {
     id: string
-}*/
+}*!/
 
 const UserDecksShitCode: React.FC = () => {
     const {cardPacks} = useSelector((state: AppStateType) => state.cardPacks);
@@ -62,4 +63,5 @@ const UserDecksShitCode: React.FC = () => {
     );
 };
 
-export default UserDecksShitCode
+export default UserDecksShitCode*/
+export default 1

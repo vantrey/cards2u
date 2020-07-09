@@ -1,8 +1,33 @@
-import React  from 'react';
-import styles from './DecksQuestions.module.css';
-
+import React, {useState} from 'react';
+import styles from '../decksQuestions/DecksQuestions.module.css';
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "../../../../../bll/store/store";
+import {updateUserFavoriteDecks} from "../../../../../bll/favoriteDecks/favoriteDecksReducer";
+import FindDeckPopup from "../../findDeckPopup/FindDeckPopup";
+import Popup from "reactjs-popup";
 
 const DecksQuestionsTest = () => {
+
+    const {cardPacks} = useSelector((state: AppStateType) => state.cardPacks);
+    const {cards} = useSelector((state: AppStateType) => state.cards);
+    const {isAuth} = useSelector((state: AppStateType) => state.login)
+    const {user} = useSelector((state: AppStateType) => state.profile);
+    const [showPopup, setShowPopup] = useState<boolean>(false)
+    const dispatch = useDispatch();
+    const myDecks = useSelector((state: AppStateType) => state.favoriteDecks.userFavoriteDecks)
+
+
+
+    const handleOpen = () => {
+        if (isAuth && myDecks !== null && myDecks.favoriteDecks.length === 5) {
+            setShowPopup(!showPopup);
+        } else if (isAuth && myDecks !== null && myDecks.favoriteDecks.length < 5) {
+            dispatch(updateUserFavoriteDecks(user._id,'id','noName',[]));
+        } else {
+            return null;
+        }
+
+    }
 
     return (
         <div className={styles.container__rightBlock}>
@@ -67,7 +92,11 @@ const DecksQuestionsTest = () => {
                         </div>
                     </div>
                     <div className={styles.deckInfo__button_wrap}>
-                        <button className={styles.deckInfo__button}>save to favorites</button>
+                        <Popup open={showPopup} onOpen={handleOpen} className={styles.shit__popup} modal
+                               trigger={<button className={styles.deckInfo__button}>save to favorites</button>}>
+                            {close => <FindDeckPopup close={close}/>}
+
+                        </Popup>
                     </div>
 
                 </div>

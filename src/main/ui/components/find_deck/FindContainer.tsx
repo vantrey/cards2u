@@ -8,7 +8,7 @@ import FindDeck from "./find/FindDeck";
 import UserInfo from "../../common/user/UserInfo";
 import Loader from "../../common/loader/Loader";
 import {getCardPacks} from '../../../features/cardsPacks/bll/cardPacksReducer';
-import DecksQuestionsTest from "./info/decksQuestions/DecksQuestions";
+import DecksQuestionsTest from "./info/decksQuestions(test)/DecksQuestions(test)";
 import DecksNames from './info/decksNames/DecksNames';
 import DecksLogout from "./info/decksLogout/DecksLogout";
 import PopupAuth from '../../common/popUp/popUp_Authorization/PopupAuth';
@@ -110,7 +110,7 @@ const FindContainer: React.FC = () => {
                     { !isAuth &&  <DecksLogout/> }
                     { isAuth && !selectUser && !decksQuestions && <DecksLogout/> }
                     { isAuth && selectUser && !decksQuestions && <DecksNames nameUser={nameUser}/> }
-                   {/* { isAuth && !selectUser &&  !decksQuestions && <DecksQuestions/> }*/}
+                   {/* { isAuth && !selectUser &&  !decksQuestions && <DecksQuestionsTest/> }*/}
 
                 </div>
             </div>
