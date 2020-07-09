@@ -48,7 +48,7 @@ const FindContainer: React.FC = () => {
 
     const onShowDecks = (e: React.MouseEvent<HTMLDivElement>) => {
         const id = e.currentTarget.id
-        const nameUser = e.currentTarget.getAttribute('data-nameUser');
+        const nameUser = e.currentTarget.getAttribute('data-nameuser');
         setNameUser(nameUser);
         setShowMode(id);
         setIsLocalFetching(true);
@@ -107,10 +107,10 @@ const FindContainer: React.FC = () => {
                         </div>
                     </div>
 
-                    {/*{ !isAuth &&  <DecksLogout/> }*/}
-                    {/*{ isAuth && !selectUser && !decksQuestions && <DecksLogout/> }*/}
-                    {/*{ isAuth && selectUser && !decksQuestions && <DecksNames nameUser={nameUser}/> }*/}
-                    { isAuth && !selectUser &&  !decksQuestions && <DecksQuestions/> }
+                    { !isAuth &&  <DecksLogout/> }
+                    { isAuth && !selectUser && !decksQuestions && <DecksLogout/> }
+                    { isAuth && selectUser && !decksQuestions && <DecksNames nameUser={nameUser}/> }
+                    {/*{ isAuth && !selectUser &&  !decksQuestions && <DecksQuestions/> }*/}
 
                 </div>
             </div>
