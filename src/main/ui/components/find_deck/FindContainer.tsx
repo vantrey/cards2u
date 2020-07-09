@@ -12,6 +12,7 @@ import DecksQuestions from "./info/decksQuestions/DecksQuestions";
 import DecksNames from './info/decksNames/DecksNames';
 import DecksLogout from "./info/decksLogout/DecksLogout";
 import PopupAuth from '../../common/popUp/popUp_Authorization/PopupAuth';
+import {useLocalFetch} from "../../../helpers/localFetchingHook";
 
 
 const FindContainer: React.FC = () => {
@@ -19,17 +20,21 @@ const FindContainer: React.FC = () => {
     const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer);
     const {isAuth} = useSelector((state: AppStateType) => state.login);
     const [ modal, setModal ] = useState (false);
+    const [ nameUser, setNameUser ] = useState<string | null> ('');
 
     const [showMode, setShowMode] = useState<string>('');
     const [popupAuth, setPopupAuth] = useState<boolean>(false);
     const [selectUser, setSelectUser] = useState<boolean>(false);
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);
+    const {setIsLocalFetching, isLocalFetching} = useLocalFetch();
+
 
     const pageChangedHandler = (page: { selected: number }) => {
         dispatch(usersActions.setPage(page.selected + 1))
     };
 
     useEffect(() => {
+        setIsLocalFetching(true);
         dispatch(getUser(page, pageCount))
     }, [page, pageCount])
 
@@ -43,8 +48,12 @@ const FindContainer: React.FC = () => {
 
     const onShowDecks = (e: React.MouseEvent<HTMLDivElement>) => {
         const id = e.currentTarget.id
+        const nameUser = e.currentTarget.getAttribute('data-nameUser');
+        setNameUser(nameUser);
         setShowMode(id);
-        dispatch(getCardPacks(1, 10, id))
+        setIsLocalFetching(true);
+        setSelectUser(true);
+        dispatch(getCardPacks(1, 100, id))
     };
 
     const pageCountSize = Math.ceil(totalUsersCount / pageCount);
@@ -72,9 +81,7 @@ const FindContainer: React.FC = () => {
                             {
                                 !isAuth &&
 								<div className={styles.find__wrap_mirror}>
-									<div className={styles.find__loader}>
-										{/*<Loader/>*/}
-									</div>
+									<div className={styles.find__loader}> </div>
 								</div>
                             }
                             <FindDeck users={users}
@@ -82,6 +89,7 @@ const FindContainer: React.FC = () => {
                                       sortDeckDown={sortDeckDown}
                                       onShowDecks={onShowDecks}
                                       showMode={showMode}
+                                      isLocalFetching={isLocalFetching}
                             />
                             <div className={styles.find__paginate}>
                                 <ReactPaginate
@@ -100,9 +108,9 @@ const FindContainer: React.FC = () => {
                     </div>
 
                     { !isAuth &&  <DecksLogout/> }
-                    {/*{ isAuth && !selectUser && !decksQuestions && <DecksLogout/> }*/}
-                    {/*{ isAuth && !selectUser && !decksQuestions && <DecksNames/> }*/}
-                    { isAuth && !selectUser &&  !decksQuestions && <DecksQuestions/> }
+                    { isAuth && !selectUser && !decksQuestions && <DecksLogout/> }
+                    { isAuth && selectUser && !decksQuestions && <DecksNames nameUser={nameUser}/> }
+                    {/*{ isAuth && !selectUser &&  !decksQuestions && <DecksQuestions/> }*/}
 
                 </div>
             </div>

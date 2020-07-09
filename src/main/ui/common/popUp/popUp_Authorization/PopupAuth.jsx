@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './PopupAuth.module.css';
 import bell from '../../../icons/bell.png';
 import { useHistory } from "react-router";
-import scrollBg from '../../../images/scroll.webp';
 import closeIcon from '../../../icons/cancel.png';
 import { NavLink } from "react-router-dom";
 import { REDIRECT_PATH } from "../../../components/routes/FormRoutes";

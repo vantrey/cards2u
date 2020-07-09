@@ -58,25 +58,24 @@ const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks,
             {showDecks && !isLocalFetching &&
 			<>
                 {cardPacks.length === 0 ?
-                    // <div className={styles.userDecks__none}>You don't have a deck.</div>
-                    <div className={styles.userDecks__items} id='drag-X'>
-                        <div className={styles.item} onClick={onSelectDeck}>
-                            <small className={styles.item__title}>Name Name</small>
-                        </div>
-                         <div className={styles.item} onClick={onSelectDeck}>
-                            <small className={styles.item__title}>Name Native</small>
-                        </div>
-                         <div className={styles.item} onClick={onSelectDeck}>
-                            <small className={styles.item__title}>React Native</small>
-                        </div>
-                         <div className={styles.item} onClick={onSelectDeck}>
-                            <small className={styles.item__title}>My english</small>
-                        </div>
-                         <div className={styles.item} onClick={onSelectDeck}>
-                            <small className={styles.item__title}>Title Title</small>
-                        </div>
-
-                    </div>
+                    <div className={styles.userDecks__none}>You don't have a deck.</div>
+                    // <div className={styles.userDecks__items} id='drag-X'>
+                    //     <div className={styles.item} onClick={onSelectDeck}>
+                    //         <small className={styles.item__title}>Name Name</small>
+                    //     </div>
+                    //      <div className={styles.item} onClick={onSelectDeck}>
+                    //         <small className={styles.item__title}>Name Native</small>
+                    //     </div>
+                    //      <div className={styles.item} onClick={onSelectDeck}>
+                    //         <small className={styles.item__title}>React Native</small>
+                    //     </div>
+                    //      <div className={styles.item} onClick={onSelectDeck}>
+                    //         <small className={styles.item__title}>My english</small>
+                    //     </div>
+                    //      <div className={styles.item} onClick={onSelectDeck}>
+                    //         <small className={styles.item__title}>Title Title</small>
+                    //     </div>
+                    // </div>
                     :
                     (
                         <div className={styles.userDecks__have}>

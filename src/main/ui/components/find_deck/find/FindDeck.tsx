@@ -6,6 +6,7 @@ import Sort from './sort/Sort'
 import Loader from "../../../common/loader/Loader";
 import {useSelector} from "react-redux";
 import {AppStateType} from "../../../../bll/store/store";
+import {useLocalFetch} from "../../../../helpers/localFetchingHook";
 
 
 
@@ -15,9 +16,8 @@ type UsersDeckType = {
     sortDeckDown: (e: React.MouseEvent<HTMLButtonElement>) => void
     onShowDecks: (e: React.MouseEvent<HTMLDivElement>) => void
     showMode: string
+    isLocalFetching: boolean
 }
-
-
 
 const FindDeck: React.FC<UsersDeckType> = ({
                                                users,
@@ -25,14 +25,13 @@ const FindDeck: React.FC<UsersDeckType> = ({
                                                sortDeckDown,
                                                onShowDecks,
                                                showMode,
+                                               isLocalFetching
                                            }) => {
     const Headers = [
         {name: 'avatar', title: 'Avatar'},
         {name: 'name', title: 'Nick'},
         {name: 'publicCardPacksCount', title: 'Decks'}
     ];
-
-    const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest)
 
     return (
         <div className={styles.findDeck__wrap}>
@@ -50,13 +49,13 @@ const FindDeck: React.FC<UsersDeckType> = ({
                 }
             </div>
             {
-                isPreventFetching &&
+                isLocalFetching &&
 				<div className={styles.findDeck__loader}>
 					<Loader/>
 				</div>
             }
             {
-                !isPreventFetching &&
+                !isLocalFetching &&
 				<div className={styles.findDeck__users}>
                     {
                         users.map(u =>

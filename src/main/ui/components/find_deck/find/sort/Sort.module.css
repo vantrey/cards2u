@@ -19,6 +19,7 @@
     border: 1px solid #088dcd;
     color: #088dcd;
     cursor: pointer;
+    outline: none;
     margin: 1px;
     transition: all .3s ease;
 }
@@ -28,4 +29,9 @@
     border: 1px solid whitesmoke;
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.3);
+}
+
+.sort__button:active  {
+    transition: all .3s ease;
+    transform: translate(1px,1px);
 }
