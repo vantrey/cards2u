@@ -83,6 +83,7 @@ const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks,
                                 <div
                                     className={styles.decks__wrap}
                                     id={cardPack._id}
+                                    data-cardpackname={cardPack.name}
                                     key={cardPack._id}
                                     onClick={onSelectDeck}
                                 >
