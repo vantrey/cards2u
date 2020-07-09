@@ -26,6 +26,7 @@ const FindContainer: React.FC = () => {
     const {isAuth} = useSelector((state: AppStateType) => state.login);
     const [ modal, setModal ] = useState (false);
     const [ nameUser, setNameUser ] = useState<string | null> ('');
+    const [ deckscount, setDeckscount ] = useState<string | null> ('');
 
     const [showMode, setShowMode] = useState<string>('');
     const [popupAuth, setPopupAuth] = useState<boolean>(false);
@@ -62,7 +63,9 @@ const FindContainer: React.FC = () => {
     const onShowDecks = (e: React.MouseEvent<HTMLDivElement>) => {
         const id = e.currentTarget.id
         const nameUser = e.currentTarget.getAttribute('data-nameuser');
+        const deckscount = e.currentTarget.getAttribute('data-deckscount');
         setNameUser(nameUser);
+        setDeckscount(deckscount);
         setShowMode(id);
         setIsLocalFetching(true);
         setSelectUser(true);
@@ -130,7 +133,7 @@ const FindContainer: React.FC = () => {
                     { !isAuth &&  <DecksLogout/> }
                     { isAuth && !selectUser && !decksQuestions && <DecksLogout/> }
                     { isAuth && selectUser && !decksQuestions && <DecksNames
-                        nameUser={nameUser} onSelectDeck={onSelectDeck}/> }
+                        nameUser={nameUser} onSelectDeck={onSelectDeck} deckscount={deckscount}/> }
                     { isAuth && selectUser &&  decksQuestions && <DecksQuestions
 						cardPackName={cardPackName} cards={cards}/> }
 
