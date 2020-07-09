@@ -107,10 +107,10 @@ const FindContainer: React.FC = () => {
                         </div>
                     </div>
 
-                    {/*{ !isAuth &&  <DecksLogout/> }*/}
-                    {/*{ isAuth && !selectUser && !decksQuestions && <DecksLogout/> }*/}
-                    {/*{ isAuth && selectUser && !decksQuestions && <DecksNames nameUser={nameUser}/> }*/}
-                    { isAuth && !selectUser &&  !decksQuestions && <DecksQuestions/> }
+                    { !isAuth &&  <DecksLogout/> }
+                    { isAuth && !selectUser && !decksQuestions && <DecksLogout/> }
+                    { isAuth && selectUser && !decksQuestions && <DecksNames nameUser={nameUser}/> }
+                    {/*{ isAuth && !selectUser &&  !decksQuestions && <DecksQuestions/> }*/}
 
                 </div>
             </div>
