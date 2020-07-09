@@ -48,7 +48,7 @@ const FindContainer: React.FC = () => {
 
     const onShowDecks = (e: React.MouseEvent<HTMLDivElement>) => {
         const id = e.currentTarget.id
-        const nameUser = e.currentTarget.getAttribute('data-nameUser');
+        const nameUser = e.currentTarget.getAttribute('data-nameuser');
         setNameUser(nameUser);
         setShowMode(id);
         setIsLocalFetching(true);
