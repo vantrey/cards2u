@@ -22,7 +22,6 @@ const CardEntersContainer: React.FC<PropsType> = React.memo(({}) => {
         reset();
     });
 
-
     return (
         <div>
             <CardEntersForm
