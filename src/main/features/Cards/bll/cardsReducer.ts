@@ -140,6 +140,7 @@ export const get_Cards = (
 export const add_Card = ({cardsPack_id, question, answer}: AddCardType): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
+            debugger
             dispatch(setIsPreventFetching(true));
             let token = repository.getToken();
             const res = await cardsApi.addCard({cardsPack_id, question, answer}, token);

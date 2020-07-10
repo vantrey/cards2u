@@ -11,7 +11,7 @@ type PropsType = {
 }
 
 
-const CardEntersForm: React.FC<PropsType> = ({register, errors, onSubmit}) => {
+const EditCardForm: React.FC<PropsType> = ({register, errors, onSubmit}) => {
 
     return (
         <div>
@@ -38,4 +38,4 @@ const CardEntersForm: React.FC<PropsType> = ({register, errors, onSubmit}) => {
         </div>
     )
 };
-export default CardEntersForm;
+export default EditCardForm;
