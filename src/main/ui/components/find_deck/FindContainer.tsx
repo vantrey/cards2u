@@ -17,6 +17,7 @@ import { loginActions } from '../../../auth/login/loginReducer';
 import {get_Cards} from "../../../features/Cards/bll/cardsReducer";
 import { FindFreeDeck } from '../../../helpers/findFreeDeck/FindFreeDeck';
 import { repository } from '../../../helpers/repos_localStorage/Token';
+import PopupFreeSlot from './save_favorites/popup_freeSlot/PopupFreeSlot';
 
 
 const FindContainer: React.FC = () => {
@@ -29,13 +30,12 @@ const FindContainer: React.FC = () => {
     const [ nameUser, setNameUser ] = useState<string | null> ('');
     const [ deckscount, setDeckscount ] = useState<string | null> ('');
     const [ popupSaveToDeckOk, setPopupSaveToDeckOk ] = useState<boolean> (false);
-    const [ saveToFavoritePopup, setSaveToFavoritePopup ] = useState<boolean> (false);
+    const [ saveToFavoritePopup, setSaveToFavoritePopup ] = useState<boolean> (true);
 
     const [showMode, setShowMode] = useState<string>('');
     const [popupAuth, setPopupAuth] = useState<boolean>(false);
     const [selectUser, setSelectUser] = useState<boolean>(false);
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);
-    const [currentDeckname, setCurrentDeckname] = useState<string | null>('');
     const {setIsLocalFetching, isLocalFetching} = useLocalFetch();
     const currentLocation = useLocation();
 
@@ -81,7 +81,6 @@ const FindContainer: React.FC = () => {
 
     const onSelectDeck = (e: React.MouseEvent<HTMLDivElement>) => {
         const deckname = e.currentTarget.getAttribute('data-deckname');
-        setCurrentDeckname(deckname);
         setDecksQuestions(true);
             dispatch(get_Cards(e.currentTarget.id, deckname));
     };
@@ -98,11 +97,9 @@ const FindContainer: React.FC = () => {
 
     const SaveToFavoriteDecks = () => {
         const freeSlotID = FindFreeDeck(userId);
-        console.log(freeSlotID)
         if (freeSlotID) {
-            repository.updateUserFavoriteDeck(userId, freeSlotID, currentDeckname, cards);
+            repository.updateUserFavoriteDeck(userId, freeSlotID, cardPackName, cards);
             setPopupSaveToDeckOk(true);
-
         } else {
             setSaveToFavoritePopup(true);
         }
@@ -116,6 +113,8 @@ const FindContainer: React.FC = () => {
                     <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
                 </div>
                 <div className={styles.container__body}>
+                    <PopupFreeSlot setSaveToFavoritePopup={setSaveToFavoritePopup}
+                                   saveToFavoritePopup={saveToFavoritePopup}/>
                     <div className={styles.container__leftBlock}>
                         <div className={styles.find__wrap_block}>
                             {

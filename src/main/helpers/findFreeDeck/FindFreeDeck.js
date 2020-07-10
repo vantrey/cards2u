@@ -4,7 +4,6 @@ import { repository } from "../repos_localStorage/Token";
 export const FindFreeDeck = (userId) => {
 
 	const userFavoriteDecksFromLS = repository.get_UserFavoriteDecksFromLS(userId);
-	console.log(userFavoriteDecksFromLS.favoriteDecks)
 	const emptySlots = userFavoriteDecksFromLS.favoriteDecks.filter(fDecks => {
 		return fDecks.deckName === '';
 	});

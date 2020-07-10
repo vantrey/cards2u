@@ -43,6 +43,7 @@
 }
 
 .container__body {
+    position: relative;
     display: flex;
     justify-content: space-between;
 }
