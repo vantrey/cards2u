@@ -50,6 +50,33 @@ export const CardsReducer = (state: initialStateType = initialState, action: Act
                 })
             };
 
+        case "CARDS_REDUCER/ADD_CARD_SUCCESS":
+            return {
+                ...state,
+                cards: [...state.cards, action.newCard]
+            };
+
+        case "CARDS_REDUCER/DEL_CARD_SUCCESS":
+            return {
+                ...state,
+                cards: state.cards.filter(c => c._id !== action.deletedCard._id)
+            };
+
+        case "CARDS_REDUCER/UPD_CARD_SUCCESS":
+            return {
+                ...state,
+                cards: state.cards.map(c => {
+                    if (c._id === action.updatedCard._id) {
+                        return {
+                            ...c,
+                            answer: action.updatedCard.answer,
+                            question: action.updatedCard.question
+                        }
+                    }
+                    return c
+                })
+            };
+
         default:
             return state;
     }
@@ -64,11 +91,26 @@ export const cardsActions = {
     } as const),
     set_Success: (isSuccess: boolean) => ({type: "CARDS_REDUCER/SET_SUCCESS", isSuccess} as const),
     setFirstPage: (page: number) => ({type: 'CARDS_REDUCER/SET_PAGE', page} as const),
+
     setCardGradeSuccess: (newCardGrade: NewCardGradeType) => ({
         type: 'CARDS_REDUCER/SET_GRADE_CARD_SUCCESS',
         newCardGrade
     } as const),
 
+    addCardSuccess: (newCard: CardType) => ({
+        type: 'CARDS_REDUCER/ADD_CARD_SUCCESS',
+        newCard
+    } as const),
+
+    delCardSuccess: (deletedCard: CardType) => ({
+        type: 'CARDS_REDUCER/DEL_CARD_SUCCESS',
+        deletedCard
+    } as const),
+
+    updCardSuccess: (updatedCard: CardType) => ({
+        type: 'CARDS_REDUCER/UPD_CARD_SUCCESS',
+        updatedCard
+    } as const),
 
 };
 
@@ -103,6 +145,7 @@ export const add_Card = ({cardsPack_id, question, answer}: AddCardType): ThunkTy
             const res = await cardsApi.addCard({cardsPack_id, question, answer}, token);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
             dispatch(cardsActions.set_Success(res.data.success));
+            dispatch(cardsActions.addCardSuccess(res.data.newCard));
             /*dispatch(get_Cards(cardsPack_id));*/
             dispatch(setIsPreventFetching(false));
         } catch (e) {
@@ -112,7 +155,7 @@ export const add_Card = ({cardsPack_id, question, answer}: AddCardType): ThunkTy
         }
     };
 
-export const delete_Card = (card_id: string, cardsPack_id: string): ThunkType =>
+export const delete_Card = (card_id: string): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
             dispatch(setIsPreventFetching(true));
@@ -120,7 +163,8 @@ export const delete_Card = (card_id: string, cardsPack_id: string): ThunkType =>
             const res = await cardsApi.deleteCard(card_id, token);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
             dispatch(cardsActions.set_Success(res.data.success));
-           /* dispatch(get_Cards(cardsPack_id));*/
+            dispatch(cardsActions.delCardSuccess(res.data.deletedCard))
+            /* dispatch(get_Cards(cardsPack_id));*/
             dispatch(setIsPreventFetching(false));
         } catch (e) {
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
@@ -129,7 +173,7 @@ export const delete_Card = (card_id: string, cardsPack_id: string): ThunkType =>
         }
     };
 
-export const update_Card = ({_id, question, answer}: UpdateCardType, cardsPack_id: string): ThunkType =>
+export const update_Card = ({_id, question, answer}: UpdateCardType): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
             dispatch(setIsPreventFetching(true));
@@ -137,6 +181,7 @@ export const update_Card = ({_id, question, answer}: UpdateCardType, cardsPack_i
             const res = await cardsApi.updateCard({_id, question, answer}, token);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
             dispatch(cardsActions.set_Success(res.data.success));
+            dispatch(cardsActions.updCardSuccess(res.data.updatedCard));
             /*dispatch(get_Cards(cardsPack_id));*/
             dispatch(setIsPreventFetching(false));
         } catch (e) {
