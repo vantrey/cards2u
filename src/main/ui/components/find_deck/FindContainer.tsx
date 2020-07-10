@@ -6,7 +6,6 @@ import {getUser, usersActions} from "../../../features/users/bll/UserReducer";
 import ReactPaginate from "react-paginate";
 import FindDeck from "./find/FindDeck";
 import UserInfo from "../../common/user/UserInfo";
-import Loader from "../../common/loader/Loader";
 import {getCardPacks} from '../../../features/cardsPacks/bll/cardPacksReducer';
 import DecksQuestions from "./info/decksQuestions/DecksQuestions";
 import DecksNames from './info/decksNames/DecksNames';
@@ -16,6 +15,8 @@ import {useLocalFetch} from "../../../helpers/localFetchingHook";
 import { useLocation } from 'react-router-dom';
 import { loginActions } from '../../../auth/login/loginReducer';
 import {get_Cards} from "../../../features/Cards/bll/cardsReducer";
+import { FindFreeDeck } from '../../../helpers/findFreeDeck/FindFreeDeck';
+import { repository } from '../../../helpers/repos_localStorage/Token';
 
 
 const FindContainer: React.FC = () => {
@@ -23,15 +24,18 @@ const FindContainer: React.FC = () => {
     const dispatch = useDispatch();
     const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer);
     const {cards, cardPackName} = useSelector((state: AppStateType) => state.cards);
-    const {isAuth} = useSelector((state: AppStateType) => state.login);
+    const {isAuth,userId} = useSelector((state: AppStateType) => state.login);
     const [ modal, setModal ] = useState (false);
     const [ nameUser, setNameUser ] = useState<string | null> ('');
     const [ deckscount, setDeckscount ] = useState<string | null> ('');
+    const [ popupSaveToDeckOk, setPopupSaveToDeckOk ] = useState<boolean> (false);
+    const [ saveToFavoritePopup, setSaveToFavoritePopup ] = useState<boolean> (false);
 
     const [showMode, setShowMode] = useState<string>('');
     const [popupAuth, setPopupAuth] = useState<boolean>(false);
     const [selectUser, setSelectUser] = useState<boolean>(false);
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);
+    const [currentDeckname, setCurrentDeckname] = useState<string | null>('');
     const {setIsLocalFetching, isLocalFetching} = useLocalFetch();
     const currentLocation = useLocation();
 
@@ -77,6 +81,7 @@ const FindContainer: React.FC = () => {
 
     const onSelectDeck = (e: React.MouseEvent<HTMLDivElement>) => {
         const deckname = e.currentTarget.getAttribute('data-deckname');
+        setCurrentDeckname(deckname);
         setDecksQuestions(true);
             dispatch(get_Cards(e.currentTarget.id, deckname));
     };
@@ -90,6 +95,18 @@ const FindContainer: React.FC = () => {
             clearTimeout (timerId)
         }
     }, []);
+
+    const SaveToFavoriteDecks = () => {
+        const freeSlotID = FindFreeDeck(userId);
+        console.log(freeSlotID)
+        if (freeSlotID) {
+            repository.updateUserFavoriteDeck(userId, freeSlotID, currentDeckname, cards);
+            setPopupSaveToDeckOk(true);
+
+        } else {
+            setSaveToFavoritePopup(true);
+        }
+    }
 
     return (
         <div className={styles.find__wrap}>
@@ -135,7 +152,8 @@ const FindContainer: React.FC = () => {
                     { isAuth && selectUser && !decksQuestions && <DecksNames
                         nameUser={nameUser} onSelectDeck={onSelectDeck} deckscount={deckscount}/> }
                     { isAuth && selectUser &&  decksQuestions && <DecksQuestions
-						cardPackName={cardPackName} cards={cards}/> }
+						cardPackName={cardPackName} cards={cards} SaveToFavoriteDecks={SaveToFavoriteDecks}
+						popupSaveToDeckOk={popupSaveToDeckOk} setPopupSaveToDeckOk={setPopupSaveToDeckOk}/> }
 
                 </div>
             </div>

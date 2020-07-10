@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './DecksQuestions.module.css';
 import EmptyDeck from "../emptyDeck/EmptyDeck";
+import PopupNoteOk from "../../save_favorites/popup_notification/popupNoteOk";
 
 
-const DecksQuestions = ({cards, cardPackName}) => {
+const DecksQuestions = ({cards, cardPackName, SaveToFavoriteDecks, popupSaveToDeckOk, setPopupSaveToDeckOk}) => {
 
 	return (
 		<div className={styles.container__rightBlock}>
@@ -20,7 +21,7 @@ const DecksQuestions = ({cards, cardPackName}) => {
                         {cards.length === 0 ?  <EmptyDeck/>  :
 
                         (cards.map (cards =>
-								<div className={styles.data__item}>
+								<div className={styles.data__item} key={cards._id}>
 									<div className={styles.item__question}>{cards.question}</div>
 									<div className={styles.data__border}></div>
 									<div className={styles.item__answer}>{cards.answer}</div>
@@ -28,10 +29,10 @@ const DecksQuestions = ({cards, cardPackName}) => {
                             ) )
 						}
 					</div>
-					<div className={styles.deckInfo__button_wrap}>
+					<div className={styles.deckInfo__button_wrap} onClick={SaveToFavoriteDecks}>
 						<button className={styles.deckInfo__button}>save to favorites</button>
 					</div>
-
+					<PopupNoteOk popupSaveToDeckOk={popupSaveToDeckOk} setPopupSaveToDeckOk={setPopupSaveToDeckOk}/>
 				</div>
 			</div>
 		</div>
