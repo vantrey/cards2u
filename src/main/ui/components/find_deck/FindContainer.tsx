@@ -27,6 +27,7 @@ const FindContainer: React.FC = () => {
     const {cards, cardPackName} = useSelector((state: AppStateType) => state.cards);
     const {isAuth,userId} = useSelector((state: AppStateType) => state.login);
     const [ modal, setModal ] = useState (false);
+    const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
     const [ nameUser, setNameUser ] = useState<string | null> ('');
     const [ deckscount, setDeckscount ] = useState<string | null> ('');
     const [ popupSaveToDeckOk, setPopupSaveToDeckOk ] = useState<boolean> (false);
@@ -58,10 +59,12 @@ const FindContainer: React.FC = () => {
     }, [page, pageCount])
 
     const sortDeckUp = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setIsLocalFetching(true);
         dispatch(getUser(1, 10, e.currentTarget.name, '1'))
     };
 
     const sortDeckDown = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setIsLocalFetching(true);
         dispatch(getUser(1, 10, e.currentTarget.name, '0'))
     };
 
@@ -111,7 +114,7 @@ const FindContainer: React.FC = () => {
             setPopupSaveToDeckOk(true);
     }
 
-
+    const classForPagination = isPreventFetching  ? `${styles.pagination} ${styles.pagination__block}` : `${styles.pagination}`
     return (
         <div className={styles.find__wrap}>
             <div className={styles.find__left}> </div>
@@ -150,7 +153,7 @@ const FindContainer: React.FC = () => {
                                     marginPagesDisplayed={1}
                                     pageRangeDisplayed={2}
                                     onPageChange={pageChangedHandler}
-                                    containerClassName={styles.pagination}
+                                    containerClassName={classForPagination}
                                     activeClassName={styles.active}/>
                             </div>
                         </div>

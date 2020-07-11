@@ -18,6 +18,11 @@
     transition-timing-function: ease-out;
 }
 
+.users__data_block {
+    pointer-events: none;
+    cursor: none;
+}
+
 .users__data:hover {
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;

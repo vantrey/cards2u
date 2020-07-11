@@ -103,6 +103,11 @@
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75) !important
 }
 
+.pagination__block {
+    pointer-events: none;
+    cursor: none;
+}
+
 .pagination > li > a {
     border: 1px solid #088dcd;
     padding: 5px 10px;
