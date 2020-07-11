@@ -9,16 +9,11 @@ export const FindFreeDeck = (userId) => {
 	});
 
 	const freeSlot = emptySlots[0];
-	const freeFavoriteSlotID = freeSlot.favoriteDeckId;
 
 	if(freeSlot) {
+		const  freeFavoriteSlotID = freeSlot.favoriteDeckId;
 		return freeFavoriteSlotID;
 	} else {
-		return null
+		return false;
 	}
-
 };
-
-// const freeSlotID = FindFreeDeck('5ee7342f8c6c320004bab925');
-// console.log ('freeSlotID', freeSlotID)
-

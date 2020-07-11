@@ -30,7 +30,8 @@ const FindContainer: React.FC = () => {
     const [ nameUser, setNameUser ] = useState<string | null> ('');
     const [ deckscount, setDeckscount ] = useState<string | null> ('');
     const [ popupSaveToDeckOk, setPopupSaveToDeckOk ] = useState<boolean> (false);
-    const [ saveToFavoritePopup, setSaveToFavoritePopup ] = useState<boolean> (true);
+    const [ saveToFavoritePopup, setSaveToFavoritePopup ] = useState<boolean> (false);
+    const [ favoriteSlotID, setFavoriteSlotID ] = useState<string>  ('');
 
     const [showMode, setShowMode] = useState<string>('');
     const [popupAuth, setPopupAuth] = useState<boolean>(false);
@@ -105,6 +106,12 @@ const FindContainer: React.FC = () => {
         }
     }
 
+    const SaveToFavoriteDecksSID = () => {
+            repository.updateUserFavoriteDeck(userId, favoriteSlotID, cardPackName, cards);
+            setPopupSaveToDeckOk(true);
+    }
+
+
     return (
         <div className={styles.find__wrap}>
             <div className={styles.find__left}> </div>
@@ -114,7 +121,10 @@ const FindContainer: React.FC = () => {
                 </div>
                 <div className={styles.container__body}>
                     <PopupFreeSlot setSaveToFavoritePopup={setSaveToFavoritePopup}
-                                   saveToFavoritePopup={saveToFavoritePopup}/>
+                                   saveToFavoritePopup={saveToFavoritePopup}
+                                   setFavoriteSlotID={setFavoriteSlotID}
+                                   SaveToFavoriteDecksSID={SaveToFavoriteDecksSID}
+                    />
                     <div className={styles.container__leftBlock}>
                         <div className={styles.find__wrap_block}>
                             {

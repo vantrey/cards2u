@@ -24,9 +24,7 @@
     display: flex;
     position: relative;
     width: 90%;
-    height: 60%;
-
-    border: 1px solid red;
+    height: 65%;
 }
 
 .popupAuth__note {
@@ -88,7 +86,7 @@
 }
 
 .note__button {
-    width: 108px;
+    width: 120px;
     height: 26px;
     display: flex;
     flex-wrap: nowrap;
@@ -114,10 +112,17 @@
     transform: translate(1px, 1px);
 }
 
-.note__buttons_active {
+.note__buttonsGroop {
     width: 40%;
+    transition: opacity 0.3s ease;
+    opacity: 0;
 }
 
+.note__buttonsGroop_active {
+    transition: opacity 0.3s ease;
+    opacity: 1;
+
+}
 .popupAuth__icon {
     width: 20px;
     height: 20px;
@@ -129,10 +134,11 @@
 
 
 .header__info {
-    width: 70%;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 .header__info h3 {
     text-shadow: 5px 5px 5px  rgba(0,0,0,0.75);
@@ -142,8 +148,9 @@
     color: orange;
     text-transform: uppercase;
     margin-top: 15px;
-    margin-bottom: 10px;
-    text-shadow: 5px 5px 5px  rgba(0,0,0,0.75);
+    margin-bottom: 20px;
+    width: 100%;
+    /*text-shadow: 5px 5px 5px  rgba(0,0,0,0.75);*/
 }
 
 .header__link {
@@ -152,11 +159,11 @@
 }
 
 .header__decks {
-    width: 100%;
+    width: 80%;
     height: 100%;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .decks__item {
@@ -164,9 +171,9 @@
     height: 135px;
     margin: 0 10px;
     border-radius: 1px;
-    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    /*-webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);*/
+    /*-moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);*/
+    /*box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);*/
     transition: all 0.3s ease;
     position: relative;
 }
@@ -184,26 +191,32 @@
 .decks__item_1 {
     background: url('../../../../images/card-bg-BR.png') no-repeat;
     background-size: contain;
+    background-color: currentColor;
 }
 .decks__item_2 {
     background: url('../../../../images/card-bg-RR.png') no-repeat;
     background-size: contain;
+    background-color: currentColor;
 }
 .decks__item_3 {
     background: url('../../../../images/card-bg-GR.png') no-repeat;
     background-size: contain;
+     background-color: currentColor;
 }
 .decks__item_4 {
     background: url('../../../../images/card-bg-PR.png') no-repeat;
     background-size: contain;
+     background-color: currentColor;
 }
 .decks__item_5 {
     background: url('../../../../images/card-bg-OR.png') no-repeat;
     background-size: contain;
+     background-color: currentColor;
 }
 .decks__item_6 {
     background: url('../../../../images/card-bg-FR.png') no-repeat;
     background-size: contain;
+     background-color: currentColor;
 }
 
 /*===== стили для tooltip*/

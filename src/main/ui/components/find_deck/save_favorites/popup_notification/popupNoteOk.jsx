@@ -6,7 +6,6 @@ import closeIcon from "../../../../icons/cancel.png";
 
 const PopupNoteOk = ({popupSaveToDeckOk, setPopupSaveToDeckOk}) => {
 
-
 	const closeModal = (e) => {
 		if ( e.target.matches ('#closeIconId') || (e.target.closest ('#popupAuth') === null) ) {
 			setPopupSaveToDeckOk (false);
@@ -16,12 +15,12 @@ const PopupNoteOk = ({popupSaveToDeckOk, setPopupSaveToDeckOk}) => {
 	useEffect (() => {
 		let timerId = setTimeout (() => {
 			setPopupSaveToDeckOk (false);
-		}, 4000)
+		}, 3000)
 
 		return () => {
 			clearTimeout (timerId)
 		}
-	}, [setPopupSaveToDeckOk]);
+	}, [popupSaveToDeckOk]);
 
 
 	const classForModal = popupSaveToDeckOk === true ? `${styles.popupAuth__wrap} ${styles.popupAuth__wrap_active}` : `${styles.popupAuth__wrap}`;
