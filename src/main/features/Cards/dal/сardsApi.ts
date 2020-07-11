@@ -17,14 +17,24 @@ type GetCardsType = {
     tokenDeathTime: number
     sortCards:string
 }
-
-
-type AddPostDeleteResponseType = {
-    Card: CardType
+type CommonResponseType = {
     success: boolean
     token: string
     tokenDeathTime: number
 }
+
+type AddCardResponseType = {
+    newCard: CardType
+} & CommonResponseType
+
+type DelCardResponseType = {
+    deletedCard: CardType
+} & CommonResponseType
+
+type UpdCardResponseType = {
+    updatedCard: CardType
+} & CommonResponseType
+
 
 export const cardsApi = {
     getCards(cardsPack_id: string, token: string | null,sortCards:string) {
@@ -32,7 +42,7 @@ export const cardsApi = {
     },
 
     addCard(card: AddCardType, token: string | null) {
-        return instance.post<AddPostDeleteResponseType>(``,
+        return instance.post<AddCardResponseType>(``,
             {
                 card,
                 token
@@ -41,11 +51,11 @@ export const cardsApi = {
 
     },
     deleteCard(id: string, token: string | null) {
-        return instance.delete<AddPostDeleteResponseType>(`?token=${token}&id=${id}`)
+        return instance.delete<DelCardResponseType>(`?token=${token}&id=${id}`)
 
     },
     updateCard(card: UpdateCardType | NewCardGradeType, token: string | null) {
-        return instance.put<AddPostDeleteResponseType>(``,
+        return instance.put<UpdCardResponseType>(``,
             {
                 card,
                 token
