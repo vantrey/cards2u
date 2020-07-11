@@ -28,7 +28,7 @@ const UserData: React.FC<UserDecsType> = ({
     const classForUserData = isPreventFetching  ? `${styles.users__data} ${styles.users__data_block}` : `${styles.users__data}`
 
     return (
-        <div className={styles.users__data} onClick={onShowDecks} id={id} data-nameuser={name}
+        <div className={classForUserData} onClick={onShowDecks} id={id} data-nameuser={name}
              data-deckscount={decks} >
             {avatar &&
             <div className={styles.users__avatar}>

@@ -17,6 +17,7 @@ const PopupFreeSlot = ({saveToFavoritePopup, setSaveToFavoritePopup, setFavorite
 	const onSaveFavoriteDeck = () => {
 		setSaveToFavoritePopup (false);
 		SaveToFavoriteDecksSID();
+		setshowButtonGroop(false);
 	}
 
 	const onShowButtonGroop = (e) => {

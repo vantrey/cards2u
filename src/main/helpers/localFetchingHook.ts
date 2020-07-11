@@ -7,7 +7,7 @@ export const useLocalFetch = () => {
     const [isFetching, setIsLocalFetching] = useState<boolean>(false);
     const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
 
-    const isLocalFetching = isPreventFetching && isFetching;
+    const isLocalFetching = isFetching && isPreventFetching;
 
     useEffect(() => {
         if (!isPreventFetching) {
