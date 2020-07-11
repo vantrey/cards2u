@@ -24,8 +24,6 @@ const Game = () => {
 	const { user } = useSelector ((state) => state.profile);
 	const { userFavoriteDecks } = useSelector ((state) => state.favoriteDecks);
 
-	console.log (userFavoriteDecks)
-
 	return (
 		<div className={styles.game__wrap}>
 			<div className={styles.game__left}></div>

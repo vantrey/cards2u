@@ -166,26 +166,28 @@
     align-items: flex-start;
 }
 
+.decks__label {
+    position: relative;
+    border: 1px solid transparent;
+}
+
+.decks__radio {
+    position: absolute;
+    opacity: 0;
+}
+
+.decks__radio:checked + .decks__label {
+    border: 1px solid orange;
+    background-color: orange;
+}
+
 .decks__item {
     width: 78px;
     height: 135px;
     margin: 0 10px;
     border-radius: 1px;
-    /*-webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);*/
-    /*-moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);*/
-    /*box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);*/
     transition: all 0.3s ease;
     position: relative;
-}
-
-.decks__item:hover {
-    transition: all 0.3s ease;
-    -webkit-transform: translateY(-4px);
-    transform: translateY(-4px);
-    -webkit-box-shadow: 9px 9px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 9px 9px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 9px 9px 5px 0px rgba(0,0,0,0.75);
-
 }
 
 .decks__item_1 {
@@ -217,6 +219,17 @@
     background: url('../../../../images/card-bg-FR.png') no-repeat;
     background-size: contain;
      background-color: currentColor;
+}
+
+
+.decks__item:hover  {
+    transition: all 0.3s ease;
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
+    -webkit-box-shadow: 9px 9px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 9px 9px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 9px 9px 5px 0px rgba(0,0,0,0.75);
+
 }
 
 /*===== стили для tooltip*/
