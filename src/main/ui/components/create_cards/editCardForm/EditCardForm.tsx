@@ -1,33 +1,34 @@
 import React, {useEffect} from 'react';
 import {useForm} from "react-hook-form";
-import {editCardFormSchema} from "./editCardFormSchema";
-import EditCardForm from "./EditCardForm";
 import {CardType} from "../../../../types/entities";
 import {useDispatch} from "react-redux";
 import {add_Card, update_Card} from "../../../../features/Cards/bll/cardsReducer";
+import Textarea from "../../../common/textarea/Textarea";
+import Button from "../../../common/Button/Button";
 
 
-type editCardFormType = {
+type EditCardFormType = {
     question: string
     answer: string
 }
+
 type PropsType = {
     isEditCardMode: boolean
     currentCardData: CardType | undefined
     setIsEditCardMode: React.Dispatch<React.SetStateAction<boolean>>
-    /*cardsPack_id: string*/
+    cardsPack_id: string
 }
 
-const FormsContainer: React.FC<PropsType> = React.memo(({
+const EditCardForm: React.FC<PropsType> = React.memo(({
                                                             isEditCardMode,
                                                             currentCardData,
                                                             setIsEditCardMode,
-                                                            /*cardsPack_id,*/
+                                                            cardsPack_id,
                                                         }) => {
 
     const dispatch = useDispatch();
 
-    const {register, handleSubmit, errors, reset, setValue} = useForm<editCardFormType>({
+    const {register, handleSubmit, errors, reset, setValue} = useForm<EditCardFormType>({
         mode: 'onBlur',
 
     });
@@ -39,32 +40,48 @@ const FormsContainer: React.FC<PropsType> = React.memo(({
         }
     }, [isEditCardMode, currentCardData?.question, currentCardData?.answer]);
 
-    const onCardUpdSubmit = handleSubmit((data) => {
 
-            if (isEditCardMode) {
+    const onSubmit = handleSubmit((data) => {
 
-                if (currentCardData) {  // if find method returned undefined
-                    const {_id} = currentCardData;
+        if (isEditCardMode) {
+
+            if (currentCardData) {  // if find method returned undefined
+                const {_id} = currentCardData;
                 dispatch(update_Card({_id, question: data.question, answer: data.answer}));
                 setIsEditCardMode(false);
             }
         }
 
-        /*if (!isEditCardMode) {
+        if (!isEditCardMode) {
             dispatch(add_Card({cardsPack_id, question: data.question, answer: data.answer}));
-        }*/
-
+        }
         reset();
     });
 
     return (
         <div>
-            <EditCardForm
-                register={register}
-                errors={errors}
-                onSubmit={onCardUpdSubmit}
-            />
+
+            <form onSubmit={onSubmit}>
+
+                    <Textarea
+                        register={register}
+                        name='question'
+                        errors={errors}
+                        placeholder='Enter your question'
+                    />
+                    <Textarea
+                        register={register}
+                        name='answer'
+                        errors={errors}
+                        placeholder='Enter your answer'
+                    />
+
+
+                <div>
+                    <Button/>
+                </div>
+            </form>
         </div>
     )
 });
-export default FormsContainer;
+export default EditCardForm;
