@@ -14,6 +14,7 @@ const initialState = {
     pageCount: 10,
     cardsTotalCount: 0,
     cardPackName: '',
+    cardsPack_id: '',
 };
 
 type initialStateType = typeof initialState;
@@ -24,7 +25,8 @@ export const CardsReducer = (state: initialStateType = initialState, action: Act
             return {
                 ...state,
                 cards: action.cards,
-                cardPackName: action.cardPackName
+                cardPackName: action.cardPackName,
+                cardsPack_id: action.cardsPack_id
             };
 
         case  "CARDS_REDUCER/SET_SUCCESS":
@@ -84,10 +86,11 @@ export const CardsReducer = (state: initialStateType = initialState, action: Act
 };
 
 export const cardsActions = {
-    setCards: (cards: Array<CardType>, cardPackName: string) => ({
+    setCards: (cards: Array<CardType>, cardPackName: string, cardsPack_id: string) => ({
         type: 'CARDS_REDUCER/SET_CARDS',
         cards,
-        cardPackName
+        cardPackName,
+        cardsPack_id,
     } as const),
     set_Success: (isSuccess: boolean) => ({type: "CARDS_REDUCER/SET_SUCCESS", isSuccess} as const),
     setFirstPage: (page: number) => ({type: 'CARDS_REDUCER/SET_PAGE', page} as const),
@@ -126,7 +129,13 @@ export const get_Cards = (
             dispatch(setIsPreventFetching(true));
             let token = repository.getToken();
             const res = await cardsApi.getCards(cardsPack_id, token, direction + sortCards);
-            dispatch(cardsActions.setCards(res.data.cards, cardPackName ? cardPackName : '')); // to prevent set nul to state
+
+            dispatch(cardsActions.setCards(
+                res.data.cards,
+                cardPackName ? cardPackName : '', // to prevent set null to state
+                cardsPack_id
+            ));
+
             dispatch(cardsActions.set_Success(true));
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
             dispatch(setIsPreventFetching(false));

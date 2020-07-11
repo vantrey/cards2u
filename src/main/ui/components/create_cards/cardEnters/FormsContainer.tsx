@@ -15,14 +15,14 @@ type PropsType = {
     isEditCardMode: boolean
     currentCardData: CardType | undefined
     setIsEditCardMode: React.Dispatch<React.SetStateAction<boolean>>
-    cardsPack_id: string
+    /*cardsPack_id: string*/
 }
 
 const FormsContainer: React.FC<PropsType> = React.memo(({
                                                             isEditCardMode,
                                                             currentCardData,
                                                             setIsEditCardMode,
-                                                            cardsPack_id,
+                                                            /*cardsPack_id,*/
                                                         }) => {
 
     const dispatch = useDispatch();
@@ -50,9 +50,9 @@ const FormsContainer: React.FC<PropsType> = React.memo(({
             }
         }
 
-        if (!isEditCardMode) {
-            dispatch(add_Card({cardsPack_id, question: data.question, answer: data.answer}))
-        }
+        /*if (!isEditCardMode) {
+            dispatch(add_Card({cardsPack_id, question: data.question, answer: data.answer}));
+        }*/
 
         reset();
     });

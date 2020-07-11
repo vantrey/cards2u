@@ -16,8 +16,8 @@ const CreateContainer = () => {
     const [isEditCardMode, setIsEditCardMode] = useState<boolean>(false);
     const [cardId, setCardId] = useState<string>('');
 
-
     const {cards, cardPackName} = useSelector((state: AppStateType) => state.cards);
+    const {} = useSelector((state: AppStateType) => state.currentUserDecks);
 
 
 
@@ -32,7 +32,7 @@ const CreateContainer = () => {
             <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
 
             <FormsContainer
-                cardsPack_id={cardsPackId}
+                /*cardsPack_id={cards[0]?.cardsPack_id}*/
                 setIsEditCardMode={setIsEditCardMode}
                 isEditCardMode={isEditCardMode}
                 currentCardData={cards.find(c => c._id === cardId)}
