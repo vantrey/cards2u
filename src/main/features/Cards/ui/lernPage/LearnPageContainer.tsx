@@ -26,7 +26,7 @@ const getGrade = (gradePrev: number, gradeNext: number, shots: number) => {
 
 const LearnPageContainer: React.FC = () => {
 
-  const {cards, isSuccess, isFetching} = useSelector((state: AppStateType) => state.cards);
+  const {cards, isSuccess, /*isFetching*/} = useSelector((state: AppStateType) => state.cards);
   const dispatch = useDispatch()
   const history = useHistory()
   const {pack_id} = useParams()
@@ -87,7 +87,7 @@ const LearnPageContainer: React.FC = () => {
 
   return (
     <div>
-      {(isFetching && <div>...Loading</div>) ||
+      {/*{(isFetching && <div>...Loading</div>) ||*/}
       <LearnPage
         isShowAnswer={isShowAnswer}
         setIsShowAnswer={setIsShowAnswer}

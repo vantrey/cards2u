@@ -8,7 +8,7 @@ import {setIsPreventFetching} from "../../../bll/preventReques/preventRequestRed
 
 const initialState = {
     cards: [] as Array<CardType>,
-    isFetching: false,
+    isCardsFetching: false,
     isSuccess: false,
     page: 1,
     pageCount: 10,
@@ -79,6 +79,12 @@ export const CardsReducer = (state: initialStateType = initialState, action: Act
                 })
             };
 
+        case "CARDS_REDUCER/SET_IS_FETCHING":
+            return {
+                ...state,
+                  isCardsFetching: action.isFetching
+            };
+
         default:
             return state;
     }
@@ -115,6 +121,11 @@ export const cardsActions = {
         updatedCard
     } as const),
 
+    setIsFetching: (isFetching: boolean) => ({
+        type: 'CARDS_REDUCER/SET_IS_FETCHING',
+        isFetching
+    } as const),
+
 };
 
 type ActionsType = InferActionTypes<typeof cardsActions>
@@ -127,6 +138,7 @@ export const get_Cards = (
     async (dispatch: DispatchType) => {
         try {
             dispatch(setIsPreventFetching(true));
+            dispatch(cardsActions.setIsFetching(true));
             let token = repository.getToken();
             const res = await cardsApi.getCards(cardsPack_id, token, direction + sortCards);
 
@@ -135,12 +147,14 @@ export const get_Cards = (
                 cardPackName ? cardPackName : '', // to prevent set null to state
                 cardsPack_id
             ));
-
             dispatch(cardsActions.set_Success(true));
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
+            dispatch(cardsActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
+
         } catch (e) {
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+            dispatch(cardsActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
         }
     };
@@ -149,18 +163,20 @@ export const get_Cards = (
 export const add_Card = ({cardsPack_id, question, answer}: AddCardType): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
-            debugger
             dispatch(setIsPreventFetching(true));
+            dispatch(cardsActions.setIsFetching(true));
             let token = repository.getToken();
             const res = await cardsApi.addCard({cardsPack_id, question, answer}, token);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
             dispatch(cardsActions.set_Success(res.data.success));
             dispatch(cardsActions.addCardSuccess(res.data.newCard));
             /*dispatch(get_Cards(cardsPack_id));*/
+            dispatch(cardsActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
         } catch (e) {
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
             dispatch(cardsActions.set_Success(false));
+            dispatch(cardsActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
         }
     };
@@ -169,16 +185,19 @@ export const delete_Card = (card_id: string): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
             dispatch(setIsPreventFetching(true));
+            dispatch(cardsActions.setIsFetching(true));
             let token = repository.getToken();
             const res = await cardsApi.deleteCard(card_id, token);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
             dispatch(cardsActions.set_Success(res.data.success));
             dispatch(cardsActions.delCardSuccess(res.data.deletedCard))
             /* dispatch(get_Cards(cardsPack_id));*/
+            dispatch(cardsActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
         } catch (e) {
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
             dispatch(cardsActions.set_Success(false));
+            dispatch(cardsActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
         }
     };
@@ -187,16 +206,19 @@ export const update_Card = ({_id, question, answer}: UpdateCardType): ThunkType 
     async (dispatch: DispatchType) => {
         try {
             dispatch(setIsPreventFetching(true));
+            dispatch(cardsActions.setIsFetching(true));
             let token = repository.getToken();
             const res = await cardsApi.updateCard({_id, question, answer}, token);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
             dispatch(cardsActions.set_Success(res.data.success));
             dispatch(cardsActions.updCardSuccess(res.data.updatedCard));
             /*dispatch(get_Cards(cardsPack_id));*/
+            dispatch(cardsActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
         } catch (e) {
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
             dispatch(cardsActions.set_Success(false));
+            dispatch(cardsActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
         }
     };
@@ -204,15 +226,18 @@ export const setCardGrade = (newCardGrade: NewCardGradeType): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
             dispatch(setIsPreventFetching(true));
+            dispatch(cardsActions.setIsFetching(true));
             let token = repository.getToken();
             const res = await cardsApi.updateCard(newCardGrade, token);
             dispatch(cardsActions.setCardGradeSuccess(newCardGrade));
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
             dispatch(cardsActions.set_Success(res.data.success));
+            dispatch(cardsActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
         } catch (e) {
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
             dispatch(cardsActions.set_Success(false));
+            dispatch(cardsActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
         }
     };

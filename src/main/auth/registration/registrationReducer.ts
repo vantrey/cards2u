@@ -6,6 +6,7 @@ import {setIsPreventFetching} from "../../bll/preventReques/preventRequestReduce
 const initialState = {
   isSuccess: false,
   errorServerMessage: '',
+  isRegisterFetching: false
 };
 
 export const registrationReducer = (state: typeof initialState = initialState, action: ActionsType) => {
@@ -22,8 +23,14 @@ export const registrationReducer = (state: typeof initialState = initialState, a
       return {
         ...state,
         isSuccess: action.isSuccess
-
       };
+
+    case "REGISTRATION_REDUCER/SET_IS_FETCHING":
+      return {
+        ...state,
+        isRegisterFetching: action.isFetching
+      };
+
     default:
       return state
   }
@@ -40,7 +47,12 @@ export const registerActions = {
   setIsRegistrationSuccess: (isSuccess: boolean) => ({
     type: 'REGISTRATION_REDUCER/SET_IS_SUCCESS',
       isSuccess
-  } as const)
+  } as const),
+
+  setIsFetching: (isFetching: boolean) => ({
+    type: 'REGISTRATION_REDUCER/SET_IS_FETCHING',
+    isFetching
+  } as const),
 };
 
 type ActionsType = InferActionTypes<typeof registerActions>
@@ -52,11 +64,14 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 export const createUser = (email: string, password: string): ThunkType => async (dispatch: DispatchType) => {
   try {
     dispatch(setIsPreventFetching(true));
+    dispatch(registerActions.setIsFetching(true));
     const response = await api.registration(email, password);
     dispatch(registerActions.createUserSuccess(response.data.success, ''));
+    dispatch(registerActions.setIsFetching(false));
     dispatch(setIsPreventFetching(false));
   } catch (e) {
     dispatch(registerActions.createUserSuccess(false, e.response.data.error));
+    dispatch(registerActions.setIsFetching(false));
     dispatch(setIsPreventFetching(false));
   }
 };

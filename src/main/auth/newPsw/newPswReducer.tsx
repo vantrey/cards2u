@@ -6,10 +6,12 @@ import {setIsPreventFetching} from "../../bll/preventReques/preventRequestReduce
 const initialState = {
   isSuccess: false,
   errorServerMessage: '',
+  isNewPswFetching: false
 };
 
 export const newPswReducer = (state: typeof initialState = initialState, action: ActionsType) => {
   switch (action.type) {
+
     case "NEW_PSW_REDUCER/SET_NEW_PSW_SUCCESS":
       return {
         ...state,
@@ -17,19 +19,31 @@ export const newPswReducer = (state: typeof initialState = initialState, action:
         errorServerMessage: action.errorServerMessage
       };
 
+    case "NEW_PSW_REDUCER/SET_IS_FETCHING":
+      return {
+          ...state,
+        isNewPswFetching: action.isFetching
+      };
+
     default:
       return state
   }
 };
 
-const actions = {
+const newPswActions = {
+
   setNewPswSuccess: (isSuccess: boolean, errorServerMessage: string) => ({
     type: 'NEW_PSW_REDUCER/SET_NEW_PSW_SUCCESS',
     isSuccess,
     errorServerMessage
   } as const),
+
+  setIsFetching: (isFetching: boolean) => ({
+    type: 'NEW_PSW_REDUCER/SET_IS_FETCHING',
+    isFetching
+  } as const),
 };
-type ActionsType = InferActionTypes<typeof actions>
+type ActionsType = InferActionTypes<typeof newPswActions>
 
 // thunks
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
@@ -38,11 +52,14 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 export const setNewPsw = (resetPswToken: string, password: string): ThunkType => async (dispatch: DispatchType) => {
   try {
     dispatch(setIsPreventFetching(true));
+    dispatch(newPswActions.setIsFetching(true));
     const response = await api.setNewPsw(resetPswToken, password);
-    dispatch(actions.setNewPswSuccess(response.data.success, ''));
+    dispatch(newPswActions.setNewPswSuccess(response.data.success, ''));
+    dispatch(newPswActions.setIsFetching(false));
     dispatch(setIsPreventFetching(false));
   } catch (e) {
-    dispatch(actions.setNewPswSuccess(false, e.response.data.error));
+    dispatch(newPswActions.setNewPswSuccess(false, e.response.data.error));
+    dispatch(newPswActions.setIsFetching(false));
     dispatch(setIsPreventFetching(false));
   }
 };
