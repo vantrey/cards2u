@@ -145,9 +145,10 @@
     height: 30px;
     justify-content: center;
     align-items: center;
-    font-family: 'CS Grimrock', sans-serif;
+    font-family: sans-serif;
     border: 1px solid #088dcd;
     color: #088dcd;
+    font-size: 16px;
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
     background-color: transparent;
     -webkit-transition-duration: 0.3s;

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import styles from './Game.module.css';
+import gif from '../../video/анимация-путник-с-фоном.gif';
+import gif1 from '../../video/1.gif';
+import gif2 from '../../video/2.gif';
 import DecksRoutes, {
 	GAME_PATH_DECK_BLUE,
 	GAME_PATH_DECK_GREEN,
@@ -28,7 +31,11 @@ const Game = () => {
 		<div className={styles.game__wrap}>
 			<div className={styles.game__left}></div>
 			<div className={styles.game__container}>
-				<div className={styles.game__analytics}>analytics</div>
+				<div className={styles.game__analytics}>analytics
+					<img src={gif} alt=""/>
+					<img src={gif1} alt=""/>
+					<img src={gif2} alt=""/>
+				</div>
 				<div className={styles.game__content}>
 					<div className={styles.content__header}>
 						<div className={styles.header__user}>
