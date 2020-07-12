@@ -1,5 +1,5 @@
 .findDeck__wrap {
-    position: relative;
+    /*position: relative;*/
     padding: 10px;
     margin-bottom: 10px;
     font-family: sans-serif;
@@ -45,17 +45,12 @@
 }
 
 .findDeck__loader {
-    overflow: hidden;
-    overflow-y: auto;
-    min-height: 350px;
-    max-height: 410px;
+    height: 338px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    /*background: #607d8b url('../../../images/unit.jpg') center center no-repeat;*/
-    /*background-size: cover;*/
+    /*position: relative;*/
 }
 
 .findDeck__users {

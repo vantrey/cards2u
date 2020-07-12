@@ -6,7 +6,8 @@ import Loader from "../../../../common/loader/Loader";
 import { useSelector } from "react-redux";
 
 
-const DecksQuestions = ({cards, cardPackName, SaveToFavoriteDecks, popupSaveToDeckOk, setPopupSaveToDeckOk}) => {
+const DecksQuestions = ({cards, cardPackName, SaveToFavoriteDecks, popupSaveToDeckOk,
+							setPopupSaveToDeckOk, setDecksQuestions}) => {
 
 	const {isCardsFetching} = useSelector((state) => state.cards);
 
@@ -36,8 +37,9 @@ const DecksQuestions = ({cards, cardPackName, SaveToFavoriteDecks, popupSaveToDe
 						}
 					</div>
 					}
-					<div className={styles.deckInfo__button_wrap} onClick={SaveToFavoriteDecks}>
-						<button className={styles.deckInfo__button}>save to favorites</button>
+					<div className={styles.deckInfo__button_wrap} >
+						<button className={styles.deckInfo__button} disabled={isCardsFetching} onClick={()=> {setDecksQuestions(false)}}>go back</button>
+						<button className={styles.deckInfo__button} disabled={isCardsFetching} onClick={SaveToFavoriteDecks}>save to favorites</button>
 					</div>
 					<PopupNoteOk popupSaveToDeckOk={popupSaveToDeckOk} setPopupSaveToDeckOk={setPopupSaveToDeckOk}/>
 				</div>
