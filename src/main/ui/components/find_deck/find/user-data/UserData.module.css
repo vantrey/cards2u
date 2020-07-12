@@ -11,6 +11,7 @@
     max-height: 56px;
     padding:0  24px;
     color: #088dcd;
+    cursor: pointer;
     background-color: transparent;
     border-bottom: 1px solid #088dcd;
     -webkit-transition-property: background-color;

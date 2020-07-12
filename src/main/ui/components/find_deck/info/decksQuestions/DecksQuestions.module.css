@@ -142,6 +142,7 @@
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
     transition: color, background-color;
+    cursor: pointer;
 }
 
 .deckInfo__button:hover {

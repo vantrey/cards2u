@@ -171,6 +171,7 @@
 .decks__label {
     position: relative;
     border: 1px solid transparent;
+    cursor: pointer;
 }
 
 .decks__radio {
