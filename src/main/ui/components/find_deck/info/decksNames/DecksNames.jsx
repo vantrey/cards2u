@@ -6,9 +6,10 @@ import EmptyDecks from "../emptyDecks/EmptyDecks";
 import Loader from "../../../../common/loader/Loader";
 
 
-const DecksNames = ({nameUser, onSelectDeck, deckscount,isLocalFetching}) => {
+const DecksNames = ({nameUser, onSelectDeck, deckscount}) => {
 
     const {cardPacks} = useSelector((state) => state.cardPacks);
+    const {isCardPacksFetching} = useSelector((state) => state.cardPacks);
 
 	return (
 		<div className={styles.container__rightBlock}>
@@ -19,8 +20,8 @@ const DecksNames = ({nameUser, onSelectDeck, deckscount,isLocalFetching}) => {
 				<div className={styles.decksNames__subtitle}>has &nbsp;
 					<strong className={styles.subtitle__number}>{deckscount} &nbsp;</strong>decks
 				</div>
-				{isLocalFetching && <Loader/>}
-				{!isLocalFetching &&
+				{isCardPacksFetching && <Loader/>}
+				{!isCardPacksFetching &&
 				<div className={styles.decksNames}>
 					{
 						cardPacks && (

@@ -101,6 +101,19 @@
 
 }
 
+.deckInfo__loader {
+    width: 100%;
+    min-height: 280px;
+    max-height: 280px;
+    overflow: hidden;
+    overflow-y: auto;
+    display: flex;
+    border: 1px solid transparent;
+    flex-direction: column;
+    margin-bottom: 10px;
+    position: relative;
+}
+
 .data__item_box {
     width: 100%;
     min-height: 280px;
