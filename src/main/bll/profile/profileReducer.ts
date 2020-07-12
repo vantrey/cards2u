@@ -8,7 +8,7 @@ import {setIsPreventFetching} from "../preventReques/preventRequestReducer";
 const initialState = {
     isSuccess: false,
     errorServerMessage: '',
-    isFetching: false,
+    isProfileFetching: false,
     user: {
         avatar: '',
         created: '',
@@ -45,6 +45,12 @@ export const profileReducer = (state: typeof initialState = initialState, action
                 user: action.user
             };
 
+        case "PROFILE_REDUCER/SET_IS_FETCHING":
+            return {
+                ...state,
+                isProfileFetching: action.isFetching
+            };
+
 
         default:
             return state
@@ -55,6 +61,10 @@ export const profileActions = {
     setIsSuccess: (isSuccess: boolean) => ({type: "PROFILE_REDUCER/SET_SUCCESS", isSuccess} as const),
     setErrorFromServer: (error: string) => ({type: 'PROFILE_REDUCER/SET_ERROR', error} as const),
     setUser: (user: UserType) => ({type: 'PROFILE_REDUCER/SET_USER_SUCCESS', user} as const),
+    setIsFetching: (isFetching: boolean) => ({
+        type: 'PROFILE_REDUCER/SET_IS_FETCHING',
+        isFetching
+    } as const),
 };
 
 type ActionsType = InferActionTypes<typeof profileActions>
@@ -79,10 +89,12 @@ export const getUser = (): ThunkType => async (dispatch: DispatchType, getState:
 
         } else {
             dispatch(setIsPreventFetching(true));
+            dispatch(profileActions.setIsFetching(true));
             const res = await api.getUser(token, userId);// userId & token can be null -> server will response error
             dispatch(profileActions.setUser(res.data.user));
             repository.save_UserToLS(res.data.user);
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
+            dispatch(profileActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
         }
         dispatch(profileActions.setIsSuccess(true));
@@ -90,6 +102,7 @@ export const getUser = (): ThunkType => async (dispatch: DispatchType, getState:
     } catch (e) {
         dispatch(profileActions.setErrorFromServer(e.response.data.error));
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+        dispatch(profileActions.setIsFetching(false));
         dispatch(setIsPreventFetching(false));
     }
 };
@@ -98,14 +111,17 @@ export const updateUser = (name: string, avatar: string | null = null): ThunkTyp
     try {
         const token = repository.getToken();
         dispatch(setIsPreventFetching(true));
+        dispatch(profileActions.setIsFetching(true));
         const res = await api.updateUser(token, name, avatar);
         dispatch(profileActions.setUser(res.data.updatedUser));
         repository.saveToken(res.data.token, res.data.tokenDeathTime);
         repository.save_UserToLS(res.data.updatedUser);
+        dispatch(profileActions.setIsFetching(false));
         dispatch(setIsPreventFetching(false));
     } catch (e) {
         dispatch(profileActions.setErrorFromServer(e.response.data.error));
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+        dispatch(profileActions.setIsFetching(false));
         dispatch(setIsPreventFetching(false));
     }
 

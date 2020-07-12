@@ -10,7 +10,7 @@ import CardPacks from "./CardPacks";
 const CardPacksContainer: React.FC = () => {
     const {
         cardPacks,
-        isFetching,
+        isCardPacksFetching,
         totalCardPacksCount,
         pageSize,
         errorFromServer,
@@ -75,7 +75,7 @@ const CardPacksContainer: React.FC = () => {
             pageSize={pageSize}
             totalCardPacksCount={totalCardPacksCount}
             currentPage={currentPage}
-            isFetching={isFetching}
+            isFetching={isCardPacksFetching}
             deletePacksCards={deletePacksCards}
             cardsPackId={cardsPackId}
             user_id={user_id}

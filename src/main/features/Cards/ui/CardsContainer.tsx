@@ -15,7 +15,7 @@ import Link from "../../../ui/common/Link/Link";
 
 const CardsContainer: React.FC = () => {
     const {pack_id, user_id} = useParams();
-    const {cards, isFetching, pageCount, cardsTotalCount} = useSelector((state: AppStateType) => state.cards);
+    const {cards, /*isFetching,*/ pageCount, cardsTotalCount} = useSelector((state: AppStateType) => state.cards);
     const dispatch = useDispatch();
 
 
@@ -41,16 +41,16 @@ const CardsContainer: React.FC = () => {
         dispatch(add_Card({cardsPack_id: pack_id, question: valueQuestion, answer: valueAnswer}))
     }
     const onDeleteCard = (card_id: string) => {
-        dispatch(delete_Card(card_id, pack_id))
+        dispatch(delete_Card(card_id, /*pack_id*/))
     }
     const onUpdateCard = (_id: string, question: string, answer: string) => {
-        dispatch(update_Card({_id, question, answer}, pack_id))
+        dispatch(update_Card({_id, question, answer}, /*pack_id*/))
     }
 
     const pageCountSize = Math.ceil(cardsTotalCount / pageCount)
     return (
         <div className={styles.Cards_container}>
-            {(isFetching && <div>...Loading please wait</div>) ||
+            {/*{(isFetching && <div>...Loading please wait</div>) ||*/}
 
             <div className={styles.Cards_container}>
                 <ReactPaginate
