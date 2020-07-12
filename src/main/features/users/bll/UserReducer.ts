@@ -11,8 +11,8 @@ const initialState = {
     page: 1,
     pageCount: 10,
     totalUsersCount: 0,
-    isFetching: false
-}
+    isUsersFetching: false
+};
 
 type InitialStateType = typeof initialState
 
@@ -33,24 +33,39 @@ export const userReducer = (state: InitialStateType = initialState, action: Acti
             return {
                 ...state,
                 page: action.page
-            }
+            };
+
+        case "cards2u/main/users/SET_IS_FETCHING":
+            return {
+                ...state,
+              isUsersFetching: action.isFetching
+            };
 
         default:
             return state
     }
-}
+};
+
 export const usersActions = {
+
     getUserSuccess: (users: UserType[]) => ({
         type: 'cards2u/main/users/GET_USERS', users
     } as const),
+
     setPageCount: (pageData: { page: number, pageCount: number, totalUsersCount: number }) => ({
         type: 'cards2u/main/users/SET_PAGE_DATA', pageData
     } as const),
+
     setPage: (page: number) => ({
         type: 'cards2u/main/users/SET_PAGE', page
     } as const),
 
-}
+    setIsFetching: (isFetching: boolean) => ({
+        type: 'cards2u/main/users/SET_IS_FETCHING',
+        isFetching
+    } as const),
+};
+
 type ActionsType = InferActionTypes<typeof usersActions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
@@ -58,7 +73,8 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 export const getUser = (page: number, pageCount: number, sortUsers = 'avatar', direction = '0'): ThunkType =>
     async (dispatch: DispatchType, getState: () => AppStateType) => {
         try {
-            dispatch(setIsPreventFetching(true))
+            dispatch(setIsPreventFetching(true));
+            dispatch(usersActions.setIsFetching(true));
             let token = repository.getToken()
             const result = await api.getUsers(token, page, pageCount, direction + sortUsers)
             repository.saveToken(result.token, result.tokenDeathTime)
@@ -68,11 +84,12 @@ export const getUser = (page: number, pageCount: number, sortUsers = 'avatar', d
                 pageCount: result.pageCount,
                 totalUsersCount: result.usersTotalCount
             }));
+            dispatch(usersActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false))
         } catch (e) {
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
-            dispatch(setIsPreventFetching(false))
+            dispatch(setIsPreventFetching(false));
+            dispatch(usersActions.setIsFetching(false));
         }
-
-    }
+    };
 
