@@ -19,21 +19,22 @@ const CreateContainer = () => {
     const [isEditCardMode, setIsEditCardMode] = useState<boolean>(false);
     const [isCreateDeckMode, setIsCreateDeckMode] = useState<boolean>(true);
 
-    const [cardId, setCardId] = useState<string>('');
-
-
+    const [currentCardId, setCurrentCardId] = useState<string>('');
 
 
     const onEditCardClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
         setIsEditCardMode(true);
-        setCardId(e.currentTarget.id);
+        setCurrentCardId(e.currentTarget.id);
         setIsCreateDeckMode(false);
+    }, []);
+
+    const onCancelEditCardClick = useCallback(() => {
+        setIsEditCardMode(false);
     }, []);
 
     /*const onModeSetterClick = useCallback((e: React.MouseEvent<HTMLDivElement>) =>{
 
     }, []);*/
-
 
 
     return (
@@ -50,14 +51,17 @@ const CreateContainer = () => {
                 cardsPack_id={cardsPack_id}
                 setIsEditCardMode={setIsEditCardMode}
                 isEditCardMode={isEditCardMode}
-                currentCardData={cards.find(c => c._id === cardId)}
+                currentCardData={cards.find(c => c._id === currentCardId)}
             />
 
 
-
             <OwnCards // decksQuestion copy
+                onCancelEditCardClick={onCancelEditCardClick}
+                cards={cards}
+                cardPackName={cardPackName}
+                isEditCardMode={isEditCardMode}
                 onEditCardClick={onEditCardClick}
-                cards={cards} cardPackName={cardPackName}
+                currentCardId={currentCardId}
             />
 
 

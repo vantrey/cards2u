@@ -34,9 +34,12 @@ const EditCardForm: React.FC<PropsType> = React.memo(({
     });
 
     useEffect(() => {
-        if (isEditCardMode) {
-            setValue('question', currentCardData ? currentCardData.question : '');
-            setValue('answer', currentCardData ? currentCardData.answer : '');
+        if (isEditCardMode && currentCardData) {
+            setValue('question', currentCardData.question );
+            setValue('answer', currentCardData.answer);
+        }
+        if (!isEditCardMode) {
+            reset();
         }
     }, [isEditCardMode, currentCardData?.question, currentCardData?.answer]);
 
@@ -45,7 +48,7 @@ const EditCardForm: React.FC<PropsType> = React.memo(({
 
         if (isEditCardMode) {
 
-            if (currentCardData) {  // if find method returned undefined
+            if (currentCardData) { // to prevent undefined
                 const {_id} = currentCardData;
                 dispatch(update_Card({_id, question: data.question, answer: data.answer}));
                 setIsEditCardMode(false);
