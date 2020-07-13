@@ -20,11 +20,11 @@ type PropsType = {
 }
 
 const EditCardForm: React.FC<PropsType> = React.memo(({
-                                                            isEditCardMode,
-                                                            currentCardData,
-                                                            setIsEditCardMode,
-                                                            cardsPack_id,
-                                                        }) => {
+                                                          isEditCardMode,
+                                                          currentCardData,
+                                                          setIsEditCardMode,
+                                                          cardsPack_id,
+                                                      }) => {
 
     const dispatch = useDispatch();
 
@@ -35,14 +35,13 @@ const EditCardForm: React.FC<PropsType> = React.memo(({
 
     useEffect(() => {
         if (isEditCardMode && currentCardData) {
-            setValue('question', currentCardData.question );
+            setValue('question', currentCardData.question);
             setValue('answer', currentCardData.answer);
         }
         if (!isEditCardMode) {
             reset();
         }
     }, [isEditCardMode, currentCardData?.question, currentCardData?.answer]);
-
 
     const onSubmit = handleSubmit((data) => {
 
@@ -62,29 +61,28 @@ const EditCardForm: React.FC<PropsType> = React.memo(({
     });
 
     return (
-        <div>
+        <form onSubmit={onSubmit}>
 
-            <form onSubmit={onSubmit}>
-
-                    <Textarea
-                        register={register}
-                        name='question'
-                        errors={errors}
-                        placeholder='Enter your question'
-                    />
-                    <Textarea
-                        register={register}
-                        name='answer'
-                        errors={errors}
-                        placeholder='Enter your answer'
-                    />
+            <Textarea
+                register={register}
+                name='question'
+                errors={errors}
+                placeholder='Enter your question'
+            />
+            <Textarea
+                register={register}
+                name='answer'
+                errors={errors}
+                placeholder='Enter your answer'
+            />
 
 
-                <div>
-                    <Button/>
-                </div>
-            </form>
-        </div>
+            <div>
+                {isEditCardMode &&
+                <Button> Change </Button>}
+            </div>
+
+        </form>
     )
 });
 export default EditCardForm;
