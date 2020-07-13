@@ -7,6 +7,9 @@ type PropsType = {
     cards: Array<CardType>
     cardPackName: string
     onEditCardClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+    isEditCardMode: boolean
+    onCancelEditCardClick: () => void
+    currentCardId: string
 }
 
 
@@ -14,7 +17,10 @@ const OwnCards: React.FC<PropsType> = React.memo(({
                                                       cards,
                                                       cardPackName,
                                                       onEditCardClick,
-}) => {
+                                                      isEditCardMode,
+                                                      onCancelEditCardClick,
+                                                      currentCardId,
+                                                  }) => {
 
     return (
         <div className={styles.container__rightBlock}>
@@ -35,12 +41,19 @@ const OwnCards: React.FC<PropsType> = React.memo(({
                                     <div className={styles.item__question}>{cards.question}</div>
                                     <div className={styles.data__border}></div>
                                     <div className={styles.item__answer}>{cards.answer}</div>
+
+                                    {isEditCardMode && cards._id === currentCardId &&
+                                    <button onClick={onCancelEditCardClick}>
+                                        cancel
+                                    </button>}
+
+                                    {(isEditCardMode && cards._id !== currentCardId || !isEditCardMode) &&
                                     <button
                                         id={cards._id}
                                         onClick={onEditCardClick}
                                     >
                                         edit
-                                    </button>
+                                    </button>}
                                 </div>
                             ))
                         }
