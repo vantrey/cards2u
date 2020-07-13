@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useForm} from "react-hook-form";
 import {CardType} from "../../../../types/entities";
 import {useDispatch} from "react-redux";
-import {add_Card, update_Card} from "../../../../features/Cards/bll/cardsReducer";
+import {add_Card, delete_Card, update_Card} from "../../../../features/Cards/bll/cardsReducer";
 import Textarea from "../../../common/textarea/Textarea";
 import Button from "../../../common/Button/Button";
 
@@ -28,10 +28,10 @@ const EditCardForm: React.FC<PropsType> = React.memo(({
 
     const dispatch = useDispatch();
 
-    const {register, handleSubmit, errors, reset, setValue} = useForm<EditCardFormType>({
+    const {register, handleSubmit, errors, reset, setValue, watch} = useForm<EditCardFormType>({
         mode: 'onBlur',
-
     });
+
 
     useEffect(() => {
         if (isEditCardMode && currentCardData) {
@@ -43,20 +43,33 @@ const EditCardForm: React.FC<PropsType> = React.memo(({
         }
     }, [isEditCardMode, currentCardData?.question, currentCardData?.answer]);
 
+    const getIsEmptyFields = () => {
+        return !watch().answer && !watch().question;
+    };
+
     const onSubmit = handleSubmit((data) => {
 
         if (isEditCardMode) {
 
             if (currentCardData) { // to prevent undefined
                 const {_id} = currentCardData;
-                dispatch(update_Card({_id, question: data.question, answer: data.answer}));
-                setIsEditCardMode(false);
+
+                if (!getIsEmptyFields()) {
+                    dispatch(update_Card({_id, question: data.question, answer: data.answer}));
+                    setIsEditCardMode(false);
+                }
+
+                if (getIsEmptyFields()) {
+                    dispatch(delete_Card(_id));
+                    setIsEditCardMode(false);
+                }
             }
         }
 
         if (!isEditCardMode) {
             dispatch(add_Card({cardsPack_id, question: data.question, answer: data.answer}));
         }
+
         reset();
     });
 
@@ -78,8 +91,14 @@ const EditCardForm: React.FC<PropsType> = React.memo(({
 
 
             <div>
-                {isEditCardMode &&
-                <Button> Change </Button>}
+                {isEditCardMode && !getIsEmptyFields() &&
+                <Button>Change</Button>}
+
+                {!isEditCardMode &&
+                <Button>Create</Button>}
+
+                {isEditCardMode && getIsEmptyFields() &&
+                <Button>Delete</Button>}
             </div>
 
         </form>
