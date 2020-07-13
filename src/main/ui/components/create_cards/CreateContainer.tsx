@@ -10,7 +10,7 @@ import {cardsActions} from "../../../features/Cards/bll/cardsReducer";
 
 const CreateContainer = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const {cards, cardPackName, cardsPack_id, isSuccess} = useSelector((state: AppStateType) => state.cards);
 
@@ -34,26 +34,19 @@ const CreateContainer = () => {
         setIsEditCardMode(false);
     }, []);
 
-    /*const onExitEditCardMode = useCallback(() => {
+    const onExitEditCardMode = useCallback(() => {
         dispatch(cardsActions.set_Success(false))
-    }, [isSuccess]);*/
+    }, [isSuccess]);
 
     return (
         <div className={styles.create__wrap}>
 
             <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
 
-            {isCreateDeckMode &&
-            <button onClick={() => {
-                setIsCreateDeckMode(false)
-            }}>edit card</button>}
+            {isSuccess &&
+            <button onClick={onExitEditCardMode}>create new deck</button>}
 
-            {!isCreateDeckMode &&
-            <button onClick={() => {
-                setIsCreateDeckMode(true)
-            }}>create new deck</button>}
-
-            {!isCreateDeckMode &&
+            {isSuccess &&
             <EditCardForm
                 cardsPack_id={cardsPack_id}
                 setIsEditCardMode={setIsEditCardMode}
@@ -61,7 +54,7 @@ const CreateContainer = () => {
                 currentCardData={cards.find(c => c._id === currentCardId)}
             />}
 
-            {isCreateDeckMode &&
+            {!isSuccess &&
             <NewDeckForm/>}
 
             <OwnCards // decksQuestion copy
