@@ -1,15 +1,18 @@
 import React, {useCallback, useState} from 'react';
 import styles from './Create.module.css';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import EditCardForm from "./editCardForm/EditCardForm";
 import UserInfo from "../../common/user/UserInfo";
 import OwnCards from "./cards/OwnCards";
 import {AppStateType} from "../../../bll/store/store";
 import NewDeckForm from "./newDeckForm/NewDeckForm";
+import {cardsActions} from "../../../features/Cards/bll/cardsReducer";
 
 const CreateContainer = () => {
 
-    const {cards, cardPackName, cardsPack_id} = useSelector((state: AppStateType) => state.cards);
+    const dispatch = useDispatch()
+
+    const {cards, cardPackName, cardsPack_id, isSuccess} = useSelector((state: AppStateType) => state.cards);
 
     const [selectUser, setSelectUser] = useState<boolean>(false);  //doesnt use yet
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);  //doesnt use yet
@@ -31,7 +34,9 @@ const CreateContainer = () => {
         setIsEditCardMode(false);
     }, []);
 
-
+    /*const onExitEditCardMode = useCallback(() => {
+        dispatch(cardsActions.set_Success(false))
+    }, [isSuccess]);*/
 
     return (
         <div className={styles.create__wrap}>
@@ -39,10 +44,14 @@ const CreateContainer = () => {
             <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
 
             {isCreateDeckMode &&
-            <button onClick={()=>{setIsCreateDeckMode(false)}}>create or edit cards</button>}
+            <button onClick={() => {
+                setIsCreateDeckMode(false)
+            }}>edit card</button>}
 
             {!isCreateDeckMode &&
-            <button onClick={()=>{setIsCreateDeckMode(true)}}>create new deck</button>}
+            <button onClick={() => {
+                setIsCreateDeckMode(true)
+            }}>create new deck</button>}
 
             {!isCreateDeckMode &&
             <EditCardForm
