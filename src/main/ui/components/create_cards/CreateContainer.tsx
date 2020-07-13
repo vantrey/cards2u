@@ -31,9 +31,7 @@ const CreateContainer = () => {
         setIsEditCardMode(false);
     }, []);
 
-    const toggleIsCreateDeckMode = () => {
-        setIsCreateDeckMode(!isCreateDeckMode)
-    };
+
 
     return (
         <div className={styles.create__wrap}>
@@ -41,10 +39,10 @@ const CreateContainer = () => {
             <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
 
             {isCreateDeckMode &&
-            <button onClick={toggleIsCreateDeckMode}>create or edit cards</button>}
+            <button onClick={()=>{setIsCreateDeckMode(false)}}>create or edit cards</button>}
 
             {!isCreateDeckMode &&
-            <button onClick={toggleIsCreateDeckMode}>create new deck</button>}
+            <button onClick={()=>{setIsCreateDeckMode(true)}}>create new deck</button>}
 
             {!isCreateDeckMode &&
             <EditCardForm
