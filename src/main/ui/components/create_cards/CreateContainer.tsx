@@ -1,13 +1,11 @@
 import React, {useCallback, useState} from 'react';
 import styles from './Create.module.css';
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import EditCardForm from "./editCardForm/EditCardForm";
 import UserInfo from "../../common/user/UserInfo";
 import OwnCards from "./cards/OwnCards";
 import {AppStateType} from "../../../bll/store/store";
-import {update_Card} from "../../../features/Cards/bll/cardsReducer";
-import {CardType} from "../../../types/entities";
-import ModeSetter from "./modeSetter/ModeSetter";
+import NewDeckForm from "./newDeckForm/NewDeckForm";
 
 const CreateContainer = () => {
 
@@ -17,6 +15,7 @@ const CreateContainer = () => {
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);  //doesnt use yet
 
     const [isEditCardMode, setIsEditCardMode] = useState<boolean>(false);
+
     const [isCreateDeckMode, setIsCreateDeckMode] = useState<boolean>(true);
 
     const [currentCardId, setCurrentCardId] = useState<string>('');
@@ -32,28 +31,31 @@ const CreateContainer = () => {
         setIsEditCardMode(false);
     }, []);
 
-    /*const onModeSetterClick = useCallback((e: React.MouseEvent<HTMLDivElement>) =>{
-
-    }, []);*/
-
+    const toggleIsCreateDeckMode = () => {
+        setIsCreateDeckMode(!isCreateDeckMode)
+    };
 
     return (
         <div className={styles.create__wrap}>
 
             <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
 
-            {/*<ModeSetter onModeSetterClick={onModeSetterClick} currentMode={''}>
-                {}
-            </ModeSetter>*/}
+            {isCreateDeckMode &&
+            <button onClick={toggleIsCreateDeckMode}>create or edit cards</button>}
 
+            {!isCreateDeckMode &&
+            <button onClick={toggleIsCreateDeckMode}>create new deck</button>}
 
+            {!isCreateDeckMode &&
             <EditCardForm
                 cardsPack_id={cardsPack_id}
                 setIsEditCardMode={setIsEditCardMode}
                 isEditCardMode={isEditCardMode}
                 currentCardData={cards.find(c => c._id === currentCardId)}
-            />
+            />}
 
+            {isCreateDeckMode &&
+            <NewDeckForm/>}
 
             <OwnCards // decksQuestion copy
                 onCancelEditCardClick={onCancelEditCardClick}
@@ -63,7 +65,6 @@ const CreateContainer = () => {
                 onEditCardClick={onEditCardClick}
                 currentCardId={currentCardId}
             />
-
 
         </div>
     )
