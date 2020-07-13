@@ -76,7 +76,6 @@ const FindContainer: React.FC = () => {
         setNameUser(nameUser);
         setDeckscount(deckscount);
         setShowMode(id);
-        setIsLocalFetching(true);
         setSelectUser(true);
         setDecksQuestions(false);
         dispatch(getCardPacks(1, 100, id))

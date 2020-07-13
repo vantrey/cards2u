@@ -56,7 +56,7 @@ const Game = () => {
 								}
 								{
 									!user.name &&
-									<span>john wick</span>
+									<span>John Wick</span>
 								}
 							</div>
 						</div>
