@@ -7,6 +7,7 @@ import OwnCards from "./cards/OwnCards";
 import {AppStateType} from "../../../bll/store/store";
 import NewDeckForm from "./newDeckForm/NewDeckForm";
 import {cardsActions} from "../../../features/Cards/bll/cardsReducer";
+import AlternativeForm from "./alternativeForm/AlternativeForm";
 
 const CreateContainer = () => {
 
@@ -19,15 +20,14 @@ const CreateContainer = () => {
 
     const [isEditCardMode, setIsEditCardMode] = useState<boolean>(false);
 
-    const [isCreateDeckMode, setIsCreateDeckMode] = useState<boolean>(true);
-
     const [currentCardId, setCurrentCardId] = useState<string>('');
+
+    const [isAlternativeDeck, setIsAlternativeDeck] = useState<boolean>(false);
 
 
     const onEditCardClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
         setIsEditCardMode(true);
         setCurrentCardId(e.currentTarget.id);
-        setIsCreateDeckMode(false);
     }, []);
 
     const onCancelEditCardClick = useCallback(() => {
@@ -38,6 +38,10 @@ const CreateContainer = () => {
         dispatch(cardsActions.set_Success(false))
     }, [isSuccess]);
 
+    const onIsAlternativeDeckChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setIsAlternativeDeck(e.currentTarget.checked);
+    }, []);
+
     return (
         <div className={styles.create__wrap}>
 
@@ -46,7 +50,7 @@ const CreateContainer = () => {
             {isSuccess &&
             <button onClick={onExitEditCardMode}>create new deck</button>}
 
-            {isSuccess &&
+            {isSuccess && !isAlternativeDeck &&
             <EditCardForm
                 cardsPack_id={cardsPack_id}
                 setIsEditCardMode={setIsEditCardMode}
@@ -54,8 +58,20 @@ const CreateContainer = () => {
                 currentCardData={cards.find(c => c._id === currentCardId)}
             />}
 
+            {isSuccess && isAlternativeDeck &&
+                <AlternativeForm
+                    isEditCardMode={isEditCardMode}
+                    currentCardData={cards.find(c => c._id === currentCardId)}
+                    setIsEditCardMode={setIsEditCardMode}
+                    cardsPack_id={cardsPack_id}
+                />
+            }
+
             {!isSuccess &&
-            <NewDeckForm/>}
+            <NewDeckForm
+                onIsAlternativeDeckChange={onIsAlternativeDeckChange}
+                isAlternativeDeck={isAlternativeDeck}
+            />}
 
             <OwnCards // decksQuestion copy
                 onCancelEditCardClick={onCancelEditCardClick}
