@@ -7,7 +7,6 @@ import {AppStateType} from "../../../../bll/store/store";
 import Loader from "../../loader/Loader";
 
 
-
 type AvaDecksTypeProps = {
     cardPacks: CardPackType[]
     showMyDecks: () => void
@@ -18,40 +17,76 @@ type AvaDecksTypeProps = {
     isLocalFetching: boolean
 }
 
-const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks,
+const UserDecks: React.FC<AvaDecksTypeProps> = ({
+                                                    cardPacks,
                                                     showMyDecks,
                                                     showDecks,
                                                     onSelectDeck,
                                                     isAuth,
                                                     isPreventFetching,
                                                     isLocalFetching
-
-}) => {
+                                                }) => {
 
     useEffect(() => {
-        const dragBlockElement = document.getElementById('drag-X');
-        if (dragBlockElement) {
-            dragBlockElement.addEventListener('mousedown', dragHandler.start);
-            dragBlockElement.addEventListener('mouseup', dragHandler.end);
-        }
 
-        return () => {
-            if (dragBlockElement) {
-                dragBlockElement.removeEventListener('mousedown', dragHandler.start);
-                dragBlockElement.removeEventListener('mouseup', dragHandler.end);
+        if(cardPacks.length > 0) {
+            console.log("!!!")
+            const dragBlockElement = document.getElementById('drag-X');
+            console.log(dragBlockElement)
+
+         const dragHandler = {
+            lastClientX: 0,
+            start: function (e: any) {
+                if (e.button == 0) {
+                    console.log ("start")
+                    window.addEventListener('mousemove', dragHandler.drag);
+                    dragHandler.lastClientX = e.clientX;
+                    e.preventDefault();
+                }
+            },
+            end: function (e: any) {
+                console.log ("end")
+                if (e.button == 0) {
+                    window.removeEventListener('mousemove', dragHandler.drag);
+                }
+            },
+            drag: function (e: any) {
+                console.log ("delta")
+                let delta = e.clientX - dragHandler.lastClientX;
+                // window.scrollTo(window.scrollX - delta, window.scrollY);
+                if (dragBlockElement) {
+                    dragBlockElement.scrollLeft = delta;
+                }
+                dragHandler.lastClientX = e.clientX;
+                e.preventDefault();
             }
+        };
+
+            if (dragBlockElement) {
+                dragBlockElement.addEventListener('mousedown', dragHandler.start);
+                dragBlockElement.addEventListener('mouseup', dragHandler.end);
+            }
+        } else {
+            console.log("---")
         }
 
-    }, []);
+        // return () => {
+        //     if (dragBlockElement) {
+        //         dragBlockElement.removeEventListener('mousedown', dragHandler.start);
+        //         dragBlockElement.removeEventListener('mouseup', dragHandler.end);
+        //     }
+        // }
+
+    }, [cardPacks]);
 
     return (
         <div className={styles.userDecks__wrap} >
             {!showDecks &&
-            <button
-                className={styles.userDecks__button}
-                disabled={!isAuth || isPreventFetching}
-                onClick={showMyDecks}
-            >
+			<button
+				className={styles.userDecks__button}
+				disabled={!isAuth || isPreventFetching}
+				onClick={showMyDecks}
+			>
 				<strong className={styles.button__text}>Show my decks</strong>
 			</button>}
             {showDecks && isLocalFetching && <Loader/>}
@@ -59,26 +94,9 @@ const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks,
 			<>
                 {cardPacks.length === 0 ?
                     <div className={styles.userDecks__none}>You don't have a deck.</div>
-                    // <div className={styles.userDecks__items} id='drag-X'>
-                    //     <div className={styles.item} onClick={onSelectDeck}>
-                    //         <small className={styles.item__title}>Name Name</small>
-                    //     </div>
-                    //      <div className={styles.item} onClick={onSelectDeck}>
-                    //         <small className={styles.item__title}>Name Native</small>
-                    //     </div>
-                    //      <div className={styles.item} onClick={onSelectDeck}>
-                    //         <small className={styles.item__title}>React Native</small>
-                    //     </div>
-                    //      <div className={styles.item} onClick={onSelectDeck}>
-                    //         <small className={styles.item__title}>My english</small>
-                    //     </div>
-                    //      <div className={styles.item} onClick={onSelectDeck}>
-                    //         <small className={styles.item__title}>Title Title</small>
-                    //     </div>
-                    // </div>
                     :
                     (
-                        <div className={styles.userDecks__have}>
+                        <div className={styles.userDecks__have} id='drag-X'>
                             {cardPacks.map(cardPack =>
                                 <div
                                     className={styles.decks__wrap}
@@ -96,7 +114,8 @@ const UserDecks: React.FC<AvaDecksTypeProps> = ({cardPacks,
                         </div>
                     )
                 }
-			</>}
+			</>
+            }
         </div>
     );
 };
