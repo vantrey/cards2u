@@ -18,7 +18,7 @@ const Buttons = ({ setCardFace, cardface, setCardBg}) => {
 			<button className={`${styles.buttons} ${styles.button__left}`}
 					onClick={()=>{setCardFace(true)}}
 					disabled={cardface}	>Back</button>
-			<button className={`${styles.buttons} ${styles.button__center}`} >Center</button>
+			{/*<button className={`${styles.buttons} ${styles.button__center}`} >Center</button>*/}
 			<button className={`${styles.buttons} ${styles.button__right} ${'soundClick'}`} data-sound={soundCard}
 					onClick={onChangeBG}>Next</button>
 		</div>
