@@ -6,12 +6,14 @@ import {setIsPreventFetching} from "../../bll/preventReques/preventRequestReduce
 const initialState = {
     isSuccess: false,
     messageAboutError: '',
+    isRestorePswFetching: false
 };
 
 type  initialStateType = typeof initialState;
 
 export const restorePswReducer = (state: initialStateType = initialState, action: ActionsType) => {
     switch (action.type) {
+
         case "RESTORE_PASSWORD_REDUCER/SEND_EMAIL_SUCCESS":
             return {
                 ...state,
@@ -19,17 +21,28 @@ export const restorePswReducer = (state: initialStateType = initialState, action
                 messageAboutError: action.messageAboutError
             };
 
+        case "RESTORE_PASSWORD_REDUCER/SET_IS_FETCHING":
+            return {
+                ...state,
+              isRestorePswFetching: action.isFetching
+            };
+
         default:
             return state;
     }
 };
 
-const actions = {
+const restorePswActions = {
     sendEmail: (isSuccess: boolean, messageAboutError: string) =>
         ({type: "RESTORE_PASSWORD_REDUCER/SEND_EMAIL_SUCCESS", isSuccess, messageAboutError} as const),
+
+    setIsFetching: (isFetching: boolean) => ({
+        type: 'RESTORE_PASSWORD_REDUCER/SET_IS_FETCHING',
+        isFetching
+    } as const),
 };
 
-type ActionsType = InferActionTypes<typeof actions>
+type ActionsType = InferActionTypes<typeof restorePswActions>
 
 // thunks
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
@@ -39,11 +52,14 @@ export const send_Email = (email: string, html1: string, html2: string): ThunkTy
     async (dispatch: DispatchType) => {
         try {
             dispatch(setIsPreventFetching(true));
+            dispatch(restorePswActions.setIsFetching(true));
             const res = await api.restorePsw(email, html1, html2);
-            dispatch(actions.sendEmail(res.data.success, ''));
+            dispatch(restorePswActions.sendEmail(res.data.success, ''));
+            dispatch(restorePswActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
         } catch (e) {
-            dispatch(actions.sendEmail(false, e.response.data.error));
+            dispatch(restorePswActions.sendEmail(false, e.response.data.error));
+            dispatch(restorePswActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
         }
     };

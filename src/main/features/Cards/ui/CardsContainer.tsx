@@ -15,7 +15,7 @@ import Link from "../../../ui/common/Link/Link";
 
 const CardsContainer: React.FC = () => {
     const {pack_id, user_id} = useParams();
-    const {cards, isFetching, pageCount, cardsTotalCount} = useSelector((state: AppStateType) => state.cards);
+    const {cards, /*isFetching,*/ pageCount, cardsTotalCount} = useSelector((state: AppStateType) => state.cards);
     const dispatch = useDispatch();
 
 
@@ -50,7 +50,7 @@ const CardsContainer: React.FC = () => {
     const pageCountSize = Math.ceil(cardsTotalCount / pageCount)
     return (
         <div className={styles.Cards_container}>
-            {(isFetching && <div>...Loading please wait</div>) ||
+            {/*{(isFetching && <div>...Loading please wait</div>) ||*/}
 
             <div className={styles.Cards_container}>
                 <ReactPaginate

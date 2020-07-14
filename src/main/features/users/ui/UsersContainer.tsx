@@ -18,7 +18,7 @@ type UsersPropsType = {
 }
 
 const UsersContainer: React.FC = (props) => {
-        const {users, pageCount, page, totalUsersCount, isFetching} = useSelector((state: AppStateType) => state.getUserReducer)
+        const {users, pageCount, page, totalUsersCount, isUsersFetching} = useSelector((state: AppStateType) => state.getUserReducer)
         const dispatch = useDispatch()
         const [data, setOrderedUser] = useState<UsersPropsType>({
             data: [],
@@ -56,7 +56,7 @@ const UsersContainer: React.FC = (props) => {
     // @ts-ignore
     return (
             <div className={styles.get_users_container}>
-                {isFetching && <span>...LOADING</span>}
+                {isUsersFetching && <span>...LOADING</span>}
                 <ReactPaginate
                     previousLabel={"prev"}
                     nextLabel={"next"}

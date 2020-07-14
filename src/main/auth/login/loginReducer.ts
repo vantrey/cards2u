@@ -14,7 +14,8 @@ const initialState = {
     rememberMe: false,
     errorServerMessage: '',
     userId: null as string | null,
-    currentLocation: ''
+    currentLocation: '',
+    isLoginFetching: false
 };
 
 type InitialStateType = typeof initialState
@@ -47,23 +48,38 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
                 currentLocation: action.currentLocation
             };
 
+        case "LOGIN_REDUCER/SET_IS_FETCHING":
+            return {
+                ...state,
+              isLoginFetching: action.isFetching
+            };
+
         default:
             return state
     }
 };
 
 export const loginActions = {
+
     loginAuthMeSuccess: (isAuth: boolean, userId: string | null) => ({
         type: 'LOGIN_REDUCER/LOGIN', isAuth, userId
     } as const),
+
     logoutSuccess: () => ({
         type: 'LOGIN_REDUCER/LOGOUT',
     } as const),
+
     setErrorFromServer: (error: string) => ({
         type: 'LOGIN_REDUCER/SET_ERROR', error
     } as const),
+
     setCurrentLocation: (currentLocation: string) => ({
         type: 'LOGIN_REDUCER/CURRENT_LOCATION', currentLocation
+    } as const),
+
+    setIsFetching: (isFetching: boolean) => ({
+        type: 'LOGIN_REDUCER/SET_IS_FETCHING',
+        isFetching
     } as const),
 };
 
@@ -80,16 +96,19 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
     async (dispatch: DispatchType) => {
         try {
             dispatch(setIsPreventFetching(true));
+            dispatch(loginActions.setIsFetching(true));
             const result = await api.login(email, password, rememberMe);
             dispatch(loginActions.loginAuthMeSuccess(result.data.success, result.data._id));
             repository.save_Auth_id(result.data._id);
             repository.saveToken(result.data.token, result.data.tokenDeathTime);
             dispatch(localAuthMe());
+            dispatch(loginActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
 
         } catch (e) {
             dispatch(loginActions.setErrorFromServer(e.response.data.error));
             dispatch(loginActions.loginAuthMeSuccess(false, null));
+            dispatch(loginActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
         }
     };
