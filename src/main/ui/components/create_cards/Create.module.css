@@ -1,11 +1,82 @@
 .create__wrap {
     width: 100%;
     height: 100vh;
-    background-color: #000;
+    font-family: 'CS Grimrock', sans-serif;
+    min-width: 100%;
+    min-height: 100vh;
+    display: flex;
+    background: url('../../images/find-bg.jpg') center center no-repeat;
+    background-size: cover;
+
+}
+
+.create__container {
+    position: relative;
+    width: 1140px;
+    max-width: 1140px;
+    height: calc(100vh - 150px);
+    margin: 100px auto 0 auto;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(6px);
+    padding: 20px;
+}
+
+.create__left {
+    flex-grow: 1;
+    background: transparent;
+}
+
+.create__right {
+    flex-grow: 1;
+    background: transparent;
+}
+
+.create__main {
+    width: 60%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: whitesmoke;
-    font-family: 'CS Grimrock', sans-serif;
+
+    border: 1px solid green;
+}
+
+.main__top {
+    width: 100%;
+    height: 300px;
+    display: flex;
+
+    border: 1px solid blue;
+}
+
+.main__content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    border: 1px solid red;
+}
+
+.main__forms {
+    width: 60%;
+    height: 100%;
+    display: flex;
+
+    border: 1px solid black;
+}
+
+.main__decks {
+    width: 40%;
+    height: 100%;
+    display: flex;
+
+    border: 1px solid black;
+}
+
+.create__aside {
+    width: 40%;
+    height: 100%;
+    display: flex;
+
+    border: 1px solid green;
 }

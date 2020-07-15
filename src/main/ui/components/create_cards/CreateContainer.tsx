@@ -44,44 +44,56 @@ const CreateContainer = () => {
 
     return (
         <div className={styles.create__wrap}>
+            <div className={styles.create__left}></div>
+            <div className={styles.create__container}>
+                <div className={styles.create__main}>
+                    <div className={styles.main__top}>
+                        <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
+                    </div>
+                    <div className={styles.main__content}>
+                        <div className={styles.main__forms}>
+                            {isSuccess && !isAlternativeDeck &&
+							<EditCardForm
+								cardsPack_id={cardsPack_id}
+								setIsEditCardMode={setIsEditCardMode}
+								isEditCardMode={isEditCardMode}
+								currentCardData={cards.find(c => c._id === currentCardId)}
+							/>}
 
-            <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
+                            {isSuccess && isAlternativeDeck &&
+							<AlternativeForm
+								isEditCardMode={isEditCardMode}
+								currentCardData={cards.find(c => c._id === currentCardId)}
+								setIsEditCardMode={setIsEditCardMode}
+								cardsPack_id={cardsPack_id}
+							/>
+                            }
 
-            {isSuccess &&
-            <button onClick={onExitEditCardMode}>create new deck</button>}
+                            {!isSuccess &&
+							<NewDeckForm
+								onIsAlternativeDeckChange={onIsAlternativeDeckChange}
+								isAlternativeDeck={isAlternativeDeck}
+							/>}
 
-            {isSuccess && !isAlternativeDeck &&
-            <EditCardForm
-                cardsPack_id={cardsPack_id}
-                setIsEditCardMode={setIsEditCardMode}
-                isEditCardMode={isEditCardMode}
-                currentCardData={cards.find(c => c._id === currentCardId)}
-            />}
-
-            {isSuccess && isAlternativeDeck &&
-                <AlternativeForm
-                    isEditCardMode={isEditCardMode}
-                    currentCardData={cards.find(c => c._id === currentCardId)}
-                    setIsEditCardMode={setIsEditCardMode}
-                    cardsPack_id={cardsPack_id}
-                />
-            }
-
-            {!isSuccess &&
-            <NewDeckForm
-                onIsAlternativeDeckChange={onIsAlternativeDeckChange}
-                isAlternativeDeck={isAlternativeDeck}
-            />}
-
-            <OwnCards // decksQuestion copy
-                onCancelEditCardClick={onCancelEditCardClick}
-                cards={cards}
-                cardPackName={cardPackName}
-                isEditCardMode={isEditCardMode}
-                onEditCardClick={onEditCardClick}
-                currentCardId={currentCardId}
-            />
-
+                        </div>
+                        <div className={styles.main__decks}>
+                            {isSuccess &&
+							<button onClick={onExitEditCardMode}>create new deck</button>}
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.create__aside}>
+                    <OwnCards // decksQuestion copy
+                        onCancelEditCardClick={onCancelEditCardClick}
+                        cards={cards}
+                        cardPackName={cardPackName}
+                        isEditCardMode={isEditCardMode}
+                        onEditCardClick={onEditCardClick}
+                        currentCardId={currentCardId}
+                    />
+                </div>
+            </div>
+            <div className={styles.create__right}></div>
         </div>
     )
 };
