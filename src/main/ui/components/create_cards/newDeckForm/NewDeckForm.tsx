@@ -4,15 +4,21 @@ import {useDispatch} from "react-redux";
 import Textarea from "../../../common/textarea/Textarea";
 import Button from "../../../common/Button/Button";
 import {createDeck} from "../../../../bll/currentUserDecks/currentUserDecksReducer";
-
+import styles from "./NewDeckForm.module.css"
 
 type EditCardFormType = {
     deckName: string
 }
 
-type PropsType = {}
+type PropsType = {
+    onIsAlternativeDeckChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    isAlternativeDeck: boolean
+}
 
-const NewDeckForm: React.FC<PropsType> = React.memo(({}) => {
+const NewDeckForm: React.FC<PropsType> = React.memo(({
+                                                         onIsAlternativeDeckChange,
+                                                         isAlternativeDeck,
+                                                     }) => {
 
     const dispatch = useDispatch();
 
@@ -28,20 +34,35 @@ const NewDeckForm: React.FC<PropsType> = React.memo(({}) => {
     );
 
     return (
-        <form onSubmit={onSubmit}>
+        <div>
 
-            <Textarea
-                register={register}
-                name='deckName'
-                errors={errors}
-                placeholder='Enter name of your new deck'
-            />
+            <div className={styles.checkBox}>
 
-            <div>
-                <Button>Create</Button>
+                <input
+                    type='checkbox'
+                    checked={isAlternativeDeck}
+                    onChange={onIsAlternativeDeckChange}
+                    id='checkbox'
+                />
+                <label htmlFor="checkbox"> </label>
+                <span>alternative deck</span>
             </div>
 
-        </form>
+            <form onSubmit={onSubmit}>
+
+                <Textarea
+                    register={register}
+                    name='deckName'
+                    errors={errors}
+                    placeholder='Enter name of your new deck'
+                />
+
+                <div>
+                    <Button>Create</Button>
+                </div>
+
+            </form>
+        </div>
     )
 });
 export default NewDeckForm;

@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Neucha&display=swap');
+/*font-family: 'Neucha', cursive;*/
+
 .users__data {
     display: flex;
     align-items: center;
@@ -8,6 +11,7 @@
     max-height: 56px;
     padding:0  24px;
     color: #088dcd;
+    cursor: pointer;
     background-color: transparent;
     border-bottom: 1px solid #088dcd;
     -webkit-transition-property: background-color;
@@ -16,6 +20,11 @@
     transition-duration: 0.3s;
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
+}
+
+.users__data_block {
+    pointer-events: none;
+    cursor: none;
 }
 
 .users__data:hover {

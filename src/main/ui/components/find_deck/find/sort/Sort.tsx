@@ -1,5 +1,7 @@
 import React from "react";
 import styles from './Sort.module.css'
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../../../../bll/store/store";
 
 
 
@@ -18,13 +20,14 @@ const Sort: React.FC<UsersDeckHeader> = ({
                                                            sortDeckUp,
                                                            sortDeckDown
                                                        }) => {
+    const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
 
     return (
         <div className={styles.sort__wrap}>
             <h5 className={styles.sort__title}>{title}</h5>
             <>
-                <button className={styles.sort__button} onClick={sortDeckDown} name={name}>&#8593;</button>
-                <button className={styles.sort__button}  onClick={sortDeckUp} name={name}>&#8595;</button>
+                <button className={styles.sort__button} disabled={isPreventFetching} onClick={sortDeckDown} name={name}>&#8593;</button>
+                <button className={styles.sort__button} disabled={isPreventFetching} onClick={sortDeckUp} name={name}>&#8595;</button>
             </>
 
         </div>
