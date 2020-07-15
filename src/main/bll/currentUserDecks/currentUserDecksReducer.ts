@@ -154,7 +154,7 @@ export const deleteDeck = (cardsPackId: string): ThunkType => async (dispatch: D
         dispatch(currentUserDecksActions.setIsFetching(true));
         let token = repository.getToken();
         const response = await cardPacksApi.deleteCardsPack(token, cardsPackId);
-        dispatch(currentUserDecksActions.deleteDeckSuccess(response.data.deletedCardsPack.user_id));
+        dispatch(currentUserDecksActions.deleteDeckSuccess(response.data.deletedCardsPack._id));
         repository.saveToken(response.data.token, response.data.tokenDeathTime);
         dispatch(currentUserDecksActions.setIsFetching(false));
         dispatch(setIsPreventFetching(false));
