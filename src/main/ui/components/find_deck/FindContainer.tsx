@@ -13,20 +13,20 @@ import DecksNames from './info/decksNames/DecksNames';
 import DecksLogout from "./info/decksLogout/DecksLogout";
 import PopupAuth from '../../common/popUp/popUp_Authorization/PopupAuth';
 import {useLocalFetch} from "../../../helpers/localFetchingHook";
-import { useLocation } from 'react-router-dom';
-import { loginActions } from '../../../auth/login/loginReducer';
+import {useLocation} from 'react-router-dom';
+import {loginActions} from '../../../auth/login/loginReducer';
 import {get_Cards} from "../../../features/Cards/bll/cardsReducer";
 
 
 const FindContainer: React.FC = () => {
 
     const dispatch = useDispatch();
-    const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer);
+    const {page, pageCount, totalUsersCount, users, sortUsers, direction} = useSelector((state: AppStateType) => state.getUserReducer);
     const {cards, cardPackName} = useSelector((state: AppStateType) => state.cards);
     const {isAuth} = useSelector((state: AppStateType) => state.login);
-    const [ modal, setModal ] = useState (false);
-    const [ nameUser, setNameUser ] = useState<string | null> ('');
-    const [ deckscount, setDeckscount ] = useState<string | null> ('');
+    const [modal, setModal] = useState(false);
+    const [nameUser, setNameUser] = useState<string | null>('');
+    const [deckscount, setDeckscount] = useState<string | null>('');
 
     const [showMode, setShowMode] = useState<string>('');
     const [popupAuth, setPopupAuth] = useState<boolean>(false);
@@ -39,8 +39,7 @@ const FindContainer: React.FC = () => {
 
     useEffect(() => {
         dispatch(loginActions.setCurrentLocation(currentPath));
-    },[currentPath])
-
+    }, [currentPath])
 
 
     const pageChangedHandler = (page: { selected: number }) => {
@@ -49,15 +48,15 @@ const FindContainer: React.FC = () => {
 
     useEffect(() => {
         setIsLocalFetching(true);
-        dispatch(getUser(page, pageCount))
-    }, [page, pageCount])
+        dispatch(getUser(page, pageCount, sortUsers, direction))
+    }, [page, pageCount, sortUsers, direction])
 
     const sortDeckUp = (e: React.MouseEvent<HTMLButtonElement>) => {
-        dispatch(getUser(1, 10, e.currentTarget.name, '1'))
+        dispatch(usersActions.setSort(page,10,e.currentTarget.name, '1'))
     };
 
     const sortDeckDown = (e: React.MouseEvent<HTMLButtonElement>) => {
-        dispatch(getUser(1, 10, e.currentTarget.name, '0'))
+        dispatch(usersActions.setSort(page,10,e.currentTarget.name, '0'))
     };
 
     const onShowDecks = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -78,22 +77,22 @@ const FindContainer: React.FC = () => {
     const onSelectDeck = (e: React.MouseEvent<HTMLDivElement>) => {
         const deckname = e.currentTarget.getAttribute('data-deckname');
         setDecksQuestions(true);
-            dispatch(get_Cards(e.currentTarget.id, deckname));
+        dispatch(get_Cards(e.currentTarget.id, deckname));
     };
 
-    useEffect (() => {
-        let timerId = setTimeout (() => {
+    useEffect(() => {
+        let timerId = setTimeout(() => {
             setPopupAuth(true)
         }, 500)
 
         return () => {
-            clearTimeout (timerId)
+            clearTimeout(timerId)
         }
     }, []);
 
     return (
         <div className={styles.find__wrap}>
-            <div className={styles.find__left}> </div>
+            <div className={styles.find__left}></div>
             <div className={styles.find__container}>
                 <div className={styles.container__top}>
                     <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
@@ -103,9 +102,9 @@ const FindContainer: React.FC = () => {
                         <div className={styles.find__wrap_block}>
                             {
                                 !isAuth &&
-								<div className={styles.find__wrap_mirror}>
-									<div className={styles.find__loader}> </div>
-								</div>
+                                <div className={styles.find__wrap_mirror}>
+                                    <div className={styles.find__loader}></div>
+                                </div>
                             }
                             <FindDeck users={users}
                                       sortDeckUp={sortDeckUp}
@@ -130,19 +129,19 @@ const FindContainer: React.FC = () => {
                         </div>
                     </div>
 
-                    { !isAuth &&  <DecksLogout/> }
-                    { isAuth && !selectUser && !decksQuestions && <DecksLogout/> }
-                    { isAuth && selectUser && !decksQuestions && <DecksNames
-                        nameUser={nameUser} onSelectDeck={onSelectDeck} deckscount={deckscount}/> }
-                    { isAuth && selectUser &&  decksQuestions && <DecksQuestions
-						cardPackName={cardPackName} cards={cards}/> }
+                    {!isAuth && <DecksLogout/>}
+                    {isAuth && !selectUser && !decksQuestions && <DecksLogout/>}
+                    {isAuth && selectUser && !decksQuestions && <DecksNames
+                        nameUser={nameUser} onSelectDeck={onSelectDeck} deckscount={deckscount}/>}
+                    {isAuth && selectUser && decksQuestions && <DecksQuestions
+                        cardPackName={cardPackName} cards={cards}/>}
 
                 </div>
             </div>
-            <div className={styles.find__right}> </div>
+            <div className={styles.find__right}></div>
             {
                 !isAuth && popupAuth && <PopupAuth setPopupAuth={setPopupAuth}
-												   modal={modal} setModal={setModal}/>
+                                                   modal={modal} setModal={setModal}/>
             }
         </div>)
 }
