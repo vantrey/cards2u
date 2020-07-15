@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {add_Card, delete_Card, update_Card} from "../../../../features/Cards/bll/cardsReducer";
 import Textarea from "../../../common/textarea/Textarea";
 import Button from "../../../common/Button/Button";
+import {deleteDeck} from "../../../../bll/currentUserDecks/currentUserDecksReducer";
 
 
 type EditCardFormType = {
@@ -74,34 +75,37 @@ const EditCardForm: React.FC<PropsType> = React.memo(({
     });
 
     return (
-        <form onSubmit={onSubmit}>
+        <>
+            <button onClick={()=> {dispatch(deleteDeck(cardsPack_id))}}>del pack</button> {/*temp for del packs*/}
+            <form onSubmit={onSubmit}>
 
-            <Textarea
-                register={register}
-                name='question'
-                errors={errors}
-                placeholder='Enter your question'
-            />
-            <Textarea
-                register={register}
-                name='answer'
-                errors={errors}
-                placeholder='Enter your answer'
-            />
+                <Textarea
+                    register={register}
+                    name='question'
+                    errors={errors}
+                    placeholder='Enter your question'
+                />
+                <Textarea
+                    register={register}
+                    name='answer'
+                    errors={errors}
+                    placeholder='Enter your answer'
+                />
 
 
-            <div>
-                {isEditCardMode && !getIsEmptyFields() &&
-                <Button>Change</Button>}
+                <div>
+                    {isEditCardMode && !getIsEmptyFields() &&
+                    <Button>Change</Button>}
 
-                {!isEditCardMode &&
-                <Button>Create</Button>}
+                    {!isEditCardMode &&
+                    <Button>Create</Button>}
 
-                {isEditCardMode && getIsEmptyFields() &&
-                <Button>Delete</Button>}
-            </div>
+                    {isEditCardMode && getIsEmptyFields() &&
+                    <Button>Delete</Button>}
+                </div>
 
-        </form>
+            </form>
+        </>
     )
 });
 export default EditCardForm;

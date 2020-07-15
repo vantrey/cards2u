@@ -7,10 +7,11 @@ import OwnCards from "./cards/OwnCards";
 import {AppStateType} from "../../../bll/store/store";
 import NewDeckForm from "./newDeckForm/NewDeckForm";
 import {cardsActions} from "../../../features/Cards/bll/cardsReducer";
+import AlternativeForm from "./alternativeForm/AlternativeForm";
 
 const CreateContainer = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const {cards, cardPackName, cardsPack_id, isSuccess} = useSelector((state: AppStateType) => state.cards);
 
@@ -19,41 +20,37 @@ const CreateContainer = () => {
 
     const [isEditCardMode, setIsEditCardMode] = useState<boolean>(false);
 
-    const [isCreateDeckMode, setIsCreateDeckMode] = useState<boolean>(true);
-
     const [currentCardId, setCurrentCardId] = useState<string>('');
+
+    const [isAlternativeDeck, setIsAlternativeDeck] = useState<boolean>(false);
 
 
     const onEditCardClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
         setIsEditCardMode(true);
         setCurrentCardId(e.currentTarget.id);
-        setIsCreateDeckMode(false);
     }, []);
 
     const onCancelEditCardClick = useCallback(() => {
         setIsEditCardMode(false);
     }, []);
 
-    /*const onExitEditCardMode = useCallback(() => {
+    const onExitEditCardMode = useCallback(() => {
         dispatch(cardsActions.set_Success(false))
-    }, [isSuccess]);*/
+    }, [isSuccess]);
+
+    const onIsAlternativeDeckChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setIsAlternativeDeck(e.currentTarget.checked);
+    }, []);
 
     return (
         <div className={styles.create__wrap}>
 
             <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
 
-            {isCreateDeckMode &&
-            <button onClick={() => {
-                setIsCreateDeckMode(false)
-            }}>edit card</button>}
+            {isSuccess &&
+            <button onClick={onExitEditCardMode}>create new deck</button>}
 
-            {!isCreateDeckMode &&
-            <button onClick={() => {
-                setIsCreateDeckMode(true)
-            }}>create new deck</button>}
-
-            {!isCreateDeckMode &&
+            {isSuccess && !isAlternativeDeck &&
             <EditCardForm
                 cardsPack_id={cardsPack_id}
                 setIsEditCardMode={setIsEditCardMode}
@@ -61,8 +58,20 @@ const CreateContainer = () => {
                 currentCardData={cards.find(c => c._id === currentCardId)}
             />}
 
-            {isCreateDeckMode &&
-            <NewDeckForm/>}
+            {isSuccess && isAlternativeDeck &&
+                <AlternativeForm
+                    isEditCardMode={isEditCardMode}
+                    currentCardData={cards.find(c => c._id === currentCardId)}
+                    setIsEditCardMode={setIsEditCardMode}
+                    cardsPack_id={cardsPack_id}
+                />
+            }
+
+            {!isSuccess &&
+            <NewDeckForm
+                onIsAlternativeDeckChange={onIsAlternativeDeckChange}
+                isAlternativeDeck={isAlternativeDeck}
+            />}
 
             <OwnCards // decksQuestion copy
                 onCancelEditCardClick={onCancelEditCardClick}
