@@ -25,7 +25,7 @@ import {updateUserFavoriteDecks} from '../../../bll/favoriteDecks/favoriteDecksR
 const FindContainer: React.FC = () => {
 
     const dispatch = useDispatch();
-    const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer);
+    const {page, pageCount, totalUsersCount, users,sortUsers,direction} = useSelector((state: AppStateType) => state.getUserReducer);
     const {cards, cardPackName} = useSelector((state: AppStateType) => state.cards);
     const {isAuth, userId} = useSelector((state: AppStateType) => state.login);
     const [modal, setModal] = useState(false);
@@ -56,17 +56,17 @@ const FindContainer: React.FC = () => {
 
     useEffect(() => {
         setIsLocalFetching(true);
-        dispatch(getUser(page, pageCount))
-    }, [page, pageCount])
+        dispatch(getUser(page, pageCount,sortUsers,direction))
+    }, [page, pageCount,sortUsers,direction])
 
     const sortDeckUp = (e: React.MouseEvent<HTMLButtonElement>) => {
         setIsLocalFetching(true);
-        dispatch(getUser(1, 10, e.currentTarget.name, '1'))
+        dispatch(usersActions.setSort(page, 10, e.currentTarget.name, '1'))
     };
 
     const sortDeckDown = (e: React.MouseEvent<HTMLButtonElement>) => {
         setIsLocalFetching(true);
-        dispatch(getUser(1, 10, e.currentTarget.name, '0'))
+        dispatch(usersActions.setSort(page, 10, e.currentTarget.name, '0'))
     };
 
     const onShowDecks = (e: React.MouseEvent<HTMLDivElement>) => {
