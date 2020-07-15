@@ -29,25 +29,26 @@ const UserDecks: React.FC<AvaDecksTypeProps> = ({
 
     useEffect(() => {
 
+        const dragBlockElement = document.getElementById('drag-X');
+
         if(cardPacks.length > 0) {
             console.log("!!!")
-            const dragBlockElement = document.getElementById('drag-X');
             console.log(dragBlockElement)
 
          const dragHandler = {
             lastClientX: 0,
             start: function (e: any) {
-                if (e.button == 0) {
+                if (e.button == 0 && dragBlockElement) {
                     console.log ("start")
-                    window.addEventListener('mousemove', dragHandler.drag);
+                    dragBlockElement.addEventListener('mousemove', dragHandler.drag);
                     dragHandler.lastClientX = e.clientX;
                     e.preventDefault();
                 }
             },
             end: function (e: any) {
                 console.log ("end")
-                if (e.button == 0) {
-                    window.removeEventListener('mousemove', dragHandler.drag);
+                if (e.button == 0 && dragBlockElement) {
+                    dragBlockElement.removeEventListener('mousemove', dragHandler.drag);
                 }
             },
             drag: function (e: any) {
@@ -70,17 +71,17 @@ const UserDecks: React.FC<AvaDecksTypeProps> = ({
             console.log("---")
         }
 
-        // return () => {
-        //     if (dragBlockElement) {
-        //         dragBlockElement.removeEventListener('mousedown', dragHandler.start);
-        //         dragBlockElement.removeEventListener('mouseup', dragHandler.end);
-        //     }
-        // }
+        return () => {
+            if (dragBlockElement) {
+                dragBlockElement.removeEventListener('mousedown', dragHandler.start);
+                dragBlockElement.removeEventListener('mouseup', dragHandler.end);
+            }
+        }
 
-    }, [cardPacks]);
+    }, [cardPacks.length]);
 
     return (
-        <div className={styles.userDecks__wrap} >
+        <div className={styles.userDecks__wrap} id='drag-X'>
             {!showDecks &&
 			<button
 				className={styles.userDecks__button}
@@ -92,27 +93,23 @@ const UserDecks: React.FC<AvaDecksTypeProps> = ({
             {showDecks && isLocalFetching && <Loader/>}
             {showDecks && !isLocalFetching &&
 			<>
-                {cardPacks.length === 0 ?
-                    <div className={styles.userDecks__none}>You don't have a deck.</div>
-                    :
-                    (
-                        <div className={styles.userDecks__have} id='drag-X'>
-                            {cardPacks.map(cardPack =>
-                                <div
-                                    className={styles.decks__wrap}
-                                    id={cardPack._id}
-                                    data-cardpackname={cardPack.name}
-                                    key={cardPack._id}
-                                    onClick={onSelectDeck}
-                                >
-                                    <div className={styles.item}>
-                                        <small className={styles.item__title}>{cardPack.name}</small>
-                                    </div>
-                                    {/*<button className={styles.decks__button}>delete</button>*/}
-                                </div>)
-                            }
-                        </div>
-                    )
+                {cardPacks.length === 0 &&  <div className={styles.userDecks__none}>You don't have a deck.</div>}
+                {cardPacks.length !== 0 &&
+                    <div className={styles.userDecks__have} >
+                        {cardPacks.map(cardPack =>
+                            <div
+                                className={styles.decks__wrap}
+                                id={cardPack._id}
+                                data-cardpackname={cardPack.name}
+                                key={cardPack._id}
+                                onClick={onSelectDeck}
+                            >
+                                <div className={styles.item}>
+                                    <small className={styles.item__title}>{cardPack.name}</small>
+                                </div>
+                            </div>)
+                        }
+                    </div>
                 }
 			</>
             }

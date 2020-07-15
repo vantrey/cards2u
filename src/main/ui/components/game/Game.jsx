@@ -39,9 +39,9 @@ const Game = () => {
 			<div className={styles.game__left}></div>
 			<div className={styles.game__container}>
 				<div className={styles.game__analytics}>analytics
-					<img src={gif} alt=""/>
-					<img src={gif1} alt=""/>
-					<img src={gif2} alt=""/>
+					{/*<img src={gif} alt=""/>*/}
+					{/*<img src={gif1} alt=""/>*/}
+					{/*<img src={gif2} alt=""/>*/}
 				</div>
 				<div className={styles.game__content}>
 					<div className={styles.content__header}>

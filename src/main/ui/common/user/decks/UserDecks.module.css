@@ -58,14 +58,12 @@
 .userDecks__items, .userDecks__have {
     position: absolute;
     display: flex;
-    justify-content: center;
     align-items: center;
     overflow: hidden;
     overflow-x: auto;
-    padding-left: 24px;
     top: 9%;
-    left: 22%;
-    width: 56%;
+    left: 18%;
+    width: 284px;
     height: 72%;
 }
 
