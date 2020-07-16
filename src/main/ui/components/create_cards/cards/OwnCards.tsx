@@ -41,19 +41,23 @@ const OwnCards: React.FC<PropsType> = React.memo(({
                                     <div className={styles.item__question}>{cards.question}</div>
                                     <div className={styles.data__border}></div>
                                     <div className={styles.item__answer}>{cards.answer}</div>
+                                    <div className={styles.data__border}></div>
+                                    <div className={styles.data__buttons}>
+                                        {isEditCardMode && cards._id === currentCardId &&
+										<button className={styles.data__button} onClick={onCancelEditCardClick}>
+											cancel
+										</button>}
 
-                                    {isEditCardMode && cards._id === currentCardId &&
-                                    <button onClick={onCancelEditCardClick}>
-                                        cancel
-                                    </button>}
+                                        {(isEditCardMode && cards._id !== currentCardId || !isEditCardMode) &&
+										<button className={styles.data__button}
+												id={cards._id}
+												onClick={onEditCardClick}
+										>
+											edit
+										</button>}
+                                        <button className={styles.data__button}>delete</button>
 
-                                    {(isEditCardMode && cards._id !== currentCardId || !isEditCardMode) &&
-                                    <button
-                                        id={cards._id}
-                                        onClick={onEditCardClick}
-                                    >
-                                        edit
-                                    </button>}
+                                    </div>
                                 </div>
                             ))
                         }
