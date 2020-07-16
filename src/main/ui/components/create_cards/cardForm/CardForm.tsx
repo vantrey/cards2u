@@ -17,7 +17,7 @@ type CardFormType = {
 
 type PropsType = {
     isEditCardMode: boolean
-    currentCard: CardType | undefined
+    selectedCard: CardType | undefined
     setIsEditCardMode: React.Dispatch<React.SetStateAction<boolean>>
     cardsPack_id: string
     onDeleteDeck: () => void
@@ -25,7 +25,7 @@ type PropsType = {
 
 const CardForm: React.FC<PropsType> = React.memo(({
                                                       isEditCardMode,
-                                                      currentCard,
+                                                      selectedCard,
                                                       setIsEditCardMode,
                                                       cardsPack_id,
                                                       onDeleteDeck,
@@ -45,22 +45,22 @@ const CardForm: React.FC<PropsType> = React.memo(({
 
 
     useEffect(() => {
-        if (isEditCardMode && currentCard) {
-            setValue('question', currentCard.question);
-            setValue('answer', currentCard.answer);
+        if (isEditCardMode && selectedCard) {
+            setValue('question', selectedCard.question);
+            setValue('answer', selectedCard.answer);
         }
         if (!isEditCardMode) {
             reset();
         }
-    }, [isEditCardMode, currentCard?.question, currentCard?.answer]);
+    }, [isEditCardMode, selectedCard?.question, selectedCard?.answer]);
 
 
     const onSubmit = handleSubmit((data) => {
 
         if (isEditCardMode) {
 
-            if (currentCard) { // to prevent undefined
-                const {_id} = currentCard;
+            if (selectedCard) { // to prevent undefined
+                const {_id} = selectedCard;
 
                     dispatch(update_Card({_id, question: data.question, answer: data.answer}));
                     setIsEditCardMode(false);

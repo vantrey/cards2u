@@ -9,7 +9,8 @@ type PropsType = {
     onEditCardClick: (e: React.MouseEvent<HTMLButtonElement>) => void
     isEditCardMode: boolean
     onCancelEditCardClick: () => void
-    currentCardId: string
+    selectedCardId: string
+    onDeleteCard: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 
@@ -19,7 +20,8 @@ const OwnCards: React.FC<PropsType> = React.memo(({
                                                       onEditCardClick,
                                                       isEditCardMode,
                                                       onCancelEditCardClick,
-                                                      currentCardId,
+                                                      selectedCardId,
+                                                      onDeleteCard
                                                   }) => {
 
     return (
@@ -36,24 +38,31 @@ const OwnCards: React.FC<PropsType> = React.memo(({
                     <div className={styles.data__item_box}>
                         {cards.length === 0 ? <EmptyDeck/> :
 
-                            (cards.map(cards =>
-                                <div key={cards._id} className={styles.data__item}>
-                                    <div className={styles.item__question}>{cards.question}</div>
+                            (cards.map(card =>
+                                <div key={card._id} className={styles.data__item}>
+                                    <div className={styles.item__question}>{card.question}</div>
                                     <div className={styles.data__border}></div>
-                                    <div className={styles.item__answer}>{cards.answer}</div>
+                                    <div className={styles.item__answer}>{card.answer}</div>
 
-                                    {isEditCardMode && cards._id === currentCardId &&
+                                    {isEditCardMode && card._id === selectedCardId &&
                                     <button onClick={onCancelEditCardClick}>
                                         cancel
                                     </button>}
 
-                                    {(isEditCardMode && cards._id !== currentCardId || !isEditCardMode) &&
+                                    {(isEditCardMode && card._id !== selectedCardId || !isEditCardMode) &&
                                     <button
-                                        id={cards._id}
+                                        id={card._id}
                                         onClick={onEditCardClick}
                                     >
                                         edit
                                     </button>}
+
+                                    <button
+                                        id={card._id}
+                                        onClick={onDeleteCard}
+                                    >
+                                        delete
+                                    </button>
                                 </div>
                             ))
                         }

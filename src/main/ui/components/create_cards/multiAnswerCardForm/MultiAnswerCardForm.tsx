@@ -6,6 +6,7 @@ import {add_Card, delete_Card, update_Card} from "../../../../features/Cards/bll
 import Textarea from "../../../common/textarea/Textarea";
 import Button from "../../../common/Button/Button";
 import * as yup from "yup";
+import CreateCardTextarea from "../../../common/createCardTextarea/CreateCardTextarea";
 
 
 type AlternativeFormType = {
@@ -17,14 +18,14 @@ type AlternativeFormType = {
 
 type PropsType = {
     isEditCardMode: boolean
-    currentCard: CardType | undefined  // will another type with 3 answers
+    selectedCard: CardType | undefined  // will another type with 3 answers
     setIsEditCardMode: React.Dispatch<React.SetStateAction<boolean>>
     cardsPack_id: string
 }
 
 const MultiAnswerCardForm: React.FC<PropsType> = React.memo(({
                                                           isEditCardMode,
-                                                             currentCard,
+                                                                 selectedCard,
                                                           setIsEditCardMode,
                                                           cardsPack_id,
                                                       }) => {
@@ -63,27 +64,27 @@ const MultiAnswerCardForm: React.FC<PropsType> = React.memo(({
     return (
         <form onSubmit={onSubmit}>
 
-            <Textarea
+            <CreateCardTextarea
                 register={register}
                 name='question'
                 errors={errors}
                 placeholder='Enter your question'
             />
-            <Textarea
+            <CreateCardTextarea
                 register={register}
                 name='answerRight'
                 errors={errors}
                 placeholder='Enter right your answer'
             />
 
-            <Textarea
+            <CreateCardTextarea
                 register={register}
                 name='answerFirstVariant'
                 errors={errors}
                 placeholder='Enter first variant of answer'
             />
 
-            <Textarea
+            <CreateCardTextarea
                 register={register}
                 name='answerSecondVariant'
                 errors={errors}

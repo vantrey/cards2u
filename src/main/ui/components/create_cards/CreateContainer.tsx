@@ -6,7 +6,7 @@ import UserInfo from "../../common/user/UserInfo";
 import OwnCards from "./cards/OwnCards";
 import {AppStateType} from "../../../bll/store/store";
 import CreateDeckForm from "./createDeckForm/CreateDeckForm";
-import {cardsActions} from "../../../features/Cards/bll/cardsReducer";
+import {cardsActions, delete_Card} from "../../../features/Cards/bll/cardsReducer";
 import MultiAnswerCardForm from "./multiAnswerCardForm/MultiAnswerCardForm";
 import CardForm from "./cardForm/CardForm";
 import {useIsSuccessWithNotFirstRendering} from "../../../helpers/firstRenderHook";
@@ -26,17 +26,17 @@ const CreateContainer = () => {
 
     const [isEditCardMode, setIsEditCardMode] = useState<boolean>(false);
 
-    const [currentCardId, setCurrentCardId] = useState<string>('');
+    const [selectedCardId, setSelectedCardId] = useState<string>('');
 
     const [isMultiDeck, setIsMultiDeck] = useState<boolean>(false);
 
-    const currentCard = useMemo(() => {
-        return cards.find(c => c._id === currentCardId);
-    }, [cards, currentCardId]);
+    const selectedCard = useMemo(() => {
+        return cards.find(c => c._id === selectedCardId);
+    }, [cards, selectedCardId]);
 
     const onEditCardClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
         setIsEditCardMode(true);
-        setCurrentCardId(e.currentTarget.id);
+        setSelectedCardId(e.currentTarget.id);
     }, []);
 
     const onCancelEditCardClick = useCallback(() => {
@@ -45,17 +45,20 @@ const CreateContainer = () => {
 
     const onExitEditCardMode = useCallback(() => {
         dispatch(cardsActions.set_Success(false))
-    }, [isSuccess]);
+    }, []);
 
     const onIsMultiDeckChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setIsMultiDeck(e.currentTarget.checked);
     }, []);
 
     const onDeleteDeck = useCallback(() => {
-        setIsEditCardMode(false);
         dispatch(deleteDeck(cardsPack_id));
-        dispatch(cardsActions.set_Success(false));
-    }, [cardsPack_id, isSuccess]);
+    }, [cardsPack_id]);
+
+    const onDeleteCard = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+        dispatch(delete_Card(e.currentTarget.id));
+        setIsEditCardMode(false)
+    }, []);
 
     return (
         <div className={styles.create__wrap}>
@@ -71,13 +74,13 @@ const CreateContainer = () => {
                 cardsPack_id={cardsPack_id}
                 setIsEditCardMode={setIsEditCardMode}
                 isEditCardMode={isEditCardMode}
-                currentCard={currentCard}
+                selectedCard={selectedCard}
             />}
 
             {isSuccessWithNotFirstRendering && isMultiDeck &&
             <MultiAnswerCardForm
                 isEditCardMode={isEditCardMode}
-                currentCard={currentCard}
+                selectedCard={selectedCard}
                 setIsEditCardMode={setIsEditCardMode}
                 cardsPack_id={cardsPack_id}
             />
@@ -95,7 +98,8 @@ const CreateContainer = () => {
                 cardPackName={isSuccessWithNotFirstRendering ? cardPackName : ''}
                 isEditCardMode={isEditCardMode}
                 onEditCardClick={onEditCardClick}
-                currentCardId={currentCardId}
+                selectedCardId={selectedCardId}
+                onDeleteCard={onDeleteCard}
             />
 
         </div>
