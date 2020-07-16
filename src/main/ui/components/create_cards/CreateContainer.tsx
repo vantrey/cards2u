@@ -10,6 +10,7 @@ import {cardsActions} from "../../../features/Cards/bll/cardsReducer";
 import MultiAnswerCardForm from "./multiAnswerCardForm/MultiAnswerCardForm";
 import CardForm from "./cardForm/CardForm";
 import {useIsSuccessWithNotFirstRendering} from "../../../helpers/firstRenderHook";
+import {deleteDeck} from "../../../bll/currentUserDecks/currentUserDecksReducer";
 
 
 const CreateContainer = () => {
@@ -49,6 +50,12 @@ const CreateContainer = () => {
         setIsMultiDeck(e.currentTarget.checked);
     }, []);
 
+    const onDeleteDeck = useCallback(() => {
+        setIsEditCardMode(false);
+        dispatch(deleteDeck(cardsPack_id));
+        dispatch(cardsActions.set_Success(false));
+    }, [cardsPack_id, isSuccess]);
+
     return (
         <div className={styles.create__wrap}>
 
@@ -59,6 +66,7 @@ const CreateContainer = () => {
 
             {isSuccessWithNotFirstRendering && !isMultiDeck &&
             <CardForm
+                onDeleteDeck={onDeleteDeck}
                 cardsPack_id={cardsPack_id}
                 setIsEditCardMode={setIsEditCardMode}
                 isEditCardMode={isEditCardMode}
@@ -66,12 +74,12 @@ const CreateContainer = () => {
             />}
 
             {isSuccessWithNotFirstRendering && isMultiDeck &&
-                <MultiAnswerCardForm
-                    isEditCardMode={isEditCardMode}
-                    currentCard={currentCard}
-                    setIsEditCardMode={setIsEditCardMode}
-                    cardsPack_id={cardsPack_id}
-                />
+            <MultiAnswerCardForm
+                isEditCardMode={isEditCardMode}
+                currentCard={currentCard}
+                setIsEditCardMode={setIsEditCardMode}
+                cardsPack_id={cardsPack_id}
+            />
             }
 
             {!isSuccessWithNotFirstRendering &&
@@ -82,8 +90,8 @@ const CreateContainer = () => {
 
             <OwnCards // decksQuestion copy
                 onCancelEditCardClick={onCancelEditCardClick}
-                cards={isSuccessWithNotFirstRendering ? cards: []}
-                cardPackName={isSuccessWithNotFirstRendering ? cardPackName: ''}
+                cards={isSuccessWithNotFirstRendering ? cards : []}
+                cardPackName={isSuccessWithNotFirstRendering ? cardPackName : ''}
                 isEditCardMode={isEditCardMode}
                 onEditCardClick={onEditCardClick}
                 currentCardId={currentCardId}

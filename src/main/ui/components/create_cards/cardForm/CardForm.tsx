@@ -18,14 +18,16 @@ type PropsType = {
     currentCard: CardType | undefined
     setIsEditCardMode: React.Dispatch<React.SetStateAction<boolean>>
     cardsPack_id: string
+    onDeleteDeck: () => void
 }
 
 const CardForm: React.FC<PropsType> = React.memo(({
-                                                          isEditCardMode,
-                                                          currentCard,
-                                                          setIsEditCardMode,
-                                                          cardsPack_id,
-                                                      }) => {
+                                                      isEditCardMode,
+                                                      currentCard,
+                                                      setIsEditCardMode,
+                                                      cardsPack_id,
+                                                      onDeleteDeck,
+                                                  }) => {
 
     const dispatch = useDispatch();
 
@@ -76,7 +78,8 @@ const CardForm: React.FC<PropsType> = React.memo(({
 
     return (
         <>
-            <button onClick={()=> {dispatch(deleteDeck(cardsPack_id))}}>del pack</button> {/*temp for del packs*/}
+            <button onClick={onDeleteDeck}>del pack</button>  {/*temp for del packs*/}
+
             <form onSubmit={onSubmit}>
 
                 <Textarea
