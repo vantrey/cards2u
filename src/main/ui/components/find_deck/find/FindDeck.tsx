@@ -35,7 +35,6 @@ const FindDeck: React.FC<UsersDeckType> = ({
 
     return (
         <div className={styles.findDeck__wrap}>
-
             <div className={styles.findDeck__header}>
                 {
                     Headers.map(h =>
@@ -72,7 +71,6 @@ const FindDeck: React.FC<UsersDeckType> = ({
 				</div>
             }
         </div>
-
     )
 }
 

@@ -43,6 +43,7 @@
 }
 
 .container__body {
+    position: relative;
     display: flex;
     justify-content: space-between;
 }
@@ -100,6 +101,11 @@
     outline: none;
     margin: 15px auto;
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75) !important
+}
+
+.pagination__block {
+    pointer-events: none;
+    cursor: none;
 }
 
 .pagination > li > a {

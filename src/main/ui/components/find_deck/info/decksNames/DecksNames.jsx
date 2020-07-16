@@ -3,11 +3,13 @@ import styles from './DecksNames.module.css';
 import { useSelector } from "react-redux";
 import { AppStateType } from "../../../../../bll/store/store";
 import EmptyDecks from "../emptyDecks/EmptyDecks";
+import Loader from "../../../../common/loader/Loader";
 
 
 const DecksNames = ({nameUser, onSelectDeck, deckscount}) => {
 
     const {cardPacks} = useSelector((state) => state.cardPacks);
+    const {isCardPacksFetching} = useSelector((state) => state.cardPacks);
 
 	return (
 		<div className={styles.container__rightBlock}>
@@ -18,22 +20,25 @@ const DecksNames = ({nameUser, onSelectDeck, deckscount}) => {
 				<div className={styles.decksNames__subtitle}>has &nbsp;
 					<strong className={styles.subtitle__number}>{deckscount} &nbsp;</strong>decks
 				</div>
+				{isCardPacksFetching && <Loader/>}
+				{!isCardPacksFetching &&
 				<div className={styles.decksNames}>
-                    {
-                        cardPacks && (
-                        cardPacks.map(decksNames =>
-                        <div className={styles.decksNames__item}
-                        id={decksNames._id}
-                        key={decksNames._id}
-						data-deckname={decksNames.name}
-                        onClick={onSelectDeck}
-                        >{decksNames.name}
-                        </div>))
+					{
+						cardPacks && (
+							cardPacks.map (decksNames =>
+								<div className={styles.decksNames__item}
+									 id={decksNames._id}
+									 key={decksNames._id}
+									 data-deckname={decksNames.name}
+									 onClick={onSelectDeck}
+								>{decksNames.name}
+								</div>))
 
-                    }					{
-					(cardPacks.length === 0) &&  <EmptyDecks/>
-					}
+					} {
+					(cardPacks.length === 0) && <EmptyDecks/>
+				}
 				</div>
+				}
 			</div>
 		</div>
 	)

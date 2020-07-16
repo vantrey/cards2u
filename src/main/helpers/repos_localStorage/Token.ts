@@ -115,7 +115,7 @@ export const repository = {
         return null;
     },
 
-    updateUserFavoriteDeck(userId: string | null, favoriteDeckId: string, deckName: string, deck: Array<CardType>) {
+    updateUserFavoriteDeck(userId: string | null, favoriteDeckId: string, deckName: string | null, deck: Array<CardType>) {
         userId = this._isUnknownUser(userId);
 
         let allFavoriteDecks = this._get_AllFavoriteDecksFromLS();
@@ -193,11 +193,11 @@ export const repository = {
                     {
                         userId,
                         favoriteDecks: [
-                            {favoriteDeckId: '1', deckName: '', deck: []},
-                            {favoriteDeckId: '2', deckName: '', deck: []},
-                            {favoriteDeckId: '3', deckName: '', deck: []},
-                            {favoriteDeckId: '4', deckName: '', deck: []},
-                            {favoriteDeckId: '5', deckName: '', deck: []},
+                            {favoriteDeckId: 'favoriteDeckSlot1', deckName: '', deck: []},
+                            {favoriteDeckId: 'favoriteDeckSlot2', deckName: '', deck: []},
+                            {favoriteDeckId: 'favoriteDeckSlot3', deckName: '', deck: []},
+                            {favoriteDeckId: 'favoriteDeckSlot4', deckName: '', deck: []},
+                            {favoriteDeckId: 'favoriteDeckSlot5', deckName: '', deck: []},
                         ]
                     }
                 ]
@@ -210,11 +210,11 @@ export const repository = {
                 {
                     userId,
                     favoriteDecks: [
-                        {favoriteDeckId: '1', deckName: '', deck: []},
-                        {favoriteDeckId: '2', deckName: '', deck: []},
-                        {favoriteDeckId: '3', deckName: '', deck: []},
-                        {favoriteDeckId: '4', deckName: '', deck: []},
-                        {favoriteDeckId: '5', deckName: '', deck: []},
+                        {favoriteDeckId: 'favoriteDeckSlot1', deckName: '', deck: []},
+                        {favoriteDeckId: 'favoriteDeckSlot2', deckName: '', deck: []},
+                        {favoriteDeckId: 'favoriteDeckSlot3', deckName: '', deck: []},
+                        {favoriteDeckId: 'favoriteDeckSlot4', deckName: '', deck: []},
+                        {favoriteDeckId: 'favoriteDeckSlot5', deckName: '', deck: []},
                     ]
                 }
             ]

@@ -1,5 +1,6 @@
 
 .container__rightBlock {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 40%;
@@ -100,6 +101,19 @@
 
 }
 
+.deckInfo__loader {
+    width: 100%;
+    min-height: 280px;
+    max-height: 280px;
+    overflow: hidden;
+    overflow-y: auto;
+    display: flex;
+    border: 1px solid transparent;
+    flex-direction: column;
+    margin-bottom: 10px;
+    position: relative;
+}
+
 .data__item_box {
     width: 100%;
     min-height: 280px;
@@ -120,7 +134,7 @@
     display: flex;
     width: 100%;
     height: 65px;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     border: 1px solid transparent;
 }
@@ -131,9 +145,10 @@
     height: 30px;
     justify-content: center;
     align-items: center;
-    font-family: 'CS Grimrock', sans-serif;
+    font-family: sans-serif;
     border: 1px solid #088dcd;
     color: #088dcd;
+    font-size: 16px;
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
     background-color: transparent;
     -webkit-transition-duration: 0.3s;
@@ -141,6 +156,7 @@
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
     transition: color, background-color;
+    cursor: pointer;
 }
 
 .deckInfo__button:hover {
