@@ -5,7 +5,7 @@ import EditCardForm from "./cardForm/CardForm";
 import UserInfo from "../../common/user/UserInfo";
 import OwnCards from "./cards/OwnCards";
 import {AppStateType} from "../../../bll/store/store";
-import CreateDeckForm from "./CreateDeckForm/CreateDeckForm";
+import CreateDeckForm from "./createDeckForm/CreateDeckForm";
 import {cardsActions} from "../../../features/Cards/bll/cardsReducer";
 import MultiAnswerCardForm from "./multiAnswerCardForm/MultiAnswerCardForm";
 import CardForm from "./cardForm/CardForm";

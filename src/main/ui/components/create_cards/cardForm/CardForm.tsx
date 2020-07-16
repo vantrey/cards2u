@@ -6,6 +6,8 @@ import {add_Card, delete_Card, update_Card} from "../../../../features/Cards/bll
 import Textarea from "../../../common/textarea/Textarea";
 import Button from "../../../common/Button/Button";
 import {deleteDeck} from "../../../../bll/currentUserDecks/currentUserDecksReducer";
+import CreateCardTextarea from "../../../common/createCardTextarea/CreateCardTextarea";
+import * as yup from "yup";
 
 
 type CardFormType = {
@@ -31,8 +33,14 @@ const CardForm: React.FC<PropsType> = React.memo(({
 
     const dispatch = useDispatch();
 
+    const schema = yup.object().shape({
+        question: yup.string().required('⚠ please, fill up question'),
+        answer: yup.string().required('⚠ please, fill up answer'),
+    });
+
     const {register, handleSubmit, errors, reset, setValue, watch} = useForm<CardFormType>({
         mode: 'onBlur',
+        validationSchema: schema
     });
 
 
@@ -46,9 +54,6 @@ const CardForm: React.FC<PropsType> = React.memo(({
         }
     }, [isEditCardMode, currentCard?.question, currentCard?.answer]);
 
-    const getIsEmptyFields = () => {
-        return !watch().answer && !watch().question;
-    };
 
     const onSubmit = handleSubmit((data) => {
 
@@ -57,15 +62,8 @@ const CardForm: React.FC<PropsType> = React.memo(({
             if (currentCard) { // to prevent undefined
                 const {_id} = currentCard;
 
-                if (!getIsEmptyFields()) {
                     dispatch(update_Card({_id, question: data.question, answer: data.answer}));
                     setIsEditCardMode(false);
-                }
-
-                if (getIsEmptyFields()) {
-                    dispatch(delete_Card(_id));
-                    setIsEditCardMode(false);
-                }
             }
         }
 
@@ -82,13 +80,13 @@ const CardForm: React.FC<PropsType> = React.memo(({
 
             <form onSubmit={onSubmit}>
 
-                <Textarea
+                <CreateCardTextarea
                     register={register}
                     name='question'
                     errors={errors}
                     placeholder='Enter your question'
                 />
-                <Textarea
+                <CreateCardTextarea
                     register={register}
                     name='answer'
                     errors={errors}
@@ -97,14 +95,12 @@ const CardForm: React.FC<PropsType> = React.memo(({
 
 
                 <div>
-                    {isEditCardMode && !getIsEmptyFields() &&
+                    {isEditCardMode &&
                     <Button>Change</Button>}
 
                     {!isEditCardMode &&
                     <Button>Create</Button>}
 
-                    {isEditCardMode && getIsEmptyFields() &&
-                    <Button>Delete</Button>}
                 </div>
 
             </form>

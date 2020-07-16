@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
 import Textarea from "../../../common/textarea/Textarea";
 import Button from "../../../common/Button/Button";
 import {createDeck} from "../../../../bll/currentUserDecks/currentUserDecksReducer";
 import styles from "./CreateDeckForm.module.css"
+import CreateCardTextarea from "../../../common/createCardTextarea/CreateCardTextarea";
+import * as yup from "yup";
 
 type CreateDeckFormType = {
     deckName: string
@@ -22,10 +24,14 @@ const CreateDeckForm: React.FC<PropsType> = React.memo(({
 
     const dispatch = useDispatch();
 
-    const {register, handleSubmit, errors, reset, setValue, watch} = useForm<CreateDeckFormType>({
-        mode: 'onBlur',
+    const schema = yup.object().shape({
+        deckName: yup.string().required('⚠ please, fill up deck name'),
     });
 
+    const {register, handleSubmit, errors, reset} = useForm<CreateDeckFormType>({
+        mode: 'onBlur',
+        validationSchema: schema
+    });
 
     const onSubmit = handleSubmit((data) => {
             dispatch(createDeck({name: data.deckName}));
@@ -50,11 +56,11 @@ const CreateDeckForm: React.FC<PropsType> = React.memo(({
 
             <form onSubmit={onSubmit}>
 
-                <Textarea
+                <CreateCardTextarea
                     register={register}
                     name='deckName'
                     errors={errors}
-                    placeholder='Enter name of your new deck'
+                    placeholder='Enter deck name'
                 />
 
                 <div>
