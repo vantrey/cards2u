@@ -1,14 +1,13 @@
 import React, {useCallback, useMemo, useState} from 'react';
 import styles from './Create.module.css';
 import {useDispatch, useSelector} from "react-redux";
-import EditCardForm from "./cardForm/CardForm";
+import CardForm from "./cardForm/CardForm";
 import UserInfo from "../../common/user/UserInfo";
 import OwnCards from "./cards/OwnCards";
 import {AppStateType} from "../../../bll/store/store";
 import CreateDeckForm from "./createDeckForm/CreateDeckForm";
 import {cardsActions, delete_Card} from "../../../features/Cards/bll/cardsReducer";
 import MultiAnswerCardForm from "./multiAnswerCardForm/MultiAnswerCardForm";
-import CardForm from "./cardForm/CardForm";
 import {useIsSuccessWithNotFirstRendering} from "../../../helpers/firstRenderHook";
 import {deleteDeck} from "../../../bll/currentUserDecks/currentUserDecksReducer";
 
