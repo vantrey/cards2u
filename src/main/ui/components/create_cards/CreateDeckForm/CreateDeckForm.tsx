@@ -4,25 +4,25 @@ import {useDispatch} from "react-redux";
 import Textarea from "../../../common/textarea/Textarea";
 import Button from "../../../common/Button/Button";
 import {createDeck} from "../../../../bll/currentUserDecks/currentUserDecksReducer";
-import styles from "./NewDeckForm.module.css"
+import styles from "./CreateDeckForm.module.css"
 
-type EditCardFormType = {
+type CreateDeckFormType = {
     deckName: string
 }
 
 type PropsType = {
-    onIsAlternativeDeckChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-    isAlternativeDeck: boolean
+    onIsMultiDeckChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    isMultiDeck: boolean
 }
 
-const NewDeckForm: React.FC<PropsType> = React.memo(({
-                                                         onIsAlternativeDeckChange,
-                                                         isAlternativeDeck,
+const CreateDeckForm: React.FC<PropsType> = React.memo(({
+                                                            onIsMultiDeckChange,
+                                                            isMultiDeck,
                                                      }) => {
 
     const dispatch = useDispatch();
 
-    const {register, handleSubmit, errors, reset, setValue, watch} = useForm<EditCardFormType>({
+    const {register, handleSubmit, errors, reset, setValue, watch} = useForm<CreateDeckFormType>({
         mode: 'onBlur',
     });
 
@@ -40,12 +40,12 @@ const NewDeckForm: React.FC<PropsType> = React.memo(({
 
                 <input
                     type='checkbox'
-                    checked={isAlternativeDeck}
-                    onChange={onIsAlternativeDeckChange}
+                    checked={isMultiDeck}
+                    onChange={onIsMultiDeckChange}
                     id='checkbox'
                 />
                 <label htmlFor="checkbox"> </label>
-                <span>alternative deck</span>
+                <span>multi answer deck</span>
             </div>
 
             <form onSubmit={onSubmit}>
@@ -65,4 +65,4 @@ const NewDeckForm: React.FC<PropsType> = React.memo(({
         </div>
     )
 });
-export default NewDeckForm;
+export default CreateDeckForm;

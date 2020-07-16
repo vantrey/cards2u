@@ -7,7 +7,8 @@ import {Redirect} from 'react-router-dom'
 
 import Registration from "./Regirtration"
 import {registrationFormSchema} from './registrationFormShema'
-import { LOGIN_PATH } from '../../ui/components/routes/FormRoutes';
+import {LOGIN_PATH} from '../../ui/components/routes/FormRoutes';
+import {useIsSuccessWithNotFirstRendering} from "../../helpers/firstRenderHook";
 
 type RegistrationFormDataType = {
   email: string
@@ -17,11 +18,14 @@ type RegistrationFormDataType = {
 
 const RegistrationContainer: React.FC = () => {
 
-  const [isFirsRendering, setIsFirstRendering] = useState(true);
-
   const {isSuccess, errorServerMessage} = useSelector((state: AppStateType) => state.registration);
 
   const dispatch = useDispatch();
+
+  const isSuccessWithNotFirstRender = useIsSuccessWithNotFirstRendering(
+      isSuccess,
+      registerActions.setIsRegistrationSuccess
+  );
 
   const {register, handleSubmit, errors, reset} = useForm<RegistrationFormDataType>({
     mode: 'onBlur',
@@ -33,14 +37,7 @@ const RegistrationContainer: React.FC = () => {
     reset()
   });
 
-  if (isFirsRendering) {
-    if (isSuccess) {
-      dispatch(registerActions.setIsRegistrationSuccess(false))
-    }
-    setIsFirstRendering(false)
-  }
-
-  if (isSuccess && !isFirsRendering) return <Redirect to={LOGIN_PATH}/>;
+  if (isSuccessWithNotFirstRender) return <Redirect to={LOGIN_PATH}/>;
 
   return (
     <Registration

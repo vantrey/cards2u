@@ -16,14 +16,14 @@ type AlternativeFormType = {
 
 type PropsType = {
     isEditCardMode: boolean
-    currentCardData: CardType | undefined  // will another type with 3 answers
+    currentCard: CardType | undefined  // will another type with 3 answers
     setIsEditCardMode: React.Dispatch<React.SetStateAction<boolean>>
     cardsPack_id: string
 }
 
-const AlternativeForm: React.FC<PropsType> = React.memo(({
+const MultiAnswerCardForm: React.FC<PropsType> = React.memo(({
                                                           isEditCardMode,
-                                                          currentCardData,
+                                                             currentCard,
                                                           setIsEditCardMode,
                                                           cardsPack_id,
                                                       }) => {
@@ -95,4 +95,4 @@ const AlternativeForm: React.FC<PropsType> = React.memo(({
         </form>
     )
 });
-export default AlternativeForm;
+export default MultiAnswerCardForm;

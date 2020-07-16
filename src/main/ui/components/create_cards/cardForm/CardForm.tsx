@@ -8,41 +8,41 @@ import Button from "../../../common/Button/Button";
 import {deleteDeck} from "../../../../bll/currentUserDecks/currentUserDecksReducer";
 
 
-type EditCardFormType = {
+type CardFormType = {
     question: string
     answer: string
 }
 
 type PropsType = {
     isEditCardMode: boolean
-    currentCardData: CardType | undefined
+    currentCard: CardType | undefined
     setIsEditCardMode: React.Dispatch<React.SetStateAction<boolean>>
     cardsPack_id: string
 }
 
-const EditCardForm: React.FC<PropsType> = React.memo(({
+const CardForm: React.FC<PropsType> = React.memo(({
                                                           isEditCardMode,
-                                                          currentCardData,
+                                                          currentCard,
                                                           setIsEditCardMode,
                                                           cardsPack_id,
                                                       }) => {
 
     const dispatch = useDispatch();
 
-    const {register, handleSubmit, errors, reset, setValue, watch} = useForm<EditCardFormType>({
+    const {register, handleSubmit, errors, reset, setValue, watch} = useForm<CardFormType>({
         mode: 'onBlur',
     });
 
 
     useEffect(() => {
-        if (isEditCardMode && currentCardData) {
-            setValue('question', currentCardData.question);
-            setValue('answer', currentCardData.answer);
+        if (isEditCardMode && currentCard) {
+            setValue('question', currentCard.question);
+            setValue('answer', currentCard.answer);
         }
         if (!isEditCardMode) {
             reset();
         }
-    }, [isEditCardMode, currentCardData?.question, currentCardData?.answer]);
+    }, [isEditCardMode, currentCard?.question, currentCard?.answer]);
 
     const getIsEmptyFields = () => {
         return !watch().answer && !watch().question;
@@ -52,8 +52,8 @@ const EditCardForm: React.FC<PropsType> = React.memo(({
 
         if (isEditCardMode) {
 
-            if (currentCardData) { // to prevent undefined
-                const {_id} = currentCardData;
+            if (currentCard) { // to prevent undefined
+                const {_id} = currentCard;
 
                 if (!getIsEmptyFields()) {
                     dispatch(update_Card({_id, question: data.question, answer: data.answer}));
@@ -108,4 +108,4 @@ const EditCardForm: React.FC<PropsType> = React.memo(({
         </>
     )
 });
-export default EditCardForm;
+export default CardForm;
