@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import styles from './Create.module.css';
 import {useDispatch, useSelector} from "react-redux";
 import EditCardForm from "./cardForm/CardForm";
@@ -30,8 +30,9 @@ const CreateContainer = () => {
 
     const [isMultiDeck, setIsMultiDeck] = useState<boolean>(false);
 
-    const currentCard = cards.find(c => c._id === currentCardId);  // is it correct?
-
+    const currentCard = useMemo(() => {
+        return cards.find(c => c._id === currentCardId);
+    }, [cards, currentCardId]);
 
     const onEditCardClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
         setIsEditCardMode(true);
