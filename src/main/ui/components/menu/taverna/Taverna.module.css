@@ -130,14 +130,14 @@
 /*====== */
 
 .main__item_game {
-    background: url("../../../images/menu-green-450-2-min.png");
+    background: url("../../../images/menu-yellow.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 
 }
 
 .main__item_card {
-    background: url("../../../images/menu-blue.png");
+    background: url("../../../images/menu-green-450-2-min.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -149,7 +149,7 @@
 }
 
 .main__item_home {
-    background: url("../../../images/menu-white-600-1-min.png");
+    background: url("../../../images/menu-blue.png");
     background-size: cover;
     background-repeat: no-repeat;
 }

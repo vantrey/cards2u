@@ -8,6 +8,8 @@ import {AppStateType} from "../../../bll/store/store";
 import NewDeckForm from "./newDeckForm/NewDeckForm";
 import {cardsActions} from "../../../features/Cards/bll/cardsReducer";
 import AlternativeForm from "./alternativeForm/AlternativeForm";
+import DefaultDeck from "./defaultDeck/DefaultDeck";
+
 
 const CreateContainer = () => {
 
@@ -42,6 +44,7 @@ const CreateContainer = () => {
         setIsAlternativeDeck(e.currentTarget.checked);
     }, []);
 
+    // @ts-ignore
     return (
         <div className={styles.create__wrap}>
             <div className={styles.create__left}></div>
@@ -77,8 +80,8 @@ const CreateContainer = () => {
 
                         </div>
                         <div className={styles.main__decks}>
-                            {isSuccess &&
-							<button onClick={onExitEditCardMode}>create new deck</button>}
+							<button onClick={onExitEditCardMode}>create new deck</button>
+                            <DefaultDeck/>
                         </div>
                     </div>
                 </div>

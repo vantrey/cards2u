@@ -5,7 +5,7 @@
     min-width: 100%;
     min-height: 100vh;
     display: flex;
-    background: url('../../images/find-bg.jpg') center center no-repeat;
+    background: url('../../images/create-bg.jpg') center center no-repeat;
     background-size: cover;
 
 }
@@ -32,7 +32,7 @@
 }
 
 .create__main {
-    width: 55%;
+    width: 50%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -57,23 +57,26 @@
 }
 
 .main__forms {
-    width: 60%;
+    width: 56%;
     height: 100%;
     display: flex;
+    flex-direction: column;
 
     border: 1px solid black;
 }
 
 .main__decks {
-    width: 40%;
+    width: 44%;
     height: 100%;
     display: flex;
+    position: relative;
+    flex-direction: column;
 
     border: 1px solid black;
 }
 
 .create__aside {
-    width: 45%;
+    width: 50%;
     height: 100%;
     display: flex;
 

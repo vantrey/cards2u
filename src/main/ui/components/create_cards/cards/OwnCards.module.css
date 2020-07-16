@@ -1,15 +1,20 @@
 
 .container__rightBlock {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     border-top: 2px solid orange;
     border-bottom: 2px solid orange;
 }
 
 .deckInfo__wrap {
-    width: 100%;
     padding: 10px;
+    width: 96%;
+    height: 80%;
+    overflow: hidden;
+
+    border: 1px solid #1f5e25;
 }
 
 .deckInfo__title {
@@ -38,10 +43,10 @@
     height: 60px;
     min-height: 58px;
     max-height: 60px;
-    color: #088dcd;
+    color:  #1f5e25;
     background-color: transparent;
-    border-bottom: 1px solid #088dcd;
-    border-top: 1px solid #088dcd;
+    border-bottom: 1px solid #1f5e25;
+    border-top: 1px solid #1f5e25;
     -webkit-transition-property: background-color;
     transition-property: background-color;
     -webkit-transition-duration: 0.3s;
@@ -70,7 +75,7 @@
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
     background-color: rgba(0, 0, 0, 0.3);
-    color: whitesmoke;
+    color: #4caf50;
 }
 
 .title__question, .item__question {
@@ -79,7 +84,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #088dcd;
+    color: #1f5e25;
     font-size: 14px;
     padding: 12px;
 }
@@ -93,7 +98,7 @@
     width: 2px;
     height: 50%;
     padding: 10px 0;
-    border: 1px solid #088dcd;
+    border: 1px solid #1f5e25;
 }
 
 .title__answer, .item__answer {
@@ -102,7 +107,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #088dcd;
+    color: #1f5e25;
     font-size: 14px;
     padding: 12px;
 }
