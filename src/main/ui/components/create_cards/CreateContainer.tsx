@@ -80,8 +80,11 @@ const CreateContainer = () => {
 
                         </div>
                         <div className={styles.main__decks}>
-							<button onClick={onExitEditCardMode}>create new deck</button>
                             <DefaultDeck/>
+                            <div className={styles.decks__buttons}>
+							    <button onClick={onExitEditCardMode} className={styles.decks__button}>create new deck</button>
+							    <button onClick={onExitEditCardMode} className={styles.decks__button}>create new deck</button>
+                            </div>
                         </div>
                     </div>
                 </div>

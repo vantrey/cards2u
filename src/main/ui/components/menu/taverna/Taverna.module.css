@@ -215,12 +215,13 @@
 }
 
 .main__item_card h1 {
-    color: #40c4ff;
+    /*color: #40c4ff;*/
+    color: #4caf50;
 
 }
 
 .main__item_game h1 {
-    color: #4caf50;
+    color: #f57c00;
 
 }
 

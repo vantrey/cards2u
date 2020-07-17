@@ -2,19 +2,19 @@
 .container__rightBlock {
     display: flex;
     justify-content: center;
-    align-items: center;
     width: 100%;
-    border-top: 2px solid orange;
-    border-bottom: 2px solid orange;
+    margin-top: 46px;
 }
 
 .deckInfo__wrap {
     padding: 10px;
     width: 96%;
-    height: 80%;
+    height: 90%;
     overflow: hidden;
 
-    border: 1px solid #1f5e25;
+    /*border: 1px solid #088dcd;*/
+    /*border-left: 1px solid #088dcd;*/
+    /*border-right: 1px solid #088dcd;*/
 }
 
 .deckInfo__title {
@@ -43,10 +43,10 @@
     height: 60px;
     min-height: 58px;
     max-height: 60px;
-    color:  #1f5e25;
+    color:  #088dcd;
     background-color: transparent;
-    border-bottom: 1px solid #1f5e25;
-    border-top: 1px solid #1f5e25;
+    border-bottom: 1px solid #088dcd;
+    border-top: 1px solid #088dcd;
     -webkit-transition-property: background-color;
     transition-property: background-color;
     -webkit-transition-duration: 0.3s;
@@ -75,7 +75,7 @@
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
     background-color: rgba(0, 0, 0, 0.3);
-    color: #4caf50;
+    color: whitesmoke;
 }
 
 .title__question, .item__question {
@@ -84,7 +84,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #1f5e25;
+    color: #088dcd;
     font-size: 14px;
     padding: 12px;
 }
@@ -98,7 +98,7 @@
     width: 2px;
     height: 50%;
     padding: 10px 0;
-    border: 1px solid #1f5e25;
+    border: 1px solid #088dcd;
 }
 
 .title__answer, .item__answer {
@@ -107,7 +107,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #1f5e25;
+    color: #088dcd;
     font-size: 14px;
     padding: 12px;
 }
@@ -162,7 +162,7 @@
 .data__item:hover .data__button:hover {
     color: whitesmoke;
     border: 1px solid #088dcd;
-    background-color: #088dcd;
+    background-color: #2c6ab7;
     -webkit-transition-property: background-color;
     transition-property: background-color;
     -webkit-transition-duration: 0.3s;
@@ -221,4 +221,9 @@
 
 .deckInfo__button:active {
     transform: translate(1px, 1px);
+}
+
+.data__item_active {
+    order: 1;
+
 }

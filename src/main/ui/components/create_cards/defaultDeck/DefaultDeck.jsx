@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './DefaultDeck.module.css';
-import deckBG from '../../../images/card-bg-OR.png';
+import deckBG from '../../../images/card-bg-LBR.jpg';
 
 
 const DefaultDeck = () => {

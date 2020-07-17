@@ -102,7 +102,6 @@ const FindContainer: React.FC = () => {
     const SaveToFavoriteDecks = () => {
         const freeSlotID = FindFreeDeck(userId);
         if (freeSlotID) {
-            // repository.updateUserFavoriteDeck(userId, freeSlotID, cardPackName, cards);
             dispatch(updateUserFavoriteDecks(userId, freeSlotID, cardPackName, cards));
             setPopupSaveToDeckOk(true);
         } else {
@@ -111,7 +110,6 @@ const FindContainer: React.FC = () => {
     }
 
     const SaveToFavoriteDecksSID = () => {
-        // repository.updateUserFavoriteDeck(userId, favoriteSlotID, cardPackName, cards);
         dispatch(updateUserFavoriteDecks(userId, favoriteSlotID, cardPackName, cards));
         setPopupSaveToDeckOk(true);
     }
