@@ -1,31 +1,37 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
 import Textarea from "../../../common/textarea/Textarea";
 import Button from "../../../common/Button/Button";
 import {createDeck} from "../../../../bll/currentUserDecks/currentUserDecksReducer";
-import styles from "./NewDeckForm.module.css"
+import styles from "./CreateDeckForm.module.css"
+import CreateCardTextarea from "../../../common/createCardTextarea/CreateCardTextarea";
+import * as yup from "yup";
 
-type EditCardFormType = {
+type CreateDeckFormType = {
     deckName: string
 }
 
 type PropsType = {
-    onIsAlternativeDeckChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-    isAlternativeDeck: boolean
+    onIsMultiDeckChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    isMultiDeck: boolean
 }
 
-const NewDeckForm: React.FC<PropsType> = React.memo(({
-                                                         onIsAlternativeDeckChange,
-                                                         isAlternativeDeck,
+const CreateDeckForm: React.FC<PropsType> = React.memo(({
+                                                            onIsMultiDeckChange,
+                                                            isMultiDeck,
                                                      }) => {
 
     const dispatch = useDispatch();
 
-    const {register, handleSubmit, errors, reset, setValue, watch} = useForm<EditCardFormType>({
-        mode: 'onBlur',
+    const schema = yup.object().shape({
+        deckName: yup.string().required('⚠ please, fill up deck name'),
     });
 
+    const {register, handleSubmit, errors, reset} = useForm<CreateDeckFormType>({
+        mode: 'onBlur',
+        validationSchema: schema
+    });
 
     const onSubmit = handleSubmit((data) => {
             dispatch(createDeck({name: data.deckName}));
@@ -40,21 +46,21 @@ const NewDeckForm: React.FC<PropsType> = React.memo(({
 
                 <input
                     type='checkbox'
-                    checked={isAlternativeDeck}
-                    onChange={onIsAlternativeDeckChange}
+                    checked={isMultiDeck}
+                    onChange={onIsMultiDeckChange}
                     id='checkbox'
                 />
                 <label htmlFor="checkbox"> </label>
-                <span>alternative deck</span>
+                <span>multi answer deck</span>
             </div>
 
             <form onSubmit={onSubmit}>
 
-                <Textarea
+                <CreateCardTextarea
                     register={register}
                     name='deckName'
                     errors={errors}
-                    placeholder='Enter name of your new deck'
+                    placeholder='Enter deck name'
                 />
 
                 <div>
@@ -65,4 +71,4 @@ const NewDeckForm: React.FC<PropsType> = React.memo(({
         </div>
     )
 });
-export default NewDeckForm;
+export default CreateDeckForm;

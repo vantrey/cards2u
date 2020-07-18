@@ -1,14 +1,16 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import styles from './Create.module.css';
 import {useDispatch, useSelector} from "react-redux";
-import EditCardForm from "./editCardForm/EditCardForm";
 import UserInfo from "../../common/user/UserInfo";
 import OwnCards from "./cards/OwnCards";
 import {AppStateType} from "../../../bll/store/store";
-import NewDeckForm from "./newDeckForm/NewDeckForm";
-import {cardsActions} from "../../../features/Cards/bll/cardsReducer";
-import AlternativeForm from "./alternativeForm/AlternativeForm";
+import {cardsActions, delete_Card} from "../../../features/Cards/bll/cardsReducer";
 import DefaultDeck from "./defaultDeck/DefaultDeck";
+import CardForm from "./cardForm/CardForm";
+import MultiAnswerCardForm from "./multiAnswerCardForm/MultiAnswerCardForm";
+import CreateDeckForm from "./createDeckForm/CreateDeckForm";
+import { deleteDeck } from '../../../bll/currentUserDecks/currentUserDecksReducer';
+import { useIsSuccessWithNotFirstRendering } from '../../../helpers/firstRenderHook';
 
 
 const CreateContainer = () => {
@@ -17,19 +19,24 @@ const CreateContainer = () => {
 
     const {cards, cardPackName, cardsPack_id, isSuccess} = useSelector((state: AppStateType) => state.cards);
 
+    const isSuccessWithNotFirstRendering = useIsSuccessWithNotFirstRendering(isSuccess, cardsActions.set_Success); // to prevent render with wrong users data from reducer while first rendering
+
     const [selectUser, setSelectUser] = useState<boolean>(false);  //doesnt use yet
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);  //doesnt use yet
 
     const [isEditCardMode, setIsEditCardMode] = useState<boolean>(false);
 
-    const [currentCardId, setCurrentCardId] = useState<string>('');
+    const [selectedCardId, setSelectedCardId] = useState<string>('');
 
-    const [isAlternativeDeck, setIsAlternativeDeck] = useState<boolean>(false);
+    const [isMultiDeck, setIsMultiDeck] = useState<boolean>(false);
 
+    const selectedCard = useMemo(() => {
+        return cards.find(c => c._id === selectedCardId);
+    }, [cards, selectedCardId]);
 
     const onEditCardClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
         setIsEditCardMode(true);
-        setCurrentCardId(e.currentTarget.id);
+        setSelectedCardId(e.currentTarget.id);
     }, []);
 
     const onCancelEditCardClick = useCallback(() => {
@@ -38,13 +45,21 @@ const CreateContainer = () => {
 
     const onExitEditCardMode = useCallback(() => {
         dispatch(cardsActions.set_Success(false))
-    }, [isSuccess]);
-
-    const onIsAlternativeDeckChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setIsAlternativeDeck(e.currentTarget.checked);
     }, []);
 
-    // @ts-ignore
+    const onIsMultiDeckChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setIsMultiDeck(e.currentTarget.checked);
+    }, []);
+
+    const onDeleteDeck = useCallback(() => {
+        dispatch(deleteDeck(cardsPack_id));
+    }, [cardsPack_id]);
+
+    const onDeleteCard = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+        dispatch(delete_Card(e.currentTarget.id));
+        setIsEditCardMode(false)
+    }, []);
+
     return (
         <div className={styles.create__wrap}>
             <div className={styles.create__left}></div>
@@ -55,27 +70,32 @@ const CreateContainer = () => {
                     </div>
                     <div className={styles.main__content}>
                         <div className={styles.main__forms}>
-                            {isSuccess && !isAlternativeDeck &&
-							<EditCardForm
+
+                            {isSuccessWithNotFirstRendering &&
+							<button onClick={onExitEditCardMode}>create new deck</button>}
+
+                            {isSuccessWithNotFirstRendering && !isMultiDeck &&
+							<CardForm
+								onDeleteDeck={onDeleteDeck}
 								cardsPack_id={cardsPack_id}
 								setIsEditCardMode={setIsEditCardMode}
 								isEditCardMode={isEditCardMode}
-								currentCardData={cards.find(c => c._id === currentCardId)}
+								selectedCard={selectedCard}
 							/>}
 
-                            {isSuccess && isAlternativeDeck &&
-							<AlternativeForm
+                            {isSuccessWithNotFirstRendering && isMultiDeck &&
+							<MultiAnswerCardForm
 								isEditCardMode={isEditCardMode}
-								currentCardData={cards.find(c => c._id === currentCardId)}
+								selectedCard={selectedCard}
 								setIsEditCardMode={setIsEditCardMode}
 								cardsPack_id={cardsPack_id}
 							/>
                             }
 
-                            {!isSuccess &&
-							<NewDeckForm
-								onIsAlternativeDeckChange={onIsAlternativeDeckChange}
-								isAlternativeDeck={isAlternativeDeck}
+                            {!isSuccessWithNotFirstRendering &&
+							<CreateDeckForm
+								onIsMultiDeckChange={onIsMultiDeckChange}
+								isMultiDeck={isMultiDeck}
 							/>}
 
                         </div>
@@ -89,13 +109,14 @@ const CreateContainer = () => {
                     </div>
                 </div>
                 <div className={styles.create__aside}>
-                    <OwnCards // decksQuestion copy
+                    {/*<OwnCardsLogout/>*/}
+                    <OwnCards
                         onCancelEditCardClick={onCancelEditCardClick}
                         cards={cards}
                         cardPackName={cardPackName}
                         isEditCardMode={isEditCardMode}
                         onEditCardClick={onEditCardClick}
-                        currentCardId={currentCardId}
+                        selectedCardId={selectedCardId}
                     />
                 </div>
             </div>
