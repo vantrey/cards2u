@@ -1,15 +1,16 @@
 import React, {useCallback, useMemo, useState} from 'react';
 import styles from './Create.module.css';
 import {useDispatch, useSelector} from "react-redux";
-import CardForm from "./cardForm/CardForm";
 import UserInfo from "../../common/user/UserInfo";
 import OwnCards from "./cards/OwnCards";
 import {AppStateType} from "../../../bll/store/store";
-import CreateDeckForm from "./createDeckForm/CreateDeckForm";
 import {cardsActions, delete_Card} from "../../../features/Cards/bll/cardsReducer";
+import DefaultDeck from "./defaultDeck/DefaultDeck";
+import CardForm from "./cardForm/CardForm";
 import MultiAnswerCardForm from "./multiAnswerCardForm/MultiAnswerCardForm";
-import {useIsSuccessWithNotFirstRendering} from "../../../helpers/firstRenderHook";
-import {deleteDeck} from "../../../bll/currentUserDecks/currentUserDecksReducer";
+import CreateDeckForm from "./createDeckForm/CreateDeckForm";
+import { deleteDeck } from '../../../bll/currentUserDecks/currentUserDecksReducer';
+import { useIsSuccessWithNotFirstRendering } from '../../../helpers/firstRenderHook';
 
 
 const CreateContainer = () => {
@@ -61,46 +62,65 @@ const CreateContainer = () => {
 
     return (
         <div className={styles.create__wrap}>
+            <div className={styles.create__left}></div>
+            <div className={styles.create__container}>
+                <div className={styles.create__main}>
+                    <div className={styles.main__top}>
+                        <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
+                    </div>
+                    <div className={styles.main__content}>
+                        <div className={styles.main__forms}>
 
-            <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
+                            {isSuccessWithNotFirstRendering &&
+							<button onClick={onExitEditCardMode}>create new deck</button>}
 
-            {isSuccessWithNotFirstRendering &&
-            <button onClick={onExitEditCardMode}>create new deck</button>}
+                            {isSuccessWithNotFirstRendering && !isMultiDeck &&
+							<CardForm
+								onDeleteDeck={onDeleteDeck}
+								cardsPack_id={cardsPack_id}
+								setIsEditCardMode={setIsEditCardMode}
+								isEditCardMode={isEditCardMode}
+								selectedCard={selectedCard}
+							/>}
 
-            {isSuccessWithNotFirstRendering && !isMultiDeck &&
-            <CardForm
-                onDeleteDeck={onDeleteDeck}
-                cardsPack_id={cardsPack_id}
-                setIsEditCardMode={setIsEditCardMode}
-                isEditCardMode={isEditCardMode}
-                selectedCard={selectedCard}
-            />}
+                            {isSuccessWithNotFirstRendering && isMultiDeck &&
+							<MultiAnswerCardForm
+								isEditCardMode={isEditCardMode}
+								selectedCard={selectedCard}
+								setIsEditCardMode={setIsEditCardMode}
+								cardsPack_id={cardsPack_id}
+							/>
+                            }
 
-            {isSuccessWithNotFirstRendering && isMultiDeck &&
-            <MultiAnswerCardForm
-                isEditCardMode={isEditCardMode}
-                selectedCard={selectedCard}
-                setIsEditCardMode={setIsEditCardMode}
-                cardsPack_id={cardsPack_id}
-            />
-            }
+                            {!isSuccessWithNotFirstRendering &&
+							<CreateDeckForm
+								onIsMultiDeckChange={onIsMultiDeckChange}
+								isMultiDeck={isMultiDeck}
+							/>}
 
-            {!isSuccessWithNotFirstRendering &&
-            <CreateDeckForm
-                onIsMultiDeckChange={onIsMultiDeckChange}
-                isMultiDeck={isMultiDeck}
-            />}
-
-            <OwnCards // decksQuestion copy
-                onCancelEditCardClick={onCancelEditCardClick}
-                cards={isSuccessWithNotFirstRendering ? cards : []}
-                cardPackName={isSuccessWithNotFirstRendering ? cardPackName : ''}
-                isEditCardMode={isEditCardMode}
-                onEditCardClick={onEditCardClick}
-                selectedCardId={selectedCardId}
-                onDeleteCard={onDeleteCard}
-            />
-
+                        </div>
+                        <div className={styles.main__decks}>
+                            <DefaultDeck/>
+                            <div className={styles.decks__buttons}>
+							    <button onClick={onExitEditCardMode} className={styles.decks__button}>create new deck</button>
+							    <button onClick={onExitEditCardMode} className={styles.decks__button}>create new deck</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.create__aside}>
+                    {/*<OwnCardsLogout/>*/}
+                    <OwnCards
+                        onCancelEditCardClick={onCancelEditCardClick}
+                        cards={cards}
+                        cardPackName={cardPackName}
+                        isEditCardMode={isEditCardMode}
+                        onEditCardClick={onEditCardClick}
+                        selectedCardId={selectedCardId}
+                    />
+                </div>
+            </div>
+            <div className={styles.create__right}></div>
         </div>
     )
 };
