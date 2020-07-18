@@ -1,30 +1,28 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './OwnCardsLogout.module.css';
 import decor from "../../../../images/decor-gold.png";
-import MultiColoredTextComponent from '../../../../../helpers/fireText/MultiColoredTextComponent';
+import FireComponent from '../../../../../helpers/fireText/FireComponent';
 
 
-const OwnCardsLogout = React.memo(() => {
+const OwnCardsLogout = ({effect}) => {
 
-    const [effect, setEffect] = useState(false);
+    let classForImg = effect === true ? `${styles.cardsLogout__img} ${styles.cardsLogout__img_active}` : `${styles.cardsLogout__img}`;
 
     return (
-
         <div className={styles.container__rightBlock}>
-            <MultiColoredTextComponent effect={effect}>Here you can see the information about others users decks.
-                If you like some deck you can add it to your favorite list. </MultiColoredTextComponent>
-            <button className={styles.game__button} onClick={ () => {setEffect(!effect)}}> X </button>
-            {/*<div className={styles.cardsLogout__wrap}>*/}
-            {/*    <p className={styles.cardsLogout__text}> Here you can see the information about others users decks.*/}
-            {/*        If you like some deck you can add it to your favorite list.*/}
-            {/*    </p>*/}
-            {/*    <div className={styles.cardsLogout__img}>*/}
-            {/*        <img src={decor} alt='decor'/>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+            <div className={styles.cardsLogout__text}>
+                <FireComponent effect={effect}>Here you can sees.</FireComponent>
+                <FireComponent effect={effect}>Here you .</FireComponent>
+                <FireComponent effect={effect}>Here you sees.</FireComponent>
+                <FireComponent effect={effect}>Here you can sees.</FireComponent>
+                <FireComponent effect={effect}>Here you can sees.sf sdfsd </FireComponent>
+            </div>
+            <div className={classForImg}>
+                <img src={decor} alt='decor'/>
+            </div>
         </div>
     )
-})
+}
 
 export default OwnCardsLogout;
 

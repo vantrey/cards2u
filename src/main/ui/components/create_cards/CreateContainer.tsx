@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import styles from './Create.module.css';
 import {useDispatch, useSelector} from "react-redux";
 import UserInfo from "../../common/user/UserInfo";
@@ -11,23 +11,20 @@ import MultiAnswerCardForm from "./multiAnswerCardForm/MultiAnswerCardForm";
 import CreateDeckForm from "./createDeckForm/CreateDeckForm";
 import { deleteDeck } from '../../../bll/currentUserDecks/currentUserDecksReducer';
 import { useIsSuccessWithNotFirstRendering } from '../../../helpers/firstRenderHook';
+import OwnCardsLogout from './cards/ownCardsLogout/OwnCardsLogout';
 
 
 const CreateContainer = () => {
 
     const dispatch = useDispatch();
-
+    const [effect, setEffect] = useState(false);
+    const [ownCards, setShowOwnCards] = useState(false);
     const {cards, cardPackName, cardsPack_id, isSuccess} = useSelector((state: AppStateType) => state.cards);
-
     const isSuccessWithNotFirstRendering = useIsSuccessWithNotFirstRendering(isSuccess, cardsActions.set_Success); // to prevent render with wrong users data from reducer while first rendering
-
     const [selectUser, setSelectUser] = useState<boolean>(false);  //doesnt use yet
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);  //doesnt use yet
-
     const [isEditCardMode, setIsEditCardMode] = useState<boolean>(false);
-
     const [selectedCardId, setSelectedCardId] = useState<string>('');
-
     const [isMultiDeck, setIsMultiDeck] = useState<boolean>(false);
 
     const selectedCard = useMemo(() => {
@@ -44,6 +41,7 @@ const CreateContainer = () => {
     }, []);
 
     const onExitEditCardMode = useCallback(() => {
+        setEffect(true);
         dispatch(cardsActions.set_Success(false))
     }, []);
 
@@ -59,6 +57,14 @@ const CreateContainer = () => {
         dispatch(delete_Card(e.currentTarget.id));
         setIsEditCardMode(false)
     }, []);
+
+    useEffect( () => {
+        if(effect) {
+            setTimeout( ()=>{
+                setShowOwnCards(true);
+            },4000)
+        }
+    },[effect])
 
     return (
         <div className={styles.create__wrap}>
@@ -109,15 +115,15 @@ const CreateContainer = () => {
                     </div>
                 </div>
                 <div className={styles.create__aside}>
-                    {/*<OwnCardsLogout/>*/}
-                    <OwnCards
+                    { !ownCards && <OwnCardsLogout effect={effect}/>}
+                    { ownCards && <OwnCards
                         onCancelEditCardClick={onCancelEditCardClick}
                         cards={cards}
                         cardPackName={cardPackName}
                         isEditCardMode={isEditCardMode}
                         onEditCardClick={onEditCardClick}
                         selectedCardId={selectedCardId}
-                    />
+                    />}
                 </div>
             </div>
             <div className={styles.create__right}></div>

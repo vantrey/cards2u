@@ -42,13 +42,13 @@
     justify-content: center;
     align-items: center;
     transform: scale(0);
-    transition: all 0.3s ease;
+    transition:  scale 0.3s ease;
     font-family: 'CS Grimrock', sans-serif;
 }
 
 .scroll__wrap_active {
     transform: scale(1);
-    transition: all 0.3s ease;
+    transition: scale 0.3s ease;
 }
 
 .scroll__img {
