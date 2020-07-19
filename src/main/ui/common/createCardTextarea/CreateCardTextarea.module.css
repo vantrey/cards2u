@@ -107,5 +107,6 @@
 
 .form__textarea::placeholder {
   color: #5d4037;
+  text-align: center;
 }
 
