@@ -3,10 +3,10 @@ import {useForm} from "react-hook-form";
 import {CardType} from "../../../../types/entities";
 import {useDispatch} from "react-redux";
 import {add_Card, delete_Card, update_Card} from "../../../../features/Cards/bll/cardsReducer";
-import Textarea from "../../../common/textarea/Textarea";
-import Button from "../../../common/Button/Button";
 import * as yup from "yup";
 import CreateCardTextarea from "../../../common/createCardTextarea/CreateCardTextarea";
+import styles from "./MultiAnswerCardForm.module.css";
+import CreateCardButton from "../../../common/CreateCardButton/CreateCardButton";
 
 
 type AlternativeFormType = {
@@ -62,8 +62,9 @@ const MultiAnswerCardForm: React.FC<PropsType> = React.memo(({
     });
 
     return (
-        <form onSubmit={onSubmit}>
-
+        <div className={styles.cardform__wrap}>
+        <form className={styles.form} onSubmit={onSubmit}>
+            <div className={styles.formtextarea__wrap}>
             <CreateCardTextarea
                 register={register}
                 name='question'
@@ -76,26 +77,24 @@ const MultiAnswerCardForm: React.FC<PropsType> = React.memo(({
                 errors={errors}
                 placeholder='Enter right your answer'
             />
-
             <CreateCardTextarea
                 register={register}
                 name='answerFirstVariant'
                 errors={errors}
                 placeholder='Enter first variant of answer'
             />
-
             <CreateCardTextarea
                 register={register}
                 name='answerSecondVariant'
                 errors={errors}
                 placeholder='Enter second variant of answer'
             />
-
-            <div>
-                <Button/>
             </div>
-
+            <div className={styles.formbuttons__wrap}>
+                <CreateCardButton/>
+            </div>
         </form>
+        </div>
     )
 });
 export default MultiAnswerCardForm;

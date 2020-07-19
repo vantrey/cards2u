@@ -1,4 +1,4 @@
-dform__wrap {
+.cardform__wrap {
     width: 100%;
     height: 334px;
     padding: 0 15px;
@@ -13,9 +13,7 @@ dform__wrap {
 }
 
 .formtextarea__wrap {
-    height: 226px;
-    overflow: hidden;
-    overflow-y: auto;
+
 }
 
 .formbuttons__wrap {

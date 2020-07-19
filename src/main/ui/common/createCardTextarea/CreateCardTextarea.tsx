@@ -14,8 +14,9 @@ type PropsType = OwnPropsType & TextareaType
 const CreateCardTextarea: React.FC<PropsType> = ({register, errors, name, title, ...props}) => {
 
     return (
-        <div className={styles.form__group}>
+        <div className={styles.form__item}>
             <textarea
+                className={styles.form__textarea}
                 ref={register}
                 {...props}
                 name={name}

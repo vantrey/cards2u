@@ -3,11 +3,10 @@ import {useForm} from "react-hook-form";
 import {CardType} from "../../../../types/entities";
 import {useDispatch} from "react-redux";
 import {add_Card, delete_Card, update_Card} from "../../../../features/Cards/bll/cardsReducer";
-import Textarea from "../../../common/textarea/Textarea";
-import Button from "../../../common/Button/Button";
-import {deleteDeck} from "../../../../bll/currentUserDecks/currentUserDecksReducer";
+import styles from "./CardForm.module.css";
 import CreateCardTextarea from "../../../common/createCardTextarea/CreateCardTextarea";
 import * as yup from "yup";
+import CreateCardButton from "../../../common/CreateCardButton/CreateCardButton";
 
 
 type CardFormType = {
@@ -32,17 +31,14 @@ const CardForm: React.FC<PropsType> = React.memo(({
                                                   }) => {
 
     const dispatch = useDispatch();
-
     const schema = yup.object().shape({
         question: yup.string().required('⚠ please, fill up question'),
         answer: yup.string().required('⚠ please, fill up answer'),
     });
-
     const {register, handleSubmit, errors, reset, setValue, watch} = useForm<CardFormType>({
         mode: 'onBlur',
         validationSchema: schema
     });
-
 
     useEffect(() => {
         if (isEditCardMode && selectedCard) {
@@ -54,7 +50,6 @@ const CardForm: React.FC<PropsType> = React.memo(({
         }
     }, [isEditCardMode, selectedCard?.question, selectedCard?.answer]);
 
-
     const onSubmit = handleSubmit((data) => {
 
         if (isEditCardMode) {
@@ -62,8 +57,8 @@ const CardForm: React.FC<PropsType> = React.memo(({
             if (selectedCard) { // to prevent undefined
                 const {_id} = selectedCard;
 
-                    dispatch(update_Card({_id, question: data.question, answer: data.answer}));
-                    setIsEditCardMode(false);
+                dispatch(update_Card({_id, question: data.question, answer: data.answer}));
+                setIsEditCardMode(false);
             }
         }
 
@@ -75,36 +70,33 @@ const CardForm: React.FC<PropsType> = React.memo(({
     });
 
     return (
-        <>
-            <button onClick={onDeleteDeck}>del pack</button>  {/*temp for del packs*/}
+        <div className={styles.cardform__wrap}>
+            {/*<button onClick={onDeleteDeck}>del pack</button>  /!*temp for del packs*!/*/}
 
-            <form onSubmit={onSubmit}>
-
-                <CreateCardTextarea
-                    register={register}
-                    name='question'
-                    errors={errors}
-                    placeholder='Enter your question'
-                />
-                <CreateCardTextarea
-                    register={register}
-                    name='answer'
-                    errors={errors}
-                    placeholder='Enter your answer'
-                />
-
-
-                <div>
+            <form className={styles.form} onSubmit={onSubmit}>
+                <div className={styles.formtextarea__wrap}>
+                    <CreateCardTextarea
+                        register={register}
+                        name='question'
+                        errors={errors}
+                        placeholder='enter your question, no more than 220 chars'
+                    />
+                    <CreateCardTextarea
+                        register={register}
+                        name='answer'
+                        errors={errors}
+                        placeholder='enter your answer, no more than 190 chars'
+                    />
+                </div>
+                <div className={styles.formbuttons__wrap}>
                     {isEditCardMode &&
-                    <Button>Change</Button>}
+					<CreateCardButton className={styles.form__button}>Change</CreateCardButton>}
 
                     {!isEditCardMode &&
-                    <Button>Create</Button>}
-
+					<CreateCardButton className={styles.form__button}>Create</CreateCardButton>}
                 </div>
-
             </form>
-        </>
+        </div>
     )
 });
 export default CardForm;

@@ -7,7 +7,6 @@
     display: flex;
     background: url('../../images/create-bg2.jpg') center center no-repeat;
     background-size: cover;
-
 }
 
 .create__container {
@@ -32,20 +31,17 @@
 }
 
 .create__main {
-    width: 50%;
+    width: 52%;
     height: 100%;
+    padding-left: 10px;
     display: flex;
     flex-direction: column;
-
-    /*border: 1px solid green;*/
 }
 
 .main__top {
     width: 100%;
     height: 300px;
     display: flex;
-
-    /*border: 1px solid blue;*/
 }
 
 .main__content {
@@ -53,27 +49,22 @@
     height: 100%;
     padding-top: 28px;
     display: flex;
-
-    /*border: 1px solid red;*/
 }
 
 .main__forms {
-    width: 56%;
+    width: 64%;
     height: 100%;
     display: flex;
     flex-direction: column;
-
-    border: 1px solid black;
 }
 
 .main__decks {
-    width: 44%;
+    width: 218px;
     height: 100%;
     display: flex;
     position: relative;
     flex-direction: column;
-
-    border: 1px solid black;
+    z-index: 100;
 }
 
 .decks__buttons {
@@ -113,7 +104,6 @@
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
     background-color: orange;
-    /*background-color: rgba(0, 0, 0, 0.3);*/
     color: black;
 }
 
@@ -127,9 +117,7 @@
 }
 
 .create__aside {
-    width: 50%;
+    width: 48%;
     height: 100%;
     display: flex;
-
-    /*border: 1px solid green;*/
 }

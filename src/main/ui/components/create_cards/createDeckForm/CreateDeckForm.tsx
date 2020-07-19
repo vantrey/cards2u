@@ -1,12 +1,11 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
-import Textarea from "../../../common/textarea/Textarea";
-import Button from "../../../common/Button/Button";
 import {createDeck} from "../../../../bll/currentUserDecks/currentUserDecksReducer";
 import styles from "./CreateDeckForm.module.css"
 import CreateCardTextarea from "../../../common/createCardTextarea/CreateCardTextarea";
 import * as yup from "yup";
+import CreateCardButton from "../../../common/CreateCardButton/CreateCardButton";
 
 type CreateDeckFormType = {
     deckName: string
@@ -40,33 +39,29 @@ const CreateDeckForm: React.FC<PropsType> = React.memo(({
     );
 
     return (
-        <div>
-
-            <div className={styles.checkBox}>
-
-                <input
-                    type='checkbox'
-                    checked={isMultiDeck}
-                    onChange={onIsMultiDeckChange}
-                    id='checkbox'
-                />
-                <label htmlFor="checkbox"> </label>
-                <span>multi answer deck</span>
-            </div>
-
-            <form onSubmit={onSubmit}>
-
-                <CreateCardTextarea
-                    register={register}
-                    name='deckName'
-                    errors={errors}
-                    placeholder='Enter deck name'
-                />
-
-                <div>
-                    <Button>Create</Button>
+        <div className={styles.cardform__wrap}>
+            <form className={styles.form}  onSubmit={onSubmit}>
+                <div className={styles.formtextarea__wrap}>
+                    <CreateCardTextarea
+                        register={register}
+                        name='deckName'
+                        errors={errors}
+                        placeholder='Enter deck name'
+                    />
                 </div>
-
+                <div className={styles.checkBox}>
+                    <input
+                        type='checkbox'
+                        checked={isMultiDeck}
+                        onChange={onIsMultiDeckChange}
+                        id='checkbox1'
+                    />
+                    <label htmlFor="checkbox1"> </label>
+                    <div className={styles.checkBox__span}>multi answer deck</div>
+                </div>
+                <div  className={styles.formbuttons__wrap}>
+                    <CreateCardButton className={styles.form__button}>Create</CreateCardButton>
+                </div>
             </form>
         </div>
     )
