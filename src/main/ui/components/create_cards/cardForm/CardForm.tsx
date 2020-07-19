@@ -32,22 +32,28 @@ const CardForm: React.FC<PropsType> = React.memo(({
                                                   }) => {
 
     const dispatch = useDispatch();
-
-    const questionMaxLength = 20;
+    const questionMaxLength = 220;
+    const answerMaxLength = 190;
 
     const schema = yup.object().shape({
         question: yup.string().required('⚠ please, fill up question')
-            .max(questionMaxLength, 'Limit'),
-        answer: yup.string().required('⚠ please, fill up answer'),
+            .max(questionMaxLength, `Limit ${questionMaxLength}`),
+        answer: yup.string().required('⚠ please, fill up answer')
+            .max(answerMaxLength, `Limit ${questionMaxLength}`),
     });
+
     const {register, handleSubmit, errors, reset, setValue, watch} = useForm<CardFormType>({
-        mode: 'onBlur',
+        mode: 'onChange',
         validationSchema: schema
     });
 
     const questionRestLimit = useMemo(() => {
         return getRestLimit(questionMaxLength, watch().question)
     }, [questionMaxLength, watch().question]);
+
+    const answerRestLimit = useMemo(() => {
+        return getRestLimit(answerMaxLength, watch().answer)
+    }, [answerMaxLength, watch().answer]);
 
     useEffect(() => {
         if (isEditCardMode && selectedCard) {
@@ -83,20 +89,18 @@ const CardForm: React.FC<PropsType> = React.memo(({
             <form className={styles.form} onSubmit={onSubmit}>
                 <div className={styles.formtextarea__wrap}>
                     <CreateCardTextarea
-                        maxLength={questionMaxLength}
                         register={register}
                         name='question'
                         errors={errors}
                         placeholder='enter your question'
+                        restLimit={questionRestLimit}
                     />
-
-                    <div style={{fontFamily: 'arial'}}>{questionRestLimit}</div>
-
                     <CreateCardTextarea
                         register={register}
                         name='answer'
                         errors={errors}
                         placeholder='enter your answer'
+                        restLimit={answerRestLimit}
                     />
                 </div>
                 <div className={styles.formbuttons__wrap}>

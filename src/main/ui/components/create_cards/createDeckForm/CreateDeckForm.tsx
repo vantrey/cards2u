@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
 import {createDeck} from "../../../../bll/currentUserDecks/currentUserDecksReducer";
@@ -6,6 +6,7 @@ import styles from "./CreateDeckForm.module.css"
 import CreateCardTextarea from "../../../common/createCardTextarea/CreateCardTextarea";
 import * as yup from "yup";
 import CreateCardButton from "../../../common/CreateCardButton/CreateCardButton";
+import {getRestLimit} from "../../../../helpers/restLimit/restLimit";
 
 type CreateDeckFormType = {
     deckName: string
@@ -22,15 +23,21 @@ const CreateDeckForm: React.FC<PropsType> = React.memo(({
                                                      }) => {
 
     const dispatch = useDispatch();
+    const deckNameMaxLength = 220;
 
     const schema = yup.object().shape({
-        deckName: yup.string().required('⚠ please, fill up deck name'),
+        deckName: yup.string().required('⚠ please, fill up deck name')
+            .max(deckNameMaxLength, `Limit ${deckNameMaxLength}`),
     });
 
-    const {register, handleSubmit, errors, reset} = useForm<CreateDeckFormType>({
-        mode: 'onBlur',
+    const {register, handleSubmit, errors, reset, watch} = useForm<CreateDeckFormType>({
+        mode: 'onChange',
         validationSchema: schema
     });
+
+    const deckNameRestLimit = useMemo(() => {
+        return getRestLimit(deckNameMaxLength, watch().deckName)
+    }, [deckNameMaxLength, watch().deckName]);
 
     const onSubmit = handleSubmit((data) => {
             dispatch(createDeck({name: data.deckName}));
@@ -43,6 +50,7 @@ const CreateDeckForm: React.FC<PropsType> = React.memo(({
             <form className={styles.form}  onSubmit={onSubmit}>
                 <div className={styles.formtextarea__wrap}>
                     <CreateCardTextarea
+                        restLimit={deckNameRestLimit}
                         register={register}
                         name='deckName'
                         errors={errors}

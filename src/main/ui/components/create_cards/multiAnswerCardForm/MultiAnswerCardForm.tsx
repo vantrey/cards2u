@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {useForm} from "react-hook-form";
 import {CardType} from "../../../../types/entities";
 import {useDispatch} from "react-redux";
@@ -7,6 +7,7 @@ import * as yup from "yup";
 import CreateCardTextarea from "../../../common/createCardTextarea/CreateCardTextarea";
 import styles from "./MultiAnswerCardForm.module.css";
 import CreateCardButton from "../../../common/CreateCardButton/CreateCardButton";
+import {getRestLimit} from "../../../../helpers/restLimit/restLimit";
 
 
 type AlternativeFormType = {
@@ -31,18 +32,40 @@ const MultiAnswerCardForm: React.FC<PropsType> = React.memo(({
                                                       }) => {
 
     const dispatch = useDispatch();
+    const questionMaxLength = 220;
+    const answerMaxLength = 190;
 
     const schema = yup.object().shape({
-        question: yup.string().required('⚠ please, fill up question'),
-        answerRight: yup.string().required('⚠ please, fill up right answer'),
-        answerFirstVariant: yup.string().required('⚠ please, fill up first variant'),
-        answerSecondVariant: yup.string().required('⚠ please, fill up second variant'),
+        question: yup.string().required('⚠ please, fill up question')
+            .max(questionMaxLength, `Limit ${questionMaxLength}`),
+        answerRight: yup.string().required('⚠ please, fill up right answer')
+            .max(answerMaxLength, `Limit ${answerMaxLength}`),
+        answerFirstVariant: yup.string().required('⚠ please, fill up first variant')
+            .max(answerMaxLength, `Limit ${answerMaxLength}`),
+        answerSecondVariant: yup.string().required('⚠ please, fill up second variant')
+            .max(answerMaxLength, `Limit ${answerMaxLength}`),
     });
 
     const {register, handleSubmit, errors, reset, setValue, watch} = useForm<AlternativeFormType>({
-        mode: 'onBlur',
+        mode: 'onChange',
         validationSchema: schema
     });
+
+    const questionRestLimit = useMemo(() => {
+        return getRestLimit(questionMaxLength, watch().question)
+    }, [questionMaxLength, watch().question]);
+
+    const answerRightRestLimit = useMemo(() => {
+        return getRestLimit(answerMaxLength, watch().answerRight)
+    }, [answerMaxLength, watch().answerRight]);
+
+    const answerFirstVariantRestLimit = useMemo(() => {
+        return getRestLimit(answerMaxLength, watch().answerFirstVariant)
+    }, [answerMaxLength, watch().answerFirstVariant]);
+
+    const answerSecondVariantRestLimit = useMemo(() => {
+        return getRestLimit(answerMaxLength, watch().answerSecondVariant)
+    }, [answerMaxLength, watch().answerSecondVariant]);
 
     /*useEffect(() => {
         if (isEditCardMode && currentCardData) {
@@ -66,24 +89,28 @@ const MultiAnswerCardForm: React.FC<PropsType> = React.memo(({
         <form className={styles.form} onSubmit={onSubmit}>
             <div className={styles.formtextarea__wrap}>
             <CreateCardTextarea
+                restLimit={questionRestLimit}
                 register={register}
                 name='question'
                 errors={errors}
                 placeholder='Enter your question'
             />
             <CreateCardTextarea
+                restLimit={answerRightRestLimit}
                 register={register}
                 name='answerRight'
                 errors={errors}
                 placeholder='Enter right your answer'
             />
             <CreateCardTextarea
+                restLimit={answerFirstVariantRestLimit}
                 register={register}
                 name='answerFirstVariant'
                 errors={errors}
                 placeholder='Enter first variant of answer'
             />
             <CreateCardTextarea
+                restLimit={answerSecondVariantRestLimit}
                 register={register}
                 name='answerSecondVariant'
                 errors={errors}

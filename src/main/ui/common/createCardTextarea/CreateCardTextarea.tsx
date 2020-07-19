@@ -7,11 +7,19 @@ type OwnPropsType = {
     name: string
     errors: UseFormErrorsType
     register: UseFormRegisterType
+    restLimit: string
 }
 type TextareaType = React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>
 type PropsType = OwnPropsType & TextareaType
 
-const CreateCardTextarea: React.FC<PropsType> = ({register, errors, name, title, ...props}) => {
+const CreateCardTextarea: React.FC<PropsType> = ({
+                                                     register,
+                                                     errors,
+                                                     name,
+                                                     title,
+                                                     restLimit,
+                                                     ...props
+                                                 }) => {
 
     return (
         <div className={styles.form__item}>
@@ -21,6 +29,8 @@ const CreateCardTextarea: React.FC<PropsType> = ({register, errors, name, title,
                 {...props}
                 name={name}
             />
+
+            <div style={{fontFamily: 'arial'}}>{restLimit}</div>
 
             {errors[name] &&
 

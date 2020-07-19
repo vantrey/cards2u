@@ -6,8 +6,8 @@ export const getRestLimit = (maxLength: number, value: string | undefined) => {
         if (result < 0) {
             return `you must shorten the text by ${result * -1} chars`
         }
-        return result
+        return result.toString()
     }  else {
-        return maxLength
+        return maxLength.toString()
     }
 };
