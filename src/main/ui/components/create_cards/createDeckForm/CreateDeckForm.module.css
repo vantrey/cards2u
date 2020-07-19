@@ -1,6 +1,33 @@
+.cardform__wrap {
+    width: 100%;
+    height: 334px;
+    padding: 0 15px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+.formtextarea__wrap {
+
+}
+
+.formbuttons__wrap {
+
+}
+
+.form__button {
+
+}
+
 .checkBox {
     position: relative;
     margin: 12px 0;
+    margin-top: -100px;
     min-width: 240px;
     max-width: 300px;
     height: 20px;
@@ -30,7 +57,7 @@ input[type="checkbox"]:checked + label:before,
 input[type="checkbox"]:not(:checked) + label:before {
     content: "";
     position: absolute;
-    border: 1px solid #795548;
+    border: 1px solid orange;
     background-color: transparent;
     border-radius: 2px;
     left: 50%;
@@ -63,8 +90,8 @@ input[type="checkbox"]:not(:checked) + label:after {
     width: 15px;
     height: 9px;
     border-radius: 1px;
-    border-left: 4px solid #3e2723;
-    border-bottom: 4px solid #3e2723;
+    border-left: 4px solid orange;
+    border-bottom: 4px solid orange;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
@@ -78,4 +105,10 @@ input[type="checkbox"]:not(:checked) + label:after {
 
 input[type="checkbox"]:checked + label:after {
     opacity: 1;
+}
+
+.checkBox__span {
+    font-family: sans-serif;
+    color: orange;
+    font-size: 14px;
 }

@@ -4,9 +4,9 @@ import {CardType} from "../../../../types/entities";
 import {useDispatch} from "react-redux";
 import {add_Card, delete_Card, update_Card} from "../../../../features/Cards/bll/cardsReducer";
 import styles from "./CardForm.module.css";
-import Button from "../../../common/Button/Button";
 import CreateCardTextarea from "../../../common/createCardTextarea/CreateCardTextarea";
 import * as yup from "yup";
+import CreateCardButton from "../../../common/CreateCardButton/CreateCardButton";
 
 
 type CardFormType = {
@@ -79,21 +79,21 @@ const CardForm: React.FC<PropsType> = React.memo(({
                         register={register}
                         name='question'
                         errors={errors}
-                        placeholder='Enter your question'
+                        placeholder='enter your question, no more than 220 chars'
                     />
                     <CreateCardTextarea
                         register={register}
                         name='answer'
                         errors={errors}
-                        placeholder='Enter your answer'
+                        placeholder='enter your answer, no more than 190 chars'
                     />
                 </div>
                 <div className={styles.formbuttons__wrap}>
                     {isEditCardMode &&
-					<Button>Change</Button>}
+					<CreateCardButton className={styles.form__button}>Change</CreateCardButton>}
 
                     {!isEditCardMode &&
-					<Button>Create</Button>}
+					<CreateCardButton className={styles.form__button}>Create</CreateCardButton>}
                 </div>
             </form>
         </div>
