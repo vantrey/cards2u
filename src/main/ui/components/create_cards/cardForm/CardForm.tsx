@@ -79,13 +79,13 @@ const CardForm: React.FC<PropsType> = React.memo(({
                         register={register}
                         name='question'
                         errors={errors}
-                        placeholder='enter your question, no more than 220 chars'
+                        placeholder='enter your question'
                     />
                     <CreateCardTextarea
                         register={register}
                         name='answer'
                         errors={errors}
-                        placeholder='enter your answer, no more than 190 chars'
+                        placeholder='enter your answer'
                     />
                 </div>
                 <div className={styles.formbuttons__wrap}>

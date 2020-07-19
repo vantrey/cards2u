@@ -25,7 +25,7 @@ const OwnCards: React.FC<PropsType> = React.memo(({
     useEffect(() => {
         const currentCardElement = document.getElementById(selectedCardId + 1);
         if(isEditCardMode && currentCardElement) {
-            currentCardElement.style.backgroundColor = 'darkblue';
+            currentCardElement.style.backgroundColor = '#1a237e';
         } else if (!isEditCardMode && currentCardElement) {
             currentCardElement.style.backgroundColor = 'transparent';
         }

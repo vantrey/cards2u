@@ -78,10 +78,11 @@
   border: 1px solid orange ;
   height: 100px;
   width: 100% ;
-  color: #90a4ae;
+  color: #6d4c41;
   outline: none;
+  padding: 4px;
   font-size: 14px;
-  line-height: 1.9;
+  line-height: 1.6;
   font-weight: bold;
 }
 
