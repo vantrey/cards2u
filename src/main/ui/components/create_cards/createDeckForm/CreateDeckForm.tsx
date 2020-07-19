@@ -23,7 +23,7 @@ const CreateDeckForm: React.FC<PropsType> = React.memo(({
                                                      }) => {
 
     const dispatch = useDispatch();
-    const deckNameMaxLength = 220;
+    const deckNameMaxLength = 20;
 
     const schema = yup.object().shape({
         deckName: yup.string().required('⚠ please, fill up deck name')
@@ -31,7 +31,7 @@ const CreateDeckForm: React.FC<PropsType> = React.memo(({
     });
 
     const {register, handleSubmit, errors, reset, watch} = useForm<CreateDeckFormType>({
-        mode: 'onChange',
+        mode: 'onBlur',
         validationSchema: schema
     });
 
@@ -50,6 +50,7 @@ const CreateDeckForm: React.FC<PropsType> = React.memo(({
             <form className={styles.form}  onSubmit={onSubmit}>
                 <div className={styles.formtextarea__wrap}>
                     <CreateCardTextarea
+                        maxLength={deckNameMaxLength}
                         restLimit={deckNameRestLimit}
                         register={register}
                         name='deckName'
