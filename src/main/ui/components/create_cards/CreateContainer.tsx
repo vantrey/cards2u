@@ -76,10 +76,6 @@ const CreateContainer = () => {
                     </div>
                     <div className={styles.main__content}>
                         <div className={styles.main__forms}>
-
-                            {isSuccessWithNotFirstRendering &&
-							<button onClick={onExitEditCardMode}>create new deck</button>}
-
                             {isSuccessWithNotFirstRendering && !isMultiDeck &&
 							<CardForm
 								onDeleteDeck={onDeleteDeck}

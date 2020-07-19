@@ -11,11 +11,11 @@ const OwnCardsLogout = ({effect}) => {
     return (
         <div className={styles.container__rightBlock}>
             <div className={styles.cardsLogout__text}>
-                <FireComponent effect={effect}>Here you can sees.</FireComponent>
-                <FireComponent effect={effect}>Here you .</FireComponent>
-                <FireComponent effect={effect}>Here you sees.</FireComponent>
-                <FireComponent effect={effect}>Here you can sees.</FireComponent>
-                <FireComponent effect={effect}>Here you can sees.sf sdfsd </FireComponent>
+                <FireComponent effect={effect}>Here you can create your</FireComponent>
+                <FireComponent effect={effect}>personal cards and decks,</FireComponent>
+                <FireComponent effect={effect}>edit or delete existing</FireComponent>
+                <FireComponent effect={effect}>ones.</FireComponent>
+                <FireComponent effect={effect}>Here you can sees.sf sdfsd</FireComponent>
             </div>
             <div className={classForImg}>
                 <img src={decor} alt='decor'/>

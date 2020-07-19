@@ -1,89 +1,88 @@
-.form__group {
+.form__item {
   position: relative;
-  margin: 10px 0;
-  min-width: 240px;
-  max-width: 300px;
-
-}
-
-
-.form__group .control__label {
-  position: absolute;
-  top: 0.25rem;
-  pointer-events: none;
-  padding-left: 0.125rem;
-  z-index: 1;
-  color: #5d4037;
-  font-size: 12px;
-  font-weight: normal;
-  -webkit-transition: all 0.28s ease;
-  transition: all 0.28s ease;
-  left: 0;
-}
-
-.form__group .mtrl__select {
-  position: relative;
-  border-bottom: 0.0625rem solid #795548;
-  display: block;
-}
-
-.form__group .mtrl__select::before {
-  content: '';
-  height: 0.125rem;
-  width: 0;
-  left: 50%;
-  bottom: -0.0625rem;
-  position: absolute;
-  background: #3e2723;
-  -webkit-transition: left 0.28s ease, width 0.28s ease;
-  transition: left 0.28s ease, width 0.28s ease;
-  z-index: 2;
-}
-
-.form__group input {
-  display: block;
-  background: none;
-  padding: 0.125rem 0.125rem 0.0625rem;
-  font-size: 12px;
-  border-width: 0;
-  border-color: transparent;
-  line-height: 1.9;
+  padding: 10px;
   width: 100%;
-  color: #3e2723;
-  font-weight: bold;
-  -webkit-transition: all 0.28s ease;
-  transition: all 0.28s ease;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-
-  height: 1.9rem;
 
 }
 
-.form__group input:focus {
-  color: #82898e;
-}
 
-.form__group input:focus ~ .control__label,
-.form__group input:valid ~ .control__label {
-  font-size: 9px;
-  color: #795548;
-  top: -10px;
-  left: 0;
-}
+/*.form__group .control__label {*/
+/*  position: absolute;*/
+/*  top: 0.25rem;*/
+/*  pointer-events: none;*/
+/*  padding-left: 0.125rem;*/
+/*  z-index: 1;*/
+/*  color: #5d4037;*/
+/*  font-size: 12px;*/
+/*  font-weight: normal;*/
+/*  -webkit-transition: all 0.28s ease;*/
+/*  transition: all 0.28s ease;*/
+/*  left: 0;*/
+/*}*/
 
-.form__group input:focus {
-  outline: none;
-}
+/*.form__group .mtrl__select {*/
+/*  position: relative;*/
+/*  border-bottom: 0.0625rem solid #795548;*/
+/*  display: block;*/
+/*}*/
 
-.form__group input:focus ~ .control__label {
-  color: #82898e;
-}
+/*.form__group .mtrl__select::before {*/
+/*  content: '';*/
+/*  height: 0.125rem;*/
+/*  width: 0;*/
+/*  left: 50%;*/
+/*  bottom: -0.0625rem;*/
+/*  position: absolute;*/
+/*  background: #3e2723;*/
+/*  -webkit-transition: left 0.28s ease, width 0.28s ease;*/
+/*  transition: left 0.28s ease, width 0.28s ease;*/
+/*  z-index: 2;*/
+/*}*/
 
-.form__group input:focus ~ .mtrl__select::before {
-  width: 100%;
-  left: 0;
-}
+/*.form__group input {*/
+/*  display: block;*/
+/*  background: none;*/
+/*  padding: 0.125rem 0.125rem 0.0625rem;*/
+/*  font-size: 12px;*/
+/*  border-width: 0;*/
+/*  border-color: transparent;*/
+/*  line-height: 1.9;*/
+/*  width: 100%;*/
+/*  color: #3e2723;*/
+/*  font-weight: bold;*/
+/*  -webkit-transition: all 0.28s ease;*/
+/*  transition: all 0.28s ease;*/
+/*  -webkit-box-shadow: none;*/
+/*  box-shadow: none;*/
+
+/*  height: 1.9rem;*/
+
+/*}*/
+
+/*.form__group input:focus {*/
+/*  color: #82898e;*/
+/*}*/
+
+/*.form__group input:focus ~ .control__label,*/
+/*.form__group input:valid ~ .control__label {*/
+/*  font-size: 9px;*/
+/*  color: #795548;*/
+/*  top: -10px;*/
+/*  left: 0;*/
+/*}*/
+
+/*.form__group input:focus {*/
+/*  outline: none;*/
+/*}*/
+
+/*.form__group input:focus ~ .control__label {*/
+/*  color: #82898e;*/
+/*}*/
+
+/*.form__group input:focus ~ .mtrl__select::before {*/
+/*  width: 100%;*/
+/*  left: 0;*/
+/*}*/
 .form__warning_wrap {
   width: 100%;
   height: 100%;
@@ -151,12 +150,11 @@
   }
 }
 
-textarea {
-  background-color: transparent !important;
-  border: 1px solid #795548 !important;
-  margin: 0 !important;
-  height: 100px !important;
-  width: 300px !important;
+.form__textarea {
+  background-color: transparent ;
+  border: 1px solid orange ;
+  height: 100px;
+  width: 100% ;
   color: #90a4ae;
   outline: none;
   font-size: 14px;
@@ -164,26 +162,26 @@ textarea {
   font-weight: bold;
 }
 
-textarea:focus, textarea:active {
-  border: 1px solid #5d4037 !important;
+.form__textarea:focus, .form__textarea:active {
+  border: 1px solid orange;
 }
 
-textarea::-webkit-input-placeholder {
+.form__textarea::-webkit-input-placeholder {
   color: #795548;
 }
 
-textarea:-moz-placeholder { /* Firefox 18- */
+.form__textarea:-moz-placeholder { /* Firefox 18- */
   color: #795548;
 }
 
-textarea::-moz-placeholder {  /* Firefox 19+ */
+.form__textarea::-moz-placeholder {  /* Firefox 19+ */
   color: #795548;
 }
 
-textarea:-ms-input-placeholder {
+.form__textarea:-ms-input-placeholder {
   color: #795548;
 }
 
-textarea::placeholder {
+.form__textarea::placeholder {
   color: #795548;
 }
