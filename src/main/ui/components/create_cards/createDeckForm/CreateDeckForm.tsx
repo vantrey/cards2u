@@ -50,6 +50,7 @@ const CreateDeckForm: React.FC<PropsType> = React.memo(({
             <form className={styles.form}  onSubmit={onSubmit}>
                 <div className={styles.formtextarea__wrap}>
                     <CreateCardTextarea
+                        maxLength={deckNameMaxLength}
                         restLimit={deckNameRestLimit}
                         register={register}
                         name='deckName'
