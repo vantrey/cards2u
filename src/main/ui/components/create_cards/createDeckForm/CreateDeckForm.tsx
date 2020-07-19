@@ -23,7 +23,7 @@ const CreateDeckForm: React.FC<PropsType> = React.memo(({
                                                      }) => {
 
     const dispatch = useDispatch();
-    const deckNameMaxLength = 220;
+    const deckNameMaxLength = 20;
 
     const schema = yup.object().shape({
         deckName: yup.string().required('⚠ please, fill up deck name')

@@ -9,8 +9,7 @@ import DefaultDeck from "./defaultDeck/DefaultDeck";
 import CardForm from "./cardForm/CardForm";
 import MultiAnswerCardForm from "./multiAnswerCardForm/MultiAnswerCardForm";
 import CreateDeckForm from "./createDeckForm/CreateDeckForm";
-import { deleteDeck } from '../../../bll/currentUserDecks/currentUserDecksReducer';
-import { useIsSuccessWithNotFirstRendering } from '../../../helpers/firstRenderHook';
+import {deleteDeck} from '../../../bll/currentUserDecks/currentUserDecksReducer';
 import OwnCardsLogout from './cards/ownCardsLogout/OwnCardsLogout';
 import PopupAuth from "../../common/popUp/popUp_Authorization/PopupAuth";
 import {loginActions} from "../../../auth/login/loginReducer";
@@ -22,8 +21,11 @@ const CreateContainer = () => {
     const dispatch = useDispatch();
     const [effect, setEffect] = useState(false);
     const [ownCards, setShowOwnCards] = useState(false);
-    const {cards, cardPackName, cardsPack_id, isSuccess} = useSelector((state: AppStateType) => state.cards);
-    const isSuccessWithNotFirstRendering = useIsSuccessWithNotFirstRendering(isSuccess, cardsActions.set_Success); // to prevent render with wrong users data from reducer while first rendering
+    const {cards,
+        cardPackName,
+        cardsPack_id,
+        isSuccess
+    } = useSelector((state: AppStateType) => state.currentUserCards);
     const [selectUser, setSelectUser] = useState<boolean>(false);  //doesnt use yet
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);  //doesnt use yet
     const [isEditCardMode, setIsEditCardMode] = useState<boolean>(false);
@@ -37,7 +39,7 @@ const CreateContainer = () => {
 
     useEffect(() => {
         dispatch(loginActions.setCurrentLocation(currentPath));
-    }, [currentPath])
+    }, [currentPath]);
 
     const selectedCard = useMemo(() => {
         return cards.find(c => c._id === selectedCardId);
@@ -76,12 +78,12 @@ const CreateContainer = () => {
                 setShowOwnCards(true);
             },4000)
         }
-    },[effect])
+    },[effect]);
 
     useEffect(() => {
         let timerId = setTimeout(() => {
             setPopupAuth(true)
-        }, 500)
+        }, 500);
 
         return () => {
             clearTimeout(timerId)
@@ -98,7 +100,7 @@ const CreateContainer = () => {
                     </div>
                     <div className={styles.main__content}>
                         <div className={styles.main__forms}>
-                            {isSuccessWithNotFirstRendering && !isMultiDeck &&
+                            {isSuccess && !isMultiDeck &&
 							<CardForm
 								onDeleteDeck={onDeleteDeck}
 								cardsPack_id={cardsPack_id}
@@ -107,7 +109,7 @@ const CreateContainer = () => {
 								selectedCard={selectedCard}
 							/>}
 
-                            {isSuccessWithNotFirstRendering && isMultiDeck &&
+                            {isSuccess && isMultiDeck &&
 							<MultiAnswerCardForm
 								isEditCardMode={isEditCardMode}
 								selectedCard={selectedCard}
@@ -116,7 +118,7 @@ const CreateContainer = () => {
 							/>
                             }
 
-                            {!isSuccessWithNotFirstRendering &&
+                            {!isSuccess &&
 							<CreateDeckForm
 								onIsMultiDeckChange={onIsMultiDeckChange}
 								isMultiDeck={isMultiDeck}

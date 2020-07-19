@@ -8,6 +8,10 @@ import CreateCardTextarea from "../../../common/createCardTextarea/CreateCardTex
 import * as yup from "yup";
 import CreateCardButton from "../../../common/CreateCardButton/CreateCardButton";
 import {getRestLimit} from "../../../../helpers/restLimit/restLimit";
+import {
+    addCurrentUserCard,
+    updateCurrentUserCard
+} from "../../../../bll/currentUserCardsReducer/currentUserCardsReducer";
 
 
 type CardFormType = {
@@ -72,13 +76,13 @@ const CardForm: React.FC<PropsType> = React.memo(({
             if (selectedCard) { // to prevent undefined
                 const {_id} = selectedCard;
 
-                dispatch(update_Card({_id, question: data.question, answer: data.answer}));
+                dispatch(updateCurrentUserCard({_id, question: data.question, answer: data.answer}));
                 setIsEditCardMode(false);
             }
         }
 
         if (!isEditCardMode) {
-            dispatch(add_Card({cardsPack_id, question: data.question, answer: data.answer}));
+            dispatch(addCurrentUserCard({cardsPack_id, question: data.question, answer: data.answer}));
         }
 
         reset();
