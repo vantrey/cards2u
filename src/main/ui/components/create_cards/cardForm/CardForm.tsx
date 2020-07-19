@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {useForm} from "react-hook-form";
 import {CardType} from "../../../../types/entities";
 import {useDispatch} from "react-redux";
@@ -7,6 +7,7 @@ import styles from "./CardForm.module.css";
 import CreateCardTextarea from "../../../common/createCardTextarea/CreateCardTextarea";
 import * as yup from "yup";
 import CreateCardButton from "../../../common/CreateCardButton/CreateCardButton";
+import {getRestLimit} from "../../../../helpers/restLimit/restLimit";
 
 
 type CardFormType = {
@@ -31,14 +32,22 @@ const CardForm: React.FC<PropsType> = React.memo(({
                                                   }) => {
 
     const dispatch = useDispatch();
+
+    const questionMaxLength = 20;
+
     const schema = yup.object().shape({
-        question: yup.string().required('⚠ please, fill up question'),
+        question: yup.string().required('⚠ please, fill up question')
+            .max(questionMaxLength, 'Limit'),
         answer: yup.string().required('⚠ please, fill up answer'),
     });
     const {register, handleSubmit, errors, reset, setValue, watch} = useForm<CardFormType>({
         mode: 'onBlur',
         validationSchema: schema
     });
+
+    const questionRestLimit = useMemo(() => {
+        return getRestLimit(questionMaxLength, watch().question)
+    }, [questionMaxLength, watch().question]);
 
     useEffect(() => {
         if (isEditCardMode && selectedCard) {
@@ -76,11 +85,15 @@ const CardForm: React.FC<PropsType> = React.memo(({
             <form className={styles.form} onSubmit={onSubmit}>
                 <div className={styles.formtextarea__wrap}>
                     <CreateCardTextarea
+                        maxLength={questionMaxLength}
                         register={register}
                         name='question'
                         errors={errors}
                         placeholder='enter your question'
                     />
+
+                    <div style={{fontFamily: 'arial'}}>{questionRestLimit}</div>
+
                     <CreateCardTextarea
                         register={register}
                         name='answer'
@@ -90,10 +103,10 @@ const CardForm: React.FC<PropsType> = React.memo(({
                 </div>
                 <div className={styles.formbuttons__wrap}>
                     {isEditCardMode &&
-					<CreateCardButton className={styles.form__button}>Change</CreateCardButton>}
+                    <CreateCardButton className={styles.form__button}>Change</CreateCardButton>}
 
                     {!isEditCardMode &&
-					<CreateCardButton className={styles.form__button}>Create</CreateCardButton>}
+                    <CreateCardButton className={styles.form__button}>Create</CreateCardButton>}
                 </div>
             </form>
         </div>
