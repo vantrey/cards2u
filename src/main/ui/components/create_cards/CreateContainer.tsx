@@ -32,7 +32,7 @@ const CreateContainer = () => {
     const [popupAuth, setPopupAuth] = useState<boolean>(false);
     const {isAuth, userId} = useSelector((state: AppStateType) => state.login);
     const [modal, setModal] = useState(false);
-    const currentLocation = useLocation();
+    const currentLocation = useLocation<string>();
     let currentPath = currentLocation.pathname;
 
     useEffect(() => {
@@ -147,7 +147,8 @@ const CreateContainer = () => {
             <div className={styles.create__right}></div>
             {
                 !isAuth && popupAuth && <PopupAuth setPopupAuth={setPopupAuth}
-												   modal={modal} setModal={setModal}/>
+												   modal={modal} setModal={setModal}
+												   currentPath={currentPath}/>
             }
         </div>
     )
