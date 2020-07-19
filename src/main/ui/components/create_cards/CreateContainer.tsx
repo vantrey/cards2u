@@ -127,7 +127,8 @@ const CreateContainer = () => {
                             <DefaultDeck/>
                             <div className={styles.decks__buttons}>
 							    <button onClick={onExitEditCardMode} className={styles.decks__button}>create new deck</button>
-							    <button onClick={onExitEditCardMode} className={styles.decks__button}>create new deck</button>
+							    <button onClick={onDeleteDeck} className={styles.decks__button}>delete deck</button>
+
                             </div>
                         </div>
                     </div>
