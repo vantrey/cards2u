@@ -12,7 +12,6 @@ type PropsType = {
     selectedCardId: string
 }
 
-
 const OwnCards: React.FC<PropsType> = React.memo(({
                                                       cards,
                                                       cardPackName,
@@ -26,7 +25,7 @@ const OwnCards: React.FC<PropsType> = React.memo(({
         const currentCardElement = document.getElementById(selectedCardId + 1);
         if(isEditCardMode && currentCardElement) {
             currentCardElement.style.backgroundColor = '#1a237e';
-        } else if (!isEditCardMode && currentCardElement) {
+        } else if (!isEditCardMode && currentCardElement && !selectedCardId) {
             currentCardElement.style.backgroundColor = 'transparent';
         }
     }, [selectedCardId, isEditCardMode]);
@@ -45,6 +44,9 @@ const OwnCards: React.FC<PropsType> = React.memo(({
                     <div className={styles.data__item_box}>
                         {cards.length === 0 ? <EmptyDeck/> :
                             (cards.map(cards =>
+
+
+
                                 <div key={cards._id} className={styles.data__item} id={cards._id + 1}>
                                     <div className={styles.item__question}>{cards.question}</div>
                                     <div className={styles.data__border}></div>

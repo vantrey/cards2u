@@ -37,7 +37,7 @@ const CreateContainer = () => {
 
     useEffect(() => {
         dispatch(loginActions.setCurrentLocation(currentPath));
-    }, [currentPath])
+    }, [currentPath]);
 
     const selectedCard = useMemo(() => {
         return cards.find(c => c._id === selectedCardId);
@@ -76,7 +76,7 @@ const CreateContainer = () => {
                 setShowOwnCards(true);
             },4000)
         }
-    },[effect])
+    },[effect]);
 
     useEffect(() => {
         let timerId = setTimeout(() => {
