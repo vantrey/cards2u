@@ -53,8 +53,8 @@ input[type="checkbox"]:not(:checked) + label {
     height: 100%;
 }
 
-input[type="checkbox"]:checked + label:before,
-input[type="checkbox"]:not(:checked) + label:before {
+input[type="checkbox"]:checked + label.form__label:before,
+input[type="checkbox"]:not(:checked) + label.form__label:before {
     content: "";
     position: absolute;
     border: 1px solid orange;
@@ -83,8 +83,8 @@ input[type="checkbox"]:not(:checked) + label:after {
     transition: all 0.2s ease;
 }
 
-input[type="checkbox"]:checked + label:after,
-input[type="checkbox"]:not(:checked) + label:after {
+input[type="checkbox"]:checked + label.form__label:after,
+input[type="checkbox"]:not(:checked) + label.form__label:after {
     left: 32%;
     top: 0;
     width: 15px;

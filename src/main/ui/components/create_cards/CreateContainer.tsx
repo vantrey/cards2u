@@ -12,6 +12,9 @@ import CreateDeckForm from "./createDeckForm/CreateDeckForm";
 import { deleteDeck } from '../../../bll/currentUserDecks/currentUserDecksReducer';
 import { useIsSuccessWithNotFirstRendering } from '../../../helpers/firstRenderHook';
 import OwnCardsLogout from './cards/ownCardsLogout/OwnCardsLogout';
+import PopupAuth from "../../common/popUp/popUp_Authorization/PopupAuth";
+import {loginActions} from "../../../auth/login/loginReducer";
+import {useLocation} from "react-router-dom";
 
 
 const CreateContainer = () => {
@@ -26,6 +29,15 @@ const CreateContainer = () => {
     const [isEditCardMode, setIsEditCardMode] = useState<boolean>(false);
     const [selectedCardId, setSelectedCardId] = useState<string>('');
     const [isMultiDeck, setIsMultiDeck] = useState<boolean>(false);
+    const [popupAuth, setPopupAuth] = useState<boolean>(false);
+    const {isAuth, userId} = useSelector((state: AppStateType) => state.login);
+    const [modal, setModal] = useState(false);
+    const currentLocation = useLocation<string>();
+    let currentPath = currentLocation.pathname;
+
+    useEffect(() => {
+        dispatch(loginActions.setCurrentLocation(currentPath));
+    }, [currentPath])
 
     const selectedCard = useMemo(() => {
         return cards.find(c => c._id === selectedCardId);
@@ -66,6 +78,16 @@ const CreateContainer = () => {
         }
     },[effect])
 
+    useEffect(() => {
+        let timerId = setTimeout(() => {
+            setPopupAuth(true)
+        }, 500)
+
+        return () => {
+            clearTimeout(timerId)
+        }
+    }, []);
+
     return (
         <div className={styles.create__wrap}>
             <div className={styles.create__left}></div>
@@ -105,7 +127,8 @@ const CreateContainer = () => {
                             <DefaultDeck/>
                             <div className={styles.decks__buttons}>
 							    <button onClick={onExitEditCardMode} className={styles.decks__button}>create new deck</button>
-							    <button onClick={onExitEditCardMode} className={styles.decks__button}>create new deck</button>
+							    <button onClick={onDeleteDeck} className={styles.decks__button}>delete deck</button>
+
                             </div>
                         </div>
                     </div>
@@ -123,6 +146,11 @@ const CreateContainer = () => {
                 </div>
             </div>
             <div className={styles.create__right}></div>
+            {
+                !isAuth && popupAuth && <PopupAuth setPopupAuth={setPopupAuth}
+												   modal={modal} setModal={setModal}
+												   currentPath={currentPath}/>
+            }
         </div>
     )
 };

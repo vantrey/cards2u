@@ -80,8 +80,6 @@ const CardForm: React.FC<PropsType> = React.memo(({
 
     return (
         <div className={styles.cardform__wrap}>
-            {/*<button onClick={onDeleteDeck}>del pack</button>  /!*temp for del packs*!/*/}
-
             <form className={styles.form} onSubmit={onSubmit}>
                 <div className={styles.formtextarea__wrap}>
                     <CreateCardTextarea
