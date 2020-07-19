@@ -31,7 +31,7 @@ const CreateDeckForm: React.FC<PropsType> = React.memo(({
     });
 
     const {register, handleSubmit, errors, reset, watch} = useForm<CreateDeckFormType>({
-        mode: 'onChange',
+        mode: 'onBlur',
         validationSchema: schema
     });
 
