@@ -108,7 +108,7 @@ const CreateContainer = () => {
                     </div>
                     <div className={styles.main__content}>
                         <div className={styles.main__forms}>
-                            {isSuccess && !isMultiDeck &&
+                            {ownCards && !isMultiDeck &&
                             <CardForm
                                 onDeleteDeck={onDeleteDeck}
                                 cardsPack_id={cardsPack_id}
@@ -117,7 +117,7 @@ const CreateContainer = () => {
                                 selectedCard={selectedCard}
                             />}
 
-                            {isSuccess && isMultiDeck &&
+                            {ownCards && isMultiDeck &&
                             <MultiAnswerCardForm
                                 isEditCardMode={isEditCardMode}
                                 selectedCard={selectedCard}
