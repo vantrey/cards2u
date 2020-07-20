@@ -14,6 +14,10 @@ import OwnCardsLogout from './cards/ownCardsLogout/OwnCardsLogout';
 import PopupAuth from "../../common/popUp/popUp_Authorization/PopupAuth";
 import {loginActions} from "../../../auth/login/loginReducer";
 import {useLocation} from "react-router-dom";
+import {
+    currentUserCardsActions,
+    deleteCurrentUserCard
+} from "../../../bll/currentUserCardsReducer/currentUserCardsReducer";
 
 
 const CreateContainer = () => {
@@ -21,7 +25,8 @@ const CreateContainer = () => {
     const dispatch = useDispatch();
     const [effect, setEffect] = useState(false);
     const [ownCards, setShowOwnCards] = useState(false);
-    const {cards,
+    const {
+        cards,
         cardPackName,
         cardsPack_id,
         isSuccess
@@ -55,8 +60,7 @@ const CreateContainer = () => {
     }, []);
 
     const onExitEditCardMode = useCallback(() => {
-        setEffect(true);
-        dispatch(cardsActions.set_Success(false))
+        dispatch(currentUserCardsActions.set_Success(false));
     }, []);
 
     const onIsMultiDeckChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,28 +69,35 @@ const CreateContainer = () => {
 
     const onDeleteDeck = useCallback(() => {
         dispatch(deleteDeck(cardsPack_id));
+        dispatch(currentUserCardsActions.set_Success(false));
     }, [cardsPack_id]);
 
     const onDeleteCard = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-        dispatch(delete_Card(e.currentTarget.id));
+        dispatch(deleteCurrentUserCard(e.currentTarget.id));
         setIsEditCardMode(false)
     }, []);
 
-    useEffect( () => {
-        if(effect) {
-            setTimeout( ()=>{
+    useEffect(() => {
+        if (isSuccess && !effect) {
+            setEffect(true);
+            setTimeout(() => {
                 setShowOwnCards(true);
-            },4000)
+
+            }, 4000);
         }
-    },[effect]);
+        if (!isSuccess) {
+            setShowOwnCards(false);
+            setEffect(false);
+        }
+    }, [isSuccess, effect]);
 
     useEffect(() => {
         let timerId = setTimeout(() => {
-            setPopupAuth(true)
+            setPopupAuth(true);
         }, 500);
 
         return () => {
-            clearTimeout(timerId)
+            clearTimeout(timerId);
         }
     }, []);
 
@@ -100,44 +111,58 @@ const CreateContainer = () => {
                     </div>
                     <div className={styles.main__content}>
                         <div className={styles.main__forms}>
-                            {isSuccess && !isMultiDeck &&
-							<CardForm
-								onDeleteDeck={onDeleteDeck}
-								cardsPack_id={cardsPack_id}
-								setIsEditCardMode={setIsEditCardMode}
-								isEditCardMode={isEditCardMode}
-								selectedCard={selectedCard}
-							/>}
+                            {ownCards && !isMultiDeck &&
+                            <CardForm
+                                cardsPack_id={cardsPack_id}
+                                setIsEditCardMode={setIsEditCardMode}
+                                isEditCardMode={isEditCardMode}
+                                selectedCard={selectedCard}
+                            />}
 
-                            {isSuccess && isMultiDeck &&
-							<MultiAnswerCardForm
-								isEditCardMode={isEditCardMode}
-								selectedCard={selectedCard}
-								setIsEditCardMode={setIsEditCardMode}
-								cardsPack_id={cardsPack_id}
-							/>
+                            {ownCards && isMultiDeck &&
+                            <MultiAnswerCardForm
+                                isEditCardMode={isEditCardMode}
+                                selectedCard={selectedCard}
+                                setIsEditCardMode={setIsEditCardMode}
+                                cardsPack_id={cardsPack_id}
+                            />
                             }
 
                             {!isSuccess &&
-							<CreateDeckForm
-								onIsMultiDeckChange={onIsMultiDeckChange}
-								isMultiDeck={isMultiDeck}
-							/>}
+                            <CreateDeckForm
+                                onIsMultiDeckChange={onIsMultiDeckChange}
+                                isMultiDeck={isMultiDeck}
+                            />}
 
                         </div>
                         <div className={styles.main__decks}>
                             <DefaultDeck/>
                             <div className={styles.decks__buttons}>
-							    <button onClick={onExitEditCardMode} className={styles.decks__button}>create new deck</button>
-							    <button onClick={onDeleteDeck} className={styles.decks__button}>delete deck</button>
+
+                                <button
+                                    onClick={onExitEditCardMode}
+                                    className={styles.decks__button}
+                                    disabled={!isSuccess}
+                                >
+                                    create new deck
+                                </button>
+
+                                <button
+                                    onClick={onDeleteDeck}
+                                    className={styles.decks__button}
+                                    disabled={!isSuccess}
+                                >
+                                    delete deck
+                                </button>
 
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className={styles.create__aside}>
-                    { !ownCards && <OwnCardsLogout effect={effect}/>}
-                    { ownCards && <OwnCards
+                    {!ownCards && <OwnCardsLogout effect={effect}/>}
+                    {ownCards && <OwnCards
+                        onDeleteCard={onDeleteCard}
                         onCancelEditCardClick={onCancelEditCardClick}
                         cards={cards}
                         cardPackName={cardPackName}
@@ -150,8 +175,8 @@ const CreateContainer = () => {
             <div className={styles.create__right}></div>
             {
                 !isAuth && popupAuth && <PopupAuth setPopupAuth={setPopupAuth}
-												   modal={modal} setModal={setModal}
-												   currentPath={currentPath}/>
+                                                   modal={modal} setModal={setModal}
+                                                   currentPath={currentPath}/>
             }
         </div>
     )

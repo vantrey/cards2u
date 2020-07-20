@@ -55,7 +55,7 @@ export const currentUserCardsReducer = (state: initialStateType = initialState, 
         case "CURRENT_USER_CARDS_REDUCER/ADD_CARD_SUCCESS":
             return {
                 ...state,
-                cards: [...state.cards, action.newCard]
+                cards: [action.newCard, ...state.cards]
             };
 
         case "CURRENT_USER_CARDS_REDUCER/DEL_CARD_SUCCESS":

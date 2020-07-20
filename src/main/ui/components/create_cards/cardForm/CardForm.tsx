@@ -24,7 +24,6 @@ type PropsType = {
     selectedCard: CardType | undefined
     setIsEditCardMode: React.Dispatch<React.SetStateAction<boolean>>
     cardsPack_id: string
-    onDeleteDeck: () => void
 }
 
 const CardForm: React.FC<PropsType> = React.memo(({
@@ -32,7 +31,7 @@ const CardForm: React.FC<PropsType> = React.memo(({
                                                       selectedCard,
                                                       setIsEditCardMode,
                                                       cardsPack_id,
-                                                      onDeleteDeck,
+
                                                   }) => {
 
     const dispatch = useDispatch();
