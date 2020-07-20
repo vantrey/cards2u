@@ -128,7 +128,7 @@ const CreateContainer = () => {
                             />
                             }
 
-                            {!isSuccess &&
+                            {!ownCards &&
                             <CreateDeckForm
                                 onIsMultiDeckChange={onIsMultiDeckChange}
                                 isMultiDeck={isMultiDeck}
