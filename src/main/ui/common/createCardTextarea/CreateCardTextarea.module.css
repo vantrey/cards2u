@@ -1,8 +1,16 @@
+.form__wrap {
+  width: auto;
+  height: auto;
+  position: relative;
+
+}
+
 .form__item {
   position: relative;
   width: 100%;
   margin-bottom: 10px;
   overflow: hidden;
+  outline: none;
 
 }
 
@@ -138,8 +146,8 @@
   -webkit-box-pack: center;
   -ms-flex-pack: center;
 
-  bottom: -86%;
-  height: 80%;
+  top: -130px;
+  height: 90%;
   width: 98%;
   left: 1%;
 }
@@ -168,16 +176,28 @@
   padding: 0;
 }
 
-.form__textarea:focus  + .tooltip,
-.form__textarea:active + .tooltip {
+.form__item:focus-within + .tooltip
+ {
   visibility: visible;
-  transform: translateY(-10px);
+  transform: translateY(20px);
   opacity: 1;
   border-color: transparent;
   transition: all 0.15s linear 0s;
 
   animation: tooltip 1s ease-in-out infinite alternate;
 
+}
+
+.tooltip__arrow {
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  border: 12px solid transparent;
+  border-top-color: #393939;
+  border-bottom: 0;
 }
 
 /*========*/
