@@ -121,6 +121,7 @@
     max-height: 560px;
     overflow: hidden;
     overflow-y: auto;
+    scroll-behavior: smooth;
     display: flex;
     border: 1px solid transparent;
     flex-direction: column;

@@ -29,7 +29,11 @@ const CreateCardTextarea: React.FC<PropsType> = ({
                 {...props}
                 name={name}
             />
-
+            <div className={styles.tooltip}>
+                <div className={styles.tooltip_wrap}>
+                    <h4 className={styles.tooltip_title}>123</h4>
+                </div>
+            </div>
             <div style={{fontFamily: 'arial'}}>{restLimit}</div>
 
             {errors[name] &&
