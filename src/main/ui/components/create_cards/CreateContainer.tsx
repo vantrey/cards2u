@@ -18,19 +18,23 @@ import {
     currentUserCardsActions,
     deleteCurrentUserCard
 } from "../../../bll/currentUserCardsReducer/currentUserCardsReducer";
+import Loader from "../../common/loader/Loader";
 
 
 const CreateContainer = () => {
 
     const dispatch = useDispatch();
-    const [effect, setEffect] = useState(false);
-    const [ownCards, setShowOwnCards] = useState(false);
     const {
         cards,
         cardPackName,
         cardsPack_id,
-        isSuccess
+        isSuccess,
+        isCardsFetching,
+        isEffect,
+        isStartMode
     } = useSelector((state: AppStateType) => state.currentUserCards);
+    const {isCurrentUserDecksFetching} = useSelector((state: AppStateType) => state.currentUserDecks);
+    const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
     const [selectUser, setSelectUser] = useState<boolean>(false);  //doesnt use yet
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);  //doesnt use yet
     const [isEditCardMode, setIsEditCardMode] = useState<boolean>(false);
@@ -39,6 +43,7 @@ const CreateContainer = () => {
     const [popupAuth, setPopupAuth] = useState<boolean>(false);
     const {isAuth, userId} = useSelector((state: AppStateType) => state.login);
     const [modal, setModal] = useState(false);
+    const [ownCards, setShowOwnCards] = useState(isSuccess);
     const currentLocation = useLocation<string>();
     let currentPath = currentLocation.pathname;
 
@@ -78,18 +83,17 @@ const CreateContainer = () => {
     }, []);
 
     useEffect(() => {
-        if (isSuccess && !effect) {
-            setEffect(true);
+        if (isSuccess && !isEffect) {
+            dispatch(currentUserCardsActions.setIsEffect(true));
             setTimeout(() => {
                 setShowOwnCards(true);
-
             }, 4000);
         }
-        if (!isSuccess) {
+        if (!isSuccess && isEffect) {
             setShowOwnCards(false);
-            setEffect(false);
+            dispatch(currentUserCardsActions.setIsEffect(false));
         }
-    }, [isSuccess, effect]);
+    }, [isSuccess, isEffect]);
 
     useEffect(() => {
         let timerId = setTimeout(() => {
@@ -111,7 +115,7 @@ const CreateContainer = () => {
                     </div>
                     <div className={styles.main__content}>
                         <div className={styles.main__forms}>
-                            {ownCards && !isMultiDeck &&
+                            {isSuccess && !isMultiDeck &&
                             <CardForm
                                 cardsPack_id={cardsPack_id}
                                 setIsEditCardMode={setIsEditCardMode}
@@ -119,7 +123,7 @@ const CreateContainer = () => {
                                 selectedCard={selectedCard}
                             />}
 
-                            {ownCards && isMultiDeck &&
+                            {isSuccess && isMultiDeck &&
                             <MultiAnswerCardForm
                                 isEditCardMode={isEditCardMode}
                                 selectedCard={selectedCard}
@@ -133,6 +137,8 @@ const CreateContainer = () => {
                                 onIsMultiDeckChange={onIsMultiDeckChange}
                                 isMultiDeck={isMultiDeck}
                             />}
+
+                            {isPreventFetching && <Loader/>}
 
                         </div>
                         <div className={styles.main__decks}>
@@ -160,7 +166,7 @@ const CreateContainer = () => {
                     </div>
                 </div>
                 <div className={styles.create__aside}>
-                    {!ownCards && <OwnCardsLogout effect={effect}/>}
+                    {!ownCards && <OwnCardsLogout effect={isEffect}/>}
                     {ownCards && <OwnCards
                         onDeleteCard={onDeleteCard}
                         onCancelEditCardClick={onCancelEditCardClick}
@@ -169,6 +175,7 @@ const CreateContainer = () => {
                         isEditCardMode={isEditCardMode}
                         onEditCardClick={onEditCardClick}
                         selectedCardId={selectedCardId}
+                        isCardsFetching={isCardsFetching}
                     />}
                 </div>
             </div>

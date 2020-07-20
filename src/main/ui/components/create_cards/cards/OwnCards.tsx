@@ -11,6 +11,7 @@ type PropsType = {
     onCancelEditCardClick: () => void
     selectedCardId: string
     onDeleteCard: (e: React.MouseEvent<HTMLButtonElement>) => void
+    isCardsFetching: boolean
 }
 
 
@@ -21,7 +22,8 @@ const OwnCards: React.FC<PropsType> = React.memo(({
                                                       isEditCardMode,
                                                       onCancelEditCardClick,
                                                       selectedCardId,
-                                                      onDeleteCard
+                                                      onDeleteCard,
+                                                      isCardsFetching,
                                                   }) => {
 
     useEffect(() => {
@@ -66,6 +68,7 @@ const OwnCards: React.FC<PropsType> = React.memo(({
                                             edit
                                         </button>}
                                         <button
+                                            disabled={isCardsFetching}
                                             id={cards._id}
                                             onClick={onDeleteCard}
                                             className={styles.data__button}
