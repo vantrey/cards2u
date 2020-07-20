@@ -6,6 +6,7 @@ import {repository} from "../../helpers/repos_localStorage/Token";
 import {cardPacksApi} from "../../features/cardsPacks/dal/cardPacksApi";
 import {cardsApi} from "../../features/Cards/dal/сardsApi";
 import {cardsActions, get_Cards} from "../../features/Cards/bll/cardsReducer";
+import {getCurrentUserCards} from "../currentUserCardsReducer/currentUserCardsReducer";
 
 const initialState = {
     currentUserDecks: [] as Array<CardPackType>,
@@ -137,7 +138,7 @@ export const createDeck = (newCardsPack: { name: string }): ThunkType => async (
         repository.saveToken(response.data.token, response.data.tokenDeathTime);
 
         const cardsPack = response.data.newCardsPack;
-        dispatch(get_Cards(cardsPack._id, cardsPack.name));
+        dispatch(getCurrentUserCards(cardsPack._id, cardsPack.name));
         dispatch(currentUserDecksActions.setIsFetching(false));
         dispatch(setIsPreventFetching(false));
 
