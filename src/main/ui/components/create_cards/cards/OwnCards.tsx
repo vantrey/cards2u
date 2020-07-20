@@ -23,15 +23,6 @@ const OwnCards: React.FC<PropsType> = React.memo(({
                                                       onDeleteCard
                                                   }) => {
 
-    useEffect(() => {
-        const currentCardElement = document.getElementById(selectedCardId + 1);
-        if (isEditCardMode && currentCardElement) {
-            currentCardElement.style.backgroundColor = '#1a237e';
-        } else if (!isEditCardMode && currentCardElement && !selectedCardId) {
-            currentCardElement.style.backgroundColor = 'transparent';
-        }
-    }, [selectedCardId, isEditCardMode]);
-
     return (
         <div className={styles.container__rightBlock}>
             <div className={styles.deckInfo__wrap}>
@@ -45,38 +36,39 @@ const OwnCards: React.FC<PropsType> = React.memo(({
                     </div>
                     <div className={styles.data__item_box}>
                         {cards.length === 0 ? <EmptyDeck/> :
-                            (cards.map(cards =>
+                            (cards.map(cards => {
+                                const classForItem = isEditCardMode  && cards._id === selectedCardId ? `${styles.data__item_active}` :
+                                    `${styles.data__item}`
+                                return (
+                                    <div key={cards._id} className={classForItem} >
+                                        <div className={styles.item__question}>{cards.question}</div>
+                                        <div className={styles.data__border}></div>
+                                        <div className={styles.item__answer}>{cards.answer}</div>
+                                        <div className={styles.data__border}></div>
+                                        <div className={styles.data__buttons}>
+                                            {isEditCardMode && cards._id === selectedCardId &&
+											<button className={styles.data__button} onClick={onCancelEditCardClick}>
+												cancel
+											</button>}
 
-
-
-                                <div key={cards._id} className={styles.data__item} id={cards._id + 1}>
-                                    <div className={styles.item__question}>{cards.question}</div>
-                                    <div className={styles.data__border}></div>
-                                    <div className={styles.item__answer}>{cards.answer}</div>
-                                    <div className={styles.data__border}></div>
-                                    <div className={styles.data__buttons}>
-                                        {isEditCardMode && cards._id === selectedCardId &&
-                                        <button className={styles.data__button} onClick={onCancelEditCardClick}>
-                                            cancel
-                                        </button>}
-
-                                        {(isEditCardMode && cards._id !== selectedCardId || !isEditCardMode) &&
-                                        <button className={styles.data__button}
+                                            {(isEditCardMode && cards._id !== selectedCardId || !isEditCardMode) &&
+											<button className={styles.data__button}
+													id={cards._id}
+													onClick={onEditCardClick}
+											>
+												edit
+											</button>}
+                                            <button
                                                 id={cards._id}
-                                                onClick={onEditCardClick}
-                                        >
-                                            edit
-                                        </button>}
-                                        <button
-                                            id={cards._id}
-                                            onClick={onDeleteCard}
-                                            className={styles.data__button}
-                                        >
-                                            delete
-                                        </button>
+                                                onClick={onDeleteCard}
+                                                className={styles.data__button}
+                                            >
+                                                delete
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            ))
+                                )
+                            }))
                         }
                     </div>
                 </div>
