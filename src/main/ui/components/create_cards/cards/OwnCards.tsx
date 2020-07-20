@@ -23,6 +23,23 @@ const OwnCards: React.FC<PropsType> = React.memo(({
                                                       onDeleteCard
                                                   }) => {
 
+    useEffect(() => {
+
+        const currentCardElement = document.getElementById(selectedCardId + 1);
+
+        if (isEditCardMode && currentCardElement) {
+            currentCardElement.style.backgroundColor = '#1a237e';
+        } else if (!isEditCardMode && currentCardElement) {
+            currentCardElement.style.backgroundColor = 'transparent';
+        }
+        return () => {
+            if (isEditCardMode && currentCardElement) {
+                currentCardElement.style.backgroundColor = 'transparent';
+            }
+        }
+
+    }, [selectedCardId, isEditCardMode]);
+
     return (
         <div className={styles.container__rightBlock}>
             <div className={styles.deckInfo__wrap}>
@@ -37,10 +54,10 @@ const OwnCards: React.FC<PropsType> = React.memo(({
                     <div className={styles.data__item_box}>
                         {cards.length === 0 ? <EmptyDeck/> :
                             (cards.map(cards => {
-                                const classForItem = isEditCardMode  && cards._id === selectedCardId ? `${styles.data__item_active}` :
-                                    `${styles.data__item}`
+                                // const classForItem = isEditCardMode  && cards._id === selectedCardId ? `${styles.data__item_active}` :
+                                //     `${styles.data__item}`
                                 return (
-                                    <div key={cards._id} className={classForItem} >
+                                    <div key={cards._id} className={styles.data__item} 	id={cards._id +1}>
                                         <div className={styles.item__question}>{cards.question}</div>
                                         <div className={styles.data__border}></div>
                                         <div className={styles.item__answer}>{cards.answer}</div>
