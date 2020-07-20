@@ -14,7 +14,10 @@ import OwnCardsLogout from './cards/ownCardsLogout/OwnCardsLogout';
 import PopupAuth from "../../common/popUp/popUp_Authorization/PopupAuth";
 import {loginActions} from "../../../auth/login/loginReducer";
 import {useLocation} from "react-router-dom";
-import {currentUserCardsActions} from "../../../bll/currentUserCardsReducer/currentUserCardsReducer";
+import {
+    currentUserCardsActions,
+    deleteCurrentUserCard
+} from "../../../bll/currentUserCardsReducer/currentUserCardsReducer";
 
 
 const CreateContainer = () => {
@@ -70,7 +73,7 @@ const CreateContainer = () => {
     }, [cardsPack_id]);
 
     const onDeleteCard = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-        dispatch(delete_Card(e.currentTarget.id));
+        dispatch(deleteCurrentUserCard(e.currentTarget.id));
         setIsEditCardMode(false)
     }, []);
 
@@ -110,7 +113,6 @@ const CreateContainer = () => {
                         <div className={styles.main__forms}>
                             {ownCards && !isMultiDeck &&
                             <CardForm
-                                onDeleteDeck={onDeleteDeck}
                                 cardsPack_id={cardsPack_id}
                                 setIsEditCardMode={setIsEditCardMode}
                                 isEditCardMode={isEditCardMode}
@@ -160,6 +162,7 @@ const CreateContainer = () => {
                 <div className={styles.create__aside}>
                     {!ownCards && <OwnCardsLogout effect={effect}/>}
                     {ownCards && <OwnCards
+                        onDeleteCard={onDeleteCard}
                         onCancelEditCardClick={onCancelEditCardClick}
                         cards={cards}
                         cardPackName={cardPackName}
