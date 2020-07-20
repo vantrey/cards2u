@@ -1,13 +1,13 @@
 import React, {useEffect, useMemo} from 'react';
 import {useForm} from "react-hook-form";
-import {CardType} from "../../../../types/entities";
+import {CardType} from "../../../../../types/entities";
 import {useDispatch} from "react-redux";
-import {add_Card, delete_Card, update_Card} from "../../../../features/Cards/bll/cardsReducer";
+import {add_Card, delete_Card, update_Card} from "../../../../../features/Cards/bll/cardsReducer";
 import * as yup from "yup";
-import CreateCardTextarea from "../../../common/createCardTextarea/CreateCardTextarea";
+import CreateCardTextarea from "../../../../common/createCardTextarea/CreateCardTextarea";
 import styles from "./MultiAnswerCardForm.module.css";
-import CreateCardButton from "../../../common/CreateCardButton/CreateCardButton";
-import {getRestLimit} from "../../../../helpers/restLimit/restLimit";
+import CreateCardButton from "../../../../common/CreateCardButton/CreateCardButton";
+import {getRestLimit} from "../../../../../helpers/restLimit/restLimit";
 
 
 type AlternativeFormType = {

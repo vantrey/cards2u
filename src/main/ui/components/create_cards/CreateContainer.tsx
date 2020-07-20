@@ -6,9 +6,9 @@ import OwnCards from "./cards/OwnCards";
 import {AppStateType} from "../../../bll/store/store";
 import {cardsActions, delete_Card} from "../../../features/Cards/bll/cardsReducer";
 import DefaultDeck from "./defaultDeck/DefaultDeck";
-import CardForm from "./cardForm/CardForm";
-import MultiAnswerCardForm from "./multiAnswerCardForm/MultiAnswerCardForm";
-import CreateDeckForm from "./createDeckForm/CreateDeckForm";
+import CardForm from "./forms/cardForm/CardForm";
+import MultiAnswerCardForm from "./forms/multiAnswerCardForm/MultiAnswerCardForm";
+import CreateDeckForm from "./forms/createDeckForm/CreateDeckForm";
 import {deleteDeck} from '../../../bll/currentUserDecks/currentUserDecksReducer';
 import OwnCardsLogout from './cards/ownCardsLogout/OwnCardsLogout';
 import PopupAuth from "../../common/popUp/popUp_Authorization/PopupAuth";
@@ -19,6 +19,7 @@ import {
     deleteCurrentUserCard
 } from "../../../bll/currentUserCardsReducer/currentUserCardsReducer";
 import Loader from "../../common/loader/Loader";
+import Forms from "./forms/Forms";
 
 
 const CreateContainer = () => {
@@ -64,8 +65,9 @@ const CreateContainer = () => {
         setIsEditCardMode(false);
     }, []);
 
-    const onExitEditCardMode = useCallback(() => {
+    const onCreateDeckClick = useCallback(() => {
         dispatch(currentUserCardsActions.set_Success(false));
+        dispatch(currentUserCardsActions.setIsStartMode(false));
     }, []);
 
     const onIsMultiDeckChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,41 +116,32 @@ const CreateContainer = () => {
                         <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
                     </div>
                     <div className={styles.main__content}>
+
                         <div className={styles.main__forms}>
-                            {isSuccess && !isMultiDeck &&
-                            <CardForm
-                                cardsPack_id={cardsPack_id}
-                                setIsEditCardMode={setIsEditCardMode}
-                                isEditCardMode={isEditCardMode}
-                                selectedCard={selectedCard}
-                            />}
 
-                            {isSuccess && isMultiDeck &&
-                            <MultiAnswerCardForm
-                                isEditCardMode={isEditCardMode}
-                                selectedCard={selectedCard}
-                                setIsEditCardMode={setIsEditCardMode}
-                                cardsPack_id={cardsPack_id}
-                            />
-                            }
+                            {isStartMode &&
+                            <div>ЗАГЛУШКА</div>}
 
-                            {!isSuccess &&
-                            <CreateDeckForm
-                                onIsMultiDeckChange={onIsMultiDeckChange}
-                                isMultiDeck={isMultiDeck}
-                            />}
-
-                            {isPreventFetching && <Loader/>}
-
+                            {!isStartMode &&
+                            <Forms
+                            isSuccess={isSuccess}
+                            isMultiDeck={isMultiDeck}
+                            cardsPack_id={cardsPack_id}
+                            setIsEditCardMode={setIsEditCardMode}
+                            isEditCardMode={isEditCardMode}
+                            selectedCard={selectedCard}
+                            onIsMultiDeckChange={onIsMultiDeckChange}
+                            isPreventFetching={isPreventFetching}
+                        />}
                         </div>
+
                         <div className={styles.main__decks}>
                             <DefaultDeck/>
                             <div className={styles.decks__buttons}>
 
                                 <button
-                                    onClick={onExitEditCardMode}
+                                    onClick={onCreateDeckClick}
                                     className={styles.decks__button}
-                                    disabled={!isSuccess}
                                 >
                                     create new deck
                                 </button>

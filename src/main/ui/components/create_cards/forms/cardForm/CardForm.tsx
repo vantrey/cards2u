@@ -1,17 +1,17 @@
 import React, {useEffect, useMemo} from 'react';
 import {useForm} from "react-hook-form";
-import {CardType} from "../../../../types/entities";
+import {CardType} from "../../../../../types/entities";
 import {useDispatch} from "react-redux";
-import {add_Card, delete_Card, update_Card} from "../../../../features/Cards/bll/cardsReducer";
+import {add_Card, delete_Card, update_Card} from "../../../../../features/Cards/bll/cardsReducer";
 import styles from "./CardForm.module.css";
-import CreateCardTextarea from "../../../common/createCardTextarea/CreateCardTextarea";
+import CreateCardTextarea from "../../../../common/createCardTextarea/CreateCardTextarea";
 import * as yup from "yup";
-import CreateCardButton from "../../../common/CreateCardButton/CreateCardButton";
-import {getRestLimit} from "../../../../helpers/restLimit/restLimit";
+import CreateCardButton from "../../../../common/CreateCardButton/CreateCardButton";
+import {getRestLimit} from "../../../../../helpers/restLimit/restLimit";
 import {
     addCurrentUserCard,
     updateCurrentUserCard
-} from "../../../../bll/currentUserCardsReducer/currentUserCardsReducer";
+} from "../../../../../bll/currentUserCardsReducer/currentUserCardsReducer";
 
 
 type CardFormType = {

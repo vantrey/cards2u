@@ -1,12 +1,12 @@
 import React, {useMemo} from 'react';
 import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
-import {createDeck} from "../../../../bll/currentUserDecks/currentUserDecksReducer";
+import {createDeck} from "../../../../../bll/currentUserDecks/currentUserDecksReducer";
 import styles from "./CreateDeckForm.module.css"
-import CreateCardTextarea from "../../../common/createCardTextarea/CreateCardTextarea";
+import CreateCardTextarea from "../../../../common/createCardTextarea/CreateCardTextarea";
 import * as yup from "yup";
-import CreateCardButton from "../../../common/CreateCardButton/CreateCardButton";
-import {getRestLimit} from "../../../../helpers/restLimit/restLimit";
+import CreateCardButton from "../../../../common/CreateCardButton/CreateCardButton";
+import {getRestLimit} from "../../../../../helpers/restLimit/restLimit";
 
 type CreateDeckFormType = {
     deckName: string
