@@ -25,13 +25,19 @@ const OwnCards: React.FC<PropsType> = React.memo(({
                                                       onDeleteCard,
                                                       isCardsFetching,
                                                   }) => {
-
     useEffect(() => {
+
         const currentCardElement = document.getElementById(selectedCardId + 1);
+
         if (isEditCardMode && currentCardElement) {
             currentCardElement.style.backgroundColor = '#1a237e';
         } else if (!isEditCardMode && currentCardElement) {
             currentCardElement.style.backgroundColor = 'transparent';
+        }
+        return () => {
+            if (isEditCardMode && currentCardElement) {
+                currentCardElement.style.backgroundColor = 'transparent';
+            }
         }
     }, [selectedCardId, isEditCardMode]);
 
