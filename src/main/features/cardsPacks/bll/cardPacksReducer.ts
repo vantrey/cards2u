@@ -128,26 +128,7 @@ export const getCardPacks = (currentPage: number | null,
         }
     };
 
-export const globalSearchForDecks = (deckName:string|null): ThunkType =>
-    async (dispatch: DispatchType) => {
-        try {
-            dispatch(setIsPreventFetching(true));
-            dispatch(cardPacksActions.setIsFetching(true));
-            let token = repository.getToken();
-                const response = await cardPacksApi.getPacksForSearch(token, deckName)
-                dispatch(cardPacksActions.getCardPacksSuccess(response.data.cardPacks, response.data.cardPacksTotalCount));
-                repository.saveToken(response.data.token, response.data.tokenDeathTime);
-                dispatch(cardPacksActions.setIsSuccess(true));
-                dispatch(cardPacksActions.setIsFetching(false));
-                dispatch(setIsPreventFetching(false));
-        } catch (e) {
-            dispatch(cardPacksActions.setError(e.response.data.error));
-            repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
-            dispatch(cardPacksActions.setIsSuccess(false));
-            dispatch(cardPacksActions.setIsFetching(false));
-            dispatch(setIsPreventFetching(false));
-        }
-    };
+
 
 export const createCardsPack = (newCardsPack: { name: string }): ThunkType => async (dispatch: DispatchType) => {
     try {

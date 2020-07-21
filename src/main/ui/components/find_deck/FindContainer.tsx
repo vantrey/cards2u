@@ -161,7 +161,7 @@ const FindContainer: React.FC = () => {
                     </div>
 
                     {!isAuth && <DecksLogout/>}
-                    {isAuth && !selectUser && !decksQuestions && <SearchByDeckName/>}
+                    {isAuth && !selectUser && !decksQuestions && <DecksLogout/>}
                     {isAuth && selectUser && !decksQuestions && <DecksNames
 						nameUser={nameUser} onSelectDeck={onSelectDeck} deckscount={deckscount}/>}
                     {isAuth && selectUser && decksQuestions && <DecksQuestions

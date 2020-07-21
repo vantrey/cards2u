@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {globalSearchForDecks} from '../../../features/cardsPacks/bll/cardPacksReducer';
+import {globalSearchForDecks} from '../../../bll/searchReducer/searchReducer'
 import {AppStateType} from '../../../bll/store/store';
 import DecksNames2 from './name_deck_for_search/DecksNames2';
 
