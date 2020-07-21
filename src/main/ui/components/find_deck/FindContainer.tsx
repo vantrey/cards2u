@@ -20,6 +20,7 @@ import {repository} from '../../../helpers/repos_localStorage/Token';
 import PopupFreeSlot from './save_favorites/popup_freeSlot/PopupFreeSlot';
 import {CardType} from "../../../types/entities";
 import {updateUserFavoriteDecks} from '../../../bll/favoriteDecks/favoriteDecksReducer';
+import SearchByDeckName from '../../common/search/SearchByDeckName';
 
 
 const FindContainer: React.FC = () => {
