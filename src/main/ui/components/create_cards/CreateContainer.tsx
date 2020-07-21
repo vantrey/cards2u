@@ -147,7 +147,7 @@ const CreateContainer = () => {
                                 <button
                                     onClick={()=> {setPopupDeleteDeck (true)}}
                                     className={styles.decks__button}
-                                    disabled={!isSuccess}
+                                    disabled={!ownCards}
                                 >
                                     delete deck
                                 </button>

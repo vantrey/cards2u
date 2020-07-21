@@ -31,7 +31,7 @@ export const currentUserDecksReducer = (state = initialState, action: ActionsTyp
         case "CURRENT_USER_DECKS_REDUCER/CREATE_DECK_SUCCESS":
             return {
                 ...state,
-                currentUserDecks: [...state.currentUserDecks, action.newDeck],
+                currentUserDecks: [action.newDeck, ...state.currentUserDecks],
             };
 
         case "CURRENT_USER_DECKS_REDUCER/DELETE_DECK_SUCCESS":
