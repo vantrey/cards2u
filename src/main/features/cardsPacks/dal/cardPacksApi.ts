@@ -42,6 +42,11 @@ export const cardPacksApi = {
       `?token=${token}&page=${currentPage}&pageCount=${pageSize}&user_id=${user_id}`
     )
   },
+  getPacksForSearch(token: string | null,packName:string) {
+    return instance.get<GetPacksType>(
+      `?token=${token}&packName=${packName}`
+    )
+  },
   createCardsPack(token: string | null, cardsPack: { name: string, user_id: string | null }) {
     return instance.post<CreateCardPackType>(
       ``,

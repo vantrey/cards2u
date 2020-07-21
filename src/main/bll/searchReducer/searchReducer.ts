@@ -2,7 +2,6 @@ import {CardPackType} from '../../types/entities';
 import {setIsPreventFetching} from '../preventReques/preventRequestReducer';
 import {repository} from '../../helpers/repos_localStorage/Token';
 import {cardPacksApi} from '../../features/cardsPacks/dal/cardPacksApi';
-import {cardPacksActions} from '../../features/cardsPacks/bll/cardPacksReducer';
 import {AppStateType, InferActionTypes} from '../store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 
@@ -80,7 +79,7 @@ export const searchActions = {
 }
 
 
-export const globalSearchForDecks = (deckName: string | null): ThunkType =>
+export const globalSearchForDecks = (deckName: string): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
             dispatch(setIsPreventFetching(true));
