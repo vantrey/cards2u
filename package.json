@@ -16,6 +16,7 @@
     "gh-pages": "^2.2.0",
     "lodash": "^4.17.15",
     "normalize.css": "^8.0.1",
+    "popup": "^0.0.3",
     "react": "^16.13.1",
     "react-avatar-editor": "^11.0.9",
     "react-dom": "^16.13.1",
@@ -25,9 +26,11 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
+    "reactjs-popup": "^1.5.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "typescript": "~3.7.2",
+    "yarn": "^1.22.4",
     "yup": "^0.29.1"
   },
   "scripts": {
