@@ -134,7 +134,6 @@ export const globalSearchForDecks = (deckName:string|null): ThunkType =>
             dispatch(setIsPreventFetching(true));
             dispatch(cardPacksActions.setIsFetching(true));
             let token = repository.getToken();
-            debugger
                 const response = await cardPacksApi.getPacksForSearch(token, deckName)
                 dispatch(cardPacksActions.getCardPacksSuccess(response.data.cardPacks, response.data.cardPacksTotalCount));
                 repository.saveToken(response.data.token, response.data.tokenDeathTime);
