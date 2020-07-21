@@ -30,11 +30,7 @@ const CreateCardTextarea: React.FC<PropsType> = ({
                 {...props}
                 name={name}
             />
-
-                {/*<div style={{fontFamily: 'arial'}}>{restLimit}</div>*/}
-
                 {errors[name] &&
-
 				<div className={styles.form__warning_wrap}>
 					<div className={styles.form__warning_icon}>
 						<img src={warning} alt="warning"/>
@@ -44,9 +40,9 @@ const CreateCardTextarea: React.FC<PropsType> = ({
                 }
             </div>
             <div className={styles.tooltip}>
-                <div className={styles.tooltip_wrap}>
-                    <h4 className={styles.tooltip_title}>123 df dgd
-                        gdfgd dsfgdfgd dg dg dfsdfsdf sdfsdfsd
+                <div className={styles.tooltip__wrap}>
+                    <h4 className={styles.tooltip__title}>123 df dgd
+                        gdfgd dsfgdfgd dg <strong className={styles.tooltip__title_strong}>{restLimit}</strong> dfsdfsdf sdfsdfsd
                     </h4>
                 </div>
                 <div className={styles.tooltip__arrow}></div>

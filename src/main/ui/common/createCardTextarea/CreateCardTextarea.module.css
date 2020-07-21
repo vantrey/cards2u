@@ -2,7 +2,6 @@
   width: auto;
   height: auto;
   position: relative;
-
 }
 
 .form__item {
@@ -11,7 +10,6 @@
   margin-bottom: 10px;
   overflow: hidden;
   outline: none;
-
 }
 
 .form__warning_wrap {
@@ -119,7 +117,6 @@
   text-align: center;
 }
 
-
 /*===== стили для tooltip*/
 .tooltip {
   display: flex;
@@ -136,8 +133,8 @@
   box-sizing: border-box;
   transform: translateY(9px);
   outline: none;
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
   transition: all 0.3s ease-in-out;
-
   display: -webkit-box;
   display: -ms-flexbox;
   -webkit-box-orient: vertical;
@@ -145,21 +142,19 @@
   -ms-flex-direction: column;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-
   top: -130px;
   height: 90%;
   width: 98%;
   left: 1%;
 }
 
-
-.tooltip_wrap {
+.tooltip__wrap {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 1px;
-  font-family: 'Neucha', cursive;
-  font-size: 14px;
+  font-family: sans-serif;
+  font-size: 12px;
   display: -webkit-box;
   display: -ms-flexbox;
   -webkit-box-orient: vertical;
@@ -167,23 +162,24 @@
   -ms-flex-direction: column;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-
 }
 
-.tooltip_title {
+.tooltip__title {
   text-align: center;
   margin: 0;
   padding: 0;
 }
 
-.form__item:focus-within + .tooltip
- {
+.tooltip__title_strong {
+  color: orange;
+}
+
+.form__item:focus-within + .tooltip {
   visibility: visible;
   transform: translateY(20px);
   opacity: 1;
   border-color: transparent;
   transition: all 0.15s linear 0s;
-
   animation: tooltip 1s ease-in-out infinite alternate;
 
 }
