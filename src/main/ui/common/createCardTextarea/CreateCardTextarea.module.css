@@ -142,7 +142,7 @@
   -ms-flex-direction: column;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  top: -130px;
+  top: -150px;
   height: 90%;
   width: 98%;
   left: 1%;
@@ -176,7 +176,7 @@
 
 .form__item:focus-within + .tooltip {
   visibility: visible;
-  transform: translateY(20px);
+  transform: translateY(40px);
   opacity: 1;
   border-color: transparent;
   transition: all 0.15s linear 0s;
