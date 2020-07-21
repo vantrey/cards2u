@@ -35,7 +35,6 @@ const CreateContainer = () => {
         isEffect,
         isStartMode
     } = useSelector((state: AppStateType) => state.currentUserCards);
-    const {isCurrentUserDecksFetching} = useSelector((state: AppStateType) => state.currentUserDecks);
     const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
     const [selectUser, setSelectUser] = useState<boolean>(false);  //doesnt use yet
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);  //doesnt use yet

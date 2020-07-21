@@ -22,14 +22,16 @@ type PropsType = {
     selectedCard: CardType | undefined  // will another type with 3 answers
     setIsEditCardMode: React.Dispatch<React.SetStateAction<boolean>>
     cardsPack_id: string
+    isPreventFetching: boolean
 }
 
 const MultiAnswerCardForm: React.FC<PropsType> = React.memo(({
-                                                          isEditCardMode,
+                                                                 isEditCardMode,
                                                                  selectedCard,
-                                                          setIsEditCardMode,
-                                                          cardsPack_id,
-                                                      }) => {
+                                                                 setIsEditCardMode,
+                                                                 cardsPack_id,
+                                                                 isPreventFetching,
+                                                             }) => {
 
     const dispatch = useDispatch();
     const questionMaxLength = 220;
@@ -86,41 +88,41 @@ const MultiAnswerCardForm: React.FC<PropsType> = React.memo(({
 
     return (
         <div className={styles.cardform__wrap}>
-        <form className={styles.form} onSubmit={onSubmit}>
-            <div className={styles.formtextarea__wrap}>
-            <CreateCardTextarea
-                restLimit={questionRestLimit}
-                register={register}
-                name='question'
-                errors={errors}
-                placeholder='Enter your question'
-            />
-            <CreateCardTextarea
-                restLimit={answerRightRestLimit}
-                register={register}
-                name='answerRight'
-                errors={errors}
-                placeholder='Enter right your answer'
-            />
-            <CreateCardTextarea
-                restLimit={answerFirstVariantRestLimit}
-                register={register}
-                name='answerFirstVariant'
-                errors={errors}
-                placeholder='Enter first variant of answer'
-            />
-            <CreateCardTextarea
-                restLimit={answerSecondVariantRestLimit}
-                register={register}
-                name='answerSecondVariant'
-                errors={errors}
-                placeholder='Enter second variant of answer'
-            />
-            </div>
-            <div className={styles.formbuttons__wrap}>
-                <CreateCardButton/>
-            </div>
-        </form>
+            <form className={styles.form} onSubmit={onSubmit}>
+                <div className={styles.formtextarea__wrap}>
+                    <CreateCardTextarea
+                        restLimit={questionRestLimit}
+                        register={register}
+                        name='question'
+                        errors={errors}
+                        placeholder='Enter your question'
+                    />
+                    <CreateCardTextarea
+                        restLimit={answerRightRestLimit}
+                        register={register}
+                        name='answerRight'
+                        errors={errors}
+                        placeholder='Enter right your answer'
+                    />
+                    <CreateCardTextarea
+                        restLimit={answerFirstVariantRestLimit}
+                        register={register}
+                        name='answerFirstVariant'
+                        errors={errors}
+                        placeholder='Enter first variant of answer'
+                    />
+                    <CreateCardTextarea
+                        restLimit={answerSecondVariantRestLimit}
+                        register={register}
+                        name='answerSecondVariant'
+                        errors={errors}
+                        placeholder='Enter second variant of answer'
+                    />
+                </div>
+                <div className={styles.formbuttons__wrap}>
+                    <CreateCardButton disabled={isPreventFetching}/>
+                </div>
+            </form>
         </div>
     )
 });

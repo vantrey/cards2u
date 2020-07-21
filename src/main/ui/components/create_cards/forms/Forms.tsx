@@ -33,6 +33,7 @@ const Forms: React.FC<PropsType> = React.memo(({
         <>
             {isSuccess && !isMultiDeck &&
             <CardForm
+                isPreventFetching={isPreventFetching}
                 cardsPack_id={cardsPack_id}
                 setIsEditCardMode={setIsEditCardMode}
                 isEditCardMode={isEditCardMode}
@@ -41,6 +42,7 @@ const Forms: React.FC<PropsType> = React.memo(({
 
             {isSuccess && isMultiDeck &&
             <MultiAnswerCardForm
+                isPreventFetching={isPreventFetching}
                 isEditCardMode={isEditCardMode}
                 selectedCard={selectedCard}
                 setIsEditCardMode={setIsEditCardMode}
@@ -50,6 +52,7 @@ const Forms: React.FC<PropsType> = React.memo(({
 
             {!isSuccess &&
             <CreateDeckForm
+                isPreventFetching={isPreventFetching}
                 onIsMultiDeckChange={onIsMultiDeckChange}
                 isMultiDeck={isMultiDeck}
             />}
