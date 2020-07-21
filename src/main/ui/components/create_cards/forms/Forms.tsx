@@ -30,7 +30,7 @@ const Forms: React.FC<PropsType> = React.memo(({
                                                }) => {
 
     return (
-        <>
+        <div className={styles.forms__wrap}>
             {isSuccess && !isMultiDeck &&
             <CardForm
                 isPreventFetching={isPreventFetching}
@@ -57,10 +57,13 @@ const Forms: React.FC<PropsType> = React.memo(({
                 isMultiDeck={isMultiDeck}
             />}
 
-            {isPreventFetching && <Loader/>} {/*need position*/}
-        </>
+            {isPreventFetching &&
+            <div className={styles.forms__loader}>
+				<Loader/>
+            </div>}
+        </div>
     )
 });
 
-export default Forms
+export default Forms;
 

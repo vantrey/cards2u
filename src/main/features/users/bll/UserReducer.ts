@@ -11,7 +11,9 @@ const initialState = {
     page: 1,
     pageCount: 10,
     totalUsersCount: 0,
-    isUsersFetching: false
+    isUsersFetching: false,
+    sortUsers:'avatar',
+    direction:'1'
 };
 
 type InitialStateType = typeof initialState
@@ -40,6 +42,15 @@ export const userReducer = (state: InitialStateType = initialState, action: Acti
                 ...state,
               isUsersFetching: action.isFetching
             };
+        case "cards2u/main/users/SET_SORT":
+            return {
+                ...state,
+                page:action.page,
+                pageCount: action.pageCount,
+                sortUsers: action.sortUsers,
+                direction:action.direction
+
+            };
 
         default:
             return state
@@ -64,13 +75,20 @@ export const usersActions = {
         type: 'cards2u/main/users/SET_IS_FETCHING',
         isFetching
     } as const),
+    setSort: (page:number,pageCount:number,sortUsers:string,direction:string) => ({
+        type: 'cards2u/main/users/SET_SORT',
+        page,
+        pageCount,
+        sortUsers,
+        direction,
+    } as const),
 };
 
 type ActionsType = InferActionTypes<typeof usersActions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const getUser = (page: number, pageCount: number, sortUsers = 'avatar', direction = '0'): ThunkType =>
+export const getUser = (page: number, pageCount: number, sortUsers:string, direction:string): ThunkType =>
     async (dispatch: DispatchType, getState: () => AppStateType) => {
         try {
             dispatch(setIsPreventFetching(true));

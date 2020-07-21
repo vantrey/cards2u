@@ -18,7 +18,7 @@ type UsersPropsType = {
 }
 
 const UsersContainer: React.FC = (props) => {
-        const {users, pageCount, page, totalUsersCount, isUsersFetching} = useSelector((state: AppStateType) => state.getUserReducer)
+        const {users, pageCount, page, totalUsersCount, isUsersFetching,direction,sortUsers} = useSelector((state: AppStateType) => state.getUserReducer)
         const dispatch = useDispatch()
         const [data, setOrderedUser] = useState<UsersPropsType>({
             data: [],
@@ -30,8 +30,8 @@ const UsersContainer: React.FC = (props) => {
             dispatch(usersActions.setPage(page.selected + 1))
         }
         useEffect(() => {
-            dispatch(getUser(page, pageCount))
-        }, [page, pageCount])
+            dispatch(getUser(page, pageCount,sortUsers,direction))
+        }, [page, pageCount,sortUsers,direction])
 
         useEffect(() => {
             setOrderedUser({

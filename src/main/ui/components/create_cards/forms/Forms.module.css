@@ -1,0 +1,11 @@
+.forms__wrap {
+    position: relative;
+}
+
+.forms__loader {
+    position: absolute;
+    width: auto;
+    height: auto;
+    bottom: 26px;
+    left: 170px;
+}
