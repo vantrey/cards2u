@@ -67,8 +67,8 @@ const CreateContainer = () => {
     }, []);
 
     const onCreateDeckClick = useCallback(() => {
-        dispatch(currentUserCardsActions.set_Success(false));
-        dispatch(currentUserCardsActions.setIsStartMode(false));
+            dispatch(currentUserCardsActions.set_Success(false));
+            dispatch(currentUserCardsActions.setIsStartMode(false));
     }, []);
 
     const onIsMultiDeckChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -141,6 +141,7 @@ const CreateContainer = () => {
                             <div className={styles.decks__buttons}>
 
                                 <button
+                                    disabled={!isAuth || (!isSuccess && !isStartMode)}
                                     onClick={onCreateDeckClick}
                                     className={styles.decks__button}
                                 >

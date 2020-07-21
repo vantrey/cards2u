@@ -8,6 +8,7 @@ import {setIsPreventFetching} from "../../bll/preventReques/preventRequestReduce
 import {cardPacksActions} from "../../features/cardsPacks/bll/cardPacksReducer";
 import {usersActions} from "../../features/users/bll/UserReducer";
 import {currentUserDecksActions} from "../../bll/currentUserDecks/currentUserDecksReducer";
+import {currentUserCardsActions} from "../../bll/currentUserCardsReducer/currentUserCardsReducer";
 
 const initialState = {
     isAuth: false,
@@ -87,7 +88,9 @@ type ActionsType = InferActionTypes<typeof loginActions> |
     InferActionTypes<typeof profileActions> |
     InferActionTypes<typeof cardPacksActions> |
     InferActionTypes<typeof usersActions> |
-    InferActionTypes<typeof currentUserDecksActions>
+    InferActionTypes<typeof currentUserDecksActions> |
+    InferActionTypes<typeof currentUserCardsActions>
+
 
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
@@ -141,6 +144,9 @@ export const logout = (): ThunkType =>
         dispatch(currentUserDecksActions.setIsSuccess(false));
 
         dispatch(createUserFavoriteDecks(null)); // reset currentUserFavoriteDeck
+
+        dispatch(currentUserCardsActions.setIsStartMode(true));  // reset current user cards (createCards component)
+        dispatch(currentUserCardsActions.set_Success(false));
     };
 
 
