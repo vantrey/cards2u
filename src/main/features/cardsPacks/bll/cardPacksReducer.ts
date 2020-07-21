@@ -1,60 +1,62 @@
 import {AppStateType, InferActionTypes} from '../../../bll/store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {CardPackType} from '../../../types/entities';
-import {cardPacksApi} from '../dal/cardPacksApi';
-import {repository} from '../../../helpers/repos_localStorage/Token';
-import {setIsPreventFetching} from '../../../bll/preventReques/preventRequestReducer';
-import {act} from 'react-dom/test-utils';
+import {CardPackType} from "../../../types/entities";
+import {cardPacksApi} from "../dal/cardPacksApi";
+import {repository} from "../../../helpers/repos_localStorage/Token";
+import {setIsPreventFetching} from "../../../bll/preventReques/preventRequestReducer";
+import {act} from "react-dom/test-utils";
+
+
 
 
 const initialState = {
-    cardPacks: [] as Array<CardPackType>,
+    cardPacks: [] as  Array<CardPackType>,
     errorFromServer: '',
     pageSize: 6,
     totalCardPacksCount: 0,
-    isSuccess: false,
+    isSuccess:false,
     cardsPackId: '',
     user_id: '',
     isCardPacksFetching: false
 };
 
-type InitialStateType = typeof initialState
+type InitialStateType =typeof initialState
 
 export const cardPacksReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
 
-        case 'CARD_PACKS_REDUCER/GET_CARD_PACKS':
+        case "CARD_PACKS_REDUCER/GET_CARD_PACKS":
             return {
                 ...state,
                 cardPacks: action.cardPacks,
                 totalCardPacksCount: action.totalCardPacksCount
             };
 
-        case 'CARD_PACKS_REDUCER/CREATE_CARD_PACKS':
+        case "CARD_PACKS_REDUCER/CREATE_CARD_PACKS":
             return {
                 ...state,
                 cardPacks: [...state.cardPacks, action.newCardsPack],
             };
 
-        case 'CARD_PACKS_REDUCER/SET_ERROR':
+        case "CARD_PACKS_REDUCER/SET_ERROR":
             return {
                 ...state,
                 errorFromServer: action.error,
             };
 
-        case 'CARD_PACKS_REDUCER/DELETE_CARDS_PACK':
+        case "CARD_PACKS_REDUCER/DELETE_CARDS_PACK":
             return {
                 ...state,
                 cardPacks: state.cardPacks.filter(tl => tl.user_id !== action.cardsPackId)
             };
 
-        case 'CARD_PACKS_REDUCER/SET_SUCCESS':
+            case "CARD_PACKS_REDUCER/SET_SUCCESS":
             return {
                 ...state,
-                isSuccess: action.isSuccess
+               isSuccess: action.isSuccess
             };
 
-        case 'CARD_PACKS_REDUCER/SET_IS_FETCHING':
+        case "CARD_PACKS_REDUCER/SET_IS_FETCHING":
             return {
                 ...state,
                 isCardPacksFetching: action.isFetching
@@ -103,22 +105,19 @@ type ActionsType = InferActionTypes<typeof cardPacksActions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const getCardPacks = (currentPage: number | null,
-                             pageSize: number | null,
-                             user_id: string | null     //19.07
-                            ): ThunkType =>     //19.07
-
+export const getCardPacks = (currentPage: number | null, pageSize: number | null, user_id: string | null): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
             dispatch(setIsPreventFetching(true));
             dispatch(cardPacksActions.setIsFetching(true));
             let token = repository.getToken();
-                const response = await cardPacksApi.getPacks(token, currentPage, pageSize, user_id)
-                dispatch(cardPacksActions.getCardPacksSuccess(response.data.cardPacks, response.data.cardPacksTotalCount));
-                repository.saveToken(response.data.token, response.data.tokenDeathTime);
-                dispatch(cardPacksActions.setIsSuccess(true));
-                dispatch(cardPacksActions.setIsFetching(false));
-                dispatch(setIsPreventFetching(false));
+            const response = await cardPacksApi.getPacks(token, currentPage, pageSize, user_id);
+            dispatch(cardPacksActions.getCardPacksSuccess(response.data.cardPacks, response.data.cardPacksTotalCount));
+            repository.saveToken(response.data.token, response.data.tokenDeathTime);
+            dispatch(cardPacksActions.setIsSuccess(true));
+            dispatch(cardPacksActions.setIsFetching(false));
+            dispatch(setIsPreventFetching(false));
+
         } catch (e) {
             dispatch(cardPacksActions.setError(e.response.data.error));
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
@@ -127,8 +126,6 @@ export const getCardPacks = (currentPage: number | null,
             dispatch(setIsPreventFetching(false));
         }
     };
-
-
 
 export const createCardsPack = (newCardsPack: { name: string }): ThunkType => async (dispatch: DispatchType) => {
     try {
@@ -150,7 +147,7 @@ export const createCardsPack = (newCardsPack: { name: string }): ThunkType => as
     }
 };
 
-export const deleteCardsPacks = (cardsPackId: string): ThunkType => async (dispatch: DispatchType) => {
+export const deleteCardsPacks = (cardsPackId: string): ThunkType=> async (dispatch: DispatchType) => {
     try {
         dispatch(setIsPreventFetching(true));
         dispatch(cardPacksActions.setIsFetching(true));

@@ -21,6 +21,7 @@ import {
 import Loader from "../../common/loader/Loader";
 import Forms from "./forms/Forms";
 import Plug from "./plug/Plug";
+import PopupDeleteDeck from "./popUp/PopupDeleteDeck";
 
 
 const CreateContainer = () => {
@@ -44,6 +45,7 @@ const CreateContainer = () => {
     const [popupAuth, setPopupAuth] = useState<boolean>(false);
     const {isAuth, userId} = useSelector((state: AppStateType) => state.login);
     const [modal, setModal] = useState(false);
+    const [popupDeleteDeck, setPopupDeleteDeck] = useState(false);
     const [ownCards, setShowOwnCards] = useState(isSuccess);
     const currentLocation = useLocation<string>();
     let currentPath = currentLocation.pathname;
@@ -77,6 +79,7 @@ const CreateContainer = () => {
     const onDeleteDeck = useCallback(() => {
         dispatch(deleteDeck(cardsPack_id));
         dispatch(currentUserCardsActions.set_Success(false));
+        setPopupDeleteDeck (false);
     }, [cardsPack_id]);
 
     const onDeleteCard = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
@@ -116,12 +119,9 @@ const CreateContainer = () => {
                         <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
                     </div>
                     <div className={styles.main__content}>
-
                         <div className={styles.main__forms}>
-
                             {isStartMode &&
                             <Plug isFetching={isCardsFetching}/>}
-
                             {!isStartMode &&
                             <Forms
                                 isSuccess={isSuccess}
@@ -134,11 +134,9 @@ const CreateContainer = () => {
                                 isPreventFetching={isPreventFetching}
                             />}
                         </div>
-
                         <div className={styles.main__decks}>
                             <DefaultDeck/>
                             <div className={styles.decks__buttons}>
-
                                 <button
                                     disabled={!isAuth || (!isSuccess && !isStartMode)}
                                     onClick={onCreateDeckClick}
@@ -146,17 +144,18 @@ const CreateContainer = () => {
                                 >
                                     create new deck
                                 </button>
-
                                 <button
-                                    onClick={onDeleteDeck}
+                                    onClick={()=> {setPopupDeleteDeck (true)}}
                                     className={styles.decks__button}
                                     disabled={!isSuccess}
                                 >
                                     delete deck
                                 </button>
-
                             </div>
                         </div>
+                        <PopupDeleteDeck popupDeleteDeck={popupDeleteDeck}
+                                         setPopupDeleteDeck={setPopupDeleteDeck}
+                                         onDeleteDeck={onDeleteDeck}/>
                     </div>
                 </div>
                 <div className={styles.create__aside}>
