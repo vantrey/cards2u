@@ -33,13 +33,12 @@
 }
 
 .container__top {
-    width: 100%;
+    width: 50%;
     height: 210px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 25px;
-    margin-left: -78px;
 }
 
 .container__body {

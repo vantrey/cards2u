@@ -6,7 +6,7 @@ import closeIcon from '../../../icons/cancel.png';
 import { NavLink } from "react-router-dom";
 import { REDIRECT_PATH } from "../../../components/routes/FormRoutes";
 
-const PopupAuth = ({setPopupAuth, setModal, modal}) => {
+const PopupAuth = ({setPopupAuth, setModal, modal, currentPath}) => {
 
 	useEffect (() => {
 		let timerId = setTimeout (() => {
@@ -23,7 +23,7 @@ const PopupAuth = ({setPopupAuth, setModal, modal}) => {
 		if ( e.target.matches ('#closeIconId') || (e.target.closest ('#popupAuth') === null) ) {
 			setPopupAuth(false);
 			setModal (false);
-			history.push ('/decks');
+			history.push (currentPath);
 		}
 	};
 

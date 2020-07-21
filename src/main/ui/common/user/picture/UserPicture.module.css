@@ -62,7 +62,7 @@
     transform: translateY(40%);
 }
 
-.picture__nick {
+.picture__nick span{
     font-size: 18px;
     color: orange;
     text-shadow: 5px 5px 5px  rgba(0,0,0,0.75);

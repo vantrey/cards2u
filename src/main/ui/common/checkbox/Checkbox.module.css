@@ -83,6 +83,8 @@ input[type="checkbox"]:checked + label:after {
   opacity: 1;
 }
 
-.form__remember {
+span.form__remember {
   font-size: 8px;
+  color: #3e2723;
+  text-shadow: none;
 }

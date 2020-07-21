@@ -130,14 +130,14 @@
 /*====== */
 
 .main__item_game {
-    background: url("../../../images/menu-green-450-2-min.png");
+    background: url("../../../images/menu-yellow.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 
 }
 
 .main__item_card {
-    background: url("../../../images/menu-blue.png");
+    background: url("../../../images/menu-green-450-2-min.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -149,7 +149,7 @@
 }
 
 .main__item_home {
-    background: url("../../../images/menu-white-600-1-min.png");
+    background: url("../../../images/menu-blue.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -215,12 +215,13 @@
 }
 
 .main__item_card h1 {
-    color: #40c4ff;
+    /*color: #40c4ff;*/
+    color: #4caf50;
 
 }
 
 .main__item_game h1 {
-    color: #4caf50;
+    color: #f57c00;
 
 }
 

@@ -5,7 +5,8 @@ import {setIsPreventFetching} from "../preventReques/preventRequestReducer";
 import {repository} from "../../helpers/repos_localStorage/Token";
 import {cardPacksApi} from "../../features/cardsPacks/dal/cardPacksApi";
 import {cardsApi} from "../../features/Cards/dal/сardsApi";
-import {get_Cards} from "../../features/Cards/bll/cardsReducer";
+import {cardsActions, get_Cards} from "../../features/Cards/bll/cardsReducer";
+import {getCurrentUserCards} from "../currentUserCardsReducer/currentUserCardsReducer";
 
 const initialState = {
     currentUserDecks: [] as Array<CardPackType>,
@@ -94,7 +95,8 @@ export const currentUserDecksActions = {
     } as const),
 };
 
-type ActionsType = InferActionTypes<typeof currentUserDecksActions>
+type ActionsType = InferActionTypes<typeof currentUserDecksActions> |
+    InferActionTypes<typeof cardsActions>
 
 // thunks
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
@@ -136,7 +138,7 @@ export const createDeck = (newCardsPack: { name: string }): ThunkType => async (
         repository.saveToken(response.data.token, response.data.tokenDeathTime);
 
         const cardsPack = response.data.newCardsPack;
-        dispatch(get_Cards(cardsPack._id, cardsPack.name));
+        dispatch(getCurrentUserCards(cardsPack._id, cardsPack.name));
         dispatch(currentUserDecksActions.setIsFetching(false));
         dispatch(setIsPreventFetching(false));
 
@@ -156,6 +158,7 @@ export const deleteDeck = (cardsPackId: string): ThunkType => async (dispatch: D
         const response = await cardPacksApi.deleteCardsPack(token, cardsPackId);
         dispatch(currentUserDecksActions.deleteDeckSuccess(response.data.deletedCardsPack._id));
         repository.saveToken(response.data.token, response.data.tokenDeathTime);
+        dispatch(cardsActions.set_Success(false));
         dispatch(currentUserDecksActions.setIsFetching(false));
         dispatch(setIsPreventFetching(false));
 

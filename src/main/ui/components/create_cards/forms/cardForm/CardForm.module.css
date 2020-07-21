@@ -1,0 +1,25 @@
+.cardform__wrap {
+    width: 100%;
+    height: 334px;
+    padding: 0 15px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+.formtextarea__wrap {
+
+}
+
+.formbuttons__wrap {
+
+}
+
+.form__button {
+
+}

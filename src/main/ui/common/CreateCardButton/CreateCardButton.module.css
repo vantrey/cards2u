@@ -1,0 +1,48 @@
+
+.createform__buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.createform__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  width: 186px;
+  height: 30px;
+  font-family: sans-serif;
+  border: 1px solid orange;
+  color: orange;
+  border-radius: 3px;
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+  background-color: transparent;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+  transition: color, background-color;
+  cursor: pointer;
+}
+
+.createform__button:hover {
+  transition: color, background-color;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+  background-color: orange;
+  /*background-color: rgba(0, 0, 0, 0.3);*/
+  color: black;
+}
+
+.createform__button:active, .createform__button:focus {
+  outline: none;
+
+}
+
+.createform__button:active {
+  transform: translate(1px, 1px);
+}

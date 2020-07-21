@@ -28,7 +28,7 @@ const UserPicture: React.FC<AvaPictureTypeProps> = ({avatar,nick}) => {
                 }
                 {
                     !nick &&
-					<span>john wick</span>
+					<span>John Wick</span>
                 }
             </div>
         </div>

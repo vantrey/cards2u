@@ -42,7 +42,7 @@ const FindContainer: React.FC = () => {
     const [selectUser, setSelectUser] = useState<boolean>(false);
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);
     const {setIsLocalFetching, isLocalFetching} = useLocalFetch();
-    const currentLocation = useLocation();
+    const currentLocation = useLocation<string>();
 
     let currentPath = currentLocation.pathname;
 
@@ -103,7 +103,6 @@ const FindContainer: React.FC = () => {
     const SaveToFavoriteDecks = () => {
         const freeSlotID = FindFreeDeck(userId);
         if (freeSlotID) {
-            // repository.updateUserFavoriteDeck(userId, freeSlotID, cardPackName, cards);
             dispatch(updateUserFavoriteDecks(userId, freeSlotID, cardPackName, cards));
             setPopupSaveToDeckOk(true);
         } else {
@@ -112,7 +111,6 @@ const FindContainer: React.FC = () => {
     }
 
     const SaveToFavoriteDecksSID = () => {
-        // repository.updateUserFavoriteDeck(userId, favoriteSlotID, cardPackName, cards);
         dispatch(updateUserFavoriteDecks(userId, favoriteSlotID, cardPackName, cards));
         setPopupSaveToDeckOk(true);
     }
@@ -176,7 +174,8 @@ const FindContainer: React.FC = () => {
             <div className={styles.find__right}></div>
             {
                 !isAuth && popupAuth && <PopupAuth setPopupAuth={setPopupAuth}
-												   modal={modal} setModal={setModal}/>
+												   modal={modal} setModal={setModal}
+												   currentPath={currentPath}/>
             }
         </div>)
 }
