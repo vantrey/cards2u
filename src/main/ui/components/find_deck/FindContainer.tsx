@@ -20,13 +20,12 @@ import {repository} from '../../../helpers/repos_localStorage/Token';
 import PopupFreeSlot from './save_favorites/popup_freeSlot/PopupFreeSlot';
 import {CardType} from "../../../types/entities";
 import {updateUserFavoriteDecks} from '../../../bll/favoriteDecks/favoriteDecksReducer';
-import SearchByDeckName from '../../common/search/SearchByDeckName';
 
 
 const FindContainer: React.FC = () => {
 
     const dispatch = useDispatch();
-    const {page, pageCount, totalUsersCount, users,sortUsers,direction} = useSelector((state: AppStateType) => state.getUserReducer);
+    const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer);
     const {cards, cardPackName} = useSelector((state: AppStateType) => state.cards);
     const {isAuth, userId} = useSelector((state: AppStateType) => state.login);
     const [modal, setModal] = useState(false);
@@ -57,17 +56,17 @@ const FindContainer: React.FC = () => {
 
     useEffect(() => {
         setIsLocalFetching(true);
-        dispatch(getUser(page, pageCount,sortUsers,direction))
-    }, [page, pageCount,sortUsers,direction])
+        dispatch(getUser(page, pageCount))
+    }, [page, pageCount])
 
     const sortDeckUp = (e: React.MouseEvent<HTMLButtonElement>) => {
         setIsLocalFetching(true);
-        dispatch(usersActions.setSort(page, 10, e.currentTarget.name, '1'))
+        dispatch(getUser(1, 10, e.currentTarget.name, '1'))
     };
 
     const sortDeckDown = (e: React.MouseEvent<HTMLButtonElement>) => {
         setIsLocalFetching(true);
-        dispatch(usersActions.setSort(page, 10, e.currentTarget.name, '0'))
+        dispatch(getUser(1, 10, e.currentTarget.name, '0'))
     };
 
     const onShowDecks = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -161,7 +160,7 @@ const FindContainer: React.FC = () => {
                     </div>
 
                     {!isAuth && <DecksLogout/>}
-                    {isAuth && !selectUser && !decksQuestions && <SearchByDeckName/>}
+                    {isAuth && !selectUser && !decksQuestions && <DecksLogout/>}
                     {isAuth && selectUser && !decksQuestions && <DecksNames
 						nameUser={nameUser} onSelectDeck={onSelectDeck} deckscount={deckscount}/>}
                     {isAuth && selectUser && decksQuestions && <DecksQuestions
