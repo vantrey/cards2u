@@ -164,13 +164,12 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
 export const getCurrentUserCards = (
     cardsPack_id: string, cardPackName: string | null, sortCards = `question`, direction = '0'): ThunkType =>
-    async (dispatch: DispatchType) => {
+    async (dispatch: DispatchType, getState: () => AppStateType) => {
         try {
             dispatch(setIsPreventFetching(true));
             dispatch(currentUserCardsActions.setIsFetching(true));
             let token = repository.getToken();
             const res = await cardsApi.getCards(cardsPack_id, token, direction + sortCards);
-
             dispatch(currentUserCardsActions.setCards(
                 res.data.cards,
                 cardPackName ? cardPackName : '', // to prevent set null to state
@@ -178,6 +177,11 @@ export const getCurrentUserCards = (
             ));
             dispatch(currentUserCardsActions.set_Success(true));
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
+
+            if(getState().currentUserCards.isStartMode) {
+                dispatch(currentUserCardsActions.setIsStartMode(false));
+            }
+
             dispatch(currentUserCardsActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
 

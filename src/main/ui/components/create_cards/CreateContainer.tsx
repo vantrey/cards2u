@@ -20,6 +20,7 @@ import {
 } from "../../../bll/currentUserCardsReducer/currentUserCardsReducer";
 import Loader from "../../common/loader/Loader";
 import Forms from "./forms/Forms";
+import Plug from "./plug/Plug";
 
 
 const CreateContainer = () => {
@@ -120,19 +121,19 @@ const CreateContainer = () => {
                         <div className={styles.main__forms}>
 
                             {isStartMode &&
-                            <div>ЗАГЛУШКА</div>}
+                            <Plug isFetching={isCardsFetching}/>}
 
                             {!isStartMode &&
                             <Forms
-                            isSuccess={isSuccess}
-                            isMultiDeck={isMultiDeck}
-                            cardsPack_id={cardsPack_id}
-                            setIsEditCardMode={setIsEditCardMode}
-                            isEditCardMode={isEditCardMode}
-                            selectedCard={selectedCard}
-                            onIsMultiDeckChange={onIsMultiDeckChange}
-                            isPreventFetching={isPreventFetching}
-                        />}
+                                isSuccess={isSuccess}
+                                isMultiDeck={isMultiDeck}
+                                cardsPack_id={cardsPack_id}
+                                setIsEditCardMode={setIsEditCardMode}
+                                isEditCardMode={isEditCardMode}
+                                selectedCard={selectedCard}
+                                onIsMultiDeckChange={onIsMultiDeckChange}
+                                isPreventFetching={isPreventFetching}
+                            />}
                         </div>
 
                         <div className={styles.main__decks}>
