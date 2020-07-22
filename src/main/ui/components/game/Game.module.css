@@ -35,6 +35,9 @@
 }
 
 .game__analytics {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 20%;
     max-width: 400px;
     height: 100%;
@@ -153,6 +156,7 @@
 .header__link {
     cursor: pointer;
     outline: none;
+    color: black;
 }
 
 .header__decks {
@@ -173,6 +177,7 @@
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
     transition: all 0.3s ease;
     position: relative;
+    background-color: black;
 }
 
 .decks__item:hover {
