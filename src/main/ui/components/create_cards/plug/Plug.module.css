@@ -1,0 +1,7 @@
+.plug__wrap {
+    width: 100%;
+    height: 335px;
+    background: url('../../../images/777.png');    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+}

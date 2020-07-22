@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import styles from './PopupDeleteDeck.module.css';
 import bell from "../../../icons/bell.png";
 import closeIcon from "../../../icons/cancel.png";
+import { loudlinks } from "../../../../helpers/loudlinks";
+import trashDelete from "../../../audio/trash-delete.mp3";
 
 
 const PopupDeleteDeck = ({popupDeleteDeck, setPopupDeleteDeck, onDeleteDeck}) => {
@@ -11,6 +13,10 @@ const PopupDeleteDeck = ({popupDeleteDeck, setPopupDeleteDeck, onDeleteDeck}) =>
 			setPopupDeleteDeck (false);
 		}
 	};
+
+	useEffect (() => {
+		loudlinks ();
+	}, []);
 
 	const classForModal = popupDeleteDeck === true ? `${styles.popupAuth__wrap} ${styles.popupAuth__wrap_active}` : `${styles.popupAuth__wrap}`;
 
@@ -26,7 +32,9 @@ const PopupDeleteDeck = ({popupDeleteDeck, setPopupDeleteDeck, onDeleteDeck}) =>
 					<h5 className={styles.note__title}>Welcome to Wisemen&nbsp;!</h5>
 					<div className={styles.note__text}>Are you sure you want to delete the deck?</div>
 					<div className={styles.note__buttons}>
-						<button className={styles.note__button} onClick={onDeleteDeck}>yes</button>
+						<div className='soundClick' data-sound={trashDelete}>
+							<button className={styles.note__button} onClick={onDeleteDeck}>yes</button>
+						</div>
 						<button className={styles.note__button} onClick={()=> {setPopupDeleteDeck (false)}}>no</button>
 					</div>
 				</div>
