@@ -96,6 +96,7 @@ const MultiAnswerCardForm: React.FC<PropsType> = React.memo(({
                         name='question'
                         errors={errors}
                         placeholder='Enter your question'
+                        autoFocus={true}
                     />
                     <CreateCardTextarea
                         restLimit={answerRightRestLimit}

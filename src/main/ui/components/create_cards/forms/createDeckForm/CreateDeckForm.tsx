@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
 import {createDeck} from "../../../../../bll/currentUserDecks/currentUserDecksReducer";
@@ -16,12 +16,14 @@ type PropsType = {
     onIsMultiDeckChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     isMultiDeck: boolean
     isPreventFetching: boolean
+    setIsMultiDeck: (isMultiDeck: boolean) => void
 }
 
 const CreateDeckForm: React.FC<PropsType> = React.memo(({
                                                             onIsMultiDeckChange,
                                                             isMultiDeck,
                                                             isPreventFetching,
+                                                            setIsMultiDeck
                                                      }) => {
 
     const dispatch = useDispatch();
@@ -47,6 +49,10 @@ const CreateDeckForm: React.FC<PropsType> = React.memo(({
         }
     );
 
+    useEffect(() => {
+        setIsMultiDeck(false);
+    }, []);
+
     return (
         <div className={styles.cardform__wrap}>
             <form className={styles.form}  onSubmit={onSubmit}>
@@ -58,6 +64,7 @@ const CreateDeckForm: React.FC<PropsType> = React.memo(({
                         name='deckName'
                         errors={errors}
                         placeholder='Enter deck name'
+                        autoFocus={true}
                     />
                 </div>
                 <div className={styles.checkBox}>

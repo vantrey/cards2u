@@ -11,8 +11,10 @@ const Plug: React.FC<PropsType> = React.memo(({isFetching}) => {
 
     return (
             <div className={styles.plug__wrap}>
-
-                {isFetching && <Loader/>}
+                {isFetching &&
+                <div className={styles.plug__loader}>
+					<Loader/>
+                </div>}
             </div>
     )
 });

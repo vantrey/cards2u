@@ -132,6 +132,7 @@ const CreateContainer = () => {
                                 selectedCard={selectedCard}
                                 onIsMultiDeckChange={onIsMultiDeckChange}
                                 isPreventFetching={isPreventFetching}
+								setIsMultiDeck={setIsMultiDeck}
                             />}
                         </div>
                         <div className={styles.main__decks}>

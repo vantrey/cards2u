@@ -29,7 +29,6 @@ const CreateCardTextarea: React.FC<PropsType> = ({
                 ref={register}
                 {...props}
                 name={name}
-                autoFocus={true}
                 tabIndex={1}
             />
                 {errors[name] &&
