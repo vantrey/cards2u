@@ -6,7 +6,7 @@ import { loudlinks } from "../../../../helpers/loudlinks";
 import trashDelete from "../../../audio/trash-delete.mp3";
 
 
-const PopupDeleteDeck = ({popupDeleteDeck, setPopupDeleteDeck, onDeleteDeck}) => {
+const PopupDeleteDeck = ({popupDeleteDeck, setPopupDeleteDeck, onDeleteDeck, cardPackName}) => {
 
 	const closeModal = (e) => {
 		if ( e.target.matches ('#closeIconId') || (e.target.closest ('#popupAuth') === null) ) {
@@ -30,7 +30,8 @@ const PopupDeleteDeck = ({popupDeleteDeck, setPopupDeleteDeck, onDeleteDeck}) =>
 				</div>
 				<div className={styles.note__info}>
 					<h5 className={styles.note__title}>Welcome to Wisemen&nbsp;!</h5>
-					<div className={styles.note__text}>Are you sure you want to delete the deck?</div>
+					<div className={styles.note__text}>Are you sure you want to delete deck
+						<span  className={styles.note__text_orange}>&nbsp;{cardPackName}&nbsp;</span>?</div>
 					<div className={styles.note__buttons}>
 						<div className='soundClick' data-sound={trashDelete}>
 							<button className={styles.note__button} onClick={onDeleteDeck}>yes</button>

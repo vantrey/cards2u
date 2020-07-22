@@ -68,8 +68,8 @@ const CreateDeckForm: React.FC<PropsType> = React.memo(({
                         onChange={onIsMultiDeckChange}
                         id='checkbox1'
                     />
-                    <label   className={styles.form__label} htmlFor="checkbox1"> </label>
-                    <div className={styles.checkBox__span}>multi answer deck</div>
+                    <label tabIndex={2} className={styles.form__label} htmlFor="checkbox1"> </label>
+                    <div className={styles.checkBox__span} >multi answer deck</div>
                 </div>
                 <div  className={styles.formbuttons__wrap}>
                     <CreateCardButton

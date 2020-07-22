@@ -74,6 +74,12 @@
     margin-bottom: 30px;
 }
 
+.note__text_orange {
+    color: orange;
+    font-weight: bold;
+    font-size: 12px;
+}
+
 .note__buttons {
     display: flex;
     flex-wrap: nowrap;

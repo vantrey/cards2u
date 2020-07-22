@@ -5,7 +5,7 @@ import soundDeck from "../../../audio/deck.mp3";
 import { loudlinks } from "../../../../helpers/loudlinks";
 
 
-const DefaultDeck = () => {
+const DefaultDeck = ({cardPackName}) => {
 
 	useEffect (() => {
 		loudlinks ();
@@ -19,7 +19,7 @@ const DefaultDeck = () => {
 						<img src={deckBG} alt="images"/>
 					</div>
 					<div className={styles.deck__details}>
-						<h2>123</h2>
+						<h2>{cardPackName}</h2>
 					</div>
 				</div>
 			</div>
