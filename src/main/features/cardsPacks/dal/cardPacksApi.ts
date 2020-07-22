@@ -55,11 +55,11 @@ export const cardPacksApi = {
       `?token=${token}&id=${cardsPackId}`
     )
   },
-  updateCardsPack(token: string | null, cardsPack: { cardsPackId: string }) {
+  updateCardsPack(token: string | null, cardsPack: { _id: string, name: string }) {
     return instance.put<UpdateCardPackType>(``,
       {
         cardsPack,
         token
       })
   }
-}
+};
