@@ -295,3 +295,12 @@
 .deckInfo__button:active {
     transform: translate(1px, 1px);
 }
+
+
+.container__search {
+    display: flex;
+    position: absolute;
+    margin-left:700px;
+    margin-top: 50px;
+
+}

@@ -14,7 +14,6 @@ const initialState = {
 
 }
 
-
 type InitialStateType = typeof initialState;
 
 
@@ -28,6 +27,7 @@ export const searchReducer = (state
                 packsFound: action.cardPacks,
                 cardPacksTotalCount: action.cardPacksTotalCount
             }
+
         case 'SEARCH_REDUCER/SEARCH_SUCCESS':
             return {
                 ...state,
@@ -89,7 +89,7 @@ export const globalSearchForDecks = (deckName: string): ThunkType =>
             dispatch(searchActions.setSearchPacksSuccess(response.data.cardPacks, response.data.cardPacksTotalCount));
             repository.saveToken(response.data.token, response.data.tokenDeathTime);
             dispatch(searchActions.setSearchSuccess(true));
-            dispatch(searchActions.setSearchSuccess(false));
+            dispatch(searchActions.setSearchFetching(false));
             dispatch(setIsPreventFetching(false));
         } catch (e) {
             dispatch(searchActions.serSearchError(e.response.data.error));
