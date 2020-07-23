@@ -1,13 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './UserInfo.module.css'
 import UserDecks from "./decks/UserDecks";
 import UserPicture from "./picture/UserPicture";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store/store";
-import {getCardPacks} from "../../../features/cardsPacks/bll/cardPacksReducer";
 import {get_Cards} from "../../../features/Cards/bll/cardsReducer";
 import {getCurrentUserDecks} from "../../../bll/currentUserDecks/currentUserDecksReducer";
-import {useLocalFetch} from "../../../helpers/localFetchingHook";
 import {useLocation} from "react-router-dom";
 import {getCurrentUserCards} from "../../../bll/currentUserCardsReducer/currentUserCardsReducer";
 
@@ -20,20 +18,31 @@ type UserInfoType = {
 const UserInfo: React.FC<UserInfoType> = ({setSelectUser, setDecksQuestions}) => {
 
     const dispatch = useDispatch();
-    const {currentUserDecks, isSuccess} = useSelector((state: AppStateType) => state.currentUserDecks);
+    const {
+        currentUserDecks,
+        isSuccess,
+        isCurrentUserDecksFetching
+    } = useSelector((state: AppStateType) => state.currentUserDecks);
     const user = useSelector((state: AppStateType) => state.profile.user);
-    const {isAuth} = useSelector((state: AppStateType) => state.login);
+    const {isAuth, userId} = useSelector((state: AppStateType) => state.login);
     const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
     const currentPath = useLocation<string>().pathname;
     const [showDecks, setShowDecks] = useState<boolean>(false);
-    const {setIsLocalFetching, isLocalFetching} = useLocalFetch(); // local fetching for Loader
+
+    useEffect(() => {
+        if (currentPath === '/cards') {
+            setShowDecks(true);
+            if (isAuth && !isSuccess && userId) {
+                dispatch(getCurrentUserDecks(userId));
+            }
+        }
+    }, [userId, isSuccess, isAuth]);
 
     const showMyDecks = () => {
         setSelectUser(false);
         setDecksQuestions(false);
         setShowDecks(!showDecks);
         if (!isSuccess) {
-            setIsLocalFetching(true);
             dispatch(getCurrentUserDecks(user._id));
         }
     };
@@ -64,7 +73,7 @@ const UserInfo: React.FC<UserInfoType> = ({setSelectUser, setDecksQuestions}) =>
                 showDecks={showDecks}
                 isAuth={isAuth}
                 isPreventFetching={isPreventFetching}
-                isLocalFetching={isLocalFetching}
+                isLocalFetching={isCurrentUserDecksFetching}
             />
         </div>
     );

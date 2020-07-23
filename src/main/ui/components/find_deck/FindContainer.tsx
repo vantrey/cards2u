@@ -11,14 +11,11 @@ import DecksQuestions from "./info/decksQuestions/DecksQuestions";
 import DecksNames from './info/decksNames/DecksNames';
 import DecksLogout from "./info/decksLogout/DecksLogout";
 import PopupAuth from '../../common/popUp/popUp_Authorization/PopupAuth';
-import {useLocalFetch} from "../../../helpers/localFetchingHook";
 import {useLocation} from 'react-router-dom';
 import {loginActions} from '../../../auth/login/loginReducer';
 import {get_Cards} from "../../../features/Cards/bll/cardsReducer";
 import {FindFreeDeck} from '../../../helpers/findFreeDeck/FindFreeDeck';
-import {repository} from '../../../helpers/repos_localStorage/Token';
 import PopupFreeSlot from './save_favorites/popup_freeSlot/PopupFreeSlot';
-import {CardType} from "../../../types/entities";
 import {updateUserFavoriteDecks} from '../../../bll/favoriteDecks/favoriteDecksReducer';
 import Search from '../../common/search/Search';
 
@@ -26,7 +23,13 @@ import Search from '../../common/search/Search';
 const FindContainer: React.FC = () => {
 
     const dispatch = useDispatch();
-    const {page, pageCount, totalUsersCount, users} = useSelector((state: AppStateType) => state.getUserReducer);
+    const {
+        page,
+        pageCount,
+        totalUsersCount,
+        users,
+        isUsersFetching
+    } = useSelector((state: AppStateType) => state.getUserReducer);
     const {cards, cardPackName} = useSelector((state: AppStateType) => state.cards);
     const {isAuth, userId} = useSelector((state: AppStateType) => state.login);
     const [modal, setModal] = useState(false);
@@ -41,37 +44,33 @@ const FindContainer: React.FC = () => {
     const [popupAuth, setPopupAuth] = useState<boolean>(false);
     const [selectUser, setSelectUser] = useState<boolean>(false);
     const [decksQuestions, setDecksQuestions] = useState<boolean>(false);
-    const {setIsLocalFetching, isLocalFetching} = useLocalFetch();
     const currentLocation = useLocation<string>();
 
     let currentPath = currentLocation.pathname;
 
     useEffect(() => {
         dispatch(loginActions.setCurrentLocation(currentPath));
-    }, [currentPath])
+    }, [currentPath]);
 
 
     const pageChangedHandler = (page: { selected: number }) => {
-        dispatch(usersActions.setPage(page.selected + 1))
+        dispatch(usersActions.setPage(page.selected + 1));
     };
 
     useEffect(() => {
-        setIsLocalFetching(true);
         dispatch(getUser(page, pageCount))
-    }, [page, pageCount])
+    }, [page, pageCount]);
 
     const sortDeckUp = (e: React.MouseEvent<HTMLButtonElement>) => {
-        setIsLocalFetching(true);
-        dispatch(getUser(1, 10, e.currentTarget.name, '1'))
+        dispatch(getUser(1, 10, e.currentTarget.name, '1'));
     };
 
     const sortDeckDown = (e: React.MouseEvent<HTMLButtonElement>) => {
-        setIsLocalFetching(true);
-        dispatch(getUser(1, 10, e.currentTarget.name, '0'))
+        dispatch(getUser(1, 10, e.currentTarget.name, '0'));
     };
 
     const onShowDecks = (e: React.MouseEvent<HTMLDivElement>) => {
-        const id = e.currentTarget.id
+        const id = e.currentTarget.id;
         const nameUser = e.currentTarget.getAttribute('data-nameuser');
         const deckscount = e.currentTarget.getAttribute('data-deckscount');
         setNameUser(nameUser);
@@ -93,7 +92,7 @@ const FindContainer: React.FC = () => {
     useEffect(() => {
         let timerId = setTimeout(() => {
             setPopupAuth(true)
-        }, 500)
+        }, 500);
 
         return () => {
             clearTimeout(timerId)
@@ -143,7 +142,7 @@ const FindContainer: React.FC = () => {
                                       sortDeckDown={sortDeckDown}
                                       onShowDecks={onShowDecks}
                                       showMode={showMode}
-                                      isLocalFetching={isLocalFetching}
+                                      isLocalFetching={isUsersFetching}
                             />
                             <div className={styles.find__paginate}>
                                 <ReactPaginate

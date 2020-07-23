@@ -9,7 +9,7 @@ import DefaultDeck from "./defaultDeck/DefaultDeck";
 import CardForm from "./forms/cardForm/CardForm";
 import MultiAnswerCardForm from "./forms/multiAnswerCardForm/MultiAnswerCardForm";
 import CreateDeckForm from "./forms/createDeckForm/CreateDeckForm";
-import {deleteDeck} from '../../../bll/currentUserDecks/currentUserDecksReducer';
+import {currentUserDecksActions, deleteDeck, updateDeck} from '../../../bll/currentUserDecks/currentUserDecksReducer';
 import OwnCardsLogout from './cards/ownCardsLogout/OwnCardsLogout';
 import PopupAuth from "../../common/popUp/popUp_Authorization/PopupAuth";
 import {loginActions} from "../../../auth/login/loginReducer";
@@ -54,6 +54,10 @@ const CreateContainer = () => {
         dispatch(loginActions.setCurrentLocation(currentPath));
     }, [currentPath]);
 
+    useEffect(() => {
+        setIsEditCardMode(false)
+    }, [cardsPack_id]);
+
     const selectedCard = useMemo(() => {
         return cards.find(c => c._id === selectedCardId);
     }, [cards, selectedCardId]);
@@ -68,8 +72,8 @@ const CreateContainer = () => {
     }, []);
 
     const onCreateDeckClick = useCallback(() => {
-            dispatch(currentUserCardsActions.set_Success(false));
-            dispatch(currentUserCardsActions.setIsStartMode(false));
+        dispatch(currentUserCardsActions.set_Success(false));
+        dispatch(currentUserCardsActions.setIsStartMode(false));
     }, []);
 
     const onIsMultiDeckChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,13 +83,17 @@ const CreateContainer = () => {
     const onDeleteDeck = useCallback(() => {
         dispatch(deleteDeck(cardsPack_id));
         dispatch(currentUserCardsActions.set_Success(false));
-        setPopupDeleteDeck (false);
+        setPopupDeleteDeck(false);
     }, [cardsPack_id]);
 
     const onDeleteCard = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
         dispatch(deleteCurrentUserCard(e.currentTarget.id));
         setIsEditCardMode(false)
     }, []);
+
+    const updateDeckName = useCallback((newDeckName) => {
+        dispatch(updateDeck(cardsPack_id, newDeckName));
+    }, [cardsPack_id]);
 
     useEffect(() => {
         if (isSuccess && !isEffect) {
@@ -146,9 +154,11 @@ const CreateContainer = () => {
                                     create new deck
                                 </button>
                                 <button
-                                    onClick={()=> {setPopupDeleteDeck (true)}}
+                                    onClick={() => {
+                                        setPopupDeleteDeck(true)
+                                    }}
                                     className={styles.decks__button}
-                                    disabled={!isSuccess}
+                                    disabled={!ownCards}
                                 >
                                     delete deck
                                 </button>
@@ -171,6 +181,8 @@ const CreateContainer = () => {
                         onEditCardClick={onEditCardClick}
                         selectedCardId={selectedCardId}
                         isCardsFetching={isCardsFetching}
+                        updateDeckName={updateDeckName}
+                        isPreventFetching={isPreventFetching}
                     />}
                 </div>
             </div>

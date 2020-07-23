@@ -3,7 +3,6 @@ import {useSelector} from "react-redux";
 import {AppStateType} from "../bll/store/store";
 
 export const useLocalFetch = () => {
-
     const [isFetching, setIsLocalFetching] = useState<boolean>(false);
     const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
 
