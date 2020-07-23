@@ -134,19 +134,9 @@ input[type="checkbox"]:not(:checked) + label:focus {
 
 }
 
-.checkBox__span:focus, .checkBox__span:active{
+.checkBox__span:focus, .checkBox__span:active {
     outline: none;
 }
-
-/*.checkBox__span:hover:before,*/
-/*.checkBox__span:focus:before*/
-/*{*/
-/*    outline: none;*/
-/*    transform: scale(1);*/
-/*    opacity: 1;*/
-/*    transition: all .3s ease;*/
-
-/*}*/
 
 input[type="checkbox"]:checked + label:focus + .checkBox__span:before,
 input[type="checkbox"]:not(:checked) + label:focus + .checkBox__span:before,

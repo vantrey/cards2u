@@ -20,6 +20,7 @@ import {repository} from '../../../helpers/repos_localStorage/Token';
 import PopupFreeSlot from './save_favorites/popup_freeSlot/PopupFreeSlot';
 import {CardType} from "../../../types/entities";
 import {updateUserFavoriteDecks} from '../../../bll/favoriteDecks/favoriteDecksReducer';
+import Search from '../../common/search/Search';
 
 
 const FindContainer: React.FC = () => {
@@ -121,6 +122,7 @@ const FindContainer: React.FC = () => {
             <div className={styles.find__container}>
                 <div className={styles.container__top}>
                     <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
+                    <Search/>
                 </div>
                 <div className={styles.container__body}>
                     <PopupFreeSlot setSaveToFavoritePopup={setSaveToFavoritePopup}

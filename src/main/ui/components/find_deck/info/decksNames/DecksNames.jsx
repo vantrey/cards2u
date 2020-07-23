@@ -14,12 +14,24 @@ const DecksNames = ({nameUser, onSelectDeck, deckscount}) => {
 	return (
 		<div className={styles.container__rightBlock}>
 			<div className={styles.decksNames__wrap}>
-				<h5 className={styles.decksNames__title}>Your friend &nbsp;
-					<strong className={styles.subtitle__name}>{nameUser}</strong>
-				</h5>
-				<div className={styles.decksNames__subtitle}>has &nbsp;
-					<strong className={styles.subtitle__number}>{deckscount} &nbsp;</strong>decks
-				</div>
+
+				<>
+					<h5 className={styles.decksNames__title}>Your friend &nbsp;
+						<strong className={styles.subtitle__name}>{nameUser}</strong>
+					</h5>
+					<div className={styles.decksNames__subtitle}>has &nbsp;
+						<strong className={styles.subtitle__number}>{deckscount} &nbsp;</strong>decks
+					</div>
+				</>
+				{/*<>*/}
+				{/*	<h5 className={styles.decksNames__title}>Decks with the name&nbsp;*/}
+				{/*		<strong className={styles.subtitle__name}>{nameUser}&nbsp;</strong>*/}
+				{/*	</h5>*/}
+				{/*	<div className={styles.decksNames__subtitle}>found&nbsp;*/}
+				{/*		<strong className={styles.subtitle__number}>{deckscount}</strong>*/}
+				{/*	</div>*/}
+				{/*</>*/}
+
 				{isCardPacksFetching && <Loader/>}
 				{!isCardPacksFetching &&
 				<div className={styles.decksNames}>

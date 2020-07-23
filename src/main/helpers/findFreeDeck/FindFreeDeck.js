@@ -5,7 +5,7 @@ export const FindFreeDeck = (userId) => {
 
 	const userFavoriteDecksFromLS = repository.get_UserFavoriteDecksFromLS(userId);
 	const emptySlots = userFavoriteDecksFromLS.favoriteDecks.filter(fDecks => {
-		return fDecks.deckName === '';
+		return fDecks.deckName === 'empty';
 	});
 
 	const freeSlot = emptySlots[0];
