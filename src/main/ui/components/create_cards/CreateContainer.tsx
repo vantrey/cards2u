@@ -9,7 +9,7 @@ import DefaultDeck from "./defaultDeck/DefaultDeck";
 import CardForm from "./forms/cardForm/CardForm";
 import MultiAnswerCardForm from "./forms/multiAnswerCardForm/MultiAnswerCardForm";
 import CreateDeckForm from "./forms/createDeckForm/CreateDeckForm";
-import {deleteDeck} from '../../../bll/currentUserDecks/currentUserDecksReducer';
+import {currentUserDecksActions, deleteDeck, updateDeck} from '../../../bll/currentUserDecks/currentUserDecksReducer';
 import OwnCardsLogout from './cards/ownCardsLogout/OwnCardsLogout';
 import PopupAuth from "../../common/popUp/popUp_Authorization/PopupAuth";
 import {loginActions} from "../../../auth/login/loginReducer";
@@ -86,6 +86,10 @@ const CreateContainer = () => {
         dispatch(deleteCurrentUserCard(e.currentTarget.id));
         setIsEditCardMode(false)
     }, []);
+
+    const updateDeckName = useCallback((newDeckName) => {
+        dispatch(updateDeck(cardsPack_id, newDeckName));
+    }, [cardsPack_id]);
 
     useEffect(() => {
         if (isSuccess && !isEffect) {
@@ -169,6 +173,7 @@ const CreateContainer = () => {
                         onEditCardClick={onEditCardClick}
                         selectedCardId={selectedCardId}
                         isCardsFetching={isCardsFetching}
+                        updateDeckName={updateDeckName}
                     />}
                 </div>
             </div>
