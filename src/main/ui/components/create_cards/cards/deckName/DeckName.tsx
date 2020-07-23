@@ -5,9 +5,10 @@ import style from "./DeckName.module.css"
 type PropsType = {
     cardPackName: string
     updateDeckName: (newDeckName: string) => void
+    isPreventFetching: boolean
 }
 
-const DeckName: React.FC<PropsType> = React.memo(({cardPackName, updateDeckName}) => {
+const DeckName: React.FC<PropsType> = React.memo(({cardPackName, updateDeckName, isPreventFetching}) => {
 
     const [editMode, setEditMode] = useState(false);
     const [nameValue, setNameValue] = useState('');
@@ -52,7 +53,7 @@ const DeckName: React.FC<PropsType> = React.memo(({cardPackName, updateDeckName}
             {!editMode &&
             <div>
                 {cardPackName}
-                <button onClick={onSetEditMode}>
+                <button  disabled={isPreventFetching} onClick={onSetEditMode}>
                     change
                 </button>
             </div>

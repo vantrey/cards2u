@@ -14,6 +14,7 @@ type PropsType = {
     onDeleteCard: (e: React.MouseEvent<HTMLButtonElement>) => void
     isCardsFetching: boolean
     updateDeckName: (newDeckName: string) => void
+    isPreventFetching: boolean
 }
 
 
@@ -27,6 +28,7 @@ const OwnCards: React.FC<PropsType> = React.memo(({
                                                       onDeleteCard,
                                                       isCardsFetching,
                                                       updateDeckName,
+                                                      isPreventFetching,
                                                   }) => {
     useEffect(() => {
 
@@ -49,7 +51,11 @@ const OwnCards: React.FC<PropsType> = React.memo(({
             <div className={styles.deckInfo__wrap}>
                 <h5 className={styles.deckInfo__title}>Selected deck: &nbsp;
                     <small className={styles.title__desc}>
-                        <DeckName cardPackName={cardPackName} updateDeckName={updateDeckName}/>
+                        <DeckName
+                            isPreventFetching={isPreventFetching}
+                            cardPackName={cardPackName}
+                            updateDeckName={updateDeckName}
+                        />
                     </small></h5>
                 <div className={styles.deckInfo__data}>
                     <div className={styles.data__title}>
