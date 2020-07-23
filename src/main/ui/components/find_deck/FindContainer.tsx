@@ -177,8 +177,7 @@ const FindContainer: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    {}
-                    {!isAuth && <DecksLogout/>}
+                    ({!isAuth && <DecksLogout/>}
                     {isAuth && !selectUser && !decksQuestions && <DecksLogout/>}
 
                     {isAuth && selectUser && !decksQuestions && <DecksNames
@@ -186,8 +185,7 @@ const FindContainer: React.FC = () => {
                     {isAuth && selectUser && decksQuestions && <DecksQuestions
                         cardPackName={cardPackName} cards={cards} SaveToFavoriteDecks={SaveToFavoriteDecks}
                         popupSaveToDeckOk={popupSaveToDeckOk} setPopupSaveToDeckOk={setPopupSaveToDeckOk}
-                        setDecksQuestions={setDecksQuestions}/>}
-
+                        setDecksQuestions={setDecksQuestions}/>})
                 </div>
             </div>
             <div className={styles.find__right}></div>
