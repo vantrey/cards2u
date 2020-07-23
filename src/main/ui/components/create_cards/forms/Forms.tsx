@@ -16,6 +16,7 @@ type PropsType = {
     selectedCard: CardType | undefined
     onIsMultiDeckChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     isPreventFetching: boolean
+    setIsMultiDeck: (isMultiDeck: boolean) => void
 }
 
 const Forms: React.FC<PropsType> = React.memo(({
@@ -27,6 +28,7 @@ const Forms: React.FC<PropsType> = React.memo(({
                                                    selectedCard,
                                                    onIsMultiDeckChange,
                                                    isPreventFetching,
+                                                   setIsMultiDeck
                                                }) => {
 
     return (
@@ -55,6 +57,7 @@ const Forms: React.FC<PropsType> = React.memo(({
                 isPreventFetching={isPreventFetching}
                 onIsMultiDeckChange={onIsMultiDeckChange}
                 isMultiDeck={isMultiDeck}
+				setIsMultiDeck={setIsMultiDeck}
             />}
 
             {isPreventFetching &&

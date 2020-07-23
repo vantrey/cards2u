@@ -151,6 +151,7 @@
 .item__answer, .item__question {
     font-family:  sans-serif;
     font-size: 12px;
+    overflow: hidden;
 }
 
 .data__buttons {

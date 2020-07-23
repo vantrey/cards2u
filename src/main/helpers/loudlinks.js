@@ -1,14 +1,6 @@
 
 export const loudlinks = () => {
 
-	// Check if the browser supports audio then get crazy, or exit out if no support.
-	// if ( !document.createElement('audio').canPlayType ) {
-	// 	console.error('Oh man 😩! \nYour browser doesn\'t support audio awesomeness.');
-	// 	return function(){}; // return an empty function if `loudLinks` is called again.
-	// } else {
-	// 	console.log('Audio works like a charm 👍');
-	// }
-
 	// Create audio element and make it awesome
 	let audioPlayer = document.createElement('audio'),
 		mp3Source = document.createElement('source'),

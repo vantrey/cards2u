@@ -140,10 +140,11 @@ const CreateContainer = () => {
                                 selectedCard={selectedCard}
                                 onIsMultiDeckChange={onIsMultiDeckChange}
                                 isPreventFetching={isPreventFetching}
+								setIsMultiDeck={setIsMultiDeck}
                             />}
                         </div>
                         <div className={styles.main__decks}>
-                            <DefaultDeck/>
+                            <DefaultDeck cardPackName={cardPackName}/>
                             <div className={styles.decks__buttons}>
                                 <button
                                     disabled={!isAuth || (!isSuccess && !isStartMode)}
@@ -165,7 +166,8 @@ const CreateContainer = () => {
                         </div>
                         <PopupDeleteDeck popupDeleteDeck={popupDeleteDeck}
                                          setPopupDeleteDeck={setPopupDeleteDeck}
-                                         onDeleteDeck={onDeleteDeck}/>
+                                         onDeleteDeck={onDeleteDeck}
+                                         cardPackName={cardPackName}/>
                     </div>
                 </div>
                 <div className={styles.create__aside}>
