@@ -18,6 +18,7 @@ import {FindFreeDeck} from '../../../helpers/findFreeDeck/FindFreeDeck';
 import PopupFreeSlot from './save_favorites/popup_freeSlot/PopupFreeSlot';
 import {updateUserFavoriteDecks} from '../../../bll/favoriteDecks/favoriteDecksReducer';
 import Search from '../../common/search/Search';
+import SearchByDeckName from '../../common/search/SearchByDeckName';
 
 
 const FindContainer: React.FC = () => {
@@ -122,6 +123,7 @@ const FindContainer: React.FC = () => {
                 <div className={styles.container__top}>
                     <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
                     <Search/>
+                    <SearchByDeckName isAuth={isAuth}/>
                 </div>
                 <div className={styles.container__body}>
                     <PopupFreeSlot setSaveToFavoritePopup={setSaveToFavoritePopup}
