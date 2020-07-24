@@ -1,8 +1,9 @@
-import styles from '../../../components/find_deck/info/decksNames/DecksNames.module.css';
+import styles from './SearchResult.module.css'
 import Loader from '../../loader/Loader';
-import EmptyDecks from '../../../components/find_deck/info/emptyDecks/EmptyDecks';
-import React from 'react';
+/*import React from 'react';*/
+/*
 import {CardPackType} from '../../../../types/entities';
+import EmptyDecksAfterSearch from '../emptyDecksAfterSearch/EmptyDecksAfterSearch';
 
 type SearchResultType = {
     packsFound: Array<CardPackType>,
@@ -45,7 +46,7 @@ const SearchResult: React.FC<SearchResultType> = ({
                                 </div>))
 
                     } {
-                    (packsFound.length === 0) && <EmptyDecks/>
+                    (packsFound.length === 0) && <EmptyDecksAfterSearch/>
                 }
                 </div>
                 }
@@ -55,4 +56,5 @@ const SearchResult: React.FC<SearchResultType> = ({
 }
 
 export default SearchResult;
+*/
 

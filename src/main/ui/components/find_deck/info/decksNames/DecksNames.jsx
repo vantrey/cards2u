@@ -8,6 +8,7 @@ import Loader from "../../../../common/loader/Loader";
 
 const DecksNames = ({nameUser, onSelectDeck, deckscount}) => {
 
+
     const {cardPacks} = useSelector((state) => state.cardPacks);
     const {isCardPacksFetching} = useSelector((state) => state.cardPacks);
 

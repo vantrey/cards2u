@@ -5,32 +5,32 @@ import styles from './SearchByDeckName.module.css'
 
 
 type ownProps = {
-    GetFoundNameOfDeck: (packName: string) => void;
+    isAuth:boolean
 }
 
-const SearchByDeckName: React.FC<ownProps> = ({
-                                                  GetFoundNameOfDeck
-                                              }) => {
-
+const SearchByDeckName: React.FC<ownProps> = ({isAuth}) => {
     const [packName, setPackName] = useState<string>('');
+    const [blockedInput,setBlock]=useState(false)
     const dispatch = useDispatch();
     const getNameDeck = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPackName(e.currentTarget.value);
     }
 
     const pressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if(!isAuth) {
+            setBlock(true)
+        }
         if (e.key === 'Enter') {
-            GetFoundNameOfDeck(packName)
             dispatch(globalSearchForDecks(packName));
             setPackName('');
         }
     }
-
-
     return (
-
         <div>
-            <input className={styles.search__input} onChange={getNameDeck}
+            <input className={styles.search__input}
+                   placeholder='Look for the deck'
+                   disabled={blockedInput}
+                   onChange={getNameDeck}
                    value={packName}
                    onKeyPress={pressEnter}
             />
