@@ -4,7 +4,6 @@ import close_icon from '../../icons/search-close1.png'
 import search_icon from '../../icons/search.png'
 
 
-
 type OwnPropsType = {
 
 }
