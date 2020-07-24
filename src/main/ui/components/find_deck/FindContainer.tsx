@@ -130,8 +130,13 @@ const FindContainer: React.FC = () => {
             <div className={styles.find__left}></div>
             <div className={styles.find__container}>
                 <div className={styles.container__top}>
-                    <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
-                    <Search isAuth={isAuth}/>
+                    <div className={styles.container__top_left}>
+                        <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
+                    </div>
+                    <div className={styles.container__top_right}>
+                      <div className={styles.topDecks}></div>     {/*заглушка*/}
+                        <Search isAuth={isAuth}/>
+                    </div>
                 </div>
                 <div className={styles.container__body}>
                     <PopupFreeSlot setSaveToFavoritePopup={setSaveToFavoritePopup}

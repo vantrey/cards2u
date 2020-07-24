@@ -36,7 +36,7 @@
     width: 100%;
     height: 210px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
 }
@@ -294,4 +294,19 @@
 
 .deckInfo__button:active {
     transform: translate(1px, 1px);
+}
+
+
+/*временные*/
+.container__top_right {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    height: 210px;
+    border: 1px solid transparent;
+    max-width: 50%;
+}
+.topDecks {
+    width: 100%;
+    height: calc(100% - 50px);
 }
