@@ -21,12 +21,12 @@ const initialState = {
 
 type initialStateType = typeof initialState;
 
-export const currentUserCardsReducer = (state: initialStateType = initialState, action: ActionsType) => {
+export const currentUserCardsReducer = (state = initialState, action: ActionsType): initialStateType => {
     switch (action.type) {
         case "CURRENT_USER_CARDS_REDUCER/SET_CARDS":
             return {
                 ...state,
-                cards: action.cards,
+                cards: action.cards ? action.cards : state.cards, // for update cardPack name
                 cardPackName: action.cardPackName,
                 cardsPack_id: action.cardsPack_id
             };
@@ -106,11 +106,11 @@ export const currentUserCardsReducer = (state: initialStateType = initialState, 
 };
 
 export const currentUserCardsActions = {
-    setCards: (cards: Array<CardType>, cardPackName: string, cardsPack_id: string) => ({
+    setCards: (cardPackName: string, cardsPack_id: string, cards: Array<CardType> | null = null) => ({
         type: 'CURRENT_USER_CARDS_REDUCER/SET_CARDS',
-        cards,
         cardPackName,
         cardsPack_id,
+        cards,
     } as const),
 
     set_Success: (isSuccess: boolean) => ({
@@ -171,14 +171,14 @@ export const getCurrentUserCards = (
             let token = repository.getToken();
             const res = await cardsApi.getCards(cardsPack_id, token, direction + sortCards);
             dispatch(currentUserCardsActions.setCards(
-                res.data.cards,
                 cardPackName ? cardPackName : '', // to prevent set null to state
-                cardsPack_id
+                cardsPack_id,
+                res.data.cards
             ));
             dispatch(currentUserCardsActions.set_Success(true));
             repository.saveToken(res.data.token, res.data.tokenDeathTime);
 
-            if(getState().currentUserCards.isStartMode) {
+            if (getState().currentUserCards.isStartMode) {
                 dispatch(currentUserCardsActions.setIsStartMode(false));
             }
 

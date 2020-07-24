@@ -104,7 +104,7 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
             dispatch(loginActions.loginAuthMeSuccess(result.data.success, result.data._id));
             repository.save_Auth_id(result.data._id);
             repository.saveToken(result.data.token, result.data.tokenDeathTime);
-            dispatch(localAuthMe());
+            dispatch(getUser());
             dispatch(loginActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
 

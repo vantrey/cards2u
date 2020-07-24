@@ -23,12 +23,13 @@ const CreateCardTextarea: React.FC<PropsType> = ({
 
     return (
         < div className={styles.form__wrap} >
-            <div className={styles.form__item} tabIndex={1} >
+            <div className={styles.form__item} >
             <textarea
                 className={styles.form__textarea}
                 ref={register}
                 {...props}
                 name={name}
+                tabIndex={1}
             />
                 {errors[name] &&
 				<div className={styles.form__warning_wrap}>

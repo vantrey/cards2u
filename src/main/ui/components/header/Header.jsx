@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Header.module.css'
 import castle from '../../icons/castle-40.png'
 import imgLogo from '../../images/Wisemen-shadow2.png'
@@ -8,24 +8,29 @@ import { PROFILE_PATH, ROOT_PATH } from "../routes/MainRoutes";
 import { useSelector } from "react-redux"
 import Logout from "../logout/Logout";
 import { useHistory } from "react-router";
+import { REDIRECT_PATH } from "../routes/FormRoutes";
 
 
 const Header = ({ setModal, toggleBg, setMenu, setAbout, openProfile, setProfile }) => {
 
 	const { isAuth } = useSelector ((state) => state.login);
 	const history = useHistory ();
-	const onToggleProfile = () => {
 
+	const onToggleProfile = () => {
         setMenu (false);
         setAbout (false);
         setProfile (!openProfile);
+	};
 
-	    if(openProfile) {
-            history.push(`${PROFILE_PATH}`);
-        } else {
-            history.push(`${ROOT_PATH}`);
-        }
-	}
+	useEffect(() => {
+		if(isAuth && openProfile) {
+			history.push(`${PROFILE_PATH}`);
+		} else if (isAuth && !openProfile) {
+			history.push(`${ROOT_PATH}`);
+		} else if (!isAuth && !toggleBg) {
+			history.push(`${REDIRECT_PATH}`);
+		}
+	}, [openProfile]);
 
 	const classForProfile = toggleBg === true ? `${styles.header__link} ${styles.header__link_notActive}` : `${styles.header__link}`;
 	const classForLogo = toggleBg === true ? `${styles.header__link} ${styles.header__link_notActive}` : `${styles.header__link}`;

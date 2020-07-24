@@ -161,6 +161,7 @@
   font-size: 14px;
   line-height: 1.9;
   font-weight: bold;
+  resize: none;
 }
 
 .form__group textarea:focus, .form__group textarea:active {

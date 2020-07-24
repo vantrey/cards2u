@@ -6,7 +6,7 @@ import {repository} from "../../helpers/repos_localStorage/Token";
 import {cardPacksApi} from "../../features/cardsPacks/dal/cardPacksApi";
 import {cardsApi} from "../../features/Cards/dal/сardsApi";
 import {cardsActions, get_Cards} from "../../features/Cards/bll/cardsReducer";
-import {getCurrentUserCards} from "../currentUserCardsReducer/currentUserCardsReducer";
+import {currentUserCardsActions, getCurrentUserCards} from "../currentUserCardsReducer/currentUserCardsReducer";
 
 const initialState = {
     currentUserDecks: [] as Array<CardPackType>,
@@ -31,13 +31,24 @@ export const currentUserDecksReducer = (state = initialState, action: ActionsTyp
         case "CURRENT_USER_DECKS_REDUCER/CREATE_DECK_SUCCESS":
             return {
                 ...state,
-                currentUserDecks: [...state.currentUserDecks, action.newDeck],
+                currentUserDecks: [action.newDeck, ...state.currentUserDecks],
             };
 
         case "CURRENT_USER_DECKS_REDUCER/DELETE_DECK_SUCCESS":
             return {
                 ...state,
                 currentUserDecks: state.currentUserDecks.filter(d => d._id !== action.deckId)
+            };
+
+        case "CURRENT_USER_DECKS_REDUCER/UPDATE_DECK_SUCCESS":
+            return {
+                ...state,
+                currentUserDecks: state.currentUserDecks.map(d => {
+                    if (d._id === action.updatedDeck._id) {
+                        return action.updatedDeck
+                    }
+                    return d
+                })
             };
 
         case "CURRENT_USER_DECKS_REDUCER/SET_SUCCESS":
@@ -93,10 +104,15 @@ export const currentUserDecksActions = {
         type: 'CURRENT_USER_DECKS_REDUCER/SET_IS_FETCHING',
         isFetching
     } as const),
+
+    updateDeckSuccess: (updatedDeck: CardPackType) => ({
+        type: 'CURRENT_USER_DECKS_REDUCER/UPDATE_DECK_SUCCESS',
+        updatedDeck
+    } as const),
 };
 
 type ActionsType = InferActionTypes<typeof currentUserDecksActions> |
-    InferActionTypes<typeof cardsActions>
+    InferActionTypes<typeof currentUserCardsActions>
 
 // thunks
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
@@ -158,7 +174,6 @@ export const deleteDeck = (cardsPackId: string): ThunkType => async (dispatch: D
         const response = await cardPacksApi.deleteCardsPack(token, cardsPackId);
         dispatch(currentUserDecksActions.deleteDeckSuccess(response.data.deletedCardsPack._id));
         repository.saveToken(response.data.token, response.data.tokenDeathTime);
-        dispatch(cardsActions.set_Success(false));
         dispatch(currentUserDecksActions.setIsFetching(false));
         dispatch(setIsPreventFetching(false));
 
@@ -168,4 +183,27 @@ export const deleteDeck = (cardsPackId: string): ThunkType => async (dispatch: D
         dispatch(currentUserDecksActions.setIsFetching(false));
         dispatch(setIsPreventFetching(false));
     }
+};
+
+export const updateDeck = (cardsPackId: string, name: string): ThunkType => async (dispatch: DispatchType) => {
+    try {
+        dispatch(setIsPreventFetching(true));
+        dispatch(currentUserDecksActions.setIsFetching(true));
+        let token = repository.getToken();
+
+        const response = await cardPacksApi.updateCardsPack(token, {_id: cardsPackId, name});
+        dispatch(currentUserDecksActions.updateDeckSuccess(response.data.updatedCardsPack));
+        dispatch(currentUserCardsActions.setCards(response.data.updatedCardsPack.name, response.data.updatedCardsPack._id));
+
+        repository.saveToken(response.data.token, response.data.tokenDeathTime);
+        dispatch(currentUserDecksActions.setIsFetching(false));
+        dispatch(setIsPreventFetching(false));
+
+    } catch (e) {
+        dispatch(currentUserDecksActions.setError(e.response.data.error));
+        repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+        dispatch(currentUserDecksActions.setIsFetching(false));
+        dispatch(setIsPreventFetching(false));
+    }
+
 };

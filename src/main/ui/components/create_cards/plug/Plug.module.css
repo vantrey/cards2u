@@ -1,0 +1,16 @@
+.plug__wrap {
+    position: relative;
+    width: 100%;
+    height: 335px;
+    background: url('../../../images/plug-bg-4-1.png');    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+}
+
+.plug__loader {
+    position: absolute;
+    width: auto;
+    height: auto;
+    bottom: 26px;
+    left: 170px;
+}

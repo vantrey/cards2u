@@ -90,6 +90,7 @@
   font-size: 14px;
   line-height: 1.6;
   font-weight: bold;
+  resize: none;
 }
 
 .form__textarea:focus, .form__textarea:active {

@@ -107,8 +107,42 @@ input[type="checkbox"]:checked + label:after {
     opacity: 1;
 }
 
+input[type="checkbox"]:checked + label:focus,
+input[type="checkbox"]:not(:checked) + label:focus {
+    outline: none;
+}
+
 .checkBox__span {
+    position: relative;
     font-family: sans-serif;
     color: orange;
     font-size: 14px;
+}
+
+.checkBox__span:before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: orange;
+    transform: scale(0);
+    opacity: 0;
+    transition: all .3s ease;
+    outline: none;
+
+}
+
+.checkBox__span:focus, .checkBox__span:active {
+    outline: none;
+}
+
+input[type="checkbox"]:checked + label:focus + .checkBox__span:before,
+input[type="checkbox"]:not(:checked) + label:focus + .checkBox__span:before,
+input[type="checkbox"]:checked + label + .checkBox__span:before {
+    outline: none;
+    transform: scale(1);
+    opacity: 1;
+    transition: all .3s ease;
 }

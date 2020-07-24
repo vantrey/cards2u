@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import styles from './OwnCards.module.css';
 import {CardType} from "../../../../types/entities";
 import EmptyDeck from "../../find_deck/info/emptyDeck/EmptyDeck";
+import DeckName from "./deckName/DeckName";
 
 type PropsType = {
     cards: Array<CardType>
@@ -12,6 +13,8 @@ type PropsType = {
     selectedCardId: string
     onDeleteCard: (e: React.MouseEvent<HTMLButtonElement>) => void
     isCardsFetching: boolean
+    updateDeckName: (newDeckName: string) => void
+    isPreventFetching: boolean
 }
 
 
@@ -24,6 +27,8 @@ const OwnCards: React.FC<PropsType> = React.memo(({
                                                       selectedCardId,
                                                       onDeleteCard,
                                                       isCardsFetching,
+                                                      updateDeckName,
+                                                      isPreventFetching,
                                                   }) => {
     useEffect(() => {
 
@@ -45,7 +50,13 @@ const OwnCards: React.FC<PropsType> = React.memo(({
         <div className={styles.container__rightBlock}>
             <div className={styles.deckInfo__wrap}>
                 <h5 className={styles.deckInfo__title}>Selected deck: &nbsp;
-                    <small className={styles.title__desc}>{cardPackName}</small></h5>
+                    <small className={styles.title__desc}>
+                        <DeckName
+                            isPreventFetching={isPreventFetching}
+                            cardPackName={cardPackName}
+                            updateDeckName={updateDeckName}
+                        />
+                    </small></h5>
                 <div className={styles.deckInfo__data}>
                     <div className={styles.data__title}>
                         <div className={styles.title__question}>Question</div>

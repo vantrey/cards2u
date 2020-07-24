@@ -98,6 +98,7 @@ const CardForm: React.FC<PropsType> = React.memo(({
                         errors={errors}
                         placeholder='enter your question'
                         restLimit={questionRestLimit}
+                        autoFocus={true}
                     />
                     <CreateCardTextarea
                         register={register}
