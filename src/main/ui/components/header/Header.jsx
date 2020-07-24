@@ -27,7 +27,7 @@ const Header = ({ setModal, toggleBg, setMenu, setAbout, openProfile, setProfile
 			history.push(`${PROFILE_PATH}`);
 		} else if (isAuth && !openProfile) {
 			history.push(`${ROOT_PATH}`);
-		} else if (!isAuth) {
+		} else if (!isAuth && !toggleBg) {
 			history.push(`${REDIRECT_PATH}`);
 		}
 	}, [openProfile]);

@@ -50,7 +50,10 @@ const Main = () => {
                     <MainRoutes/>
                 }
             </>
-            <FormRoutes/>
+            {
+                !toggleBg &&
+                <FormRoutes/>
+            }
             <Menu toggleMenu={toggleMenu} setMenu={setMenu} toggleAbout={toggleAbout}
                   setAbout={setAbout} openProfile={openProfile}
                   setProfile={setProfile} toggleBg={toggleBg} />
