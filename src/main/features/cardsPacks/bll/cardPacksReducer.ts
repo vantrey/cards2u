@@ -17,7 +17,8 @@ const initialState = {
     isSuccess:false,
     cardsPackId: '',
     user_id: '',
-    isCardPacksFetching: false
+    isCardPacksFetching: false,
+    isCardPacksFromSearch: false
 };
 
 type InitialStateType =typeof initialState
@@ -61,6 +62,11 @@ export const cardPacksReducer = (state = initialState, action: ActionsType): Ini
                 ...state,
                 isCardPacksFetching: action.isFetching
             };
+         case "CARD_PACKS_REDUCER/SET_ISCARDPACKSFROMSEARCH":
+                    return {
+                        ...state,
+                        isCardPacksFromSearch: action.isCardPacksFromSearch
+                    };
 
         default:
             return state
@@ -97,6 +103,10 @@ export const cardPacksActions = {
         type: 'CARD_PACKS_REDUCER/SET_IS_FETCHING',
         isFetching
     } as const),
+
+    setIsCardPacksFromSearch: (isCardPacksFromSearch: boolean) => ({
+        type: 'CARD_PACKS_REDUCER/SET_ISCARDPACKSFROMSEARCH', isCardPacksFromSearch
+    } as const),
 };
 
 type ActionsType = InferActionTypes<typeof cardPacksActions>
@@ -108,6 +118,7 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 export const getCardPacks = (currentPage: number | null, pageSize: number | null, user_id: string | null): ThunkType =>
     async (dispatch: DispatchType) => {
         try {
+            dispatch(cardPacksActions.setIsCardPacksFromSearch(false));
             dispatch(setIsPreventFetching(true));
             dispatch(cardPacksActions.setIsFetching(true));
             let token = repository.getToken();
@@ -116,8 +127,8 @@ export const getCardPacks = (currentPage: number | null, pageSize: number | null
             repository.saveToken(response.data.token, response.data.tokenDeathTime);
             dispatch(cardPacksActions.setIsSuccess(true));
             dispatch(cardPacksActions.setIsFetching(false));
-            dispatch(setIsPreventFetching(false));
 
+            dispatch(setIsPreventFetching(false));
         } catch (e) {
             dispatch(cardPacksActions.setError(e.response.data.error));
             repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);

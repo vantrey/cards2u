@@ -17,7 +17,8 @@ import {get_Cards} from "../../../features/Cards/bll/cardsReducer";
 import {FindFreeDeck} from '../../../helpers/findFreeDeck/FindFreeDeck';
 import PopupFreeSlot from './save_favorites/popup_freeSlot/PopupFreeSlot';
 import {updateUserFavoriteDecks} from '../../../bll/favoriteDecks/favoriteDecksReducer';
-import Search from '../../common/search/Search';
+import Search from '../search/Search';
+
 
 
 const FindContainer: React.FC = () => {
@@ -34,6 +35,8 @@ const FindContainer: React.FC = () => {
     const {isAuth, userId} = useSelector((state: AppStateType) => state.login);
     const [modal, setModal] = useState(false);
     const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
+    const {isCardPacksFromSearch} = useSelector((state:AppStateType) => state.cardPacks);
+    const {foundName } = useSelector((state:AppStateType) => state.searchReducer);
     const [nameUser, setNameUser] = useState<string | null>('');
     const [deckscount, setDeckscount] = useState<string | null>('');
     const [popupSaveToDeckOk, setPopupSaveToDeckOk] = useState<boolean>(false);
@@ -99,6 +102,13 @@ const FindContainer: React.FC = () => {
         }
     }, []);
 
+    useEffect(() => {
+     if(isCardPacksFromSearch) {
+         setSelectUser(false);
+         setDecksQuestions(false);
+     }
+    }, [isCardPacksFromSearch, foundName]);
+
     const SaveToFavoriteDecks = () => {
         const freeSlotID = FindFreeDeck(userId);
         if (freeSlotID) {
@@ -121,7 +131,7 @@ const FindContainer: React.FC = () => {
             <div className={styles.find__container}>
                 <div className={styles.container__top}>
                     <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
-                    <Search/>
+                    <Search isAuth={isAuth}/>
                 </div>
                 <div className={styles.container__body}>
                     <PopupFreeSlot setSaveToFavoritePopup={setSaveToFavoritePopup}
@@ -161,10 +171,16 @@ const FindContainer: React.FC = () => {
                     </div>
 
                     {!isAuth && <DecksLogout/>}
-                    {isAuth && !selectUser && !decksQuestions && <DecksLogout/>}
-                    {isAuth && selectUser && !decksQuestions && <DecksNames
+                    {isAuth && !selectUser && !decksQuestions && !isCardPacksFromSearch && <DecksLogout/>}
+                    {isAuth && selectUser && !decksQuestions && !isCardPacksFromSearch && <DecksNames
 						nameUser={nameUser} onSelectDeck={onSelectDeck} deckscount={deckscount}/>}
-                    {isAuth && selectUser && decksQuestions && <DecksQuestions
+                    {isAuth && isCardPacksFromSearch && !selectUser && !decksQuestions && <DecksNames
+						nameUser={nameUser} onSelectDeck={onSelectDeck} deckscount={deckscount}/>}
+                    {isAuth && selectUser && decksQuestions && !isCardPacksFromSearch && <DecksQuestions
+						cardPackName={cardPackName} cards={cards} SaveToFavoriteDecks={SaveToFavoriteDecks}
+						popupSaveToDeckOk={popupSaveToDeckOk} setPopupSaveToDeckOk={setPopupSaveToDeckOk}
+						setDecksQuestions={setDecksQuestions}/>}
+                    {isAuth && isCardPacksFromSearch && !selectUser && decksQuestions && <DecksQuestions
 						cardPackName={cardPackName} cards={cards} SaveToFavoriteDecks={SaveToFavoriteDecks}
 						popupSaveToDeckOk={popupSaveToDeckOk} setPopupSaveToDeckOk={setPopupSaveToDeckOk}
 						setDecksQuestions={setDecksQuestions}/>}

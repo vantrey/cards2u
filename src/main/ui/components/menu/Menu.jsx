@@ -20,10 +20,9 @@ const Menu = ({toggleMenu, setMenu, toggleAbout, setAbout, setProfile, openProfi
             setMenu(false);
             setAbout (!toggleAbout);
 		} else {
-
 			setAbout (!toggleAbout);
 		}
-	}
+	};
 
 	const openMenu = () => {
 		history.push(`${ROOT_PATH}`);
@@ -33,7 +32,7 @@ const Menu = ({toggleMenu, setMenu, toggleAbout, setAbout, setProfile, openProfi
         } else {
             setMenu(!toggleMenu);
         }
-    }
+    };
 
 	const classForMenu = toggleBg === true ? `${styles.menu} ${styles.menu_notActive}` : `${styles.menu}`;
 

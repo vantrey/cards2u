@@ -12,6 +12,7 @@ import {favoriteDecksReducer} from "../favoriteDecks/favoriteDecksReducer";
 import {preventRequestReducer} from "../preventReques/preventRequestReducer";
 import {currentUserDecksReducer} from "../currentUserDecks/currentUserDecksReducer";
 import {currentUserCardsReducer} from "../currentUserCardsReducer/currentUserCardsReducer";
+import { searchReducer } from "../searchReducer/searchReducer";
 
 const rootReducer = combineReducers({
     login: loginReducer,
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
     preventRequest: preventRequestReducer,
     currentUserDecks: currentUserDecksReducer,
     currentUserCards: currentUserCardsReducer,
+    searchReducer:searchReducer
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>

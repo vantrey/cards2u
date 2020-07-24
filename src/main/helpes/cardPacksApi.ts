@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {CardPackType} from "../../../types/entities";
+import {CardPackType} from "../types/entities";
 
 
 const instance = axios.create({
@@ -39,32 +39,27 @@ type UpdateCardPackType = {
 export const cardPacksApi = {
   getPacks(token: string | null, currentPage: number|null, pageSize: number|null,user_id:string|null) {
     return instance.get<GetPacksType>(
-        `?token=${token}&page=${currentPage}&pageCount=${pageSize}&user_id=${user_id}`
-    )
-  },
-  getPacksForSearch(token: string | null,packName:string) {
-    return instance.get<GetPacksType>(
-        `?token=${token}&packName=${packName}&page=${1}&pageCount=${1000}`
+      `?token=${token}&page=${currentPage}&pageCount=${pageSize}&user_id=${user_id}`
     )
   },
   createCardsPack(token: string | null, cardsPack: { name: string, user_id: string | null }) {
     return instance.post<CreateCardPackType>(
-        ``,
-        {
-          cardsPack,
-          token
-        })
+      ``,
+      {
+        cardsPack,
+        token
+      })
   },
   deleteCardsPack(token: string | null, cardsPackId: string) {
     return instance.delete<DelCardPackType>(
-        `?token=${token}&id=${cardsPackId}`
+      `?token=${token}&id=${cardsPackId}`
     )
   },
   updateCardsPack(token: string | null, cardsPack: { _id: string, name: string }) {
     return instance.put<UpdateCardPackType>(``,
-        {
-          cardsPack,
-          token
-        })
+      {
+        cardsPack,
+        token
+      })
   }
 };
