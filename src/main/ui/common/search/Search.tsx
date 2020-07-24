@@ -14,7 +14,6 @@ type PropsType = OwnPropsType
 const Search: React.FC<PropsType> = () => {
 
     return (
-        <div className={styles.column}>
             <div className={styles.search}>
                 <div className={styles.search__bar}>
                     <input id='searchOne' type='checkbox'/>
@@ -35,7 +34,6 @@ const Search: React.FC<PropsType> = () => {
                                autoFocus={true} placeholder='Search...' type='text'/>
                 </div>
             </div>
-        </div>
     )
 };
 
