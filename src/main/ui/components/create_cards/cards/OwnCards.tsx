@@ -49,14 +49,14 @@ const OwnCards: React.FC<PropsType> = React.memo(({
     return (
         <div className={styles.container__rightBlock}>
             <div className={styles.deckInfo__wrap}>
-                <h5 className={styles.deckInfo__title}>Selected deck: &nbsp;
-                    <small className={styles.title__desc}>
-                        <DeckName
-                            isPreventFetching={isPreventFetching}
-                            cardPackName={cardPackName}
-                            updateDeckName={updateDeckName}
-                        />
-                    </small></h5>
+                <div className={styles.deckInfo__top}>
+                <h5 className={styles.deckInfo__title}>Selected deck:</h5>
+                    <DeckName
+                        isPreventFetching={isPreventFetching}
+                        cardPackName={cardPackName}
+                        updateDeckName={updateDeckName}
+                    />
+                </div>
                 <div className={styles.deckInfo__data}>
                     <div className={styles.data__title}>
                         <div className={styles.title__question}>Question</div>

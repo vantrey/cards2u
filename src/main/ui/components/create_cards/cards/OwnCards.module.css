@@ -16,6 +16,14 @@
     /*border-right: 1px solid #088dcd;*/
 }
 
+.deckInfo__top {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .deckInfo__title {
     margin: 0;
     display: flex;

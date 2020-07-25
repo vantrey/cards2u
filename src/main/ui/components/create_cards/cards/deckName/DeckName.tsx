@@ -1,5 +1,5 @@
-import React, {useCallback, useState} from "react";
-import style from "./DeckName.module.css"
+import React, { useState} from "react";
+import styles from "./DeckName.module.css"
 
 
 type PropsType = {
@@ -34,30 +34,39 @@ const DeckName: React.FC<PropsType> = React.memo(({cardPackName, updateDeckName,
     return (
         <>
             {editMode &&
-            <div>
+            <>
                 <input
+                    className={styles.deckname__input}
                     maxLength={20}
                     value={nameValue}
                     onChange={onChangeName}
+                    autoFocus={true}
                 />
-                <button disabled={!nameValue} onClick={onUpdateDeckName}>
-                    apply
-                </button>
-
-                <button onClick={onCancelChangeName}>
-                    cancel
-                </button>
-
-            </div>}
+				<div className={styles.deckname__buttons}>
+					<button className={styles.deckname__button}
+                        disabled={!nameValue} onClick={onUpdateDeckName}>
+						apply
+					</button>
+					<button className={styles.deckname__button}
+                        onClick={onCancelChangeName}>
+						cancel
+					</button>
+                </div>
+            </>
+            }
 
             {!editMode &&
-            <div>
-                {cardPackName}
-                <button  disabled={isPreventFetching} onClick={onSetEditMode}>
-                    change
-                </button>
-            </div>
-
+            <>
+                <h5  className={styles.deckname__title}>React
+                    {cardPackName}
+                </h5>
+				<div className={styles.deckname__buttons}>
+                    <button className={styles.deckname__button_change}
+                        disabled={isPreventFetching} onClick={onSetEditMode}>
+                        change
+                    </button>
+				</div>
+            </>
             }
         </>
     )

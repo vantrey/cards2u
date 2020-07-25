@@ -171,8 +171,9 @@ const CreateContainer = () => {
                     </div>
                 </div>
                 <div className={styles.create__aside}>
-                    {!ownCards && <OwnCardsLogout effect={isEffect}/>}
-                    {ownCards && <OwnCards
+                    {/*{!ownCards && <OwnCardsLogout effect={isEffect}/>}*/}
+                    {/*{ownCards && <OwnCards*/}
+                    <OwnCards
                         onDeleteCard={onDeleteCard}
                         onCancelEditCardClick={onCancelEditCardClick}
                         cards={cards}
@@ -183,7 +184,7 @@ const CreateContainer = () => {
                         isCardsFetching={isCardsFetching}
                         updateDeckName={updateDeckName}
                         isPreventFetching={isPreventFetching}
-                    />}
+                    />
                 </div>
             </div>
             <div className={styles.create__right}></div>
