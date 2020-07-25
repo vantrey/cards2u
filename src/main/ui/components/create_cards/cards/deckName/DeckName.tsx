@@ -57,7 +57,7 @@ const DeckName: React.FC<PropsType> = React.memo(({cardPackName, updateDeckName,
 
             {!editMode &&
             <>
-                <h5  className={styles.deckname__title}>React
+                <h5  className={styles.deckname__title}>
                     {cardPackName}
                 </h5>
 				<div className={styles.deckname__buttons}>
