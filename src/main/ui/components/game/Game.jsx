@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Game.module.css';
-import gif from '../../video/анимация-путник-с-фоном.gif';
-import gif1 from '../../video/1.gif';
-import gif2 from '../../video/2.gif';
 import DecksRoutes, {
 	GAME_PATH_DECK_BLUE,
 	GAME_PATH_DECK_GREEN,
@@ -21,11 +18,13 @@ import avaDefault from "../../images/ava-default.png";
 import soundDeck from "../../audio/deck.mp3";
 import soundCard from "../../audio/card.mp3";
 import { loudlinks } from "../../../helpers/loudlinks";
+import Matrix from "./analytics/Analytics";
 
 
 const Game = () => {
 
 	const [ cardface, setCardFace ] = useState (true);
+	const [ startMatrix, setstartMatrix] = useState (false);
 	const [ cardBg, setCardBg ] = useState (bg_1);
 	const { user } = useSelector ((state) => state.profile);
 	const { userFavoriteDecks } = useSelector ((state) => state.favoriteDecks);
@@ -38,10 +37,21 @@ const Game = () => {
 		<div className={styles.game__wrap}>
 			<div className={styles.game__left}></div>
 			<div className={styles.game__container}>
-				<div className={styles.game__analytics}>analytics
-					{/*<img src={gif} alt=""/>*/}
-					{/*<img src={gif1} alt=""/>*/}
-					{/*<img src={gif2} alt=""/>*/}
+				<div className={styles.game__analytics}>
+					{
+						!startMatrix &&
+						<div className={styles.analytics__start}>
+							<button
+								className={styles.analytics__button}
+								onClick={() => {setstartMatrix(true)}}>
+								analytics
+							</button>
+						</div>
+					}
+					{
+						startMatrix &&
+						<Matrix/>
+					}
 				</div>
 				<div className={styles.game__content}>
 					<div className={styles.content__header}>
