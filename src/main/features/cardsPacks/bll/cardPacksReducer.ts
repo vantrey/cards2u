@@ -7,8 +7,6 @@ import {setIsPreventFetching} from "../../../bll/preventReques/preventRequestRed
 import {act} from "react-dom/test-utils";
 
 
-
-
 const initialState = {
     cardPacks: [] as  Array<CardPackType>,
     errorFromServer: '',

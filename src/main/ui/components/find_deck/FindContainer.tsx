@@ -20,7 +20,6 @@ import {updateUserFavoriteDecks} from '../../../bll/favoriteDecks/favoriteDecksR
 import Search from '../search/Search';
 
 
-
 const FindContainer: React.FC = () => {
 
     const dispatch = useDispatch();
@@ -174,7 +173,6 @@ const FindContainer: React.FC = () => {
                             </div>
                         </div>
                     </div>
-
                     {!isAuth && <DecksLogout/>}
                     {isAuth && !selectUser && !decksQuestions && !isCardPacksFromSearch && <DecksLogout/>}
                     {isAuth && selectUser && !decksQuestions && !isCardPacksFromSearch && <DecksNames
@@ -189,7 +187,6 @@ const FindContainer: React.FC = () => {
 						cardPackName={cardPackName} cards={cards} SaveToFavoriteDecks={SaveToFavoriteDecks}
 						popupSaveToDeckOk={popupSaveToDeckOk} setPopupSaveToDeckOk={setPopupSaveToDeckOk}
 						setDecksQuestions={setDecksQuestions}/>}
-
                 </div>
             </div>
             <div className={styles.find__right}></div>
