@@ -1,4 +1,4 @@
-import {CardPackType, CardType, UserFavoriteDecksType, UserType} from "../../types/entities";
+import {CardType, UserFavoriteDecksType, UserFavoriteDeckType, UserType} from "../../types/entities";
 
 type JSONObjectType = {
     tokenDeathTime: number,
@@ -94,7 +94,7 @@ export const repository = {
     },
 
     get_UserFavoriteDecksFromLS(userId: string | null) {
-       userId = this._isUnknownUser(userId);
+        userId = this._isUnknownUser(userId);
 
         const allFavoriteDecks: string | null = localStorage.getItem('allFavoriteDecks');
         if (allFavoriteDecks) {
@@ -221,6 +221,155 @@ export const repository = {
         }
         localStorage.setItem('allFavoriteDecks', JSON.stringify(allFavoriteDecks));
     },
+
+    _setDefaultDeck() {
+        let defaultDeck = {
+            favoriteDeckId: '0',
+            deckName: 'default deck',
+            deck: [
+                {
+                    answer: "5",
+                    cardsPack_id: "5eecba93996e550004cb4c2a",
+                    created: "2020-07-15T10:36:05.006Z",
+                    grade: 0,
+                    question: "4",
+                    rating: 0,
+                    shots: 0,
+                    type: "card",
+                    updated: "2020-07-15T10:36:05.006Z",
+                    user_id: "5ee7342f8c6c320004bab925",
+                    __v: 0,
+                    _id: "5f0edc15adc449000476a830"
+                },
+
+                {
+                    answer: "no answerutyjtyj",
+                    answerImg: null,
+                    answerVideo: null,
+                    cardsPack_id: "5eecba93996e550004cb4c2a",
+                    comments: null,
+                    created: "2020-07-13T10:00:20.583Z",
+                    grade: 0,
+                    question: "no question",
+                    questionImg: null,
+                    questionVideo: null,
+                    rating: 0,
+                    shots: 0,
+                    type: "card",
+                    updated: "2020-07-13T12:31:56.451Z",
+                    user_id: "5ee7342f8c6c320004bab925",
+                    __v: 0,
+                    _id: "5f0c30b4d1c4700004fe4c9e",
+                },
+
+
+                {
+                    answer: "no answer",
+                    cardsPack_id: "5eecba93996e550004cb4c2a",
+                    created: "2020-07-13T09:55:37.707Z",
+                    grade: 0,
+                    question: "no question",
+                    rating: 0,
+                    shots: 0,
+                    type: "card",
+                    updated: "2020-07-13T09:55:37.707Z",
+                    user_id: "5ee7342f8c6c320004bab925",
+                    __v: 0,
+                    _id: "5f0c2f99d1c4700004fe4c9d"
+                },
+
+                {
+                    answer: "no answer",
+                    cardsPack_id: "5eecba93996e550004cb4c2a",
+                    created: "2020-07-13T09:55:34.144Z",
+                    grade: 0,
+                    question: "no question",
+                    rating: 0,
+                    shots: 0,
+                    type: "card",
+                    updated: "2020-07-13T09:55:34.144Z",
+                    user_id: "5ee7342f8c6c320004bab925",
+                    __v: 0,
+                    _id: "5f0c2f96d1c4700004fe4c9c",
+                },
+
+                {
+                    answer: "no answer",
+                    cardsPack_id: "5eecba93996e550004cb4c2a",
+                    created: "2020-07-13T09:47:09.008Z",
+                    grade: 0,
+                    question: "no question",
+                    rating: 0,
+                    shots: 0,
+                    type: "card",
+                    updated: "2020-07-13T09:47:09.008Z",
+                    user_id: "5ee7342f8c6c320004bab925",
+                    __v: 0,
+                    _id: "5f0c2d9dd1c4700004fe4c9b",
+                },
+
+                {
+                    answer: "no answer",
+                    cardsPack_id: "5eecba93996e550004cb4c2a",
+                    created: "2020-07-13T08:20:18.535Z",
+                    grade: 0,
+                    question: "no question",
+                    rating: 0,
+                    shots: 0,
+                    type: "card",
+                    updated: "2020-07-13T08:20:18.535Z",
+                    user_id: "5ee7342f8c6c320004bab925",
+                    __v: 0,
+                    _id: "5f0c1942d1c4700004fe4c97",
+                },
+
+                {
+                    answer: "3333",
+                    cardsPack_id: "5eecba93996e550004cb4c2a",
+                    created: "2020-07-13T08:13:18.282Z",
+                    grade: 0,
+                    question: "1233",
+                    rating: 0,
+                    shots: 0,
+                    type: "card",
+                    updated: "2020-07-13T08:13:18.282Z",
+                    user_id: "5ee7342f8c6c320004bab925",
+                    __v: 0,
+                    _id: "5f0c179ed1c4700004fe4c96",
+                },
+
+                {
+                    answer: "123",
+                    cardsPack_id: "5eecba93996e550004cb4c2a",
+                    created: "2020-07-13T07:21:50.006Z",
+                    grade: 0,
+                    question: "123",
+                    rating: 0,
+                    shots: 0,
+                    type: "card",
+                    updated: "2020-07-13T07:21:50.006Z",
+                    user_id: "5ee7342f8c6c320004bab925",
+                    __v: 0,
+                    _id: "5f0c0b8ed1c4700004fe4c94"
+                }
+            ]
+        } as UserFavoriteDeckType;
+
+        localStorage.setItem('defaultDeck', JSON.stringify(defaultDeck));
+    },
+
+    getDefaultDeck() {
+        let defaultDeck: string | null = localStorage.getItem('defaultDeck');
+
+        if (!defaultDeck) {
+            this._setDefaultDeck();
+            defaultDeck = localStorage.getItem('defaultDeck');
+        }
+
+        if (defaultDeck) {
+            return JSON.parse(defaultDeck) as UserFavoriteDeckType
+        }
+    }
 };
 
 

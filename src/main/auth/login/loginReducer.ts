@@ -1,7 +1,7 @@
 import {AppStateType, InferActionTypes} from "../../bll/store/store";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {api} from "../../dal/api";
-import {repository} from "../../helpers/repos_localStorage/Token";
+import {repository} from "../../helpers/repos_localStorage/reposetory";
 import {getUser, profileActions} from "../../bll/profile/profileReducer";
 import {createUserFavoriteDecks} from "../../bll/favoriteDecks/favoriteDecksReducer";
 import {setIsPreventFetching} from "../../bll/preventReques/preventRequestReducer";
@@ -153,16 +153,17 @@ export const logout = (): ThunkType =>
 export const localAuthMe = (): ThunkType =>
     (dispatch: DispatchType) => {
         const token = repository.getToken();
-        const userId = repository.get_Auth_id();
+        let userId = repository.get_Auth_id();
 
+        if(!token) {
+            userId = null;
+            dispatch(loginActions.logoutSuccess());
+        }
         dispatch(createUserFavoriteDecks(userId));
 
-        if (token && userId) {
+        if (token) {
             dispatch(loginActions.loginAuthMeSuccess(true, userId));
             dispatch(getUser());
-
-        } else {
-            dispatch(loginActions.logoutSuccess());
         }
     };
 

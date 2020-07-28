@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "../../../ui/common/Link/Link";
 import {CARDS_PATH} from "../../../ui/components/routes/Routes";
-import {repository} from "../../../helpers/repos_localStorage/Token";
+import {repository} from "../../../helpers/repos_localStorage/reposetory";
 import ModalOnDeletePack from "./Моdal/ModalonDeletePack";
 
 type CardPackType = {

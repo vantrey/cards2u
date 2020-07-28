@@ -1,16 +1,19 @@
 import {AppStateType, InferActionTypes} from '../store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {CardType, UserFavoriteDecksType} from "../../types/entities";
-import {repository} from "../../helpers/repos_localStorage/Token";
+import {CardType, GameType, UserFavoriteDecksType, UserFavoriteDeckType} from "../../types/entities";
+import {repository} from "../../helpers/repos_localStorage/reposetory";
+import {getControlRandomCard} from "../../helpers/getCard/getCard";
 
 const initialState = {
-    userFavoriteDecks: {} as UserFavoriteDecksType
+    userFavoriteDecks: {} as UserFavoriteDecksType,
+    currentFavDeck: {} as UserFavoriteDeckType,
+    currentFavCard: {} as CardType,
 };
 
 type InitialStateType = typeof initialState
 
 export const favoriteDecksReducer =
-    (state: typeof initialState = initialState, action: ActionsType): InitialStateType => {
+    (state = initialState, action: ActionsType): InitialStateType => {
         switch (action.type) {
 
             case "FAVORITE_DECKS_REDUCER/SET_USER_FAVORITE_DECKS":
@@ -19,6 +22,30 @@ export const favoriteDecksReducer =
                     ...state,
                     userFavoriteDecks: action.userFavoriteDecks
                 };
+
+            case "FAVORITE_DECKS_REDUCER/SET_DEFAULT_FAV_DECK":
+                return {
+                    ...state,
+                    currentFavDeck: action.deck
+                }
+
+            case "FAVORITE_DECKS_REDUCER/SET_CURRENT_FAV_DECK":
+                const currentFavDeck = state.userFavoriteDecks.favoriteDecks.find(
+                    d => d.favoriteDeckId === action.favoriteDeckId
+                )
+                if (currentFavDeck) {
+                    return {
+                        ...state,
+                        currentFavDeck: currentFavDeck
+                    }
+                }
+                return state
+
+            case "FAVORITE_DECKS_REDUCER/SET_CURRENT_FAV_CARD":
+                return {
+                    ...state,
+                    currentFavCard: action.card
+                }
 
             default:
                 return state
@@ -29,6 +56,21 @@ export const favoriteDecksReducer =
 export const favoriteDecksActions = {
     setUserFavoriteDecks: (userFavoriteDecks: UserFavoriteDecksType) => ({
         type: "FAVORITE_DECKS_REDUCER/SET_USER_FAVORITE_DECKS", userFavoriteDecks
+    } as const),
+
+    setCurrentFavDeck: (favoriteDeckId: string) => ({
+        type: "FAVORITE_DECKS_REDUCER/SET_CURRENT_FAV_DECK",
+        favoriteDeckId
+    } as const),
+
+    setDefaultFavDeck: (deck: UserFavoriteDeckType) => ({
+        type: "FAVORITE_DECKS_REDUCER/SET_DEFAULT_FAV_DECK",
+        deck
+    } as const),
+
+    setCurrentFavCard: (card: CardType) => ({
+        type: "FAVORITE_DECKS_REDUCER/SET_CURRENT_FAV_CARD",
+        card
     } as const),
 };
 
@@ -53,7 +95,7 @@ export const createUserFavoriteDecks = (userId: string | null): ThunkType =>
     };
 
 export const updateUserFavoriteDecks =
-(userId: string | null, favoriteDeckId: string, deckName: string, deck: Array<CardType>): ThunkType =>
+    (userId: string | null, favoriteDeckId: string, deckName: string, deck: Array<CardType>): ThunkType =>
         (dispatch: DispatchType) => {
 
             repository.updateUserFavoriteDeck(userId, favoriteDeckId, deckName, deck);
@@ -75,5 +117,34 @@ export const delUserFavoriteDecks =
                 dispatch(favoriteDecksActions.setUserFavoriteDecks(updatedUserFavoriteDecks));
             }
         };
+
+export const getCurrentFavDeck = (favoriteDeckId: string, gameType: GameType): ThunkType =>
+    (dispatch: DispatchType, getState: () => AppStateType) => {
+
+        if (favoriteDeckId === '0') {
+            const deck = repository.getDefaultDeck();
+            if (deck) dispatch(favoriteDecksActions.setDefaultFavDeck(deck));
+
+        } else {
+            dispatch(favoriteDecksActions.setCurrentFavDeck(favoriteDeckId));
+        }
+
+        getCurrentFavCard(gameType);
+    };
+
+export const getCurrentFavCard = (gameType: GameType): ThunkType =>
+    (dispatch: DispatchType, getState: () => AppStateType) => {
+
+        const cards = getState().favoriteDecks.currentFavDeck.deck;
+        let card; // undefined
+
+        if (gameType === "controlledRandom") {
+            card = getControlRandomCard(cards);
+        }
+
+        if (card) {
+            dispatch(favoriteDecksActions.setCurrentFavCard(card));
+        }
+    };
 
 

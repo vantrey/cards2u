@@ -1,6 +1,6 @@
 import {CardPackType} from '../../types/entities';
 import {setIsPreventFetching} from '../preventReques/preventRequestReducer';
-import {repository} from '../../helpers/repos_localStorage/Token';
+import {repository} from '../../helpers/repos_localStorage/reposetory';
 import {cardPacksApi} from '../../features/cardsPacks/dal/cardPacksApi';
 import {AppStateType, InferActionTypes} from '../store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';

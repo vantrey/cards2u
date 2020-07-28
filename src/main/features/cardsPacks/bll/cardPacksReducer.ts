@@ -2,7 +2,7 @@ import {AppStateType, InferActionTypes} from '../../../bll/store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {CardPackType} from "../../../types/entities";
 import {cardPacksApi} from "../dal/cardPacksApi";
-import {repository} from "../../../helpers/repos_localStorage/Token";
+import {repository} from "../../../helpers/repos_localStorage/reposetory";
 import {setIsPreventFetching} from "../../../bll/preventReques/preventRequestReducer";
 import {act} from "react-dom/test-utils";
 

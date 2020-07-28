@@ -1,7 +1,7 @@
 import {AddCardType, CardType, NewCardGradeType, UpdateCardType} from "../../../types/entities";
 import {AppStateType, InferActionTypes} from "../../../bll/store/store";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
-import {repository} from "../../../helpers/repos_localStorage/Token";
+import {repository} from "../../../helpers/repos_localStorage/reposetory";
 import {cardsApi} from "../dal/сardsApi";
 import {setIsPreventFetching} from "../../../bll/preventReques/preventRequestReducer";
 

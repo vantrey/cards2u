@@ -1,5 +1,5 @@
 import React from 'react';
-import {repository} from "../../../helpers/repos_localStorage/Token";
+import {repository} from "../../../helpers/repos_localStorage/reposetory";
 import ModalWindowDeleteCard from "./ModalWindowCards/ModalWindowDeleteCard";
 import ModalWindowUpdateCard from "./ModalWindowCards/ModalWindowUpdateCard";
 import styles from './Cards.module.css'

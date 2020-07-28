@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../../bll/store/store";
 import {CardType} from "../../../../types/entities";
 import {cardsActions, get_Cards, setCardGrade} from "../../bll/cardsReducer";
-import {repository} from "../../../../helpers/repos_localStorage/Token";
+import {repository} from "../../../../helpers/repos_localStorage/reposetory";
 import {useHistory, useParams} from 'react-router-dom';
 import LearnPage from "./LearnPage";
 

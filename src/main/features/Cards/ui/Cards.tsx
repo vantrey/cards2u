@@ -2,7 +2,7 @@ import React from 'react';
 import {CardType} from "../../../types/entities";
 import Card from "./Card";
 import styles from './Cards.module.css'
-import {repository} from "../../../helpers/repos_localStorage/Token";
+import {repository} from "../../../helpers/repos_localStorage/reposetory";
 import ModalWindowAddCard from "./ModalWindowCards/ModalWindowAddCard";
 import CardsHeader from "./CardsHeader";
 

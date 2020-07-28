@@ -1,7 +1,7 @@
 import {AppStateType, InferActionTypes} from '../store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {UserType} from "../../types/entities";
-import {repository} from "../../helpers/repos_localStorage/Token";
+import {repository} from "../../helpers/repos_localStorage/reposetory";
 import {api} from "../../dal/api";
 import {setIsPreventFetching} from "../preventReques/preventRequestReducer";
 
