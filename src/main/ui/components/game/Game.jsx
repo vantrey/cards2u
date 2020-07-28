@@ -18,7 +18,9 @@ import avaDefault from "../../images/ava-default.png";
 import soundDeck from "../../audio/deck.mp3";
 import soundCard from "../../audio/card.mp3";
 import { loudlinks } from "../../../helpers/loudlinks";
-import Matrix from "./analytics/Analytics";
+import Matrix from "./analytics/matrix/Matrix";
+import Graph from "./analytics/graph/Graph";
+
 
 
 const Game = () => {
@@ -50,7 +52,11 @@ const Game = () => {
 					}
 					{
 						startMatrix &&
-						<Matrix/>
+							<div className={styles.analytics__data}>
+								<Graph/>
+								<Matrix/>
+							</div>
+
 					}
 				</div>
 				<div className={styles.game__content}>
