@@ -12,6 +12,7 @@
     height: 30px;
     border-radius: 25px;
     margin: 10px 0;
+    cursor: pointer;
 
 }
 
@@ -27,6 +28,7 @@
     background-color: #088dcd;
     outline: none;
     font-family:  sans-serif;
+    cursor: pointer;
 
     border: 1px solid #088dcd;
 }
