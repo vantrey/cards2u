@@ -34,6 +34,7 @@ export const favoriteDecksReducer =
                 const currentFavDeck = state.userFavoriteDecks.favoriteDecks.find(
                     d => d.favoriteDeckId === action.favoriteDeckId
                 )
+
                 if (currentFavDeck) {
                     return {
                         ...state,
@@ -170,6 +171,7 @@ export const getCurrentFavCard = (gameType: GameType): ThunkType =>
 
 export const setGrade = (newCardGrade: NewCardGradeType) =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
+
         const userId = getState().login.userId;
         const {favoriteDeckId, deckName, deck} = getState().favoriteDecks.currentFavDeck;
 
