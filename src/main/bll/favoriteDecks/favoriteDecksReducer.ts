@@ -1,8 +1,9 @@
 import {AppStateType, InferActionTypes} from '../store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {CardType, GameType, UserFavoriteDecksType, UserFavoriteDeckType} from "../../types/entities";
+import {CardType, GameType, NewCardGradeType, UserFavoriteDecksType, UserFavoriteDeckType} from "../../types/entities";
 import {repository} from "../../helpers/repos_localStorage/reposetory";
 import {getControlRandomCard} from "../../helpers/getCard/getCard";
+import {batch} from "react-redux";
 
 const initialState = {
     userFavoriteDecks: {} as UserFavoriteDecksType,
@@ -47,6 +48,20 @@ export const favoriteDecksReducer =
                     currentFavCard: action.card
                 }
 
+            case "FAVORITE_DECKS_REDUCER/SET_GRADE_SUCCESS":
+                return {
+                    ...state,
+                    currentFavDeck: {
+                        ...state.currentFavDeck,
+                        deck: state.currentFavDeck.deck.map(card => {
+                            if (action.newCardGrade._id === card._id) {
+                                return {...card, grade: action.newCardGrade.grade, shots: action.newCardGrade.shots}
+                            }
+                            return card
+                        })
+                    }
+                }
+
             default:
                 return state
         }
@@ -72,9 +87,15 @@ export const favoriteDecksActions = {
         type: "FAVORITE_DECKS_REDUCER/SET_CURRENT_FAV_CARD",
         card
     } as const),
+
+    setGradeSuccess: (newCardGrade: NewCardGradeType) => ({
+        type: 'FAVORITE_DECKS_REDUCER/SET_GRADE_SUCCESS',
+        newCardGrade
+    } as const),
 };
 
 type ActionsType = InferActionTypes<typeof favoriteDecksActions>
+
 
 // thunks
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
@@ -147,4 +168,25 @@ export const getCurrentFavCard = (gameType: GameType): ThunkType =>
         }
     };
 
+export const setGrade = (newCardGrade: NewCardGradeType) =>
+    (dispatch: DispatchType, getState: () => AppStateType) => {
+        const userId = getState().login.userId;
+        const {favoriteDeckId, deckName, deck} = getState().favoriteDecks.currentFavDeck;
 
+        const updatedDeck = deck.map(card => {
+            if (newCardGrade._id === card._id) {
+                return {...card, grade: newCardGrade.grade, shots: newCardGrade.shots}
+            }
+            return card
+        })
+
+        repository.updateUserFavoriteDeck(userId, favoriteDeckId, deckName, updatedDeck);
+        const updatedUserFavoriteDecks = repository.get_UserFavoriteDecksFromLS(userId);
+
+        if (updatedUserFavoriteDecks) {
+            batch(() => {
+                dispatch(favoriteDecksActions.setUserFavoriteDecks(updatedUserFavoriteDecks));
+                dispatch(favoriteDecksActions.setGradeSuccess(newCardGrade));
+            })
+        }
+    };
