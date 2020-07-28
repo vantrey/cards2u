@@ -18,7 +18,7 @@ const Matrix = () => {
 			q.getContext('2d').fillStyle='#00aaff'; //Тут цвет букв
 			letters.map(function(y_pos, index) {
 				let text = String.fromCharCode(512+Math.random()*75);
-				let x_pos = index * 12;
+				let x_pos = index * 11;
 				q.getContext('2d').fillText(text, x_pos, y_pos);
 				letters[index] = (y_pos > 758 + Math.random() * 1e4) ? 0 : y_pos + 10;
 			});

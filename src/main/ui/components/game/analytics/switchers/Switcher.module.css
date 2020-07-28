@@ -1,0 +1,124 @@
+.switcher__wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.switcher {
+    position: relative !important;
+    width: 130px;
+    height: 30px;
+    border-radius: 25px;
+    margin: 10px 0;
+
+}
+
+.switcher .switcher__input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative !important;
+    left: 0 !important;
+    width: 130px;
+    height: 30px;
+    border-radius: 25px;
+    background-color: #088dcd;
+    outline: none;
+    font-family:  sans-serif;
+
+    border: 1px solid #088dcd;
+}
+
+.switcher .switcher__input:before, .switcher .switcher__input:after {
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: #ffffff;
+}
+
+.switcher .switcher__input:before {
+    content: "ON";
+    left: 14px;
+    font-size: 10px;
+}
+
+.switcher .switcher__input:after {
+    content: "OFF";
+    right: 14px;
+    font-size: 10px;
+}
+
+.switcher .switcher__label {
+    z-index: 1;
+    position: absolute !important;
+    top: 9px;
+    bottom: 10px;
+    border-radius: 20px;
+    height: 18px;
+}
+
+.switcher__label:before, .switcher__label:after {
+    display: none;
+}
+
+.switcher.switcher1 .switcher__input {
+    transition: 0.25s -0.1s;
+}
+
+.switcher.switcher1 .switcher__input:checked {
+    background-color: transparent;
+}
+
+.switcher.switcher1 .switcher__input:checked:before {
+    color: #ffffff;
+    -webkit-transition: color 0.5s 0.2s;
+    transition: color 0.5s 0.2s;
+}
+
+.switcher.switcher1 .switcher__input:checked:after {
+    color: #cccccc;
+    -webkit-transition: color 0.5s;
+    transition: color 0.5s;
+}
+
+.switcher.switcher1 .switcher__input:checked + .switcher__label {
+    left: 11px;
+    right: 88px;
+    background: #088dcd;
+    -webkit-transition: left 0.5s, right 0.4s 0.2s;
+    transition: left 0.5s, right 0.4s 0.2s;
+
+    height: 18px;
+}
+
+.switcher.switcher1 .switcher__input:not(:checked) {
+    background: #088dcd;
+    -webkit-transition: background 0.5s -0.1s;
+    transition: background 0.5s -0.1s;
+}
+
+.switcher.switcher1 .switcher__input:not(:checked):before {
+    color: #cccccc;
+    -webkit-transition: color 0.5s;
+    transition: color 0.5s;
+}
+
+.switcher.switcher1 .switcher__input:not(:checked):after {
+    color: #088dcd;
+    -webkit-transition: color 0.5s 0.2s;
+    transition: color 0.5s 0.2s;
+}
+
+.switcher.switcher1 .switcher__input:not(:checked) + .switcher__label {
+    left: 94px;
+    right: 6px;
+    background: #ffffff;
+    -webkit-transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
+    transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
+
+    height: 18px;
+}
