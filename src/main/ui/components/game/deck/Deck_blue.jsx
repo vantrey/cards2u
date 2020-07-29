@@ -2,9 +2,12 @@ import React from 'react';
 import styles from './Deck_blue.module.css';
 import deckBG from '../../../images/card-bg-BR.png';
 import { cardBG, getRandomBg, maxNumber } from "../../../common/random_bg/Random_bg";
+import { useSelector } from "react-redux";
 
 
 const Deck_blue = ({ setCardBg }) => {
+
+	const { userFavoriteDecks } = useSelector ((state) => state.favoriteDecks);
 
 	const onChangeBG = () => {
 		getRandomBg (maxNumber);
@@ -18,7 +21,7 @@ const Deck_blue = ({ setCardBg }) => {
 						<img src={deckBG} alt="images"/>
 					</div>
 					<div className={styles.deck__details}>
-						<h2>React Native</h2>
+						<h2>{userFavoriteDecks.favoriteDecks[0].deckName}</h2>
 					</div>
 				</div>
 			</div>

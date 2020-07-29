@@ -155,9 +155,7 @@ export const delUserFavoriteDecks =
 
 export const getCurrentFavDeck = (favoriteDeckId: string, gameType: GameType): ThunkType =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
-
         dispatch(favoriteDecksActions.setCurrentFavDeck(favoriteDeckId));
-
         getCurrentFavCard(gameType);
     };
 
