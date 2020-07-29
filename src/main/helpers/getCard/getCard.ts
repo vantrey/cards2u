@@ -11,5 +11,7 @@ export const getCard = {
             , {sum: 0, id: -1});
         return cards[res.id + 1];
     },
+    inOrder (cards: Array<CardType>) {
 
+    }
 }

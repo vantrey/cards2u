@@ -1,16 +1,44 @@
 import {AppStateType, InferActionTypes} from '../store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {CardType, GameType, NewCardGradeType, UserFavoriteDecksType, UserFavoriteDeckType} from "../../types/entities";
+import {
+    CardType,
+    currentAnalyticsType,
+    GameType,
+    NewCardGradeType,
+    UserFavoriteDecksType,
+    UserFavoriteDeckType
+} from "../../types/entities";
 import {repository} from "../../helpers/repos_localStorage/reposetory";
 
 import {batch} from "react-redux";
 import {getCard} from "../../helpers/getCard/getCard";
 
 const initialState = {
-    userFavoriteDecks: {} as UserFavoriteDecksType,
-    currentFavDeck: {} as UserFavoriteDeckType,
+    userFavoriteDecks: {
+        userId: '',
+        favoriteDecks: []
+    } as UserFavoriteDecksType,
+
+    currentFavDeck: {
+        favoriteDeckId: '',
+        deckName: '',
+        deck: []
+    } as UserFavoriteDeckType,
+
     currentFavCard: {} as CardType,
+
     isFireworks: false, // game stop
+
+    currentCardNumber: 0,
+
+    currentAnalytics: {
+        totalCardCount: 0,
+        rightAnswers: 0,
+        faults: 0,
+        restCards: 0,
+    } as currentAnalyticsType,
+
+    gameType: 'inOrder' as GameType
 };
 
 type InitialStateType = typeof initialState
@@ -40,7 +68,12 @@ export const favoriteDecksReducer =
                 if (currentFavDeck) {
                     return {
                         ...state,
-                        currentFavDeck: currentFavDeck
+                        currentFavDeck: currentFavDeck,
+                        currentAnalytics: {
+                            ...state.currentAnalytics,
+                            totalCardCount: state.currentFavDeck.deck.length
+
+                        }
                     }
                 }
                 return state
@@ -65,10 +98,34 @@ export const favoriteDecksReducer =
                     }
                 }
 
-            case "FAVORITE_DECKS_REDUCER/SET_IS_FIREWORKS":
+            case "FAVORITE_DECKS_REDUCER/SET_IS_FIREWORKS_SUCCESS":
                 return {
                     ...state,
                     isFireworks: action.isFireworks
+                }
+
+            case "FAVORITE_DECKS_REDUCER/SET_ANALYTICS":
+                const {
+                    rightAnswers,
+                    totalCardCount,
+                    restCards,
+                    faults
+                } = state.currentAnalytics
+
+                return {
+                    ...state,
+                    currentAnalytics: {
+                        totalCardCount,
+                        rightAnswers: action.isRightAnswer ? rightAnswers +1 : rightAnswers,
+                        faults: action.isRightAnswer ? faults : faults +1,
+                        restCards: totalCardCount - (rightAnswers + faults)
+                    }
+                }
+
+            case "FAVORITE_DECKS_REDUCER/SET_GAME_TYPE":
+                return {
+                    ...state,
+                    gameType: action.gameType
                 }
 
             default:
@@ -102,9 +159,24 @@ export const favoriteDecksActions = {
         newCardGrade
     } as const),
 
-    setIsFireworks: (isFireworks: boolean) => ({
-        type: 'FAVORITE_DECKS_REDUCER/SET_IS_FIREWORKS',
+    setIsFireworksSuccess: (isFireworks: boolean) => ({
+        type: 'FAVORITE_DECKS_REDUCER/SET_IS_FIREWORKS_SUCCESS',
         isFireworks
+    } as const),
+
+    setAnalytics: (isRightAnswer: boolean) => ({
+        type: 'FAVORITE_DECKS_REDUCER/SET_ANALYTICS',
+        isRightAnswer
+    } as const),
+
+    setGameType: (gameType: GameType) => ({
+        type: 'FAVORITE_DECKS_REDUCER/SET_GAME_TYPE',
+        gameType
+    } as const),
+
+    setCurrentCardNumber: (cardNumber: number) => ({
+        type: 'FAVORITE_DECKS_REDUCER/SET_CURRENT_CARD_NUMBER',
+        cardNumber
     } as const),
 };
 
@@ -158,21 +230,51 @@ export const getCurrentFavDeck = (favoriteDeckId: string, gameType: GameType): T
 
         dispatch(favoriteDecksActions.setCurrentFavDeck(favoriteDeckId));
 
-        getCurrentFavCard(gameType);
+        getCurrentFavCard();
     };
 
-export const getCurrentFavCard = (gameType: GameType): ThunkType =>
+export const setIsFireworks = (isFireworks: boolean): ThunkType =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
+        const gameType = getState().favoriteDecks.gameType
+
+        if (gameType === "test") {
+        //repository
+        }
+        dispatch(favoriteDecksActions.setIsFireworksSuccess(isFireworks));
+    }
+
+export const getCurrentFavCard = (): ThunkType =>
+    (dispatch: DispatchType, getState: () => AppStateType) => {
+        const gameType = getState().favoriteDecks.gameType
 
         const cards = getState().favoriteDecks.currentFavDeck.deck;
-        let card; // undefined
+        const {
+            totalCardCount,
+            faults,
+            restCards,
+            rightAnswers
+        } = getState().favoriteDecks.currentAnalytics
+        const currentCardNumber = getState().favoriteDecks.currentCardNumber
+        let card: CardType; // undefined
 
-        if (gameType === "controlledRandom") {
-            card = getCard.controlledRandom(cards);
-        }
+        switch (gameType) {
+            case "controlledRandom":
+                card = getCard.controlledRandom(cards);
+                dispatch(favoriteDecksActions.setCurrentFavCard(card));
+                break;
 
-        if (card) {
-            dispatch(favoriteDecksActions.setCurrentFavCard(card));
+            case "inOrder" || "test":
+                if (totalCardCount < currentCardNumber) {
+                    dispatch(setIsFireworks(true));
+
+                } else {
+                    card = cards[currentCardNumber];
+                    batch(() => {
+                        dispatch(favoriteDecksActions.setCurrentCardNumber(currentCardNumber + 1));
+                        dispatch(favoriteDecksActions.setCurrentFavCard(card));
+                    });
+                }
+                break;
         }
     };
 
