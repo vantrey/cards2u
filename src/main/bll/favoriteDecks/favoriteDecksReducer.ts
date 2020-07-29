@@ -225,7 +225,7 @@ export const delUserFavoriteDecks =
             }
         };
 
-export const getCurrentFavDeck = (favoriteDeckId: string, gameType: GameType): ThunkType =>
+export const getCurrentFavDeck = (favoriteDeckId: string): ThunkType =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
 
         dispatch(favoriteDecksActions.setCurrentFavDeck(favoriteDeckId));
@@ -236,6 +236,7 @@ export const getCurrentFavDeck = (favoriteDeckId: string, gameType: GameType): T
 export const setIsFireworks = (isFireworks: boolean): ThunkType =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
         const gameType = getState().favoriteDecks.gameType
+        dispatch(favoriteDecksActions.setCurrentCardNumber(0));
 
         if (gameType === "test") {
         //repository
@@ -266,7 +267,6 @@ export const getCurrentFavCard = (): ThunkType =>
             case "inOrder" || "test":
                 if (totalCardCount < currentCardNumber) {
                     dispatch(setIsFireworks(true));
-
                 } else {
                     card = cards[currentCardNumber];
                     batch(() => {
