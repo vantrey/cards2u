@@ -2,13 +2,15 @@ import {AppStateType, InferActionTypes} from '../store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {CardType, GameType, NewCardGradeType, UserFavoriteDecksType, UserFavoriteDeckType} from "../../types/entities";
 import {repository} from "../../helpers/repos_localStorage/reposetory";
-import {getControlRandomCard} from "../../helpers/getCard/getCard";
+
 import {batch} from "react-redux";
+import {getCard} from "../../helpers/getCard/getCard";
 
 const initialState = {
     userFavoriteDecks: {} as UserFavoriteDecksType,
     currentFavDeck: {} as UserFavoriteDeckType,
     currentFavCard: {} as CardType,
+    isFireworks: false, // game stop
 };
 
 type InitialStateType = typeof initialState
@@ -63,6 +65,12 @@ export const favoriteDecksReducer =
                     }
                 }
 
+            case "FAVORITE_DECKS_REDUCER/SET_IS_FIREWORKS":
+                return {
+                    ...state,
+                    isFireworks: action.isFireworks
+                }
+
             default:
                 return state
         }
@@ -92,6 +100,11 @@ export const favoriteDecksActions = {
     setGradeSuccess: (newCardGrade: NewCardGradeType) => ({
         type: 'FAVORITE_DECKS_REDUCER/SET_GRADE_SUCCESS',
         newCardGrade
+    } as const),
+
+    setIsFireworks: (isFireworks: boolean) => ({
+        type: 'FAVORITE_DECKS_REDUCER/SET_IS_FIREWORKS',
+        isFireworks
     } as const),
 };
 
@@ -155,7 +168,7 @@ export const getCurrentFavCard = (gameType: GameType): ThunkType =>
         let card; // undefined
 
         if (gameType === "controlledRandom") {
-            card = getControlRandomCard(cards);
+            card = getCard.controlledRandom(cards);
         }
 
         if (card) {
