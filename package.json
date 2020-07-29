@@ -14,7 +14,7 @@
     "@types/react-paginate": "^6.2.1",
     "axios": "^0.19.2",
     "gh-pages": "^2.2.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "normalize.css": "^8.0.1",
     "popup": "^0.0.3",
     "react": "^16.13.1",
