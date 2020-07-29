@@ -143,13 +143,7 @@ export const delUserFavoriteDecks =
 export const getCurrentFavDeck = (favoriteDeckId: string, gameType: GameType): ThunkType =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
 
-        if (favoriteDeckId === '0') {
-            const deck = repository.getDefaultDeck();
-            if (deck) dispatch(favoriteDecksActions.setDefaultFavDeck(deck));
-
-        } else {
-            dispatch(favoriteDecksActions.setCurrentFavDeck(favoriteDeckId));
-        }
+        dispatch(favoriteDecksActions.setCurrentFavDeck(favoriteDeckId));
 
         getCurrentFavCard(gameType);
     };
@@ -186,6 +180,7 @@ export const setGrade = (newCardGrade: NewCardGradeType) =>
         const updatedUserFavoriteDecks = repository.get_UserFavoriteDecksFromLS(userId);
 
         if (updatedUserFavoriteDecks) {
+            // PUT to server
             batch(() => {
                 dispatch(favoriteDecksActions.setUserFavoriteDecks(updatedUserFavoriteDecks));
                 dispatch(favoriteDecksActions.setGradeSuccess(newCardGrade));
