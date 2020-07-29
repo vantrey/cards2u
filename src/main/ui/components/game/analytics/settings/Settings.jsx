@@ -11,7 +11,7 @@ const Settings  = () => {
 				<div className={styles.radio__wrap}>
 					<div className={styles.radio}>
 						<label className={styles.radio__custom}>
-							<input className={styles.radio__input} type="radio" name="number" value="1"/>
+							<input className={styles.radio__input} type="radio" name="number" value="1" checked/>
 								<span className={styles.radio__titlte}>one</span>
 						</label>
 					</div>
