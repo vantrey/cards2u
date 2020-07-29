@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles  from './Graph.module.css';
 import graphImg  from '../../../../images/graph.png';
-import Switcher from "../switchers/Switcher";
+import Settings from "../settings/Settings";
 
 
 const Graph = () => {
@@ -25,7 +25,7 @@ const Graph = () => {
 				<img src={graphImg} alt="graph"/>
 			</div>
 			<div className={styles.graph__nav}>
-				<Switcher/>
+				<Settings/>
 			</div>
 		</div>
 
