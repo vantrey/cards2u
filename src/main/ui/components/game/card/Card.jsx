@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Card.module.css';
+import {setCardGrade} from "../../../../features/Cards/bll/cardsReducer"
 
 
 let Card = ({ cardBg, setCardFace, cardface }) => {
@@ -25,3 +26,10 @@ let Card = ({ cardBg, setCardFace, cardface }) => {
 }
 
 export default Card;
+
+/*
+const onSetGrade = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const newGrade = getGrade(card.grade, Number(e.currentTarget.name), card.shots)
+	dispatch(setCardGrade({_id: card._id, grade: newGrade, shots: card.shots + 1}))
+	setIsGraded(true)
+}*/
