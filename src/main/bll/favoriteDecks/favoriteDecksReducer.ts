@@ -28,7 +28,6 @@ const initialState = {
     currentFavCard: {} as CardType,
 
     isFireworks: false, // game stop
-
     currentCardNumber: 0,
 
     currentAnalytics: {
@@ -38,7 +37,9 @@ const initialState = {
         restCards: 0,
     } as currentAnalyticsType,
 
-    gameType: 'inOrder' as GameType
+    gameType: 'inOrder' as GameType,
+    isMulti: false,
+    isSound: true,
 };
 
 type InitialStateType = typeof initialState
@@ -53,12 +54,6 @@ export const favoriteDecksReducer =
                     ...state,
                     userFavoriteDecks: action.userFavoriteDecks
                 };
-
-            case "FAVORITE_DECKS_REDUCER/SET_DEFAULT_FAV_DECK":
-                return {
-                    ...state,
-                    currentFavDeck: action.deck
-                }
 
             case "FAVORITE_DECKS_REDUCER/SET_CURRENT_FAV_DECK":
                 const currentFavDeck = state.userFavoriteDecks.favoriteDecks.find(
@@ -116,8 +111,8 @@ export const favoriteDecksReducer =
                     ...state,
                     currentAnalytics: {
                         totalCardCount,
-                        rightAnswers: action.isRightAnswer ? rightAnswers +1 : rightAnswers,
-                        faults: action.isRightAnswer ? faults : faults +1,
+                        rightAnswers: action.isRightAnswer ? rightAnswers + 1 : rightAnswers,
+                        faults: action.isRightAnswer ? faults : faults + 1,
                         restCards: totalCardCount - (rightAnswers + faults)
                     }
                 }
@@ -126,6 +121,24 @@ export const favoriteDecksReducer =
                 return {
                     ...state,
                     gameType: action.gameType
+                }
+
+            case "FAVORITE_DECKS_REDUCER/SET_CURRENT_CARD_NUMBER":
+                return {
+                    ...state,
+                    currentCardNumber: action.cardNumber
+                }
+
+            case "FAVORITE_DECKS_REDUCER/SET_IS_MULTI":
+                return {
+                    ...state,
+                    isMulti: action.isMulti
+                }
+
+            case "FAVORITE_DECKS_REDUCER/SET_IS_SOUND":
+                return {
+                    ...state,
+                    isSound: action.isSound
                 }
 
             default:
@@ -142,11 +155,6 @@ export const favoriteDecksActions = {
     setCurrentFavDeck: (favoriteDeckId: string) => ({
         type: "FAVORITE_DECKS_REDUCER/SET_CURRENT_FAV_DECK",
         favoriteDeckId
-    } as const),
-
-    setDefaultFavDeck: (deck: UserFavoriteDeckType) => ({
-        type: "FAVORITE_DECKS_REDUCER/SET_DEFAULT_FAV_DECK",
-        deck
     } as const),
 
     setCurrentFavCard: (card: CardType) => ({
@@ -169,7 +177,7 @@ export const favoriteDecksActions = {
         isRightAnswer
     } as const),
 
-    setGameType: (gameType: GameType) => ({
+    setGameTypeSuccess: (gameType: GameType) => ({
         type: 'FAVORITE_DECKS_REDUCER/SET_GAME_TYPE',
         gameType
     } as const),
@@ -177,6 +185,16 @@ export const favoriteDecksActions = {
     setCurrentCardNumber: (cardNumber: number) => ({
         type: 'FAVORITE_DECKS_REDUCER/SET_CURRENT_CARD_NUMBER',
         cardNumber
+    } as const),
+
+    setIsSound: (isSound: boolean) => ({
+        type: 'FAVORITE_DECKS_REDUCER/SET_IS_SOUND',
+        isSound
+    } as const),
+
+    setIsMulti: (isMulti: boolean) => ({
+        type: 'FAVORITE_DECKS_REDUCER/SET_IS_MULTI',
+        isMulti
     } as const),
 };
 
@@ -239,7 +257,7 @@ export const setIsFireworks = (isFireworks: boolean): ThunkType =>
         dispatch(favoriteDecksActions.setCurrentCardNumber(0));
 
         if (gameType === "test") {
-        //repository
+            //repository
         }
         dispatch(favoriteDecksActions.setIsFireworksSuccess(isFireworks));
     }
@@ -277,6 +295,14 @@ export const getCurrentFavCard = (): ThunkType =>
                 break;
         }
     };
+
+export const setGameType = (gameType: GameType) => (dispatch: DispatchType) => {
+    batch(() => {
+        dispatch(favoriteDecksActions.setCurrentCardNumber(0));
+        dispatch(getCurrentFavCard());
+        dispatch(setGameType(gameType));
+    })
+}
 
 export const setGrade = (newCardGrade: NewCardGradeType) =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
