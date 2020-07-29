@@ -1,0 +1,298 @@
+.switcher__wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.switcher__info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.switcher__title {
+    margin: 0;
+    padding: 0;
+    color: #0b3b63;
+}
+
+.radio__wrap {
+    display: flex;
+    position: relative;
+    width: 130px;
+    justify-content: space-around;
+    cursor: pointer;
+}
+
+
+.radio__custom > .radio__input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.radio__custom > .radio__titlte {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+
+.radio__titlte {
+    color: #adb5bd;
+    text-shadow: none;
+    font-size: 14px;
+    font-family: sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.radio__custom:hover > .radio__titlte {
+    color: #0b3b63;
+    transition: all 0.3s ease;
+}
+
+.radio__custom > .radio__titlte:before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid #adb5bd;
+    border-radius: 50%;
+    margin-right: 0.5em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.radio__custom > .radio__input:not(:disabled):not(:checked)+.radio__titlte:hover:before {
+    border-color: #0b3b63;
+    transition: all 0.3s ease;
+}
+
+.radio__custom > .radio__input:not(:disabled):active+.radio__titlte::before {
+    background-color: #b3d7ff;
+    border-color: #b3d7ff;
+}
+
+.radio__custom > .radio__input:focus+.radio__titlte::before {
+    /*box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);*/
+}
+
+.radio__custom > .radio__input:focus:not(:checked)+.radio__titlte::before {
+    border-color: #80bdff;
+}
+
+.radio__custom > .radio__input:checked+.radio__titlte:before {
+    border-color: #0b3b63;
+    background-color: #0b3b63;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+.radio__custom > .radio__input:checked+.radio__titlte {
+    color: #0b3b63;
+}
+
+.radio__custom > .radio__input:disabled+.radio__titlte::before {
+    background-color: #e9ecef;
+}
+
+
+.switcher {
+    position: relative !important;
+    width: 130px;
+    height: 30px;
+    border-radius: 25px;
+    cursor: pointer;
+
+}
+
+.switcher .switcher__input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative !important;
+    left: 0 !important;
+    width: 130px;
+    height: 30px;
+    border-radius: 25px;
+    background-color: #0b3b63;
+    outline: none;
+    font-family:  sans-serif;
+    cursor: pointer;
+
+    border: 1px solid #0b3b63;
+}
+
+.switcher .switcher__input:before, .switcher .switcher__input:after {
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: #ffffff;
+}
+
+.switcher .switcher__input:before {
+    content: "ON";
+    left: 14px;
+    font-size: 10px;
+}
+
+.switcher .switcher__input:after {
+    content: "OFF";
+    right: 14px;
+    font-size: 10px;
+}
+
+.switcher .switcher__label {
+    z-index: 1;
+    position: absolute !important;
+    top: 9px;
+    bottom: 10px;
+    border-radius: 20px;
+    height: 18px;
+}
+
+.switcher__label:before, .switcher__label:after {
+    display: none;
+}
+
+.switcher.switcher1 .switcher__input {
+    transition: 0.25s -0.1s;
+}
+
+.switcher.switcher1 .switcher__input:checked {
+    background-color: transparent;
+}
+
+.switcher.switcher1 .switcher__input:checked:before {
+    color: #ffffff;
+    -webkit-transition: color 0.5s 0.2s;
+    transition: color 0.5s 0.2s;
+}
+
+.switcher.switcher1 .switcher__input:checked:after {
+    color: #cccccc;
+    -webkit-transition: color 0.5s;
+    transition: color 0.5s;
+}
+
+.switcher.switcher1 .switcher__input:checked + .switcher__label {
+    left: 11px;
+    right: 88px;
+    background: #0b3b63;
+    -webkit-transition: left 0.5s, right 0.4s 0.2s;
+    transition: left 0.5s, right 0.4s 0.2s;
+
+    height: 18px;
+}
+
+.switcher.switcher1 .switcher__input:not(:checked) {
+    background: #0b3b63;
+    -webkit-transition: background 0.5s -0.1s;
+    transition: background 0.5s -0.1s;
+}
+
+.switcher.switcher1 .switcher__input:not(:checked):before {
+    color: #cccccc;
+    -webkit-transition: color 0.5s;
+    transition: color 0.5s;
+}
+
+.switcher.switcher1 .switcher__input:not(:checked):after {
+    color: #0b3b63;
+    -webkit-transition: color 0.5s 0.2s;
+    transition: color 0.5s 0.2s;
+}
+
+.switcher.switcher1 .switcher__input:not(:checked) + .switcher__label {
+    left: 94px;
+    right: 6px;
+    background: #ffffff;
+    -webkit-transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
+    transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
+
+    height: 18px;
+}
+
+
+/*===== стили для tooltip*/
+.tooltip {
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    justify-content: center;
+    z-index: 1000;
+    opacity: .40;
+    padding: 3px;
+    background: #393939;
+    color: #088dcd;
+    position: absolute;
+    font-size: 10px;
+    box-sizing: border-box;
+    transform: translateX(-10px);
+    transition: all 0.3s ease-in-out;
+
+    box-shadow: 0 0 3px rgba(56, 54, 54, 0.86);
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+
+    top: -84%;
+    width: 150%;
+    right: -210px;
+    height: 250%;
+}
+
+.tooltip_wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1px;
+    font-family: sans-serif;
+    text-shadow: none;
+    font-size: 12px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+
+}
+
+.tooltip_title {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.switcher:hover .tooltip, .radio__wrap:hover .tooltip {
+    visibility: visible;
+    transform: translateX(10px);
+    opacity: 1;
+    box-shadow: rgb(49, 56, 60) 0px 8px 8px;
+    border-color: transparent;
+    transition: all 0.15s linear 0s;
+
+    animation: tooltip 1s ease-in-out infinite alternate;
+
+}
+
+/*========*/
+
