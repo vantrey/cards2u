@@ -31,6 +31,8 @@ const Game = () => {
 	const { user } = useSelector ((state) => state.profile);
 	const { userFavoriteDecks } = useSelector ((state) => state.favoriteDecks);
 
+	console.log (userFavoriteDecks)
+
 	useEffect (() => {
 		loudlinks ();
 	}, []);
@@ -90,7 +92,7 @@ const Game = () => {
 									<div className={`${styles.decks__item} ${styles.decks__item_1}`}>
 										<div className={styles.tooltip}>
 											<div className={styles.tooltip_wrap}>
-												<h4 className={styles.tooltip_title}>React Native</h4>
+												<h4 className={styles.tooltip_title}>{userFavoriteDecks.favoriteDecks[0].deckName}</h4>
 											</div>
 										</div>
 									</div>
@@ -99,7 +101,7 @@ const Game = () => {
 									<div className={`${styles.decks__item} ${styles.decks__item_2}`}>
 										<div className={styles.tooltip}>
 											<div className={styles.tooltip_wrap}>
-												<h4 className={styles.tooltip_title}>{userFavoriteDecks.favoriteDecks[0].deckName}</h4>
+												<h4 className={styles.tooltip_title}>{userFavoriteDecks.favoriteDecks[1].deckName}</h4>
 											</div>
 										</div>
 									</div>
@@ -108,7 +110,7 @@ const Game = () => {
 									<div className={`${styles.decks__item} ${styles.decks__item_3}`}>
 										<div className={styles.tooltip}>
 											<div className={styles.tooltip_wrap}>
-												<h4 className={styles.tooltip_title}>{userFavoriteDecks.favoriteDecks[1].deckName}</h4>
+												<h4 className={styles.tooltip_title}>{userFavoriteDecks.favoriteDecks[2].deckName}</h4>
 											</div>
 										</div>
 									</div>
@@ -117,7 +119,7 @@ const Game = () => {
 									<div className={`${styles.decks__item} ${styles.decks__item_4}`}>
 										<div className={styles.tooltip}>
 											<div className={styles.tooltip_wrap}>
-												<h4 className={styles.tooltip_title}>{userFavoriteDecks.favoriteDecks[2].deckName}</h4>
+												<h4 className={styles.tooltip_title}>{userFavoriteDecks.favoriteDecks[3].deckName}</h4>
 											</div>
 										</div>
 									</div>
@@ -126,7 +128,7 @@ const Game = () => {
 									<div className={`${styles.decks__item} ${styles.decks__item_5}`}>
 										<div className={styles.tooltip}>
 											<div className={styles.tooltip_wrap}>
-												<h4 className={styles.tooltip_title}>{userFavoriteDecks.favoriteDecks[3].deckName}</h4>
+												<h4 className={styles.tooltip_title}>{userFavoriteDecks.favoriteDecks[4].deckName}</h4>
 											</div>
 										</div>
 									</div>
@@ -135,7 +137,7 @@ const Game = () => {
 									<div className={`${styles.decks__item} ${styles.decks__item_6}`}>
 										<div className={styles.tooltip}>
 											<div className={styles.tooltip_wrap}>
-												<h4 className={styles.tooltip_title}>{userFavoriteDecks.favoriteDecks[4].deckName}</h4>
+												<h4 className={styles.tooltip_title}>{userFavoriteDecks.favoriteDecks[5].deckName}</h4>
 											</div>
 										</div>
 									</div>

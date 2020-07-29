@@ -193,7 +193,7 @@ export const repository = {
                     {
                         userId,
                         favoriteDecks: [
-                            {favoriteDeckId: 'favoriteDeckSlot0', deckName: 'default deck', deck: [
+                            {favoriteDeckId: 'favoriteDeckSlot0', deckName: 'React Native', deck: [
                                     {
                                         answer: 'a1',
                                         question: 'q1',
@@ -296,7 +296,7 @@ export const repository = {
                 {
                     userId,
                     favoriteDecks: [
-                        {favoriteDeckId: 'favoriteDeckSlot0', deckName: 'default deck', deck: [
+                        {favoriteDeckId: 'favoriteDeckSlot0', deckName: 'React Native', deck: [
                                 {
                                     answer: 'a1',
                                     question: 'q1',
@@ -397,7 +397,7 @@ export const repository = {
     _setDefaultDeck() {
         let defaultDeck = {
             favoriteDeckId: 'favoriteDeckSlot0',
-            deckName: 'default deck',
+            deckName: 'React Native',
             deck: [
                 {
                     answer: "5",
