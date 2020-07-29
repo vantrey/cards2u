@@ -24,8 +24,8 @@
 .radio__wrap {
     display: flex;
     position: relative;
-    width: 100px;
-    justify-content: space-between;
+    width: 110px;
+    justify-content: space-around;
     cursor: pointer;
 }
 
@@ -252,9 +252,9 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
 
-    top: -84%;
+    top: -70%;
     width: 150%;
-    right: -210px;
+    right: -166px;
     height: 250%;
 }
 
