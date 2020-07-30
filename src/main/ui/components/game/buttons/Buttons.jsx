@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Buttons.module.css';
 import { cardBG, getRandomBg, maxNumber } from "../../../common/random_bg/Random_bg";
 import soundCard from "../../../audio/card.mp3";
-
+import { getCurrentFavCard } from "../../../../bll/favoriteDecks/favoriteDecksReducer";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const Buttons = ({ setCardFace, cardface, setCardBg}) => {
+
+	const dispatch = useDispatch();
 
 	const onChangeBG = () => {
 		setCardFace(true);
 		getRandomBg (maxNumber);
 		setCardBg(cardBG);
+		dispatch(getCurrentFavCard());
 	}
 
 	return (

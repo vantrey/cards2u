@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600;1,800&display=swap');
+/*font-family: 'EB Garamond', serif*/
+
 .deck__wrap {
     position: absolute;
     top: 0;
@@ -83,12 +86,13 @@
     text-align: center;
 }
 
-.deck .deck__details h2 {
+.deck .deck__details h4 {
     margin: 0;
     padding: 0;
     font-weight: 600;
     opacity: 0;
-    font-size: 12px;
+    /*font-size: 12px;*/
+    font-family: 'EB Garamond', serif;
     color: #78909c;
     -webkit-transition-property: opacity;
     transition-property: opacity;
@@ -98,7 +102,7 @@
     transition-timing-function: ease-out;
 }
 
-.deck:hover .deck__details h2 {
+.deck:hover .deck__details h4 {
     -webkit-transition-property: opacity;
     transition-property: opacity;
     -webkit-transition-duration: 0.3s;

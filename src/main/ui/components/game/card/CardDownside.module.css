@@ -1,18 +1,12 @@
-
 .card__wrap {
     width: 100%;
     height: 100%;
     cursor: pointer;
-    /*font-family: 'CS Grimrock', sans-serif;*/
     font-family: sans-serif;
     -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
-
     border-radius: 5px;
-
-    /*background: #0b3b63 url('../../../images/deck-bg-main1.jpg') center center no-repeat;*/
-    /*background-size: auto;*/
 }
 
 .card {
@@ -24,7 +18,7 @@
     height: 300px;
     color: whitesmoke;
     background-color: #0b3b63;
-
+    z-index: 0;
 }
 
 .card__buttons {
@@ -35,7 +29,6 @@
     padding: 10px;
     background: #0b3b63 url('../../../icons/thinking-face.png') center center no-repeat;
     background-size: contain;
-
 }
 
 .buttons__group {
@@ -117,7 +110,7 @@
     top: 18.75%;
 }
 
-.card__buttons:hover  .buttons__group, .buttons__group:focus-within {
+.card__buttons:hover  .buttons__group {
     width: 150px;
     height: 150px;
 }

@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Neucha&display=swap');
 /*font-family: 'Neucha', cursive;*/
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600;1,800&display=swap');
+/*font-family: 'EB Garamond', serif*/
 
 .game__wrap {
     width: 100%;
@@ -41,7 +43,7 @@
     width: 24%;
     max-width: 400px;
     height: 100%;
-    /*overflow: hidden;*/
+    z-index: 1;
 }
 
 .analytics__start {
@@ -310,8 +312,9 @@
     flex-direction: column;
     justify-content: center;
     padding: 1px;
-    font-family: 'Neucha', cursive;
+    font-family: 'EB Garamond', serif;
     font-size: 14px;
+    font-weight: 600;
     display: -webkit-box;
     display: -ms-flexbox;
     -webkit-box-orient: vertical;
@@ -319,7 +322,6 @@
     -ms-flex-direction: column;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-
 }
 
 .tooltip_title {
@@ -348,7 +350,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    z-index: 1;
+    /*z-index: 1;*/
 }
 
 .main__card {

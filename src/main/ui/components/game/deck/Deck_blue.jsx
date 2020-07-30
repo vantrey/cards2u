@@ -21,7 +21,7 @@ const Deck_blue = ({ setCardBg }) => {
 						<img src={deckBG} alt="images"/>
 					</div>
 					<div className={styles.deck__details}>
-						<h2>{userFavoriteDecks.favoriteDecks[0].deckName}</h2>
+						<h4>{userFavoriteDecks.favoriteDecks[0].deckName}</h4>
 					</div>
 				</div>
 			</div>

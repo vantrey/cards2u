@@ -1,6 +1,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Neucha&display=swap');
 /*font-family: 'Neucha', cursive;*/
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600;1,800&display=swap');
+/*font-family: 'EB Garamond', serif*/
 
 .card__wrap {
     width: 100%;
@@ -26,19 +28,6 @@
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1);
 }
 
-/*.card:before {*/
-/*    content: '';*/
-/*    position: absolute;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    width: 100%;*/
-/*    height: 110%;*/
-/*    background-size: cover;*/
-/*    background-position: 0 0;*/
-/*    transition: transform calc(700ms * 1.5) cubic-bezier(0.19, 1, 0.22, 1);*/
-/*    pointer-events: none;*/
-/*}*/
-/*--------------------*/
 .card .card__background {
     content: '';
     position: absolute;
@@ -55,7 +44,7 @@
 .card:hover .card__background {
     transform: translateY(-7%);
 }
-/*-----------------------*/
+
 .card:after {
     content: '';
     display: block;
@@ -79,7 +68,7 @@
     padding: 1rem;
     transition: transform calc(700ms * 1.5) cubic-bezier(0.19, 1, 0.22, 1);
     z-index: 1;
-    font-family: 'Neucha', cursive;
+    font-family: 'EB Garamond', serif
 }
 
 .card__content > * + * {
@@ -88,8 +77,10 @@
 
 .card__content .card__title {
     font-size: 1.3rem;
-    font-weight: bold;
+    font-weight: 800;
+    font-style: italic;
     line-height: 1.2;
+    font-family: 'EB Garamond', serif;
 
     opacity: 1;
 }
@@ -98,6 +89,7 @@
     font-size: 1.125rem;
     font-style: italic;
     line-height: 1.35;
+    font-family: 'EB Garamond', serif
 }
 
 .card__btn {
