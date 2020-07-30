@@ -60,9 +60,8 @@ export const favoriteDecksReducer =
                 const currentFavDeck = state.userFavoriteDecks.favoriteDecks.find(
                     d => d.favoriteDeckId === action.favoriteDeckId
                 )
-
                 if (currentFavDeck) {
-                    return {
+                    const newState = {
                         ...state,
                         currentFavDeck: currentFavDeck,
                         currentAnalytics: {
@@ -70,6 +69,25 @@ export const favoriteDecksReducer =
                             totalCardCount: currentFavDeck.deck.length
                         }
                     }
+                    if (currentFavDeck.deck.length === 0) {
+                        return {
+                            ...newState,
+                            currentFavCard: {
+                                question: 'There is no cards',
+                                answer: 'There is no cards',
+                                _id:'',
+                                user_id: '',
+                                shots: 0,
+                                grade: 0,
+                                __v: 0,
+                                cardsPack_id: '',
+                                created: '',
+                                rating: 0,
+                                type: '',
+                                updated: ''
+                            }
+                        }
+                    } else return newState
                 }
                 return state
 
@@ -274,6 +292,7 @@ export const getCurrentFavDeck = (favoriteDeckId: string): ThunkType =>
         batch(() => {
             dispatch(favoriteDecksActions.setCurrentFavDeck(favoriteDeckId));
             dispatch(favoriteDecksActions.setNextCardNumber(0));
+            dispatch(favoriteDecksActions.setIsFireworks(false));
             dispatch(getCurrentFavCard());
         })
     };
@@ -300,6 +319,9 @@ export const getCurrentFavCard = (): ThunkType =>
             restCards,
             rightAnswers
         } = getState().favoriteDecks.currentAnalytics
+        if (totalCardCount === 0) {
+            return
+        }
         const currentCardNumber = getState().favoriteDecks.nextCardNumber
         let card: CardType; // undefined
 
