@@ -11,7 +11,7 @@ export const getCard = {
             , {sum: 0, id: -1});
         return cards[res.id + 1];
     },
-    inOrder (cards: Array<CardType>) {
-
-    }
+    getCardGrade (gradePrev: number, gradeNext: number, shots: number) {
+        return (gradePrev * shots + gradeNext) / (shots + 1);
+    },
 }

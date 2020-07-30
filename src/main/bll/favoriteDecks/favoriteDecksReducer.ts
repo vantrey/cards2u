@@ -12,6 +12,7 @@ import {repository} from "../../helpers/repos_localStorage/reposetory";
 
 import {batch} from "react-redux";
 import {getCard} from "../../helpers/getCard/getCard";
+import {setCardGrade} from "../../features/Cards/bll/cardsReducer";
 
 const initialState = {
     userFavoriteDecks: {
@@ -102,12 +103,7 @@ export const favoriteDecksReducer =
                     ...state,
                     currentFavDeck: {
                         ...state.currentFavDeck,
-                        deck: state.currentFavDeck.deck.map(card => {
-                            if (action.newCardGrade._id === card._id) {
-                                return {...card, grade: action.newCardGrade.grade, shots: action.newCardGrade.shots}
-                            }
-                            return card
-                        })
+                        deck: action.updatedDeck
                     }
                 }
 
@@ -197,9 +193,9 @@ export const favoriteDecksActions = {
         card
     } as const),
 
-    setGradeSuccess: (newCardGrade: NewCardGradeType) => ({
+    setGradeSuccess: (updatedDeck: Array<CardType>) => ({
         type: 'FAVORITE_DECKS_REDUCER/SET_GRADE_SUCCESS',
-        newCardGrade
+        updatedDeck
     } as const),
 
     setIsFireworks: (isFireworks: boolean) => ({
@@ -352,15 +348,19 @@ export const setGameType = (gameType: GameType) => (dispatch: DispatchType) => {
     })
 };
 
-export const setGrade = (newCardGrade: NewCardGradeType) =>
+export const setGrade = (selectedGrade: number) =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
 
         const userId = getState().login.userId;
         const {favoriteDeckId, deckName, deck} = getState().favoriteDecks.currentFavDeck;
+        const {_id, grade, shots} = getState().favoriteDecks.currentFavCard
+
+        const newGrade = getCard.getCardGrade(grade, selectedGrade, shots);
+
 
         const updatedDeck = deck.map(card => {
-            if (newCardGrade._id === card._id) {
-                return {...card, grade: newCardGrade.grade, shots: newCardGrade.shots}
+            if (_id === card._id) {
+                return {...card, grade: newGrade, shots: shots + 1}
             }
             return card
         })
@@ -370,9 +370,10 @@ export const setGrade = (newCardGrade: NewCardGradeType) =>
 
         if (updatedUserFavoriteDecks) {
             // PUT to server
+            const updatedCardGrade = {_id, grade: newGrade, shots: shots + 1};
             batch(() => {
                 dispatch(favoriteDecksActions.setUserFavoriteDecks(updatedUserFavoriteDecks));
-                dispatch(favoriteDecksActions.setGradeSuccess(newCardGrade));
+                dispatch(favoriteDecksActions.setGradeSuccess(updatedDeck));
             })
         }
     };
