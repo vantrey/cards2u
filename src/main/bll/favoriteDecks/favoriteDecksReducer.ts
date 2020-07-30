@@ -350,7 +350,6 @@ export const setGameType = (gameType: GameType) => (dispatch: DispatchType) => {
 
 export const setGrade = (selectedGrade: number) =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
-
         const userId = getState().login.userId;
         const {favoriteDeckId, deckName, deck} = getState().favoriteDecks.currentFavDeck;
         const {_id, grade, shots} = getState().favoriteDecks.currentFavCard
