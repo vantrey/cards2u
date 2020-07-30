@@ -22,17 +22,17 @@ const Settings = ({ setNumberResponses }) => {
 
 	const onSelectGameType = (e) => {
 		if ( e.target.checked ) {
-			// dispatch(setGameType("controlledRandom"));
+			dispatch(setGameType("controlledRandom"));
 			console.log ('checked')
 		} else {
-			// dispatch(setGameType("inOrder"));
+			dispatch(setGameType("inOrder"));
 			console.log ('not-checked')
 		}
 	};
 
 	const onPassTest = (e) => {
 		if ( e.target.checked ) {
-			// dispatch(setGameType("test"));
+			dispatch(setGameType("test"));
 			console.log ('test-1')
 		} else {
 			console.log ('test-0')
@@ -41,7 +41,7 @@ const Settings = ({ setNumberResponses }) => {
 
 	const onSound = (e) => {
 		if ( e.target.checked ) {
-			// dispatch(setGameType("test"));
+			dispatch(setGameType("test"));
 			console.log ('test-1')
 		} else {
 			console.log ('test-0')

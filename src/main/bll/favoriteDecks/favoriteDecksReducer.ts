@@ -28,7 +28,7 @@ const initialState = {
     currentFavCard: {} as CardType,
 
     isFireworks: false, // game stop
-    currentCardNumber: 0,
+    nextCardNumber: 0,
 
     currentAnalytics: {
         totalCardCount: 0,
@@ -40,6 +40,7 @@ const initialState = {
     gameType: 'inOrder' as GameType,
     isMulti: true,
     isSound: true,
+    isRandomMode: false,
 };
 
 type InitialStateType = typeof initialState
@@ -66,8 +67,7 @@ export const favoriteDecksReducer =
                         currentFavDeck: currentFavDeck,
                         currentAnalytics: {
                             ...state.currentAnalytics,
-                            totalCardCount: state.currentFavDeck.deck.length
-
+                            totalCardCount: currentFavDeck.deck.length
                         }
                     }
                 }
@@ -93,7 +93,7 @@ export const favoriteDecksReducer =
                     }
                 }
 
-            case "FAVORITE_DECKS_REDUCER/SET_IS_FIREWORKS_SUCCESS":
+            case "FAVORITE_DECKS_REDUCER/SET_IS_FIREWORKS":
                 return {
                     ...state,
                     isFireworks: action.isFireworks
@@ -123,10 +123,10 @@ export const favoriteDecksReducer =
                     gameType: action.gameType
                 }
 
-            case "FAVORITE_DECKS_REDUCER/SET_CURRENT_CARD_NUMBER":
+            case "FAVORITE_DECKS_REDUCER/SET_NEXT_CARD_NUMBER":
                 return {
                     ...state,
-                    currentCardNumber: action.cardNumber
+                    nextCardNumber: action.cardNumber
                 }
 
             case "FAVORITE_DECKS_REDUCER/SET_IS_MULTI":
@@ -139,6 +139,23 @@ export const favoriteDecksReducer =
                 return {
                     ...state,
                     isSound: action.isSound
+                }
+
+            case "FAVORITE_DECKS_REDUCER/RESET_ANALYTICS":
+                return {
+                    ...state,
+                    currentAnalytics: {
+                        faults: 0,
+                        rightAnswers: 0,
+                        totalCardCount: 0,
+                        restCards: 0
+                    }
+                }
+
+            case "FAVORITE_DECKS_REDUCER/SET_IS_RANDOM_MODE":
+                return {
+                    ...state,
+                    isRandomMode: action.isRandomMode
                 }
 
             default:
@@ -167,8 +184,8 @@ export const favoriteDecksActions = {
         newCardGrade
     } as const),
 
-    setIsFireworksSuccess: (isFireworks: boolean) => ({
-        type: 'FAVORITE_DECKS_REDUCER/SET_IS_FIREWORKS_SUCCESS',
+    setIsFireworks: (isFireworks: boolean) => ({
+        type: 'FAVORITE_DECKS_REDUCER/SET_IS_FIREWORKS',
         isFireworks
     } as const),
 
@@ -182,8 +199,8 @@ export const favoriteDecksActions = {
         gameType
     } as const),
 
-    setCurrentCardNumber: (cardNumber: number) => ({
-        type: 'FAVORITE_DECKS_REDUCER/SET_CURRENT_CARD_NUMBER',
+    setNextCardNumber: (cardNumber: number) => ({
+        type: 'FAVORITE_DECKS_REDUCER/SET_NEXT_CARD_NUMBER',
         cardNumber
     } as const),
 
@@ -195,6 +212,15 @@ export const favoriteDecksActions = {
     setIsMulti: (isMulti: boolean) => ({
         type: 'FAVORITE_DECKS_REDUCER/SET_IS_MULTI',
         isMulti
+    } as const),
+
+    resetAnalytics: () => ({
+        type: 'FAVORITE_DECKS_REDUCER/RESET_ANALYTICS'
+    } as const),
+
+    setIsRandomMode: (isRandomMode: boolean) => ({
+        type: 'FAVORITE_DECKS_REDUCER/SET_IS_RANDOM_MODE',
+        isRandomMode
     } as const),
 };
 
@@ -245,19 +271,23 @@ export const delUserFavoriteDecks =
 
 export const getCurrentFavDeck = (favoriteDeckId: string): ThunkType =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
-        dispatch(favoriteDecksActions.setCurrentFavDeck(favoriteDeckId));
-        dispatch(getCurrentFavCard());
+        batch(() => {
+            dispatch(favoriteDecksActions.setCurrentFavDeck(favoriteDeckId));
+            dispatch(favoriteDecksActions.setNextCardNumber(0));
+            dispatch(getCurrentFavCard());
+        })
     };
 
-export const setIsFireworks = (isFireworks: boolean): ThunkType =>
+export const setEndGame = (): ThunkType =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
         const gameType = getState().favoriteDecks.gameType
-        dispatch(favoriteDecksActions.setCurrentCardNumber(0));
+        dispatch(favoriteDecksActions.setNextCardNumber(0));
 
         if (gameType === "test") {
             //repository
+            dispatch(favoriteDecksActions.resetAnalytics());
         }
-        dispatch(favoriteDecksActions.setIsFireworksSuccess(isFireworks));
+        dispatch(favoriteDecksActions.setIsFireworks(true));
     }
 
 export const getCurrentFavCard = (): ThunkType =>
@@ -270,7 +300,7 @@ export const getCurrentFavCard = (): ThunkType =>
             restCards,
             rightAnswers
         } = getState().favoriteDecks.currentAnalytics
-        const currentCardNumber = getState().favoriteDecks.currentCardNumber
+        const currentCardNumber = getState().favoriteDecks.nextCardNumber
         let card: CardType; // undefined
 
         switch (gameType) {
@@ -279,12 +309,12 @@ export const getCurrentFavCard = (): ThunkType =>
                 dispatch(favoriteDecksActions.setCurrentFavCard(card));
                 break;
             case "inOrder" || "test":
-                if (totalCardCount < currentCardNumber) {
-                    dispatch(setIsFireworks(true));
+                if (totalCardCount === currentCardNumber) {
+                    dispatch(setEndGame());
                 } else {
                     card = cards[currentCardNumber];
                     batch(() => {
-                        dispatch(favoriteDecksActions.setCurrentCardNumber(currentCardNumber + 1));
+                        dispatch(favoriteDecksActions.setNextCardNumber(currentCardNumber + 1));
                         dispatch(favoriteDecksActions.setCurrentFavCard(card));
                     });
                 }
@@ -294,9 +324,9 @@ export const getCurrentFavCard = (): ThunkType =>
 
 export const setGameType = (gameType: GameType) => (dispatch: DispatchType) => {
     batch(() => {
-        dispatch(favoriteDecksActions.setCurrentCardNumber(0));
+        dispatch(favoriteDecksActions.setNextCardNumber(0));
         dispatch(getCurrentFavCard());
-        dispatch(setGameType(gameType));
+        dispatch(favoriteDecksActions.setGameTypeSuccess(gameType));
     })
 };
 
