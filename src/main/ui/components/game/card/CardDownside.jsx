@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './CardDownside.module.css';
 import arrow from '../../../icons/arrows.png'
 import { useDispatch, useSelector } from "react-redux";
@@ -11,61 +11,76 @@ import { loudlinks } from "../../../../helpers/loudlinks";
 const CardDownside = ({ numberResponses, setCardFace }) => {
 
 	const dispatch = useDispatch ();
-	const { currentFavCard, gameType } = useSelector ((state) => state.favoriteDecks);
+	const [popupBlock, setPopupBlock] = useState(false);
+	const { currentFavCard, isRandomMode, gameType } = useSelector ((state) => state.favoriteDecks);
 
 	const onSelectGrade = (e) => {
 		dispatch (setGrade (Number (e.currentTarget.name)));
 	};
 
+	console.log (currentFavCard)
+
 	useEffect (() => {
-		let pElements = document.querySelectorAll("p[data-text='answer']");
+		let pElements = document.querySelectorAll ("p[data-text='answer']");
 		pElements.forEach ((el) => {
 			el.addEventListener ('click', () => {
-                if ( el.getAttribute('id') === '123' ) {
-                    el.classList.add (`${styles.discr__text_green}`);
-                    setTimeout( () => {
-                        dispatch(getCurrentFavCard());
-                        setCardFace(true);
-                    }, 1000)
-                } else {
-                    el.classList.add(`${styles.discr__text_red}`);
-                    setTimeout( () => {
-                        dispatch(getCurrentFavCard());
-                        setCardFace(true);
-                    }, 1000)
-                }
-            });
+				if ( el.getAttribute ('id') === '123' ) {
+					el.classList.add (`${styles.discr__text_green}`);
+					if (gameType === 'test') {
+						setPopupBlock (true);
+						setTimeout (() => {
+							setCardFace (true);
+							dispatch (getCurrentFavCard());
+						}, 1000);
+					}
+				} else {
+					el.classList.add (`${styles.discr__text_red}`);
+					if (gameType === 'test') {
+						setPopupBlock (true);
+						setTimeout (() => {
+							setCardFace (true);
+							dispatch (getCurrentFavCard());
+						}, 1000);
+					}
+				}
+			});
 		});
-		loudlinks();
-	}, [numberResponses]);
+		loudlinks ();
+	}, [ numberResponses ]);
 
 	return (
 		<div className={styles.card__wrap}>
 			<div className={styles.card}>
-				{(gameType === 'controlledRandom') &&
-				<div className={styles.card__voting}>
-					<div className={styles.card__buttons}>
-						<div className={styles.buttons__group}>
-							<button name={'1'} onMouseDown={onSelectGrade}>0%</button>
-							<button name={'2'} onMouseDown={onSelectGrade}>25%</button>
-							<button name={'3'} onMouseDown={onSelectGrade}>75%</button>
-							<button name={'4'} onMouseDown={onSelectGrade}>100%</button>
+				{ (isRandomMode && (gameType !== 'test')) &&
+					<div className={styles.card__voting}>
+						<div className={styles.card__buttons}>
+							<div className={styles.buttons__group}>
+								<button name={'1'} onMouseDown={onSelectGrade}>0%</button>
+								<button name={'2'} onMouseDown={onSelectGrade}>25%</button>
+								<button name={'3'} onMouseDown={onSelectGrade}>75%</button>
+								<button name={'4'} onMouseDown={onSelectGrade}>100%</button>
+							</div>
+						</div>
+						<div className={styles.card__title}>
+							<div className={styles.title__icon}>
+								<img src={arrow} alt="arrow"/>
+							</div>
+							<p>
+								click here to rate your reply where 0% - didn't know the reply,<br></br> up to
+								100% - sure in the reply
+							</p>
 						</div>
 					</div>
-					<div className={styles.card__title}>
-						<div className={styles.title__icon}>
-							<img src={arrow} alt="arrow"/>
-						</div>
-						<p>
-							click here to rate your reply where 0% - didn't know the reply,<br></br> up to
-							100% - sure in the reply
-						</p>
-					</div>
-				</div>
 				}
-				{(gameType === 'inOrder') &&
-				<div className={styles.card__voting}></div>
+
+				{ !isRandomMode &&
+					<div className={styles.card__voting}></div>
 				}
+
+				{ (isRandomMode && (gameType === 'test')) &&
+					<div className={styles.card__voting}> </div>
+				}
+
 				{(numberResponses === 'one') &&
 				<div className={styles.card__text}>
 					<h3 className={styles.text__title}>answer</h3>
@@ -90,12 +105,13 @@ const CardDownside = ({ numberResponses, setCardFace }) => {
 						</div>
 						<div className={styles.discr}>
 							<span className={styles.discr__number}>3.</span>
-								<p data-text='answer' className={`${styles.discr__text} ${'soundClick'}`}
-								   data-sound={soundFalse}> Курсор мыши появляется над над
-									элементом элементом и уходит с него.
-								</p>
+							<p data-text='answer' className={`${styles.discr__text} ${'soundClick'}`}
+							   data-sound={soundFalse}> Курсор мыши появляется над над
+								элементом элементом и уходит с него.
+							</p>
 						</div>
 					</div>
+					{ popupBlock && <div className={styles.card__popupBlock}></div> }
 				</div>
 				}
 			</div>

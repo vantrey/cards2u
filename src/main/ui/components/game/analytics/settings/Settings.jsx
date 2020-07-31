@@ -1,13 +1,12 @@
 import React from 'react';
 import styles from './Settings.module.css';
 import { useDispatch, useSelector } from "react-redux";
-import { setGameType } from "../../../../../bll/favoriteDecks/favoriteDecksReducer";
+import { favoriteDecksActions, setGameType } from "../../../../../bll/favoriteDecks/favoriteDecksReducer";
 
 
 const Settings = ({ setNumberResponses }) => {
 
 	const dispatch = useDispatch ();
-	const { gameType } = useSelector ((state) => state.favoriteDecks);
 
 	const findRadio = () => {
 		let rad = document.getElementsByName ('numberResponses');
@@ -20,25 +19,27 @@ const Settings = ({ setNumberResponses }) => {
 
 	const onSelectGameType = (e) => {
 		if ( e.target.checked ) {
-			dispatch(setGameType("controlledRandom"));
+			dispatch (setGameType ("controlledRandom"));
+			dispatch (favoriteDecksActions.setIsRandomMode(true));
 		} else {
-			dispatch(setGameType("inOrder"));
+			dispatch (setGameType ("inOrder"));
+			dispatch (favoriteDecksActions.setIsRandomMode(false));
 		}
 	};
 
 	const onPassTest = (e) => {
 		if ( e.target.checked ) {
-			dispatch(setGameType("test"));
+			dispatch (setGameType ("test"));
 		} else {
-
+			return false
 		}
 	};
 
 	const onSound = (e) => {
 		if ( e.target.checked ) {
-			dispatch(setGameType("sound"));
+			// dispatch(setGameType("sound"));
 		} else {
-			dispatch(setGameType("sound-off"));
+			// dispatch(setGameType("sound-off"));
 		}
 	};
 
