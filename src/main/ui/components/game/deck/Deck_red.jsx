@@ -2,17 +2,21 @@ import React from 'react';
 import styles from './Deck_red.module.css';
 import deckBG from '../../../images/card-bg-RR.png'
 import { cardBG, getRandomBg, maxNumber } from "../../../common/random_bg/Random_bg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentFavCard } from "../../../../bll/favoriteDecks/favoriteDecksReducer";
 
 
-const Deck_red = ({ setCardBg }) => {
+const Deck_red = ({ setCardBg, setCardFace }) => {
 
 	const { userFavoriteDecks } = useSelector ((state) => state.favoriteDecks);
+	const dispatch = useDispatch ();
 
 	const onChangeBG = () => {
+		setCardFace(true);
 		getRandomBg (maxNumber);
 		setCardBg(cardBG);
-	}
+		dispatch(getCurrentFavCard());
+	};
 
 	return (
 		<div className={styles.deck__wrap} onClick={onChangeBG}>

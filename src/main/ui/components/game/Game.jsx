@@ -192,11 +192,11 @@ const Game = () => {
                             </div>
                         </div>
                         <div className='soundClick' data-sound={soundCard}>
-                            <div className='soundHover' data-sound={soundDeck}>
+                            {/*<div className='soundHover' data-sound={soundDeck}>*/}
                                 <div className={`${styles.main__deck}`}>
-                                    <DecksRoutes setCardBg={setCardBg}/>
+                                    <DecksRoutes setCardBg={setCardBg} setCardFace={setCardFace}/>
                                 </div>
-                            </div>
+                            {/*</div>*/}
                         </div>
                     </div>
                 </div>
