@@ -9,13 +9,11 @@ const Settings = ({ setNumberResponses }) => {
 	const dispatch = useDispatch ();
 	const { gameType } = useSelector ((state) => state.favoriteDecks);
 
-	console.log (gameType)
-
 	const findRadio = () => {
 		let rad = document.getElementsByName ('numberResponses');
 		for ( let i = 0; i < rad.length; i++ ) {
 			if ( rad[i].checked ) {
-				setNumberResponses (rad[i].value)
+				setNumberResponses (rad[i].value);
 			}
 		}
 	};
@@ -23,28 +21,24 @@ const Settings = ({ setNumberResponses }) => {
 	const onSelectGameType = (e) => {
 		if ( e.target.checked ) {
 			dispatch(setGameType("controlledRandom"));
-			console.log ('checked')
 		} else {
 			dispatch(setGameType("inOrder"));
-			console.log ('not-checked')
 		}
 	};
 
 	const onPassTest = (e) => {
 		if ( e.target.checked ) {
 			dispatch(setGameType("test"));
-			console.log ('test-1')
 		} else {
-			console.log ('test-0')
+
 		}
 	};
 
 	const onSound = (e) => {
 		if ( e.target.checked ) {
-			dispatch(setGameType("test"));
-			console.log ('test-1')
+			dispatch(setGameType("sound"));
 		} else {
-			console.log ('test-0')
+			dispatch(setGameType("sound-off"));
 		}
 	};
 

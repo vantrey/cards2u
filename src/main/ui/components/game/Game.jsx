@@ -187,7 +187,7 @@ const Game = () => {
                     <div className={styles.content__main}>
                         <div className={styles.main__card}>
                             {cardface && <Card cardBg={cardBg} setCardFace={setCardFace} cardface={cardface}/>}
-                            {!cardface && <CardDownside numberResponses={numberResponses}/>}
+                            {!cardface && <CardDownside numberResponses={numberResponses} setCardFace={setCardFace} />}
                             <div className={styles.content__buttons}>
                                 <Buttons setCardFace={setCardFace} cardface={cardface} setCardBg={setCardBg}/>
                             </div>
