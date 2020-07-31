@@ -12,13 +12,11 @@ const CardDownside = ({ numberResponses, setCardFace }) => {
 
 	const dispatch = useDispatch ();
 	const [popupBlock, setPopupBlock] = useState(false);
-	const { currentFavCard, isRandomMode, gameType } = useSelector ((state) => state.favoriteDecks);
+	const { currentFavCard, isRandomMode, gameType, isMulti } = useSelector ((state) => state.favoriteDecks);
 
 	const onSelectGrade = (e) => {
 		dispatch (setGrade (Number (e.currentTarget.name)));
 	};
-
-	console.log (currentFavCard)
 
 	useEffect (() => {
 		let pElements = document.querySelectorAll ("p[data-text='answer']");
@@ -46,7 +44,7 @@ const CardDownside = ({ numberResponses, setCardFace }) => {
 			});
 		});
 		loudlinks ();
-	}, [ numberResponses ]);
+	}, [ isMulti ]);
 
 	return (
 		<div className={styles.card__wrap}>
@@ -72,22 +70,16 @@ const CardDownside = ({ numberResponses, setCardFace }) => {
 						</div>
 					</div>
 				}
-
 				{ !isRandomMode &&
 					<div className={styles.card__voting}></div>
 				}
-
-				{ (isRandomMode && (gameType === 'test')) &&
-					<div className={styles.card__voting}> </div>
-				}
-
-				{(numberResponses === 'one') &&
+				{ !isMulti &&
 				<div className={styles.card__text}>
 					<h3 className={styles.text__title}>answer</h3>
 					<p className={styles.text__discr}>{currentFavCard.answer}</p>
 				</div>
 				}
-				{(numberResponses === 'few') &&
+				{ isMulti &&
 				<div className={styles.card__text}>
 					<h3 className={styles.text__title}>answer</h3>
 					<div id={'multyanswer'} className={styles.text__discr}>
