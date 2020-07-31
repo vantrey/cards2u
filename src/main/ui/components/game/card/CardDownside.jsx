@@ -12,7 +12,7 @@ const CardDownside = ({numberResponses}) => {
 	return (
 		<div className={styles.card__wrap}>
 			<div className={styles.card}>
-				{ (gameType === 'controlledRandom')  &&
+				{ (gameType === 'controlledRandom') &&
 					<div className={styles.card__voting}>
 						<div className={styles.card__buttons}>
 							<div className={styles.buttons__group}>
