@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/wisemen/static/css/main.3467165c.chunk.css",
-    "main.js": "/wisemen/static/js/main.065dac85.chunk.js",
-    "main.js.map": "/wisemen/static/js/main.065dac85.chunk.js.map",
+    "main.css": "/wisemen/static/css/main.1bf84012.chunk.css",
+    "main.js": "/wisemen/static/js/main.85eeef5d.chunk.js",
+    "main.js.map": "/wisemen/static/js/main.85eeef5d.chunk.js.map",
     "runtime-main.js": "/wisemen/static/js/runtime-main.f2c8196c.js",
     "runtime-main.js.map": "/wisemen/static/js/runtime-main.f2c8196c.js.map",
-    "static/js/2.224b058e.chunk.js": "/wisemen/static/js/2.224b058e.chunk.js",
-    "static/js/2.224b058e.chunk.js.map": "/wisemen/static/js/2.224b058e.chunk.js.map",
+    "static/js/2.f0816517.chunk.js": "/wisemen/static/js/2.f0816517.chunk.js",
+    "static/js/2.f0816517.chunk.js.map": "/wisemen/static/js/2.f0816517.chunk.js.map",
     "index.html": "/wisemen/index.html",
-    "precache-manifest.de2851e63a4c529f7aee2d172b92377c.js": "/wisemen/precache-manifest.de2851e63a4c529f7aee2d172b92377c.js",
+    "precache-manifest.84babe8716086c2b6678694628ef4ccb.js": "/wisemen/precache-manifest.84babe8716086c2b6678694628ef4ccb.js",
     "service-worker.js": "/wisemen/service-worker.js",
-    "static/css/main.3467165c.chunk.css.map": "/wisemen/static/css/main.3467165c.chunk.css.map",
-    "static/js/2.224b058e.chunk.js.LICENSE.txt": "/wisemen/static/js/2.224b058e.chunk.js.LICENSE.txt",
+    "static/css/main.1bf84012.chunk.css.map": "/wisemen/static/css/main.1bf84012.chunk.css.map",
+    "static/js/2.f0816517.chunk.js.LICENSE.txt": "/wisemen/static/js/2.f0816517.chunk.js.LICENSE.txt",
     "static/media/index.css": "/wisemen/static/media/CSGrimrock.bd07c961.woff",
     "static/media/Intro-53-commpres-webm.webm": "/wisemen/static/media/Intro-53-commpres-webm.f9da5a9c.webm",
     "static/media/LOGOUT.png": "/wisemen/static/media/LOGOUT.83f9e0b2.png",
@@ -106,6 +106,7 @@
     "static/media/card-bg-RR.png": "/wisemen/static/media/card-bg-RR.0044d1d5.png",
     "static/media/card.mp3": "/wisemen/static/media/card.b6e10661.mp3",
     "static/media/clouse-shadow2.png": "/wisemen/static/media/clouse-shadow2.738f9628.png",
+    "static/media/correctly.mp3": "/wisemen/static/media/correctly.976815d4.mp3",
     "static/media/Create.module.css": "/wisemen/static/media/create-bg2.7f4b2b59.jpg",
     "static/media/Menu.module.css": "/wisemen/static/media/cтена-218.72a9f608.png",
     "static/media/deck.mp3": "/wisemen/static/media/deck.b2c3f6af.mp3",
@@ -121,6 +122,7 @@
     "static/media/main-bg.png": "/wisemen/static/media/main-bg.01fb4adf.png",
     "static/media/main-bg.webp": "/wisemen/static/media/main-bg.3f952342.webp",
     "static/media/Taverna.module.css": "/wisemen/static/media/menu-yellow.92cca677.jpg",
+    "static/media/mistake.mp3": "/wisemen/static/media/mistake.9bd2bbfd.mp3",
     "static/media/newIntro.mp4": "/wisemen/static/media/newIntro.cd59e4a2.mp4",
     "static/media/Plug.module.css": "/wisemen/static/media/plug-bg-4-1.378d21fd.png",
     "static/media/point-shadow2.png": "/wisemen/static/media/point-shadow2.cb23fb2f.png",
@@ -135,8 +137,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.f2c8196c.js",
-    "static/js/2.224b058e.chunk.js",
-    "static/css/main.3467165c.chunk.css",
-    "static/js/main.065dac85.chunk.js"
+    "static/js/2.f0816517.chunk.js",
+    "static/css/main.1bf84012.chunk.css",
+    "static/js/main.85eeef5d.chunk.js"
   ]
 }
