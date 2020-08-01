@@ -29,20 +29,18 @@ const Game = () => {
     const [startMatrix, setstartMatrix] = useState(false);
     const [cardBg, setCardBg] = useState(bg_1);
     const {user} = useSelector((state) => state.profile);
-    const {userFavoriteDecks} = useSelector((state) => state.favoriteDecks);
+    const {userFavoriteDecks, isSound} = useSelector((state) => state.favoriteDecks);
     const dispatch = useDispatch();
 
     const onSetFavoriteDeck = (favoriteDeckId) => {
         dispatch(getCurrentFavDeck(favoriteDeckId));
-    }
+    };
 
     useEffect(() => {
-		dispatch(getCurrentFavDeck('favoriteDeckSlot0'))
-    }, [dispatch]);
-
-    useEffect(() => {
-        loudlinks();
-    }, []);
+		dispatch(getCurrentFavDeck('favoriteDeckSlot0'));
+        loudlinks (isSound);
+        console.log ('useeff-ct relog-game')
+    }, [dispatch, isSound]);
 
     return (
         <div className={styles.game__wrap}>
@@ -64,7 +62,7 @@ const Game = () => {
                     {
                         startMatrix &&
                         <div className={styles.analytics__data}>
-                            <Graph />
+                            <Graph setCardFace={setCardFace}/>
                             <Matrix/>
                         </div>
                     }

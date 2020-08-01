@@ -320,13 +320,22 @@ export const getCurrentFavCard = (): ThunkType =>
         }
         const currentCardNumber = getState().favoriteDecks.nextCardNumber
         let card: CardType; // undefined
-
         switch (gameType) {
             case "controlledRandom":
                 card = getCard.controlledRandom(cards);
                 dispatch(favoriteDecksActions.setCurrentFavCard(card));
                 break;
-            case "inOrder" || "test":
+            case "inOrder":
+                if (totalCardCount === currentCardNumber) {
+                    dispatch(setEndGame());
+                } else {
+                    card = cards[currentCardNumber];
+                    batch(() => {
+                        dispatch(favoriteDecksActions.setNextCardNumber(currentCardNumber + 1));
+                    });
+                }
+                break;
+            case "test":
                 if (totalCardCount === currentCardNumber) {
                     dispatch(setEndGame());
                 } else {

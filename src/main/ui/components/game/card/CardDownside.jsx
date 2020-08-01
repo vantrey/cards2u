@@ -8,11 +8,11 @@ import soundFalse from "../../../audio/mistake.mp3";
 import { loudlinks } from "../../../../helpers/loudlinks";
 
 
-const CardDownside = ({ numberResponses, setCardFace }) => {
+const CardDownside = ({ setCardFace }) => {
 
 	const dispatch = useDispatch ();
 	const [popupBlock, setPopupBlock] = useState(false);
-	const { currentFavCard, isRandomMode, gameType, isMulti } = useSelector ((state) => state.favoriteDecks);
+	const { currentFavCard, isRandomMode, gameType, isMulti, isSound } = useSelector ((state) => state.favoriteDecks);
 
 	const onSelectGrade = (e) => {
 		dispatch (setGrade (Number (e.currentTarget.name)));
@@ -43,8 +43,8 @@ const CardDownside = ({ numberResponses, setCardFace }) => {
 				}
 			});
 		});
-		loudlinks ();
-	}, [ isMulti ]);
+		loudlinks (isSound);
+	}, [ isMulti, isSound ]);
 
 	return (
 		<div className={styles.card__wrap}>
