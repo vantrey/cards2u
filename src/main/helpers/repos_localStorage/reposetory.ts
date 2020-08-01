@@ -306,6 +306,7 @@ export const repository = {
                                 {
                                     answer: 'a1',
                                     question: 'q1',
+                                    wrongAnswers: ['c1 wrong1', 'a1 wrong2'],
                                     cardsPack_id: '0',
                                     grade: 0,
                                     rating: 0,
@@ -320,6 +321,7 @@ export const repository = {
                                 {
                                     answer: 'a2',
                                     question: 'q2',
+                                    wrongAnswers: ['c2 wrong1', 'a1 wrong2'],
                                     cardsPack_id: '0',
                                     grade: 0,
                                     rating: 0,
@@ -329,11 +331,12 @@ export const repository = {
                                     updated: '',
                                     __v: 0,
                                     user_id: '',
-                                    _id: "5f0edc15adc449000476a831"
+                                    _id: "5f0edc15adc449000476a831",
                                 },
                                 {
                                     answer: 'a3',
                                     question: 'q3',
+                                    wrongAnswers: ['c3 wrong1', 'a1 wrong2'],
                                     cardsPack_id: '0',
                                     grade: 0,
                                     rating: 0,
@@ -348,6 +351,7 @@ export const repository = {
                                 {
                                     answer: 'a4',
                                     question: 'q4',
+                                    wrongAnswers: ['c4 wrong1', 'a1 wrong2'],
                                     cardsPack_id: '0',
                                     grade: 0,
                                     rating: 0,
@@ -362,6 +366,7 @@ export const repository = {
                                 {
                                     answer: 'a5',
                                     question: 'q5',
+                                    wrongAnswers: ['c5 wrong1', 'a1 wrong2'],
                                     cardsPack_id: '0',
                                     grade: 0,
                                     rating: 0,
@@ -376,6 +381,7 @@ export const repository = {
                                 {
                                     answer: 'a6',
                                     question: 'q6',
+                                    wrongAnswers: ['c6 wrong1', 'a1 wrong2'],
                                     cardsPack_id: '0',
                                     grade: 0,
                                     rating: 0,
