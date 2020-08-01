@@ -76,7 +76,7 @@ export const favoriteDecksReducer =
                             currentFavCard: {
                                 question: 'There is no cards',
                                 answer: 'There is no cards',
-                                _id:'',
+                                _id: '',
                                 user_id: '',
                                 shots: 0,
                                 grade: 0,
@@ -159,9 +159,9 @@ export const favoriteDecksReducer =
                 return {
                     ...state,
                     currentAnalytics: {
+                        ...state.currentAnalytics,
                         faults: 0,
                         rightAnswers: 0,
-                        totalCardCount: 0,
                         restCards: 0
                     }
                 }
@@ -288,25 +288,29 @@ export const getCurrentFavDeck = (favoriteDeckId: string): ThunkType =>
         batch(() => {
             dispatch(favoriteDecksActions.setCurrentFavDeck(favoriteDeckId));
             dispatch(favoriteDecksActions.setNextCardNumber(0));
-            dispatch(favoriteDecksActions.setIsFireworks(false));
+            /*dispatch(favoriteDecksActions.setIsFireworks(false));*/
             dispatch(getCurrentFavCard());
         })
     };
 
 export const setEndGame = (): ThunkType =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
-        const gameType = getState().favoriteDecks.gameType
+        const {gameType, currentAnalytics, nextCardNumber} = getState().favoriteDecks
+        if (currentAnalytics.totalCardCount === nextCardNumber) {
+            dispatch(favoriteDecksActions.setIsFireworks(true));
+        }
         dispatch(favoriteDecksActions.setNextCardNumber(0));
 
         if (gameType === "test") {
             //repository
             dispatch(favoriteDecksActions.resetAnalytics());
         }
-        dispatch(favoriteDecksActions.setIsFireworks(true));
+        dispatch(getCurrentFavCard());
     }
 
 export const getCurrentFavCard = (): ThunkType =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
+
         const gameType = getState().favoriteDecks.gameType
         const cards = getState().favoriteDecks.currentFavDeck.deck;
         const {
@@ -318,30 +322,22 @@ export const getCurrentFavCard = (): ThunkType =>
         if (totalCardCount === 0) {
             return
         }
-        const currentCardNumber = getState().favoriteDecks.nextCardNumber
+        const nextCardNumber = getState().favoriteDecks.nextCardNumber
         let card: CardType; // undefined
+
         switch (gameType) {
             case "controlledRandom":
                 card = getCard.controlledRandom(cards);
                 dispatch(favoriteDecksActions.setCurrentFavCard(card));
                 break;
-            case "inOrder":
-                if (totalCardCount === currentCardNumber) {
-                    dispatch(setEndGame());
-                } else {
-                    card = cards[currentCardNumber];
-                    batch(() => {
-                        dispatch(favoriteDecksActions.setNextCardNumber(currentCardNumber + 1));
-                    });
-                }
-                break;
             case "test":
-                if (totalCardCount === currentCardNumber) {
+            case "inOrder":
+                if (totalCardCount === nextCardNumber) {
                     dispatch(setEndGame());
                 } else {
-                    card = cards[currentCardNumber];
+                    card = cards[nextCardNumber];
                     batch(() => {
-                        dispatch(favoriteDecksActions.setNextCardNumber(currentCardNumber + 1));
+                        dispatch(favoriteDecksActions.setNextCardNumber(nextCardNumber + 1));
                         dispatch(favoriteDecksActions.setCurrentFavCard(card));
                     });
                 }
@@ -350,10 +346,11 @@ export const getCurrentFavCard = (): ThunkType =>
     };
 
 export const setGameType = (gameType: GameType) => (dispatch: DispatchType) => {
+
     batch(() => {
         dispatch(favoriteDecksActions.setNextCardNumber(0));
-        dispatch(getCurrentFavCard());
         dispatch(favoriteDecksActions.setGameTypeSuccess(gameType));
+        dispatch(getCurrentFavCard());
     })
 };
 
