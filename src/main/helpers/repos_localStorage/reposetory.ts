@@ -1,4 +1,10 @@
-import {CardType, UserFavoriteDecksType, UserFavoriteDeckType, UserType} from "../../types/entities";
+import {
+    CardType,
+    CurrentAnalyticsType,
+    UserFavoriteDecksType,
+    UserFavoriteDeckType,
+    UserType
+} from "../../types/entities";
 
 type JSONObjectType = {
     tokenDeathTime: number,
@@ -129,6 +135,7 @@ export const repository = {
                         favoriteDecks: afd.favoriteDecks.map(fd => {
                             if (fd.favoriteDeckId === favoriteDeckId) {
                                 return {
+                                    ...fd,
                                     favoriteDeckId,
                                     deckName,
                                     deck
@@ -162,7 +169,7 @@ export const repository = {
                                 return {
                                     favoriteDeckId,
                                     deckName: 'empty',
-                                    deck: []
+                                    deck: [],
                                 }
                             }
                             return fd
@@ -193,7 +200,8 @@ export const repository = {
                     {
                         userId,
                         favoriteDecks: [
-                            {favoriteDeckId: 'favoriteDeckSlot0', deckName: 'React Native', deck: [
+                            {
+                                favoriteDeckId: 'favoriteDeckSlot0', deckName: 'React Native', deck: [
                                     {
                                         answer: 'a1',
                                         question: 'q1',
@@ -284,7 +292,8 @@ export const repository = {
                                         user_id: '',
                                         _id: "5f0edc15adc449000476a835"
                                     },
-                                ]},
+                                ]
+                            },
                             {favoriteDeckId: 'favoriteDeckSlot1', deckName: 'empty', deck: []},
                             {favoriteDeckId: 'favoriteDeckSlot2', deckName: 'empty', deck: []},
                             {favoriteDeckId: 'favoriteDeckSlot3', deckName: 'empty', deck: []},
@@ -302,7 +311,8 @@ export const repository = {
                 {
                     userId,
                     favoriteDecks: [
-                        {favoriteDeckId: 'favoriteDeckSlot0', deckName: 'React Native', deck: [
+                        {
+                            favoriteDeckId: 'favoriteDeckSlot0', deckName: 'React Native', deck: [
                                 {
                                     answer: 'a1',
                                     question: 'q1',
@@ -393,7 +403,8 @@ export const repository = {
                                     user_id: '',
                                     _id: "5f0edc15adc449000476a835"
                                 },
-                            ]},
+                            ]
+                        },
                         {favoriteDeckId: 'favoriteDeckSlot1', deckName: 'empty', deck: []},
                         {favoriteDeckId: 'favoriteDeckSlot2', deckName: 'empty', deck: []},
                         {favoriteDeckId: 'favoriteDeckSlot3', deckName: 'empty', deck: []},
@@ -405,8 +416,56 @@ export const repository = {
         }
         localStorage.setItem('allFavoriteDecks', JSON.stringify(allFavoriteDecks));
     },
-    setAnalytics (favoriteDeckId: string) {
+    setAnalytics(userId: string | null, favoriteDeckId: string, currentAnalytics: CurrentAnalyticsType) {
+        userId = this._isUnknownUser(userId);
 
+        let allFavoriteDecks = this._get_AllFavoriteDecksFromLS();
+
+        if (allFavoriteDecks) {
+
+            const updatedAllFavoriteDecks = allFavoriteDecks.map(afd => {
+                if (afd.userId === userId) {
+                    return {
+                        userId,
+                        favoriteDecks: afd.favoriteDecks.map(fd => {
+                            if (fd.favoriteDeckId === favoriteDeckId) {
+                                let processedAnalytics = {
+                                    ...currentAnalytics,
+                                    faults: currentAnalytics.faults + currentAnalytics.restCards
+                                } as CurrentAnalyticsType
+                                let bestAnalytics = fd.analytics ? fd.analytics.bestAnalytics : null
+
+                                if (bestAnalytics) {
+                                    bestAnalytics = (processedAnalytics.rightAnswers / processedAnalytics.totalCardCount * 100) >
+                                    (bestAnalytics.rightAnswers / bestAnalytics.totalCardCount * 100)
+                                        ? processedAnalytics : bestAnalytics
+                                } else {
+                                    bestAnalytics = processedAnalytics
+                                }
+                                return {
+                                    ...fd,
+                                    analytics: fd.analytics ?
+                                        {
+                                            ...fd.analytics,
+                                            bestAnalytics,
+                                            prevAnalytics: processedAnalytics
+                                        } :
+                                        {
+                                            bestAnalytics,
+                                            prevAnalytics: processedAnalytics
+                                        }
+
+                                }
+                            }
+                            return fd
+                        })
+                    }
+                }
+                return afd
+            });
+            const updatedAllFavoriteDecksAsString = JSON.stringify(updatedAllFavoriteDecks);
+            localStorage.setItem('allFavoriteDecks', updatedAllFavoriteDecksAsString);
+        }
     }
 };
 

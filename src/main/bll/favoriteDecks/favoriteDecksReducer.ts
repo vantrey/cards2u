@@ -2,7 +2,7 @@ import {AppStateType, InferActionTypes} from '../store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {
     CardType,
-    currentAnalyticsType,
+    CurrentAnalyticsType,
     GameType,
     NewCardGradeType,
     UserFavoriteDecksType,
@@ -36,7 +36,7 @@ const initialState = {
         rightAnswers: 0,
         faults: 0,
         restCards: 0,
-    } as currentAnalyticsType,
+    } as CurrentAnalyticsType,
 
     gameType: 'controlledRandom' as GameType,
     isMulti: false,
@@ -295,14 +295,15 @@ export const getCurrentFavDeck = (favoriteDeckId: string): ThunkType =>
 
 export const setEndGame = (): ThunkType =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
-        const {gameType, currentAnalytics, nextCardNumber} = getState().favoriteDecks
+        const {gameType, currentAnalytics, nextCardNumber, currentFavDeck} = getState().favoriteDecks;
+        const userId = getState().login.userId;
         if (currentAnalytics.totalCardCount === nextCardNumber) {
             dispatch(favoriteDecksActions.setIsFireworks(true));
         }
         dispatch(favoriteDecksActions.setNextCardNumber(0));
 
         if (gameType === "test") {
-            //repository
+            repository.setAnalytics(userId, currentFavDeck.favoriteDeckId, currentAnalytics);
             dispatch(favoriteDecksActions.resetAnalytics());
         }
     }

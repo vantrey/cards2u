@@ -75,11 +75,11 @@ export type UserFavoriteDecksType = {
 }
 
 export type AnalyticsType = {
-    prevAnalytics: currentAnalyticsType
-    bestAnalytics: currentAnalyticsType
+    prevAnalytics: CurrentAnalyticsType
+    bestAnalytics: CurrentAnalyticsType
 }
 
-export type currentAnalyticsType = {
+export type CurrentAnalyticsType = {
     totalCardCount: number
     rightAnswers: number
     faults: number
