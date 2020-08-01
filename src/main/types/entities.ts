@@ -25,6 +25,7 @@ export type CardType = {
     __v: number
     _id: string
     user_id: string
+    wrongAnswers?: Array<string>
 }
 
 
