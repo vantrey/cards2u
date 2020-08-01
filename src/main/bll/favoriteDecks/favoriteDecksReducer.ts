@@ -76,7 +76,7 @@ export const favoriteDecksReducer =
                             currentFavCard: {
                                 question: 'There is no cards',
                                 answer: 'There is no cards',
-                                _id:'',
+                                _id: '',
                                 user_id: '',
                                 shots: 0,
                                 grade: 0,
@@ -159,9 +159,9 @@ export const favoriteDecksReducer =
                 return {
                     ...state,
                     currentAnalytics: {
+                        ...state.currentAnalytics,
                         faults: 0,
                         rightAnswers: 0,
-                        totalCardCount: 0,
                         restCards: 0
                     }
                 }
@@ -307,6 +307,7 @@ export const setEndGame = (): ThunkType =>
 
 export const getCurrentFavCard = (): ThunkType =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
+
         const gameType = getState().favoriteDecks.gameType
         const cards = getState().favoriteDecks.currentFavDeck.deck;
         const {
@@ -326,7 +327,8 @@ export const getCurrentFavCard = (): ThunkType =>
                 card = getCard.controlledRandom(cards);
                 dispatch(favoriteDecksActions.setCurrentFavCard(card));
                 break;
-            case "inOrder" || "test":
+            case "test":
+            case "inOrder":
                 if (totalCardCount === currentCardNumber) {
                     dispatch(setEndGame());
                 } else {
@@ -341,10 +343,11 @@ export const getCurrentFavCard = (): ThunkType =>
     };
 
 export const setGameType = (gameType: GameType) => (dispatch: DispatchType) => {
+
     batch(() => {
         dispatch(favoriteDecksActions.setNextCardNumber(0));
-        dispatch(getCurrentFavCard());
         dispatch(favoriteDecksActions.setGameTypeSuccess(gameType));
+        dispatch(getCurrentFavCard());
     })
 };
 
