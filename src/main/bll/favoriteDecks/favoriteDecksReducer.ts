@@ -288,7 +288,7 @@ export const getCurrentFavDeck = (favoriteDeckId: string): ThunkType =>
         batch(() => {
             dispatch(favoriteDecksActions.setCurrentFavDeck(favoriteDeckId));
             dispatch(favoriteDecksActions.setNextCardNumber(0));
-            /*dispatch(favoriteDecksActions.setIsFireworks(false));*/
+            dispatch(favoriteDecksActions.setIsFireworks(false));
             dispatch(getCurrentFavCard());
         })
     };
@@ -305,7 +305,6 @@ export const setEndGame = (): ThunkType =>
             //repository
             dispatch(favoriteDecksActions.resetAnalytics());
         }
-        dispatch(getCurrentFavCard());
     }
 
 export const getCurrentFavCard = (): ThunkType =>
@@ -335,6 +334,9 @@ export const getCurrentFavCard = (): ThunkType =>
                 if (totalCardCount === nextCardNumber) {
                     dispatch(setEndGame());
                 } else {
+                    if(nextCardNumber === 0) {
+                        dispatch(favoriteDecksActions.setIsFireworks(false));
+                    }
                     card = cards[nextCardNumber];
                     batch(() => {
                         dispatch(favoriteDecksActions.setNextCardNumber(nextCardNumber + 1));
