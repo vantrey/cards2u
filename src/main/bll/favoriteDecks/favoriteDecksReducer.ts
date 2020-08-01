@@ -67,7 +67,8 @@ export const favoriteDecksReducer =
                         currentFavDeck: currentFavDeck,
                         currentAnalytics: {
                             ...state.currentAnalytics,
-                            totalCardCount: currentFavDeck.deck.length
+                            totalCardCount: currentFavDeck.deck.length,
+                            restCards: currentFavDeck.deck.length,
                         }
                     }
                     if (currentFavDeck.deck.length === 0) {
