@@ -28,7 +28,6 @@ const Game = () => {
     const [cardface, setCardFace] = useState(true);
     const [startMatrix, setstartMatrix] = useState(false);
     const [cardBg, setCardBg] = useState(bg_1);
-    const [numberResponses, setNumberResponses] = useState('one');
     const {user} = useSelector((state) => state.profile);
     const {userFavoriteDecks} = useSelector((state) => state.favoriteDecks);
     const dispatch = useDispatch();
@@ -65,7 +64,7 @@ const Game = () => {
                     {
                         startMatrix &&
                         <div className={styles.analytics__data}>
-                            <Graph setNumberResponses={setNumberResponses}/>
+                            <Graph />
                             <Matrix/>
                         </div>
                     }
@@ -187,17 +186,17 @@ const Game = () => {
                     <div className={styles.content__main}>
                         <div className={styles.main__card}>
                             {cardface && <Card cardBg={cardBg} setCardFace={setCardFace} cardface={cardface}/>}
-                            {!cardface && <CardDownside numberResponses={numberResponses} setCardFace={setCardFace} />}
+                            {!cardface && <CardDownside setCardFace={setCardFace} />}
                             <div className={styles.content__buttons}>
                                 <Buttons setCardFace={setCardFace} cardface={cardface} setCardBg={setCardBg}/>
                             </div>
                         </div>
                         <div className='soundClick' data-sound={soundCard}>
-                            <div className='soundHover' data-sound={soundDeck}>
+                            {/*<div className='soundHover' data-sound={soundDeck}>*/}
                                 <div className={`${styles.main__deck}`}>
-                                    <DecksRoutes setCardBg={setCardBg}/>
+                                    <DecksRoutes setCardBg={setCardBg} setCardFace={setCardFace}/>
                                 </div>
-                            </div>
+                            {/*</div>*/}
                         </div>
                     </div>
                 </div>

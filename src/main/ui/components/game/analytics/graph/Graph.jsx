@@ -4,7 +4,7 @@ import graphImg  from '../../../../images/graph.png';
 import Settings from "../settings/Settings";
 
 
-const Graph = ({setNumberResponses}) => {
+const Graph = () => {
 
 	const [ fadeIn, setFadeIn] = useState (false);
 
@@ -24,7 +24,7 @@ const Graph = ({setNumberResponses}) => {
 				<img src={graphImg} alt="graph"/>
 			</div>
 			<div className={styles.graph__nav}>
-				<Settings setNumberResponses={setNumberResponses}/>
+				<Settings/>
 			</div>
 		</div>
 

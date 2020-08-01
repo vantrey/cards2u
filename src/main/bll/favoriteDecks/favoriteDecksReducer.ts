@@ -38,10 +38,10 @@ const initialState = {
         restCards: 0,
     } as currentAnalyticsType,
 
-    gameType: 'inOrder' as GameType,
-    isMulti: true,
+    gameType: 'controlledRandom' as GameType,
+    isMulti: false,
     isSound: true,
-    isRandomMode: false,
+    isRandomMode: true,
 };
 
 type InitialStateType = typeof initialState
