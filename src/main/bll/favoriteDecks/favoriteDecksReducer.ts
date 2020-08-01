@@ -2,7 +2,7 @@ import {AppStateType, InferActionTypes} from '../store/store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {
     CardType,
-    currentAnalyticsType,
+    CurrentAnalyticsType,
     GameType,
     NewCardGradeType,
     UserFavoriteDecksType,
@@ -36,7 +36,7 @@ const initialState = {
         rightAnswers: 0,
         faults: 0,
         restCards: 0,
-    } as currentAnalyticsType,
+    } as CurrentAnalyticsType,
 
     gameType: 'controlledRandom' as GameType,
     isMulti: false,
@@ -67,7 +67,8 @@ export const favoriteDecksReducer =
                         currentFavDeck: currentFavDeck,
                         currentAnalytics: {
                             ...state.currentAnalytics,
-                            totalCardCount: currentFavDeck.deck.length
+                            totalCardCount: currentFavDeck.deck.length,
+                            restCards: currentFavDeck.deck.length,
                         }
                     }
                     if (currentFavDeck.deck.length === 0) {
@@ -288,24 +289,24 @@ export const getCurrentFavDeck = (favoriteDeckId: string): ThunkType =>
         batch(() => {
             dispatch(favoriteDecksActions.setCurrentFavDeck(favoriteDeckId));
             dispatch(favoriteDecksActions.setNextCardNumber(0));
-            /*dispatch(favoriteDecksActions.setIsFireworks(false));*/
+            dispatch(favoriteDecksActions.setIsFireworks(false));
             dispatch(getCurrentFavCard());
         })
     };
 
 export const setEndGame = (): ThunkType =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
-        const {gameType, currentAnalytics, nextCardNumber} = getState().favoriteDecks
+        const {gameType, currentAnalytics, nextCardNumber, currentFavDeck} = getState().favoriteDecks;
+        const userId = getState().login.userId;
         if (currentAnalytics.totalCardCount === nextCardNumber) {
             dispatch(favoriteDecksActions.setIsFireworks(true));
         }
         dispatch(favoriteDecksActions.setNextCardNumber(0));
 
         if (gameType === "test") {
-            //repository
+            repository.setAnalytics(userId, currentFavDeck.favoriteDeckId, currentAnalytics);
             dispatch(favoriteDecksActions.resetAnalytics());
         }
-        dispatch(getCurrentFavCard());
     }
 
 export const getCurrentFavCard = (): ThunkType =>
@@ -335,6 +336,9 @@ export const getCurrentFavCard = (): ThunkType =>
                 if (totalCardCount === nextCardNumber) {
                     dispatch(setEndGame());
                 } else {
+                    if(nextCardNumber === 0) {
+                        dispatch(favoriteDecksActions.setIsFireworks(false));
+                    }
                     card = cards[nextCardNumber];
                     batch(() => {
                         dispatch(favoriteDecksActions.setNextCardNumber(nextCardNumber + 1));

@@ -105,6 +105,7 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
             repository.save_Auth_id(result.data._id);
             repository.saveToken(result.data.token, result.data.tokenDeathTime);
             dispatch(getUser());
+            dispatch(createUserFavoriteDecks(result.data._id));
             dispatch(loginActions.setIsFetching(false));
             dispatch(setIsPreventFetching(false));
 
