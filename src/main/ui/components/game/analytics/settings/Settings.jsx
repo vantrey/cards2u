@@ -4,16 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { favoriteDecksActions, setGameType } from "../../../../../bll/favoriteDecks/favoriteDecksReducer";
 
 
-const Settings = () => {
+const Settings = ({setCardFace}) => {
 
 	const dispatch = useDispatch ();
-	const { gameType, isRandomMode, isMulti } = useSelector ((state) => state.favoriteDecks);
+	const { gameType, isRandomMode, isMulti, isSound } = useSelector ((state) => state.favoriteDecks);
 
 	const onSelectNumberAnswer = () => {
 		dispatch (favoriteDecksActions.setIsMulti (!isMulti));
-	}
-
-	console.log (gameType, isRandomMode)
+	};
 
 	const onSelectGameType = (e) => {
 		if ( e.target.checked ) {
@@ -28,8 +26,10 @@ const Settings = () => {
 	const onPassTest = (e) => {
 		if ( e.target.checked ) {
 			dispatch (setGameType ("test"));
+			setCardFace(true);
 			dispatch (favoriteDecksActions.setIsMulti (true));
 			dispatch (favoriteDecksActions.setIsRandomMode (false));
+			dispatch (favoriteDecksActions.setIsTestStart (true));
 		} else {
 			dispatch (setGameType ("inOrder"));
 		}
@@ -37,11 +37,15 @@ const Settings = () => {
 
 	const onSound = (e) => {
 		if ( e.target.checked ) {
-			// dispatch(setGameType("sound"));
+			dispatch(favoriteDecksActions.setIsSound(true));
 		} else {
-			// dispatch(setGameType("sound-off"));
+			dispatch(favoriteDecksActions.setIsSound(false));
 		}
 	};
+
+	const classForlabel = gameType === 'test' ? `${styles.switcher__label} ${styles.switcher__label_active}` : `${styles.switcher__label}`;
+	const classForTitle = gameType === 'test' ? `${styles.switcher__title} ${styles.switcher__title_active}` : `${styles.switcher__title}`;
+	const classForInput = gameType === 'test' ? `${styles.switcher__input} ${styles.switcher__input_active}` : `${styles.switcher__input}`;
 
 	return (
 		<div className={styles.switcher__wrap}>
@@ -83,11 +87,11 @@ const Settings = () => {
 				</div>
 			</div>
 			<div className={styles.switcher__info}>
-				<h6 className={styles.switcher__title}>Pass a test</h6>
+				<h6 className={classForTitle}>Pass a test</h6>
 				<div className={`${styles.switcher} ${styles.switcher1}`}>
-					<input className={styles.switcher__input} type="checkbox" id="switcher-2"
+					<input className={classForInput} type="checkbox" id="switcher-2"
 						   onChange={onPassTest}/>
-					<label className={styles.switcher__label} htmlFor="switcher-2"> </label>
+					<label className={classForlabel} htmlFor="switcher-2"> </label>
 					<div className={styles.tooltip}>
 						<div className={styles.tooltip_wrap}>
 							<h4 className={styles.tooltip_title}>Number of responses</h4>
@@ -99,7 +103,7 @@ const Settings = () => {
 				<h6 className={styles.switcher__title}>Sound</h6>
 				<div className={`${styles.switcher} ${styles.switcher1}`}>
 					<input className={styles.switcher__input} type="checkbox" id="switcher-3"
-						   onChange={onSound} defaultChecked/>
+						   onChange={onSound} checked={isSound}/>
 					<label className={styles.switcher__label} htmlFor="switcher-3"> </label>
 					<div className={styles.tooltip}>
 						<div className={styles.tooltip_wrap}>

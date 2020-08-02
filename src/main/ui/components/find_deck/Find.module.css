@@ -38,8 +38,30 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
+
+/*временные*/
+.container__top_right {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 210px;
+    border: 1px solid transparent;
+    max-width: 50%;
+}
+.topDecks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #088dcd;
+    width: 100%;
+    height: calc(100% - 50px);
+
+    border: 1px solid  #088dcd;
+}
+/*=====*/
 
 .container__body {
     position: relative;
@@ -297,16 +319,3 @@
 }
 
 
-/*временные*/
-.container__top_right {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    height: 210px;
-    border: 1px solid transparent;
-    max-width: 50%;
-}
-.topDecks {
-    width: 100%;
-    height: calc(100% - 50px);
-}

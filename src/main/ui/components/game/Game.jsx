@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styles from './Game.module.css';
 import DecksRoutes, {
     GAME_PATH_DECK_BLUE,
@@ -17,10 +17,11 @@ import {useDispatch, useSelector} from "react-redux";
 import avaDefault from "../../images/ava-default.png";
 import soundDeck from "../../audio/deck.mp3";
 import soundCard from "../../audio/card.mp3";
-import {loudlinks} from "../../../helpers/loudlinks";
 import Matrix from "./analytics/matrix/Matrix";
 import Graph from "./analytics/graph/Graph";
 import {getCurrentFavDeck} from "../../../bll/favoriteDecks/favoriteDecksReducer";
+import StartTest from "./test/Start_test";
+import StopTest from "./test/Stop_test";
 
 
 const Game = () => {
@@ -29,20 +30,46 @@ const Game = () => {
     const [startMatrix, setstartMatrix] = useState(false);
     const [cardBg, setCardBg] = useState(bg_1);
     const {user} = useSelector((state) => state.profile);
-    const {userFavoriteDecks} = useSelector((state) => state.favoriteDecks);
+    const {userFavoriteDecks, isSound, isTestModeStart} = useSelector((state) => state.favoriteDecks);
     const dispatch = useDispatch();
 
     const onSetFavoriteDeck = (favoriteDeckId) => {
         dispatch(getCurrentFavDeck(favoriteDeckId));
-    }
+    };
 
     useEffect(() => {
-		dispatch(getCurrentFavDeck('favoriteDeckSlot0'))
-    }, [dispatch]);
+		dispatch(getCurrentFavDeck('favoriteDeckSlot0'));
+    }, [dispatch, isSound]);
 
-    useEffect(() => {
-        loudlinks();
-    }, []);
+    const onClickSound = () => {
+        const nextCardDecksEl = document.getElementById('nextCardDecks');
+        nextCardDecksEl.play();
+    };
+
+    useEffect( () => {
+
+        const onSoundHoverEl = document.getElementById ('onSoundHover');
+        const soundHoverEl = document.getElementById ('soundHover');
+
+        if(onSoundHoverEl && soundHoverEl) {
+            onSoundHoverEl.addEventListener('mouseenter', () => {
+                soundHoverEl.play();
+            });
+
+            onSoundHoverEl.addEventListener('mouseleave', () => {
+                soundHoverEl.pause();
+                soundHoverEl.currentTime = 0;
+            });
+
+            onSoundHoverEl.addEventListener('touchmove', () => {
+                soundHoverEl.pause();
+                soundHoverEl.currentTime = 0;
+            });
+
+        }
+
+    },[]);
+
 
     return (
         <div className={styles.game__wrap}>
@@ -64,7 +91,7 @@ const Game = () => {
                     {
                         startMatrix &&
                         <div className={styles.analytics__data}>
-                            <Graph />
+                            <Graph setCardFace={setCardFace} isSound={isSound}/>
                             <Matrix/>
                         </div>
                     }
@@ -184,19 +211,32 @@ const Game = () => {
                         </div>
                     </div>
                     <div className={styles.content__main}>
+                        { isTestModeStart &&
+                         // <StartTest setCardFace={setCardFace} cardBg={cardBg} setCardBg={setCardBg}/>
+                         <StopTest setCardFace={setCardFace} cardBg={cardBg} setCardBg={setCardBg}/>
+                        }
+                        { !isTestModeStart &&
                         <div className={styles.main__card}>
                             {cardface && <Card cardBg={cardBg} setCardFace={setCardFace} cardface={cardface}/>}
-                            {!cardface && <CardDownside setCardFace={setCardFace} />}
+                            {!cardface && <CardDownside setCardFace={setCardFace}/>}
                             <div className={styles.content__buttons}>
-                                <Buttons setCardFace={setCardFace} cardface={cardface} setCardBg={setCardBg}/>
+                                <Buttons setCardFace={setCardFace} cardface={cardface} setCardBg={setCardBg}
+                                         isSound={isSound}/>
                             </div>
                         </div>
-                        <div className='soundClick' data-sound={soundCard}>
-                            {/*<div className='soundHover' data-sound={soundDeck}>*/}
+                        }
+                        <div onClick={onClickSound}>
+                            <div  id='onSoundHover'>
                                 <div className={`${styles.main__deck}`}>
                                     <DecksRoutes setCardBg={setCardBg} setCardFace={setCardFace}/>
                                 </div>
-                            {/*</div>*/}
+                                <audio autoPlay={false} muted={!isSound} id='nextCardDecks'>
+                                    <source src={soundCard} type="audio/mpeg"/>
+                                </audio>
+                                <audio autoPlay={false} muted={!isSound} id='soundHover'>
+                                    <source src={soundDeck} type="audio/mpeg"/>
+                                </audio>
+                            </div>
                         </div>
                     </div>
                 </div>

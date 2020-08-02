@@ -3,16 +3,39 @@ import styles from './DefaultDeck.module.css';
 import deckBG from '../../../images/card-bg-LBR.jpg';
 import soundDeck from "../../../audio/deck.mp3";
 import { loudlinks } from "../../../../helpers/loudlinks";
+import { useSelector } from "react-redux";
 
 
 const DefaultDeck = ({cardPackName}) => {
 
+	const {isSound} = useSelector((state) => state.favoriteDecks);
+
 	useEffect (() => {
-		loudlinks ();
+
+		const onSoundHoverDefaultDeckEl = document.getElementById ('onSoundHoverDefaultDeck');
+		const soundHoverDefaultDeckEl = document.getElementById ('soundHoverDefaultDeck');
+
+		if(onSoundHoverDefaultDeckEl && soundHoverDefaultDeckEl) {
+			onSoundHoverDefaultDeckEl.addEventListener('mouseenter', () => {
+				soundHoverDefaultDeckEl.play();
+			});
+
+			onSoundHoverDefaultDeckEl.addEventListener('mouseleave', () => {
+				soundHoverDefaultDeckEl.pause();
+				soundHoverDefaultDeckEl.currentTime = 0;
+			});
+
+			onSoundHoverDefaultDeckEl.addEventListener('touchmove', () => {
+				soundHoverDefaultDeckEl.pause();
+				soundHoverDefaultDeckEl.currentTime = 0;
+			});
+
+		}
+
 	}, []);
 
 	return (
-		<div className='soundHover' data-sound={soundDeck}>
+		<div id='onSoundHoverDefaultDeck'>
 			<div className={styles.deck__wrap}>
 				<div className={styles.deck}>
 					<div className={styles.card__imgBx}>
@@ -23,6 +46,9 @@ const DefaultDeck = ({cardPackName}) => {
 					</div>
 				</div>
 			</div>
+			<audio autoPlay={false} muted={!isSound} id='soundHoverDefaultDeck'>
+				<source src={soundDeck} type="audio/mpeg"/>
+			</audio>
 		</div>
 	)
 }

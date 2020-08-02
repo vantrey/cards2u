@@ -32,6 +32,7 @@ const Search: React.FC<OwnProps> = ({isAuth}) => {
 
     return (
         <div className={styles.search}>
+            <div className={styles.search__title}>Deck search:</div>
             <div className={styles.search__bar}>
                 <input id='searchOne' type='checkbox'/>
                 <label className={styles.search__label} htmlFor='searchOne'>

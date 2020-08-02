@@ -43,8 +43,23 @@
     align-items: center;
     width: 100%;
     height: 40%;
+    position: relative;
 
     border:  1px solid red;
+}
+
+.graph__button {
+    position: absolute;
+    bottom: 10px;
+    width: 100px;
+    height: 30px;
+    border: none;
+    background-color: #0b3b63;
+    color: whitesmoke;
+    font-size: 10px;
+    cursor: pointer;
+    transition: .25s cubic-bezier(0.25, 0, 0, 1);
+    box-shadow: 0 0 0 -.25rem #1f5e25;
 }
 
 .graph__nav {

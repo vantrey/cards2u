@@ -1,5 +1,5 @@
 
-export const loudlinks = () => {
+export const loudlinks = (isSound) => {
 
 	// Create audio element and make it awesome
 	let audioPlayer = document.createElement('audio'),
@@ -79,25 +79,32 @@ export const loudlinks = () => {
 		element.addEventListener('click', stopAudio); // stop audio on click
 	}
 
+	// let linkPlayAudio = playAudio;
+
 	// Add `click` event listeners
-	const trackClick = (element) => {
-		element.addEventListener('click', playAudio);
+	const trackClick = (element, isSound) => {
+		if (isSound) {
+			element.addEventListener('click', playAudio);
+		} else {
+			element.removeEventListener('click', playAudio);
+		}
+
 	}
 
 	// Go crazy! Scan all the links and see if they have the 'data-sound' Attribute and attach the events
-	const loudlinks = () => {
+	const loudlinks = (isSound) => {
 		let hoverLinks = document.getElementsByClassName('soundHover'),
 			clickLinks = document.getElementsByClassName('soundClick'),
 			hoverLength = hoverLinks.length,
 			clickLength = clickLinks.length,
 			i;
 
-		for (i = 0; i < hoverLength; i++) { trackHover(hoverLinks[i]); } // Hover
-		for (i = 0; i < clickLength; i++) { trackClick(clickLinks[i]); } // Click
+		for (i = 0; i < hoverLength; i++) { trackHover(hoverLinks[i], isSound); } // Hover
+		for (i = 0; i < clickLength; i++) { trackClick(clickLinks[i], isSound); } // Click
 
 		return loudlinks;
 	}
 
-	return loudlinks();
+	return loudlinks(isSound);
 
 };

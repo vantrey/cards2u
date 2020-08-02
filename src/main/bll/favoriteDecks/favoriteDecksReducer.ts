@@ -42,6 +42,7 @@ const initialState = {
     isMulti: false,
     isSound: true,
     isRandomMode: true,
+    isTestModeStart: false,
 };
 
 type InitialStateType = typeof initialState
@@ -173,6 +174,12 @@ export const favoriteDecksReducer =
                     isRandomMode: action.isRandomMode
                 }
 
+            case 'FAVORITE_DECKS_REDUCER/SET_IS_TEST_START':
+                return {
+                    ...state,
+                    isTestModeStart: action.isTestModeStart
+                }
+
             default:
                 return state
         }
@@ -236,6 +243,11 @@ export const favoriteDecksActions = {
     setIsRandomMode: (isRandomMode: boolean) => ({
         type: 'FAVORITE_DECKS_REDUCER/SET_IS_RANDOM_MODE',
         isRandomMode
+    } as const),
+
+    setIsTestStart: (isTestModeStart: boolean) => ({
+        type: 'FAVORITE_DECKS_REDUCER/SET_IS_TEST_START',
+        isTestModeStart
     } as const),
 };
 
@@ -311,7 +323,7 @@ export const setEndGame = (): ThunkType =>
 
 export const getCurrentFavCard = (): ThunkType =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
-
+        dispatch (favoriteDecksActions.setIsTestStart (false));
         const gameType = getState().favoriteDecks.gameType
         const cards = getState().favoriteDecks.currentFavDeck.deck;
         const {

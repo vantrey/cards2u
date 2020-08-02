@@ -36,6 +36,10 @@
     cursor: pointer;
 }
 
+.switcher__title_active {
+    color: red;
+}
+
 .switcher__title:hover {
     color: orange;
     transition: all .3s ease;
@@ -158,6 +162,11 @@
 
 }
 
+.switcher .switcher__input_active {
+    border: 1px solid red;
+}
+
+
 .switcher .switcher__input:before, .switcher .switcher__input:after {
     z-index: 2;
     position: absolute;
@@ -186,6 +195,10 @@
     bottom: 10px;
     border-radius: 20px;
     height: 16px;
+}
+
+.switcher__label_active {
+
 }
 
 .switcher__label:before, .switcher__label:after {
@@ -220,6 +233,10 @@
     transition: left 0.5s, right 0.4s 0.2s;
 
     height: 16px;
+}
+
+.switcher.switcher1 .switcher__input:checked + .switcher__label.switcher__label_active {
+    background: red;
 }
 
 .switcher.switcher1 .switcher__input:not(:checked) {
