@@ -42,6 +42,10 @@ const Settings = ({setCardFace}) => {
 		}
 	};
 
+	const classForlabel = gameType === 'test' ? `${styles.switcher__label} ${styles.switcher__label_active}` : `${styles.switcher__label}`;
+	const classForTitle = gameType === 'test' ? `${styles.switcher__title} ${styles.switcher__title_active}` : `${styles.switcher__title}`;
+	const classForInput = gameType === 'test' ? `${styles.switcher__input} ${styles.switcher__input_active}` : `${styles.switcher__input}`;
+
 	return (
 		<div className={styles.switcher__wrap}>
 			<div className={styles.switcher__info}>
@@ -82,11 +86,11 @@ const Settings = ({setCardFace}) => {
 				</div>
 			</div>
 			<div className={styles.switcher__info}>
-				<h6 className={styles.switcher__title}>Pass a test</h6>
+				<h6 className={classForTitle}>Pass a test</h6>
 				<div className={`${styles.switcher} ${styles.switcher1}`}>
-					<input className={styles.switcher__input} type="checkbox" id="switcher-2"
+					<input className={classForInput} type="checkbox" id="switcher-2"
 						   onChange={onPassTest}/>
-					<label className={styles.switcher__label} htmlFor="switcher-2"> </label>
+					<label className={classForlabel} htmlFor="switcher-2"> </label>
 					<div className={styles.tooltip}>
 						<div className={styles.tooltip_wrap}>
 							<h4 className={styles.tooltip_title}>Number of responses</h4>

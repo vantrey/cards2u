@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styles from './Game.module.css';
 import DecksRoutes, {
     GAME_PATH_DECK_BLUE,
@@ -21,6 +21,7 @@ import {loudlinks} from "../../../helpers/loudlinks";
 import Matrix from "./analytics/matrix/Matrix";
 import Graph from "./analytics/graph/Graph";
 import {getCurrentFavDeck} from "../../../bll/favoriteDecks/favoriteDecksReducer";
+import dragonFly from "../../audio/dragon-fly.mp3";
 
 
 const Game = () => {
@@ -36,11 +37,18 @@ const Game = () => {
         dispatch(getCurrentFavDeck(favoriteDeckId));
     };
 
+    useMemo( () => {
+        loudlinks (isSound);
+    },[isSound]);
+
     useEffect(() => {
 		dispatch(getCurrentFavDeck('favoriteDeckSlot0'));
-        loudlinks (isSound);
-        console.log ('useeff-ct relog-game')
     }, [dispatch, isSound]);
+
+    const onClickSound = () => {
+        const nextCardDecksEl = document.getElementById('nextCardDecks');
+        nextCardDecksEl.play();
+    }
 
     return (
         <div className={styles.game__wrap}>
@@ -62,7 +70,7 @@ const Game = () => {
                     {
                         startMatrix &&
                         <div className={styles.analytics__data}>
-                            <Graph setCardFace={setCardFace}/>
+                            <Graph setCardFace={setCardFace} isSound={isSound}/>
                             <Matrix/>
                         </div>
                     }
@@ -186,14 +194,17 @@ const Game = () => {
                             {cardface && <Card cardBg={cardBg} setCardFace={setCardFace} cardface={cardface}/>}
                             {!cardface && <CardDownside setCardFace={setCardFace} />}
                             <div className={styles.content__buttons}>
-                                <Buttons setCardFace={setCardFace} cardface={cardface} setCardBg={setCardBg}/>
+                                <Buttons setCardFace={setCardFace} cardface={cardface} setCardBg={setCardBg} isSound={isSound}/>
                             </div>
                         </div>
-                        <div className='soundClick' data-sound={soundCard}>
+                        <div onClick={onClickSound}>
                             {/*<div className='soundHover' data-sound={soundDeck}>*/}
-                                <div className={`${styles.main__deck}`}>
-                                    <DecksRoutes setCardBg={setCardBg} setCardFace={setCardFace}/>
-                                </div>
+                            <div className={`${styles.main__deck}`}>
+                                <DecksRoutes setCardBg={setCardBg} setCardFace={setCardFace}/>
+                            </div>
+                            <audio autoPlay={false} muted={!isSound} id='nextCardDecks'>
+                                <source src={soundCard} type="audio/mpeg"/>
+                            </audio>
                             {/*</div>*/}
                         </div>
                     </div>

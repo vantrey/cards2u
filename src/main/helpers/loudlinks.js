@@ -79,16 +79,14 @@ export const loudlinks = (isSound) => {
 		element.addEventListener('click', stopAudio); // stop audio on click
 	}
 
-	let linkPlayAudio = playAudio;
+	// let linkPlayAudio = playAudio;
 
 	// Add `click` event listeners
 	const trackClick = (element, isSound) => {
 		if (isSound) {
-			console.log ('Useeff-isSound-true-loud')
 			element.addEventListener('click', playAudio);
 		} else {
-			console.log ('Useeff-isSound-false-loud')
-			element.removeEventListener('click', linkPlayAudio);
+			element.removeEventListener('click', playAudio);
 		}
 
 	}

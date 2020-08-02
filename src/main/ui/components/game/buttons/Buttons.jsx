@@ -6,11 +6,13 @@ import { getCurrentFavCard } from "../../../../bll/favoriteDecks/favoriteDecksRe
 import { useDispatch} from "react-redux";
 
 
-const Buttons = ({ setCardFace, cardface, setCardBg}) => {
+const Buttons = ({ setCardFace, cardface, setCardBg, isSound}) => {
 
 	const dispatch = useDispatch();
+	const nextCardEl = document.getElementById('nextCard');
 
 	const onChangeBG = () => {
+		nextCardEl.play();
 		setCardFace(true);
 		getRandomBg (maxNumber);
 		setCardBg(cardBG);
@@ -22,8 +24,11 @@ const Buttons = ({ setCardFace, cardface, setCardBg}) => {
 			<button className={`${styles.buttons} ${styles.button__left}`}
 					onClick={()=>{setCardFace(true)}}
 					disabled={cardface}	>Back</button>
-			<button className={`${styles.buttons} ${styles.button__right} ${'soundClick'}`} data-sound={soundCard}
+			<button className={`${styles.buttons} ${styles.button__right}`}
 					onClick={onChangeBG}>Next</button>
+			<audio autoPlay={false} muted={!isSound} id='nextCard'>
+				<source src={soundCard} type="audio/mpeg"/>
+			</audio>
 		</div>
 	)
 }
