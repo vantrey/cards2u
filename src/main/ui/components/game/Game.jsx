@@ -17,10 +17,11 @@ import {useDispatch, useSelector} from "react-redux";
 import avaDefault from "../../images/ava-default.png";
 import soundDeck from "../../audio/deck.mp3";
 import soundCard from "../../audio/card.mp3";
-import {loudlinks} from "../../../helpers/loudlinks";
 import Matrix from "./analytics/matrix/Matrix";
 import Graph from "./analytics/graph/Graph";
 import {getCurrentFavDeck} from "../../../bll/favoriteDecks/favoriteDecksReducer";
+import StartTest from "./test/Start_test";
+import StopTest from "./test/Stop_test";
 
 
 const Game = () => {
@@ -29,7 +30,7 @@ const Game = () => {
     const [startMatrix, setstartMatrix] = useState(false);
     const [cardBg, setCardBg] = useState(bg_1);
     const {user} = useSelector((state) => state.profile);
-    const {userFavoriteDecks, isSound} = useSelector((state) => state.favoriteDecks);
+    const {userFavoriteDecks, isSound, isTestModeStart} = useSelector((state) => state.favoriteDecks);
     const dispatch = useDispatch();
 
     const onSetFavoriteDeck = (favoriteDeckId) => {
@@ -210,13 +211,20 @@ const Game = () => {
                         </div>
                     </div>
                     <div className={styles.content__main}>
+                        { isTestModeStart &&
+                         // <StartTest setCardFace={setCardFace} cardBg={cardBg} setCardBg={setCardBg}/>
+                         <StopTest setCardFace={setCardFace} cardBg={cardBg} setCardBg={setCardBg}/>
+                        }
+                        { !isTestModeStart &&
                         <div className={styles.main__card}>
                             {cardface && <Card cardBg={cardBg} setCardFace={setCardFace} cardface={cardface}/>}
-                            {!cardface && <CardDownside setCardFace={setCardFace} />}
+                            {!cardface && <CardDownside setCardFace={setCardFace}/>}
                             <div className={styles.content__buttons}>
-                                <Buttons setCardFace={setCardFace} cardface={cardface} setCardBg={setCardBg} isSound={isSound}/>
+                                <Buttons setCardFace={setCardFace} cardface={cardface} setCardBg={setCardBg}
+                                         isSound={isSound}/>
                             </div>
                         </div>
+                        }
                         <div onClick={onClickSound}>
                             <div  id='onSoundHover'>
                                 <div className={`${styles.main__deck}`}>

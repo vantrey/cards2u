@@ -133,7 +133,7 @@ const FindContainer: React.FC = () => {
                         <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
                     </div>
                     <div className={styles.container__top_right}>
-                      <div className={styles.topDecks}></div>     {/*заглушка*/}
+                      <div className={styles.topDecks}>Recommended decks</div>     {/*заглушка*/}
                         <Search isAuth={isAuth}/>
                     </div>
                 </div>

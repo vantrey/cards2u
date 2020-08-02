@@ -40,6 +40,12 @@ const Graph = ({ setCardFace, isSound }) => {
 				}
 				{!dragon &&
 				<img src={graphImg} alt="graph"/>
+					// <>
+					// <img src={fireworks} alt="fireworks"/>
+					// <audio autoPlay={true} muted={!isSound}>
+					// <source src={fireworks} type="audio/mpeg"/>
+					// </audio>
+					// </>
 				}
 				<button onClick={() => {setDragon (!dragon)}} className={styles.graph__button}>dragon</button>
 			</div>

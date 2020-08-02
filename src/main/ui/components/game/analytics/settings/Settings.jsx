@@ -29,6 +29,7 @@ const Settings = ({setCardFace}) => {
 			setCardFace(true);
 			dispatch (favoriteDecksActions.setIsMulti (true));
 			dispatch (favoriteDecksActions.setIsRandomMode (false));
+			dispatch (favoriteDecksActions.setIsTestStart (true));
 		} else {
 			dispatch (setGameType ("inOrder"));
 		}
