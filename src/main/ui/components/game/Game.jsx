@@ -21,7 +21,6 @@ import {loudlinks} from "../../../helpers/loudlinks";
 import Matrix from "./analytics/matrix/Matrix";
 import Graph from "./analytics/graph/Graph";
 import {getCurrentFavDeck} from "../../../bll/favoriteDecks/favoriteDecksReducer";
-import dragonFly from "../../audio/dragon-fly.mp3";
 
 
 const Game = () => {
@@ -37,10 +36,6 @@ const Game = () => {
         dispatch(getCurrentFavDeck(favoriteDeckId));
     };
 
-    useMemo( () => {
-        loudlinks (isSound);
-    },[isSound]);
-
     useEffect(() => {
 		dispatch(getCurrentFavDeck('favoriteDeckSlot0'));
     }, [dispatch, isSound]);
@@ -48,7 +43,32 @@ const Game = () => {
     const onClickSound = () => {
         const nextCardDecksEl = document.getElementById('nextCardDecks');
         nextCardDecksEl.play();
-    }
+    };
+
+    useEffect( () => {
+
+        const onSoundHoverEl = document.getElementById ('onSoundHover');
+        const soundHoverEl = document.getElementById ('soundHover');
+
+        if(onSoundHoverEl && soundHoverEl) {
+            onSoundHoverEl.addEventListener('mouseenter', () => {
+                soundHoverEl.play();
+            });
+
+            onSoundHoverEl.addEventListener('mouseleave', () => {
+                soundHoverEl.pause();
+                soundHoverEl.currentTime = 0;
+            });
+
+            onSoundHoverEl.addEventListener('touchmove', () => {
+                soundHoverEl.pause();
+                soundHoverEl.currentTime = 0;
+            });
+
+        }
+
+    },[]);
+
 
     return (
         <div className={styles.game__wrap}>
@@ -198,14 +218,17 @@ const Game = () => {
                             </div>
                         </div>
                         <div onClick={onClickSound}>
-                            {/*<div className='soundHover' data-sound={soundDeck}>*/}
-                            <div className={`${styles.main__deck}`}>
-                                <DecksRoutes setCardBg={setCardBg} setCardFace={setCardFace}/>
+                            <div  id='onSoundHover'>
+                                <div className={`${styles.main__deck}`}>
+                                    <DecksRoutes setCardBg={setCardBg} setCardFace={setCardFace}/>
+                                </div>
+                                <audio autoPlay={false} muted={!isSound} id='nextCardDecks'>
+                                    <source src={soundCard} type="audio/mpeg"/>
+                                </audio>
+                                <audio autoPlay={false} muted={!isSound} id='soundHover'>
+                                    <source src={soundDeck} type="audio/mpeg"/>
+                                </audio>
                             </div>
-                            <audio autoPlay={false} muted={!isSound} id='nextCardDecks'>
-                                <source src={soundCard} type="audio/mpeg"/>
-                            </audio>
-                            {/*</div>*/}
                         </div>
                     </div>
                 </div>

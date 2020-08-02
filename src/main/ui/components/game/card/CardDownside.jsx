@@ -44,9 +44,6 @@ const CardDownside = ({ setCardFace }) => {
 				}
 			});
 		});
-
-		loudlinks (isSound);
-
 	}, [ isMulti, isSound ]);
 
 	useEffect( () => {
