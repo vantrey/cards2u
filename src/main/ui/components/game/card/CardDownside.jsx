@@ -12,18 +12,22 @@ const CardDownside = ({ setCardFace }) => {
 
 	const dispatch = useDispatch ();
 	const [ popupBlock, setPopupBlock ] = useState (false);
-	const { currentFavCard, isRandomMode, gameType, isMulti, isSound, currentFavDeck } = useSelector ((state) => state.favoriteDecks);
+	const { currentFavCard, isRandomMode, gameType, isMulti, isSound } = useSelector ((state) => state.favoriteDecks);
+	let arrShuffle;
 
 	const onSelectGrade = (e) => {
 		dispatch (setGrade (Number (e.currentTarget.name)));
 	};
 
-	const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
-						{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0]},
-						{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1]}
-					  ];
 
-	let arrShuffle = shuffle (arrAnswer);
+	if (isMulti) {
+		const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
+			{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0]},
+			{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1]}
+		];
+
+		arrShuffle = shuffle (arrAnswer);
+	}
 
 	useEffect (() => {
 		let pElements = document.querySelectorAll ("p[data-text='answer']");
@@ -119,7 +123,6 @@ const CardDownside = ({ setCardFace }) => {
 				<div className={styles.card__text}>
 					<h3 className={styles.text__title}>answer</h3>
 					<div id={'multyanswer'} className={styles.text__discr}>
-
 						{
 							arrShuffle.map ((answer, index) => {
 								let soundForAnswer = answer.id === 'trueAnswer' ? soundTrue : soundFalse;
@@ -139,7 +142,6 @@ const CardDownside = ({ setCardFace }) => {
 
 							})
 						}
-
 
 						{/*<div className={styles.discr}>*/}
 						{/*	<span className={styles.discr__number}>1.</span>*/}

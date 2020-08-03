@@ -1,10 +1,20 @@
 import React, { useEffect } from 'react';
 import styles from './PopupNote.module.css';
 import bell from "../../../../icons/bell.png";
+import soundForNoteOk from "../../../../audio/added.mp3";
 import closeIcon from "../../../../icons/cancel.png";
+import { useSelector } from "react-redux";
 
 
 const PopupNoteOk = ({popupSaveToDeckOk, setPopupSaveToDeckOk}) => {
+
+	const { isSound } = useSelector ((state) => state.favoriteDecks);
+
+	// const trashDeleteAudioEl = document.getElementById ('idForAudioNoteOk');
+	//
+	// if ( trashDeleteAudioEl ) {
+	// 	trashDeleteAudioEl.play ();
+	// }
 
 	const closeModal = (e) => {
 		if ( e.target.matches ('#closeIconId') || (e.target.closest ('#popupAuth') === null) ) {
@@ -13,12 +23,22 @@ const PopupNoteOk = ({popupSaveToDeckOk, setPopupSaveToDeckOk}) => {
 	};
 
 	useEffect (() => {
+
 		let timerId = setTimeout (() => {
+			const trashDeleteAudioEl = document.getElementById ('idForAudioNoteOk');
+
+			if ( trashDeleteAudioEl ) {
+					trashDeleteAudioEl.play ();
+			}
+		}, 0)
+
+		let timerId1 = setTimeout (() => {
 			setPopupSaveToDeckOk (false);
 		}, 3000)
 
 		return () => {
-			clearTimeout (timerId)
+			clearTimeout (timerId);
+			clearTimeout (timerId1);
 		}
 	}, [popupSaveToDeckOk]);
 
@@ -41,6 +61,9 @@ const PopupNoteOk = ({popupSaveToDeckOk, setPopupSaveToDeckOk}) => {
 					<img src={closeIcon} alt="cancel-Icon" id='closeIconId'/>
 				</div>
 			</div>
+			<audio autoPlay={false} muted={!isSound} id='idForAudioNoteOk'>
+				<source src={soundForNoteOk} type="audio/mpeg"/>
+			</audio>
 		</div>
 	)
 }

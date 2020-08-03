@@ -41,7 +41,10 @@ const DecksQuestions = ({cards, cardPackName, SaveToFavoriteDecks, popupSaveToDe
 						<button className={styles.deckInfo__button} disabled={isCardsFetching} onClick={()=> {setDecksQuestions(false)}}>go back</button>
 						<button className={styles.deckInfo__button} disabled={isCardsFetching} onClick={SaveToFavoriteDecks}>save to favorites</button>
 					</div>
-					<PopupNoteOk popupSaveToDeckOk={popupSaveToDeckOk} setPopupSaveToDeckOk={setPopupSaveToDeckOk}/>
+					{ popupSaveToDeckOk &&
+						<PopupNoteOk popupSaveToDeckOk={popupSaveToDeckOk} setPopupSaveToDeckOk={setPopupSaveToDeckOk}/>
+					}
+
 				</div>
 			</div>
 		</div>

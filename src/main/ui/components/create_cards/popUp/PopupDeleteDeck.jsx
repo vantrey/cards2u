@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import styles from './PopupDeleteDeck.module.css';
 import bell from "../../../icons/bell.png";
 import closeIcon from "../../../icons/cancel.png";
-import { loudlinks } from "../../../../helpers/loudlinks";
-import trashDelete from "../../../audio/trash-delete.mp3";
+import trashDelete from "../../../audio/remove_delete.mp3";
+import { useSelector } from "react-redux";
 
 
 const PopupDeleteDeck = ({popupDeleteDeck, setPopupDeleteDeck, onDeleteDeck, cardPackName}) => {
+
+	const { isSound } = useSelector ((state) => state.favoriteDecks);
 
 	const closeModal = (e) => {
 		if ( e.target.matches ('#closeIconId') || (e.target.closest ('#popupAuth') === null) ) {
@@ -15,8 +17,15 @@ const PopupDeleteDeck = ({popupDeleteDeck, setPopupDeleteDeck, onDeleteDeck, car
 	};
 
 	useEffect (() => {
-		loudlinks ();
-	}, []);
+		const trashDeleteEl = document.getElementById ('idTrashDelete');
+		const trashDeleteAudioEl = document.getElementById ('idTrashDeleteAudio');
+
+		if ( trashDeleteEl && trashDeleteAudioEl ) {
+			trashDeleteEl.addEventListener ('click', () => {
+				trashDeleteAudioEl.play ();
+			});
+		}
+	}, [])
 
 	const classForModal = popupDeleteDeck === true ? `${styles.popupAuth__wrap} ${styles.popupAuth__wrap_active}` : `${styles.popupAuth__wrap}`;
 
@@ -33,11 +42,14 @@ const PopupDeleteDeck = ({popupDeleteDeck, setPopupDeleteDeck, onDeleteDeck, car
 					<div className={styles.note__text}>Are you sure you want to delete deck
 						<span  className={styles.note__text_orange}>&nbsp;{cardPackName}&nbsp;</span>?</div>
 					<div className={styles.note__buttons}>
-						<div className='soundClick' data-sound={trashDelete}>
+						<div id='idTrashDelete'>
 							<button className={styles.note__button} onClick={onDeleteDeck}>yes</button>
 						</div>
 						<button className={styles.note__button} onClick={()=> {setPopupDeleteDeck (false)}}>no</button>
 					</div>
+					<audio autoPlay={false} muted={!isSound} id='idTrashDeleteAudio'>
+						<source src={trashDelete} type="audio/mpeg"/>
+					</audio>
 				</div>
 				<div className={styles.popupAuth__icon}>
 					<img src={closeIcon} alt="cancel-Icon" id='closeIconId'/>
