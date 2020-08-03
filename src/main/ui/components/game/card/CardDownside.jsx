@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentFavCard, setGrade } from "../../../../bll/favoriteDecks/favoriteDecksReducer"
 import soundTrue from "../../../audio/correctly.mp3";
 import soundFalse from "../../../audio/mistake.mp3";
-import { loudlinks } from "../../../../helpers/loudlinks";
 import { shuffle } from "../../../../helpers/random_multyanswer/randomAnswer";
 
 
@@ -126,8 +125,6 @@ const CardDownside = ({ setCardFace }) => {
 								let soundForAnswer = answer.id === 'trueAnswer' ? soundTrue : soundFalse;
 								let idForAudio = answer.id === 'trueAnswer' ? 'trueAnswerSound' :
 									answer.id === 'falseAnswer1' ? 'falseAnswerSound1' : 'falseAnswerSound2';
-
-
 								return (
 									<div className={styles.discr} key={answer.id}>
 										<span className={styles.discr__number}>{index + 1}</span>
