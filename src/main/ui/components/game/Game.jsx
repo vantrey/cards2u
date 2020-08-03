@@ -212,8 +212,8 @@ const Game = () => {
                     </div>
                     <div className={styles.content__main}>
                         { isTestModeStart &&
-                         // <StartTest setCardFace={setCardFace} cardBg={cardBg} setCardBg={setCardBg}/>
-                         <StopTest setCardFace={setCardFace} cardBg={cardBg} setCardBg={setCardBg}/>
+                         <StartTest setCardFace={setCardFace} cardBg={cardBg} setCardBg={setCardBg}/>
+                         // <StopTest setCardFace={setCardFace} cardBg={cardBg} setCardBg={setCardBg}/>
                         }
                         { !isTestModeStart &&
                         <div className={styles.main__card}>

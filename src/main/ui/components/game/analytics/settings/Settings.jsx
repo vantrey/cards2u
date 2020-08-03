@@ -50,7 +50,7 @@ const Settings = ({setCardFace}) => {
 	return (
 		<div className={styles.switcher__wrap}>
 			<div className={styles.switcher__info}>
-				<h6 className={styles.switcher__title}>Number of responses</h6>
+				<h6 className={styles.switcher__title}>Number of answers</h6>
 				<div className={styles.radio__wrap}>
 					<div className={styles.radio}>
 						<label className={styles.radio__custom}>
@@ -68,33 +68,35 @@ const Settings = ({setCardFace}) => {
 					</div>
 					<div className={styles.tooltip}>
 						<div className={styles.tooltip_wrap}>
-							<h4 className={styles.tooltip_title}>Number of responses</h4>
+							<h4 className={styles.tooltip_title}>In few answers mode - only one reply is correct</h4>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div className={styles.switcher__info}>
-				<h6 className={styles.switcher__title}>Game type</h6>
+				<h6 className={styles.switcher__title}>Smart selection</h6>
 				<div className={`${styles.switcher} ${styles.switcher1}`}>
 					<input className={styles.switcher__input} type="checkbox" id="switcher-1"
 						   onChange={onSelectGameType} checked={isRandomMode}/>
 					<label className={styles.switcher__label} htmlFor="switcher-1"> </label>
 					<div className={styles.tooltip}>
 						<div className={styles.tooltip_wrap}>
-							<h4 className={styles.tooltip_title}>Number of responses</h4>
+							<h4 className={styles.tooltip_title}>Rate your answer and a smart
+								algorithm will select questions matching for you</h4>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div className={styles.switcher__info}>
-				<h6 className={classForTitle}>Pass a test</h6>
+				<h6 className={classForTitle}>Pass a test mode</h6>
 				<div className={`${styles.switcher} ${styles.switcher1}`}>
 					<input className={classForInput} type="checkbox" id="switcher-2"
 						   onChange={onPassTest}/>
 					<label className={classForlabel} htmlFor="switcher-2"> </label>
 					<div className={styles.tooltip}>
 						<div className={styles.tooltip_wrap}>
-							<h4 className={styles.tooltip_title}>Number of responses</h4>
+							<h4 className={styles.tooltip_title}>For each question you have a few
+								seconds to give the correct answer</h4>
 						</div>
 					</div>
 				</div>
@@ -107,7 +109,7 @@ const Settings = ({setCardFace}) => {
 					<label className={styles.switcher__label} htmlFor="switcher-3"> </label>
 					<div className={styles.tooltip}>
 						<div className={styles.tooltip_wrap}>
-							<h4 className={styles.tooltip_title}>Number of responses</h4>
+							<h4 className={styles.tooltip_title}>You can turn on or turn off sound effects</h4>
 						</div>
 					</div>
 				</div>

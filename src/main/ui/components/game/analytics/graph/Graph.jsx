@@ -3,7 +3,10 @@ import styles from './Graph.module.css';
 import graphImg from '../../../../images/graph.png';
 import Settings from "../settings/Settings";
 import dragonVD1 from '../../../../video/dragon-gif.gif';
+import fireworks from '../../../../video/fireworks.gif';
 import dragonFly from '../../../../audio/dragon-fly.mp3';
+import fireworksSound from '../../../../audio/fireworks.mp3';
+import dragonCloud from '../../../../images/header-bg-cloud80.png';
 
 
 const Graph = ({ setCardFace, isSound }) => {
@@ -11,6 +14,7 @@ const Graph = ({ setCardFace, isSound }) => {
 	const [ fadeIn, setFadeIn ] = useState (false);
 	const [ dragon, setDragon ] = useState (false);
 	const [ dragonImg, setDragonImg ] = useState ('');
+	const [ fireworksImg, setFireworksImg ] = useState ('');
 
 	useEffect (() => {
 		setTimeout (() => {
@@ -19,7 +23,10 @@ const Graph = ({ setCardFace, isSound }) => {
 
 		setTimeout (() => {
 			setDragonImg ('');
+			setFireworksImg('');
 			setDragonImg (dragonVD1);
+			setFireworksImg(fireworks)
+
 		}, 0)
 
 	}, [ fadeIn, dragon ]);
@@ -32,6 +39,9 @@ const Graph = ({ setCardFace, isSound }) => {
 			<div className={styles.graph__graph}>
 				{dragon &&
 				<>
+					<div className={styles.dragon__cloud}>
+						{/*<img src={dragonCloud} alt="cloud"/>*/}
+					</div>
 					<img src={dragonImg} alt="dragon"/>
 					<audio autoPlay={true} muted={!isSound}>
 						<source src={dragonFly} type="audio/mpeg"/>
@@ -39,13 +49,13 @@ const Graph = ({ setCardFace, isSound }) => {
 				</>
 				}
 				{!dragon &&
-				<img src={graphImg} alt="graph"/>
-					// <>
-					// <img src={fireworks} alt="fireworks"/>
-					// <audio autoPlay={true} muted={!isSound}>
-					// <source src={fireworks} type="audio/mpeg"/>
-					// </audio>
-					// </>
+				// <img src={graphImg} alt="graph"/>
+				<>
+					<img src={fireworksImg} alt="fireworks"/>
+					<audio autoPlay={true} muted={!isSound}>
+						<source src={fireworksSound} type="audio/mpeg"/>
+					</audio>
+				</>
 				}
 				<button onClick={() => {setDragon (!dragon)}} className={styles.graph__button}>dragon</button>
 			</div>

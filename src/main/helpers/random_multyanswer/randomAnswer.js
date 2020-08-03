@@ -1,5 +1,4 @@
 
-// let arr = [{id:1 a:'fsdfsdf'}, {id:1 a:'fsdfsdf'},{id:1 a:'fsdfsdf'}];
 
 export const shuffle = (arr) =>{
 	let j, temp;

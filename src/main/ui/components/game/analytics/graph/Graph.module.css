@@ -39,13 +39,26 @@
 
 .graph__graph {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
     width: 100%;
     height: 40%;
-    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid  #0b3b63;
 
-    border:  1px solid red;
+}
+
+.dragon__cloud {
+    background-image: url('../../../../images/header-bg-cloud80.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 1000px;
+    height: 60px;
+    position: absolute;
+    top: 60px;
+    z-index: 100;
 }
 
 .graph__button {
