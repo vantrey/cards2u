@@ -6,9 +6,10 @@ import { getCurrentFavCard, setGrade } from "../../../../bll/favoriteDecks/favor
 import soundTrue from "../../../audio/correctly.mp3";
 import soundFalse from "../../../audio/mistake.mp3";
 import { shuffle } from "../../../../helpers/random_multyanswer/randomAnswer";
+import { cardBG, getRandomBg, maxNumber } from "../../../common/random_bg/Random_bg";
 
 
-const CardDownside = ({ setCardFace }) => {
+const CardDownside = ({ setCardFace, setCardBg }) => {
 
 	const dispatch = useDispatch ();
 	const [ popupBlock, setPopupBlock ] = useState (false);
@@ -19,27 +20,17 @@ const CardDownside = ({ setCardFace }) => {
 	};
 
 	let arrShuffle = [];
-	// if ( isMulti ) {
-	// 	const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
-	// 		{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0] },
-	// 		{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1] }
-	// 	];
-	//
-	// 	 arrShuffle = shuffle (arrAnswer);
-	// }
 
-	useMemo (() => {
-		if ( isMulti ) {
-			const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
-				{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0] },
-				{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1] }
-			];
-
-			arrShuffle = shuffle (arrAnswer);
-		}
-	}, [isMulti]);
+	if ( isMulti ) {
+		const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
+			{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0] },
+			{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1] }
+		];
+		arrShuffle = shuffle (arrAnswer);
+	}
 
 	useEffect (() => {
+
 		let pElements = document.querySelectorAll ("p[data-text='answer']");
 
 		pElements.forEach ((el) => {
@@ -50,6 +41,8 @@ const CardDownside = ({ setCardFace }) => {
 						setPopupBlock (true);
 						setTimeout (() => {
 							setCardFace (true);
+							getRandomBg (maxNumber);
+							setCardBg(cardBG);
 							dispatch (getCurrentFavCard ());
 						}, 1000);
 					}
@@ -59,6 +52,8 @@ const CardDownside = ({ setCardFace }) => {
 						setPopupBlock (true);
 						setTimeout (() => {
 							setCardFace (true);
+							getRandomBg (maxNumber);
+							setCardBg(cardBG);
 							dispatch (getCurrentFavCard ());
 						}, 1000);
 					}

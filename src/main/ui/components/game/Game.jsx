@@ -218,7 +218,7 @@ const Game = () => {
                         { !isTestModeStart &&
                         <div className={styles.main__card}>
                             {cardface && <Card cardBg={cardBg} setCardFace={setCardFace} cardface={cardface}/>}
-                            {!cardface && <CardDownside setCardFace={setCardFace}/>}
+                            {!cardface && <CardDownside setCardFace={setCardFace} setCardBg={setCardBg}/>}
                             <div className={styles.content__buttons}>
                                 <Buttons setCardFace={setCardFace} cardface={cardface} setCardBg={setCardBg}
                                          isSound={isSound}/>
