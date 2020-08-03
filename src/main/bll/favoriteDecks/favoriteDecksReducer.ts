@@ -43,6 +43,7 @@ const initialState = {
     isSound: true,
     isRandomMode: true,
     isTestModeStart: false,
+    isTestModeBreak: false,
 };
 
 type InitialStateType = typeof initialState
@@ -180,6 +181,12 @@ export const favoriteDecksReducer =
                     isTestModeStart: action.isTestModeStart
                 }
 
+            case "FAVORITE_DECKS_REDUCER/SET_IS_TEST_BREAK":
+                return {
+                    ...state,
+                    isTestModeBreak: action.isTestModeBreak
+                }
+
             default:
                 return state
         }
@@ -249,6 +256,11 @@ export const favoriteDecksActions = {
         type: 'FAVORITE_DECKS_REDUCER/SET_IS_TEST_START',
         isTestModeStart
     } as const),
+
+    setIsTestBreak: (isTestModeBreak: boolean) => ({
+        type: 'FAVORITE_DECKS_REDUCER/SET_IS_TEST_BREAK',
+        isTestModeBreak
+    } as const),
 };
 
 type ActionsType = InferActionTypes<typeof favoriteDecksActions>
@@ -298,12 +310,17 @@ export const delUserFavoriteDecks =
 
 export const getCurrentFavDeck = (favoriteDeckId: string): ThunkType =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
-        batch(() => {
-            dispatch(favoriteDecksActions.setCurrentFavDeck(favoriteDeckId));
-            dispatch(favoriteDecksActions.setNextCardNumber(0));
-            dispatch(favoriteDecksActions.setIsFireworks(false));
+        const currGameType = getState().favoriteDecks.gameType;
+        dispatch(setEndGame());
+        dispatch(favoriteDecksActions.setCurrentFavDeck(favoriteDeckId));
+        /*dispatch(favoriteDecksActions.setNextCardNumber(0));
+        dispatch(favoriteDecksActions.setIsFireworks(false));*/
+        if (currGameType !== 'test') {
             dispatch(getCurrentFavCard());
-        })
+        }
+        if (currGameType === 'test') {
+            dispatch(favoriteDecksActions.setGameTypeSuccess("inOrder"));
+        }
     };
 
 export const setEndGame = (): ThunkType =>
@@ -312,10 +329,15 @@ export const setEndGame = (): ThunkType =>
         const userId = getState().login.userId;
         if (currentAnalytics.totalCardCount === nextCardNumber) {
             dispatch(favoriteDecksActions.setIsFireworks(true));
+        } else {
+            if (gameType === 'test') {
+                /*dispatch(favoriteDecksActions.setIsFireworks(false));*/
+                dispatch(favoriteDecksActions.setIsTestBreak(true));
+            }
         }
         dispatch(favoriteDecksActions.setNextCardNumber(0));
 
-        if (gameType === "test") {
+        if (gameType === 'test') { // save analytics even if test break
             repository.setAnalytics(userId, currentFavDeck.favoriteDeckId, currentAnalytics);
             dispatch(favoriteDecksActions.resetAnalytics());
         }
@@ -323,7 +345,8 @@ export const setEndGame = (): ThunkType =>
 
 export const getCurrentFavCard = (): ThunkType =>
     (dispatch: DispatchType, getState: () => AppStateType) => {
-        dispatch (favoriteDecksActions.setIsTestStart (false));
+
+        dispatch(favoriteDecksActions.setIsTestStart(false));
         const gameType = getState().favoriteDecks.gameType
         const cards = getState().favoriteDecks.currentFavDeck.deck;
         const {
@@ -348,8 +371,11 @@ export const getCurrentFavCard = (): ThunkType =>
                 if (totalCardCount === nextCardNumber) {
                     dispatch(setEndGame());
                 } else {
-                    if(nextCardNumber === 0) {
-                        dispatch(favoriteDecksActions.setIsFireworks(false));
+                    if (nextCardNumber === 0) {
+                        batch(() => {
+                            dispatch(favoriteDecksActions.setIsFireworks(false));
+                            dispatch(favoriteDecksActions.setIsTestBreak(false));
+                        });
                     }
                     card = cards[nextCardNumber];
                     batch(() => {
@@ -361,13 +387,14 @@ export const getCurrentFavCard = (): ThunkType =>
         }
     };
 
-export const setGameType = (gameType: GameType) => (dispatch: DispatchType) => {
+export const setGameType = (gameType: GameType) => (dispatch: DispatchType, getState: () => AppStateType) => {
+    const currGameType = getState().favoriteDecks.gameType;
+    dispatch(setEndGame());
+    dispatch(favoriteDecksActions.setGameTypeSuccess(gameType));
 
-    batch(() => {
-        dispatch(favoriteDecksActions.setNextCardNumber(0));
-        dispatch(favoriteDecksActions.setGameTypeSuccess(gameType));
-        dispatch(getCurrentFavCard());
-    })
+    if (gameType !== 'test' && currGameType !== 'test') {
+        dispatch(getCurrentFavCard())
+    }
 };
 
 export const setGrade = (selectedGrade: number) =>

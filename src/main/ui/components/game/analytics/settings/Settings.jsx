@@ -32,6 +32,7 @@ const Settings = ({setCardFace}) => {
 			dispatch (favoriteDecksActions.setIsTestStart (true));
 		} else {
 			dispatch (setGameType ("inOrder"));
+			dispatch (favoriteDecksActions.setIsTestStart (false));
 		}
 	};
 
@@ -91,7 +92,7 @@ const Settings = ({setCardFace}) => {
 				<h6 className={classForTitle}>Pass a test mode</h6>
 				<div className={`${styles.switcher} ${styles.switcher1}`}>
 					<input className={classForInput} type="checkbox" id="switcher-2"
-						   onChange={onPassTest}/>
+						   onChange={onPassTest} checked={gameType === 'test'}/>
 					<label className={classForlabel} htmlFor="switcher-2"> </label>
 					<div className={styles.tooltip}>
 						<div className={styles.tooltip_wrap}>
