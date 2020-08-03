@@ -1,6 +1,6 @@
 .deckname__input {
     width: 200px;
-    height: 34px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,7 +23,7 @@
 
 .deckname__button {
     width: 80px;
-    height: 34px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,7 +55,7 @@
 
 .deckname__button_change {
     width: 100%;
-    height: 34px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;

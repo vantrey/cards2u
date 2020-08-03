@@ -6,6 +6,7 @@ import dragonVD1 from '../../../../video/dragon-gif.gif';
 import fireworks from '../../../../video/fireworks.gif';
 import dragonFly from '../../../../audio/dragon-fly.mp3';
 import fireworksSound from '../../../../audio/fireworks.mp3';
+import dragonCloud from '../../../../images/header-bg-cloud80.png';
 
 
 const Graph = ({ setCardFace, isSound }) => {
@@ -38,6 +39,9 @@ const Graph = ({ setCardFace, isSound }) => {
 			<div className={styles.graph__graph}>
 				{dragon &&
 				<>
+					<div className={styles.dragon__cloud}>
+						{/*<img src={dragonCloud} alt="cloud"/>*/}
+					</div>
 					<img src={dragonImg} alt="dragon"/>
 					<audio autoPlay={true} muted={!isSound}>
 						<source src={dragonFly} type="audio/mpeg"/>

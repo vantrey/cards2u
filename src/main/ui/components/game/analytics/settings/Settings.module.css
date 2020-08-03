@@ -43,6 +43,7 @@
 .switcher__title:hover {
     color: orange;
     transition: all .3s ease;
+    font-weight: 400;
 }
 
 .radio__wrap {
@@ -276,7 +277,7 @@
     justify-content: center;
     z-index: 1000;
     opacity: .40;
-    padding: 3px;
+    padding: 8px;
     background: #393939;
     color: #088dcd;
     position: absolute;
@@ -308,7 +309,7 @@
     padding: 1px;
     font-family: sans-serif;
     text-shadow: none;
-    font-size: 12px;
+    font-size: 10px;
     display: -webkit-box;
     display: -ms-flexbox;
     -webkit-box-orient: vertical;

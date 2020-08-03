@@ -44,8 +44,7 @@
     max-width: 400px;
     height: 100%;
     z-index: 1;
-    border: 1px dashed #0b3b63;
-    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .analytics__start {
