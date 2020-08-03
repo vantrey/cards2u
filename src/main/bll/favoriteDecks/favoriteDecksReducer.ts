@@ -318,9 +318,9 @@ export const getCurrentFavDeck = (favoriteDeckId: string): ThunkType =>
         if (currGameType !== 'test') {
             dispatch(getCurrentFavCard());
         }
-        /*if (currGameType === 'test') {
+        if (currGameType === 'test') {
             dispatch(favoriteDecksActions.setGameTypeSuccess("inOrder"));
-        }*/
+        }
     };
 
 export const setEndGame = (): ThunkType =>
