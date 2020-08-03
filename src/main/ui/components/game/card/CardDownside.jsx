@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styles from './CardDownside.module.css';
 import arrow from '../../../icons/arrows.png'
 import { useDispatch, useSelector } from "react-redux";
@@ -13,21 +13,31 @@ const CardDownside = ({ setCardFace }) => {
 	const dispatch = useDispatch ();
 	const [ popupBlock, setPopupBlock ] = useState (false);
 	const { currentFavCard, isRandomMode, gameType, isMulti, isSound } = useSelector ((state) => state.favoriteDecks);
-	let arrShuffle;
 
 	const onSelectGrade = (e) => {
 		dispatch (setGrade (Number (e.currentTarget.name)));
 	};
 
+	let arrShuffle = [];
+	// if ( isMulti ) {
+	// 	const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
+	// 		{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0] },
+	// 		{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1] }
+	// 	];
+	//
+	// 	 arrShuffle = shuffle (arrAnswer);
+	// }
 
-	if (isMulti) {
-		const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
-			{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0]},
-			{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1]}
-		];
+	useMemo (() => {
+		if ( isMulti ) {
+			const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
+				{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0] },
+				{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1] }
+			];
 
-		arrShuffle = shuffle (arrAnswer);
-	}
+			arrShuffle = shuffle (arrAnswer);
+		}
+	}, [isMulti]);
 
 	useEffect (() => {
 		let pElements = document.querySelectorAll ("p[data-text='answer']");
@@ -58,6 +68,7 @@ const CardDownside = ({ setCardFace }) => {
 	}, [ isMulti, isSound ]);
 
 	useEffect (() => {
+
 		const trueAnswerSoundEl = document.getElementById ('trueAnswerSound');
 		const trueAnswerSoundElP = document.getElementById ('trueAnswer');
 		const falseAnswerSound1El = document.getElementById ('falseAnswerSound1');
