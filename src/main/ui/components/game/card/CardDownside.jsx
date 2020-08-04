@@ -60,7 +60,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 				}
 			});
 		});
-	}, [ isMulti, isSound ]);
+	}, [ isMulti ]);
 
 	useEffect (() => {
 
