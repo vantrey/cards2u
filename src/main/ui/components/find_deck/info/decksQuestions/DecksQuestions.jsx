@@ -25,8 +25,8 @@ const DecksQuestions = ({cards, cardPackName, SaveToFavoriteDecks, popupSaveToDe
 					{isCardsFetching && <div className={styles.deckInfo__loader}><Loader/></div>}
 					{!isCardsFetching &&
 					<div className={styles.data__item_box}>
-						{cards.length === 0 ? <EmptyDeck/> :
 
+						{cards.length === 0 ? <EmptyDeck/> :
 							(cards.map (cards =>
 								<div className={styles.data__item} key={cards._id}>
 									<div className={styles.item__question}>{cards.question}</div>
