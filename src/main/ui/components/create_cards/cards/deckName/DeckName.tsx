@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, {useState} from "react";
 import styles from "./DeckName.module.css"
 
 
@@ -31,6 +31,15 @@ const DeckName: React.FC<PropsType> = React.memo(({cardPackName, updateDeckName,
         setEditMode(false);
     };
 
+    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.keyCode === 13) {
+            onUpdateDeckName();
+        }
+        if (e.keyCode === 27) {
+            setEditMode(false);
+        }
+    }
+
     return (
         <>
             {editMode &&
@@ -41,31 +50,32 @@ const DeckName: React.FC<PropsType> = React.memo(({cardPackName, updateDeckName,
                     value={nameValue}
                     onChange={onChangeName}
                     autoFocus={true}
+                    onKeyDown={onKeyDown}
                 />
-				<div className={styles.deckname__buttons}>
-					<button className={styles.deckname__button}
-                        disabled={!nameValue} onClick={onUpdateDeckName}>
-						apply
-					</button>
-					<button className={styles.deckname__button}
-                        onClick={onCancelChangeName}>
-						cancel
-					</button>
+                <div className={styles.deckname__buttons}>
+                    <button className={styles.deckname__button}
+                            disabled={!nameValue} onClick={onUpdateDeckName}>
+                        apply
+                    </button>
+                    <button className={styles.deckname__button}
+                            onClick={onCancelChangeName}>
+                        cancel
+                    </button>
                 </div>
             </>
             }
 
             {!editMode &&
             <>
-                <h5  className={styles.deckname__title}>
+                <h5 className={styles.deckname__title}>
                     {cardPackName}
                 </h5>
-				<div className={styles.deckname__buttons}>
+                <div className={styles.deckname__buttons}>
                     <button className={styles.deckname__button_change}
-                        disabled={isPreventFetching} onClick={onSetEditMode}>
+                            disabled={isPreventFetching} onClick={onSetEditMode}>
                         change
                     </button>
-				</div>
+                </div>
             </>
             }
         </>

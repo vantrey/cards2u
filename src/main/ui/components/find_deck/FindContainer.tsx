@@ -34,8 +34,8 @@ const FindContainer: React.FC = () => {
     const {isAuth, userId} = useSelector((state: AppStateType) => state.login);
     const [modal, setModal] = useState(false);
     const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
-    const {isCardPacksFromSearch} = useSelector((state:AppStateType) => state.cardPacks);
-    const {foundName } = useSelector((state:AppStateType) => state.searchReducer);
+    const {isCardPacksFromSearch} = useSelector((state: AppStateType) => state.cardPacks);
+    const {foundName} = useSelector((state: AppStateType) => state.searchReducer);
     const [nameUser, setNameUser] = useState<string | null>('');
     const [deckscount, setDeckscount] = useState<string | null>('');
     const [popupSaveToDeckOk, setPopupSaveToDeckOk] = useState<boolean>(false);
@@ -60,7 +60,9 @@ const FindContainer: React.FC = () => {
     };
 
     useEffect(() => {
-        dispatch(getUser(page, pageCount))
+        if (isAuth) {
+            dispatch(getUser(page, pageCount))
+        }
     }, [page, pageCount]);
 
     const sortDeckUp = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -102,10 +104,10 @@ const FindContainer: React.FC = () => {
     }, []);
 
     useEffect(() => {
-     if(isCardPacksFromSearch) {
-         setSelectUser(false);
-         setDecksQuestions(false);
-     }
+        if (isCardPacksFromSearch) {
+            setSelectUser(false);
+            setDecksQuestions(false);
+        }
     }, [isCardPacksFromSearch, foundName]);
 
     const SaveToFavoriteDecks = () => {
@@ -133,7 +135,8 @@ const FindContainer: React.FC = () => {
                         <UserInfo setSelectUser={setSelectUser} setDecksQuestions={setDecksQuestions}/>
                     </div>
                     <div className={styles.container__top_right}>
-                      <div className={styles.topDecks}>Recommended decks</div>     {/*заглушка*/}
+                        <div className={styles.topDecks}>Recommended decks</div>
+                        {/*заглушка*/}
                         <Search isAuth={isAuth}/>
                     </div>
                 </div>
@@ -147,9 +150,9 @@ const FindContainer: React.FC = () => {
                         <div className={styles.find__wrap_block}>
                             {
                                 !isAuth &&
-								<div className={styles.find__wrap_mirror}>
-									<div className={styles.find__loader}></div>
-								</div>
+                                <div className={styles.find__wrap_mirror}>
+                                    <div className={styles.find__loader}></div>
+                                </div>
                             }
                             <FindDeck users={users}
                                       sortDeckUp={sortDeckUp}
@@ -176,24 +179,24 @@ const FindContainer: React.FC = () => {
                     {!isAuth && <DecksLogout/>}
                     {isAuth && !selectUser && !decksQuestions && !isCardPacksFromSearch && <DecksLogout/>}
                     {isAuth && selectUser && !decksQuestions && !isCardPacksFromSearch && <DecksNames
-						nameUser={nameUser} onSelectDeck={onSelectDeck} deckscount={deckscount}/>}
+                        nameUser={nameUser} onSelectDeck={onSelectDeck} deckscount={deckscount}/>}
                     {isAuth && isCardPacksFromSearch && !selectUser && !decksQuestions && <DecksNames
-						nameUser={nameUser} onSelectDeck={onSelectDeck} deckscount={deckscount}/>}
+                        nameUser={nameUser} onSelectDeck={onSelectDeck} deckscount={deckscount}/>}
                     {isAuth && selectUser && decksQuestions && !isCardPacksFromSearch && <DecksQuestions
-						cardPackName={cardPackName} cards={cards} SaveToFavoriteDecks={SaveToFavoriteDecks}
-						popupSaveToDeckOk={popupSaveToDeckOk} setPopupSaveToDeckOk={setPopupSaveToDeckOk}
-						setDecksQuestions={setDecksQuestions}/>}
+                        cardPackName={cardPackName} cards={cards} SaveToFavoriteDecks={SaveToFavoriteDecks}
+                        popupSaveToDeckOk={popupSaveToDeckOk} setPopupSaveToDeckOk={setPopupSaveToDeckOk}
+                        setDecksQuestions={setDecksQuestions}/>}
                     {isAuth && isCardPacksFromSearch && !selectUser && decksQuestions && <DecksQuestions
-						cardPackName={cardPackName} cards={cards} SaveToFavoriteDecks={SaveToFavoriteDecks}
-						popupSaveToDeckOk={popupSaveToDeckOk} setPopupSaveToDeckOk={setPopupSaveToDeckOk}
-						setDecksQuestions={setDecksQuestions}/>}
+                        cardPackName={cardPackName} cards={cards} SaveToFavoriteDecks={SaveToFavoriteDecks}
+                        popupSaveToDeckOk={popupSaveToDeckOk} setPopupSaveToDeckOk={setPopupSaveToDeckOk}
+                        setDecksQuestions={setDecksQuestions}/>}
                 </div>
             </div>
             <div className={styles.find__right}></div>
             {
                 !isAuth && popupAuth && <PopupAuth setPopupAuth={setPopupAuth}
-												   modal={modal} setModal={setModal}
-												   currentPath={currentPath}/>
+                                                   modal={modal} setModal={setModal}
+                                                   currentPath={currentPath}/>
             }
         </div>)
 }
