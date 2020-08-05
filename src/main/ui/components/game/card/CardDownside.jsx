@@ -1,32 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styles from './CardDownside.module.css';
 import arrow from '../../../icons/arrows.png'
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentFavCard, setGrade } from "../../../../bll/favoriteDecks/favoriteDecksReducer"
 import soundTrue from "../../../audio/correctly.mp3";
 import soundFalse from "../../../audio/mistake.mp3";
-import { loudlinks } from "../../../../helpers/loudlinks";
 import { shuffle } from "../../../../helpers/random_multyanswer/randomAnswer";
+import { cardBG, getRandomBg, maxNumber } from "../../../common/random_bg/Random_bg";
 
 
-const CardDownside = ({ setCardFace }) => {
+const CardDownside = ({ setCardFace, setCardBg }) => {
 
 	const dispatch = useDispatch ();
 	const [ popupBlock, setPopupBlock ] = useState (false);
-	const { currentFavCard, isRandomMode, gameType, isMulti, isSound, currentFavDeck } = useSelector ((state) => state.favoriteDecks);
+	const { currentFavCard, isRandomMode, gameType, isMulti, isSound } = useSelector ((state) => state.favoriteDecks);
 
 	const onSelectGrade = (e) => {
 		dispatch (setGrade (Number (e.currentTarget.name)));
 	};
 
-	const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
-						{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0]},
-						{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1]}
-					  ];
+	let arrShuffle = [];
+	let wrongAnswersLength = currentFavCard.wrongAnswers.length
 
-	let arrShuffle = shuffle (arrAnswer);
+	if ( isMulti && (wrongAnswersLength > 0)) {
+		const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
+			{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0] },
+			{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1] }
+		];
+		arrShuffle = shuffle (arrAnswer);
+	} else  if (isMulti && ( !wrongAnswersLength)) {
+				//sresefsdfs sadfsdf tolltip -> useEffect ->  setTimeOut -> return delete setTimOut
+	}
+
 
 	useEffect (() => {
+
 		let pElements = document.querySelectorAll ("p[data-text='answer']");
 
 		pElements.forEach ((el) => {
@@ -37,6 +45,8 @@ const CardDownside = ({ setCardFace }) => {
 						setPopupBlock (true);
 						setTimeout (() => {
 							setCardFace (true);
+							getRandomBg (maxNumber);
+							setCardBg(cardBG);
 							dispatch (getCurrentFavCard ());
 						}, 1000);
 					}
@@ -46,15 +56,18 @@ const CardDownside = ({ setCardFace }) => {
 						setPopupBlock (true);
 						setTimeout (() => {
 							setCardFace (true);
+							getRandomBg (maxNumber);
+							setCardBg(cardBG);
 							dispatch (getCurrentFavCard ());
 						}, 1000);
 					}
 				}
 			});
 		});
-	}, [ isMulti, isSound ]);
+	}, [ isMulti ]);
 
 	useEffect (() => {
+
 		const trueAnswerSoundEl = document.getElementById ('trueAnswerSound');
 		const trueAnswerSoundElP = document.getElementById ('trueAnswer');
 		const falseAnswerSound1El = document.getElementById ('falseAnswerSound1');
@@ -120,14 +133,11 @@ const CardDownside = ({ setCardFace }) => {
 				<div className={styles.card__text}>
 					<h3 className={styles.text__title}>answer</h3>
 					<div id={'multyanswer'} className={styles.text__discr}>
-
 						{
 							arrShuffle.map ((answer, index) => {
 								let soundForAnswer = answer.id === 'trueAnswer' ? soundTrue : soundFalse;
 								let idForAudio = answer.id === 'trueAnswer' ? 'trueAnswerSound' :
 									answer.id === 'falseAnswer1' ? 'falseAnswerSound1' : 'falseAnswerSound2';
-
-
 								return (
 									<div className={styles.discr} key={answer.id}>
 										<span className={styles.discr__number}>{index + 1}</span>
@@ -142,35 +152,6 @@ const CardDownside = ({ setCardFace }) => {
 
 							})
 						}
-
-
-						{/*<div className={styles.discr}>*/}
-						{/*	<span className={styles.discr__number}>1.</span>*/}
-						{/*	<p data-text='answer' id='trueAnswer' className={styles.discr__text}>*/}
-						{/*		Курсор мыши появляется над элементом.*/}
-						{/*	</p>*/}
-						{/*	<audio autoPlay={false} muted={!isSound} id='trueAnswerSound'>*/}
-						{/*		<source src={soundTrue} type="audio/mpeg"/>*/}
-						{/*	</audio>*/}
-						{/*</div>*/}
-						{/*<div className={styles.discr}>*/}
-						{/*	<span className={styles.discr__number}>2.</span>*/}
-						{/*	<p data-text='answer' id='falseAnswer1'  className={styles.discr__text}>*/}
-						{/*		Курсор мыши появляется над элементом и уходит с него.*/}
-						{/*	</p>*/}
-						{/*	<audio autoPlay={false} muted={!isSound} id='falseAnswerSound1'>*/}
-						{/*		<source src={soundFalse} type="audio/mpeg"/>*/}
-						{/*	</audio>*/}
-						{/*</div>*/}
-						{/*<div className={styles.discr}>*/}
-						{/*	<span className={styles.discr__number}>3.</span>*/}
-						{/*	<p data-text='answer' id='falseAnswer2'  className={styles.discr__text}>*/}
-						{/*		Курсор мыши появляется над над элементом элементом и уходит с него.*/}
-						{/*	</p>*/}
-						{/*	<audio autoPlay={false} muted={!isSound} id='falseAnswerSound2'>*/}
-						{/*		<source src={soundFalse} type="audio/mpeg"/>*/}
-						{/*	</audio>*/}
-						{/*</div>*/}
 					</div>
 					{popupBlock && <div className={styles.card__popupBlock}></div>}
 				</div>

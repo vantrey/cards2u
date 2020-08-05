@@ -38,6 +38,7 @@ const PopupFreeSlot = ({ saveToFavoritePopup, setSaveToFavoritePopup, setFavorit
 	const classForModal = saveToFavoritePopup === true ? `${styles.popupAuth__wrap} ${styles.popupAuth__wrap_active}` : `${styles.popupAuth__wrap}`;
 	const classForButtonGroop = showButtonGroop === true ? `${styles.note__buttonsGroop} ${styles.note__buttonsGroop_active}` : `${styles.note__buttonsGroop}`;
 	const { userFavoriteDecks } = useSelector ((state) => state.favoriteDecks);
+
 	const uncheckAllRadio = () => {
 		let radioElement = document.getElementsByName('gender');
 		for(let i=0; i < radioElement.length; i++ ) {

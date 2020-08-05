@@ -26,7 +26,6 @@ const Graph = ({ setCardFace, isSound }) => {
 			setFireworksImg('');
 			setDragonImg (dragonVD1);
 			setFireworksImg(fireworks)
-
 		}, 0)
 
 	}, [ fadeIn, dragon ]);
