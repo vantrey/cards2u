@@ -20,14 +20,18 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 	};
 
 	let arrShuffle = [];
+	let wrongAnswersLength = currentFavCard.wrongAnswers.length
 
-	if ( isMulti ) {
+	if ( isMulti && (wrongAnswersLength > 0)) {
 		const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
 			{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0] },
 			{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1] }
 		];
 		arrShuffle = shuffle (arrAnswer);
+	} else  if (isMulti && ( !wrongAnswersLength)) {
+				//sresefsdfs sadfsdf tolltip -> useEffect ->  setTimeOut -> return delete setTimOut
 	}
+
 
 	useEffect (() => {
 
@@ -148,34 +152,6 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 
 							})
 						}
-
-						{/*<div className={styles.discr}>*/}
-						{/*	<span className={styles.discr__number}>1.</span>*/}
-						{/*	<p data-text='answer' id='trueAnswer' className={styles.discr__text}>*/}
-						{/*		Курсор мыши появляется над элементом.*/}
-						{/*	</p>*/}
-						{/*	<audio autoPlay={false} muted={!isSound} id='trueAnswerSound'>*/}
-						{/*		<source src={soundTrue} type="audio/mpeg"/>*/}
-						{/*	</audio>*/}
-						{/*</div>*/}
-						{/*<div className={styles.discr}>*/}
-						{/*	<span className={styles.discr__number}>2.</span>*/}
-						{/*	<p data-text='answer' id='falseAnswer1'  className={styles.discr__text}>*/}
-						{/*		Курсор мыши появляется над элементом и уходит с него.*/}
-						{/*	</p>*/}
-						{/*	<audio autoPlay={false} muted={!isSound} id='falseAnswerSound1'>*/}
-						{/*		<source src={soundFalse} type="audio/mpeg"/>*/}
-						{/*	</audio>*/}
-						{/*</div>*/}
-						{/*<div className={styles.discr}>*/}
-						{/*	<span className={styles.discr__number}>3.</span>*/}
-						{/*	<p data-text='answer' id='falseAnswer2'  className={styles.discr__text}>*/}
-						{/*		Курсор мыши появляется над над элементом элементом и уходит с него.*/}
-						{/*	</p>*/}
-						{/*	<audio autoPlay={false} muted={!isSound} id='falseAnswerSound2'>*/}
-						{/*		<source src={soundFalse} type="audio/mpeg"/>*/}
-						{/*	</audio>*/}
-						{/*</div>*/}
 					</div>
 					{popupBlock && <div className={styles.card__popupBlock}></div>}
 				</div>
