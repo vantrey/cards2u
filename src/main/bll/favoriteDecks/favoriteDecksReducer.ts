@@ -17,7 +17,7 @@ import {setCardGrade} from "../../features/Cards/bll/cardsReducer";
 const initialState = {
     userFavoriteDecks: {
         userId: '',
-        favoriteDecks: []
+        favoriteDecks: [],
     } as UserFavoriteDecksType,
 
     currentFavDeck: {

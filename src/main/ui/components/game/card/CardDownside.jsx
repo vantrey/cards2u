@@ -36,6 +36,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 	useEffect (() => {
 
 		let pElements = document.querySelectorAll ("p[data-text='answer']");
+		let idTest, idTest1;
 
 		pElements.forEach ((el) => {
 			el.addEventListener ('click', () => {
@@ -43,7 +44,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 					el.classList.add (`${styles.discr__text_green}`);
 					if ( gameType === 'test' ) {
 						setPopupBlock (true);
-						setTimeout (() => {
+						idTest = setTimeout (() => {
 							setCardFace (true);
 							getRandomBg (maxNumber);
 							setCardBg(cardBG);
@@ -54,7 +55,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 					el.classList.add (`${styles.discr__text_red}`);
 					if ( gameType === 'test' ) {
 						setPopupBlock (true);
-						setTimeout (() => {
+						idTest1 = setTimeout (() => {
 							setCardFace (true);
 							getRandomBg (maxNumber);
 							setCardBg(cardBG);
@@ -62,8 +63,42 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 						}, 1000);
 					}
 				}
+
 			});
 		});
+		return () => {
+			pElements.forEach ((el) => {
+				el.removeEventListener('click', () => {
+					if ( el.getAttribute ('id') === 'trueAnswer' ) {
+						el.classList.add (`${styles.discr__text_green}`);
+						if ( gameType === 'test' ) {
+							setPopupBlock (true);
+							idTest = setTimeout (() => {
+								setCardFace (true);
+								getRandomBg (maxNumber);
+								setCardBg(cardBG);
+								dispatch (getCurrentFavCard ());
+							}, 1000);
+						}
+					} else {
+						el.classList.add (`${styles.discr__text_red}`);
+						if ( gameType === 'test' ) {
+							setPopupBlock (true);
+							idTest1 = setTimeout (() => {
+								setCardFace (true);
+								getRandomBg (maxNumber);
+								setCardBg(cardBG);
+								dispatch (getCurrentFavCard ());
+							}, 1000);
+						}
+					}
+
+				});
+			});
+
+			clearTimeout(idTest);
+			clearTimeout(idTest1);
+		}
 	}, [ isMulti ]);
 
 	useEffect (() => {
