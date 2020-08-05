@@ -55,7 +55,7 @@ const CreateContainer = () => {
     }, [currentPath]);
 
     useEffect(() => {
-        setIsEditCardMode(false)
+        setIsEditCardMode(false);
     }, [cardsPack_id]);
 
     const selectedCard = useMemo(() => {
@@ -88,7 +88,7 @@ const CreateContainer = () => {
 
     const onDeleteCard = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
         dispatch(deleteCurrentUserCard(e.currentTarget.id));
-        setIsEditCardMode(false)
+        setIsEditCardMode(false);
     }, []);
 
     const updateDeckName = useCallback((newDeckName) => {
@@ -144,7 +144,7 @@ const CreateContainer = () => {
                             />}
                         </div>
                         <div className={styles.main__decks}>
-                            <DefaultDeck cardPackName={cardPackName}/>
+                            <DefaultDeck isSuccess={isSuccess} cardPackName={cardPackName}/>
                             <div className={styles.decks__buttons}>
                                 <button
                                     disabled={!isAuth || (!isSuccess && !isStartMode)}

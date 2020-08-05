@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import styles from './DefaultDeck.module.css';
 import deckBG from '../../../images/card-bg-LBR.jpg';
 import soundDeck from "../../../audio/deck.mp3";
-import { loudlinks } from "../../../../helpers/loudlinks";
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 
 
-const DefaultDeck = ({cardPackName}) => {
+const DefaultDeck = ({cardPackName, isSuccess}) => {
 
 	const {isSound} = useSelector((state) => state.favoriteDecks);
 
@@ -42,7 +41,8 @@ const DefaultDeck = ({cardPackName}) => {
 						<img src={deckBG} alt="images"/>
 					</div>
 					<div className={styles.deck__details}>
-						<h2>{cardPackName}</h2>
+						{isSuccess &&
+						<h2>{cardPackName}</h2>}
 					</div>
 				</div>
 			</div>
