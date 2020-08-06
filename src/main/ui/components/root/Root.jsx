@@ -20,21 +20,22 @@ const Root = () => {
 		vid.volume = 0.4;
 		vid.addEventListener ('playing', () => {
 			setIconlash (true);
-			IDtime= setTimeout (() => {
+			IDtime = setTimeout (() => {
 				setIconlash (false);
 			}, 3000);
 		}, true);
 
 		return () => {
+
 			vid.removeEventListener ('playing', () => {
 				setIconlash (true);
 				IDtime = setTimeout (() => {
+
 					setIconlash (false);
 				}, 3000);
 			}, true);
 
 			clearTimeout(IDtime);
-			// vid.pause();
 		}
 	}, []);
 
