@@ -70,7 +70,7 @@ type ActionsType = InferActionTypes<typeof usersActions>
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 
-export const getUser = (page: number, pageCount: number, sortUsers = 'avatar', direction = '0'): ThunkType =>
+export const getUser = (page: number, pageCount: number, sortUsers = 'publicCardPacksCount', direction = '0'): ThunkType =>
     async (dispatch: DispatchType, getState: () => AppStateType) => {
         try {
             dispatch(setIsPreventFetching(true));
