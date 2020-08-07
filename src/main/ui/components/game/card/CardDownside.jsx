@@ -161,7 +161,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 				{!isMulti &&
 				<div className={styles.card__text}>
 					<h3 className={styles.text__title}>answer</h3>
-					<p className={styles.text__discr}>{currentFavCard.answer}</p>
+					<p className={`${styles.text__discr} ${styles.text__discr_center}`}>{currentFavCard.answer}</p>
 				</div>
 				}
 				{isMulti &&
