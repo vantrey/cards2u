@@ -13,6 +13,8 @@ import Card from "./card/Card";
 import CardDownside from "./card/CardDownside";
 import Buttons from "./buttons/Buttons";
 import bg_1 from './../../images/card-bg/card-bg-1.jpg';
+import taper from './../../video/taper-1.gif';
+import taperSound from './../../audio/taper.mp3';
 import { useDispatch, useSelector } from "react-redux";
 import avaDefault from "../../images/ava-default.png";
 import soundDeck from "../../audio/deck.mp3";
@@ -250,6 +252,12 @@ const Game = () => {
 								<Buttons setCardFace={setCardFace} cardface={cardface} setCardBg={setCardBg}
 										 isSound={isSound}/>
 							</div>
+							<div className={styles.main__card_fire} >
+								<img src={taper} alt="taper"/>
+							</div>
+							<audio autoPlay={true} muted={!isSound}>
+								<source src={taperSound} type="audio/mpeg"/>
+							</audio>
 						</div>
 						}
 						<div onClick={onClickSound}>

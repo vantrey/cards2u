@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styles from './CardDownside.module.css';
 import arrow from '../../../icons/arrows.png'
 import { useDispatch, useSelector } from "react-redux";
@@ -19,19 +19,30 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 		dispatch (setGrade (Number (e.currentTarget.name)));
 	};
 
-	let arrShuffle = [];
-	let wrongAnswersLength = currentFavCard.wrongAnswers.length
+	let arrShuffle;
 
-	if ( isMulti && (wrongAnswersLength > 0)) {
+	if ( isMulti ) {
 		const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
 			{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0] },
 			{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1] }
 		];
 		arrShuffle = shuffle (arrAnswer);
-	} else  if (isMulti && ( !wrongAnswersLength)) {
-				//sresefsdfs sadfsdf tolltip -> useEffect ->  setTimeOut -> return delete setTimOut
 	}
 
+	// const memoizedCallback = useCallback(
+	// 	() => {
+	// 		if ( isMulti ) {
+	// 			const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
+	// 				{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0] },
+	// 				{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1] }
+	// 			];
+	// 			return arrShuffle = shuffle (arrAnswer);
+	// 		}
+	// 	},
+	// 	[isMulti, gameType],
+	// );
+	//
+	// memoizedCallback();
 
 	useEffect (() => {
 
@@ -66,6 +77,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 
 			});
 		});
+
 		return () => {
 			pElements.forEach ((el) => {
 				el.removeEventListener('click', () => {
@@ -99,7 +111,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 			clearTimeout(idTest);
 			clearTimeout(idTest1);
 		}
-	}, [ isMulti ]);
+	}, [isMulti]);
 
 	useEffect (() => {
 
