@@ -11,7 +11,8 @@ const initialState = {
     page: 1,
     pageCount: 10,
     totalUsersCount: 0,
-    isUsersFetching: false
+    isUsersFetching: false,
+    sortUsers: ''
 };
 
 type InitialStateType = typeof initialState
@@ -38,7 +39,12 @@ export const userReducer = (state: InitialStateType = initialState, action: Acti
         case "cards2u/main/users/SET_IS_FETCHING":
             return {
                 ...state,
-              isUsersFetching: action.isFetching
+                isUsersFetching: action.isFetching
+            };
+        case "cards2u/main/users/SET_SORT":
+            return {
+                ...state,
+                sortUsers: action.sortUsers
             };
 
         default:
@@ -51,6 +57,11 @@ export const usersActions = {
     getUserSuccess: (users: UserType[]) => ({
         type: 'cards2u/main/users/GET_USERS', users
     } as const),
+
+    setSortValue: (sortUsers: string) => ({
+        type: 'cards2u/main/users/SET_SORT', sortUsers
+    } as const),
+
 
     setPageCount: (pageData: { page: number, pageCount: number, totalUsersCount: number }) => ({
         type: 'cards2u/main/users/SET_PAGE_DATA', pageData
@@ -73,6 +84,8 @@ type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
 export const getUser = (page: number, pageCount: number, sortUsers = 'publicCardPacksCount', direction = '0'): ThunkType =>
     async (dispatch: DispatchType, getState: () => AppStateType) => {
         try {
+            dispatch(usersActions.setSortValue(sortUsers));
+            sortUsers = getState().getUserReducer.sortUsers;
             dispatch(setIsPreventFetching(true));
             dispatch(usersActions.setIsFetching(true));
             let token = repository.getToken()

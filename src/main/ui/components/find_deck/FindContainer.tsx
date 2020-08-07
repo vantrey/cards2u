@@ -36,6 +36,7 @@ const FindContainer: React.FC = () => {
     const {isPreventFetching} = useSelector((state: AppStateType) => state.preventRequest);
     const {isCardPacksFromSearch} = useSelector((state: AppStateType) => state.cardPacks);
     const {foundName} = useSelector((state: AppStateType) => state.searchReducer);
+    const sortUsers=useSelector((state:AppStateType)=>state.getUserReducer.sortUsers);
     const [nameUser, setNameUser] = useState<string | null>('');
     const [deckscount, setDeckscount] = useState<string | null>('');
     const [popupSaveToDeckOk, setPopupSaveToDeckOk] = useState<boolean>(false);
@@ -61,7 +62,7 @@ const FindContainer: React.FC = () => {
 
     useEffect(() => {
         if (isAuth) {
-            dispatch(getUser(page, pageCount))
+            dispatch(getUser(page, pageCount,sortUsers))
         }
     }, [page, pageCount]);
 

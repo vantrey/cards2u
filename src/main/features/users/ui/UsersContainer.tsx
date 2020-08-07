@@ -30,7 +30,7 @@ const UsersContainer: React.FC = (props) => {
             dispatch(usersActions.setPage(page.selected + 1))
         }
         useEffect(() => {
-            dispatch(getUser(page, pageCount,))
+            dispatch(getUser(page, pageCount))
         }, [page, pageCount])
 
         useEffect(() => {
