@@ -1,5 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from "redux"
 import thunk from "redux-thunk";
+import createSagaMiddleware from "redux-saga"
 import {loginReducer} from "../../auth/login/loginReducer";
 import {registrationReducer} from "../../auth/registration/registrationReducer";
 import {restorePswReducer} from "../../auth/restorePsw/restorePswReducer";
@@ -13,6 +14,7 @@ import {preventRequestReducer} from "../preventReques/preventRequestReducer";
 import {currentUserDecksReducer} from "../currentUserDecks/currentUserDecksReducer";
 import {currentUserCardsReducer} from "../currentUserCardsReducer/currentUserCardsReducer";
 import { searchReducer } from "../searchReducer/searchReducer";
+import {allUserDecksSagas} from "../currentUserDecks/currentUserDecksReducer"
 
 const rootReducer = combineReducers({
     login: loginReducer,
@@ -32,8 +34,11 @@ const rootReducer = combineReducers({
 
 export type AppStateType = ReturnType<typeof rootReducer>
 export type InferActionTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
+const sagaMiddleWare = createSagaMiddleware()
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk, sagaMiddleWare));
+//@ts-ignore
+sagaMiddleWare.run(allUserDecksSagas)
 
 // @ts-ignore
 window.store = store;

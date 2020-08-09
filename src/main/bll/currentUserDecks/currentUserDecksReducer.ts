@@ -4,9 +4,8 @@ import {AppStateType, InferActionTypes} from "../store/store";
 import {setIsPreventFetching} from "../preventReques/preventRequestReducer";
 import {repository} from "../../helpers/repos_localStorage/reposetory";
 import {cardPacksApi} from "../../features/cardsPacks/dal/cardPacksApi";
-import {cardsApi} from "../../features/Cards/dal/сardsApi";
-import {cardsActions, get_Cards} from "../../features/Cards/bll/cardsReducer";
 import {currentUserCardsActions, getCurrentUserCards} from "../currentUserCardsReducer/currentUserCardsReducer";
+import {put, call, takeLatest, all} from "redux-saga/effects"
 
 const initialState = {
     currentUserDecks: [] as Array<CardPackType>,
@@ -114,96 +113,144 @@ export const currentUserDecksActions = {
 type ActionsType = InferActionTypes<typeof currentUserDecksActions> |
     InferActionTypes<typeof currentUserCardsActions>
 
-// thunks
-type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
-type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsType>
-
 export const getCurrentUserDecks =
-    (user_id: string | null, currentPage = 1, pageSize = 100,): ThunkType =>
-        async (dispatch: DispatchType) => {
-            try {
-                dispatch(setIsPreventFetching(true));
-                dispatch(currentUserDecksActions.setIsFetching(true));
-                let token = repository.getToken();
-                const response = await cardPacksApi.getPacks(token, currentPage, pageSize, user_id);
-                dispatch(
-                    currentUserDecksActions.getDecksSuccess(response.data.cardPacks, response.data.cardPacksTotalCount)
-                );
-                repository.saveToken(response.data.token, response.data.tokenDeathTime);
-                dispatch(currentUserDecksActions.setIsSuccess(true));
-                dispatch(currentUserDecksActions.setIsFetching(false));
-                dispatch(setIsPreventFetching(false));
+    (user_id: string | null, currentPage = 1, pageSize = 100,) => ({
+        type: "CURRENT_USER_DECKS_REDUCER/GET_DECKS",
+        user_id,
+        currentPage,
+        pageSize
+    })
 
-            } catch (e) {
-                dispatch(currentUserDecksActions.setError(e.response.data.error));
-                repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
-                dispatch(currentUserDecksActions.setIsSuccess(false));
-                dispatch(currentUserDecksActions.setIsFetching(false));
-                dispatch(setIsPreventFetching(false));
-            }
-        };
+export const createDeck = (newCardsPack: { name: string }) => ({
+    type: "CURRENT_USER_DECKS_REDUCER/CREATE_DECK",
+    newCardsPack
+})
 
-export const createDeck = (newCardsPack: { name: string }): ThunkType => async (dispatch: DispatchType) => {
+export const deleteDeck = (cardsPackId: string) => ({
+    type: "CURRENT_USER_DECKS_REDUCER/DELETE_DECK",
+    cardsPackId
+})
+
+export const updateDeck = (cardsPackId: string, name: string) => ({
+    type: "CURRENT_USER_DECKS_REDUCER/UPDATE_DECK",
+    cardsPackId,
+    name
+})
+//@ts-ignore
+export const createDeckSaga = function* ({newCardsPack}) {
     try {
-        dispatch(setIsPreventFetching(true));
-        dispatch(currentUserDecksActions.setIsFetching(true));
+        // @ts-ignore
+        yield put(setIsPreventFetching(true))
+        yield put(currentUserDecksActions.setIsFetching(true))
         let token = repository.getToken();
         let user_id = repository.get_Auth_id();
-        const response = await cardPacksApi.createCardsPack(token, {...newCardsPack, user_id});
-        dispatch(currentUserDecksActions.createDeckSuccess(response.data.newCardsPack));
+        const response = yield call(cardPacksApi.createCardsPack, token, {...newCardsPack, user_id})
+        yield put(currentUserDecksActions.createDeckSuccess(response.data.newCardsPack));
         repository.saveToken(response.data.token, response.data.tokenDeathTime);
-
         const cardsPack = response.data.newCardsPack;
-        dispatch(getCurrentUserCards(cardsPack._id, cardsPack.name));
-        dispatch(currentUserDecksActions.setIsFetching(false));
-        dispatch(setIsPreventFetching(false));
+        //@ts-ignore
+        yield put(getCurrentUserCards(cardsPack._id, cardsPack.name));
+        yield put(currentUserDecksActions.setIsFetching(false));
+        //@ts-ignore
+        yield put(setIsPreventFetching(false));
 
     } catch (e) {
-        dispatch(currentUserDecksActions.setError(e.response.data.error));
+        yield put(currentUserDecksActions.setError(e.response.data.error));
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
-        dispatch(currentUserDecksActions.setIsFetching(false));
-        dispatch(setIsPreventFetching(false));
+        yield put(currentUserDecksActions.setIsFetching(false));
+        //@ts-ignore
+        yield put(setIsPreventFetching(false));
     }
 };
 
-export const deleteDeck = (cardsPackId: string): ThunkType => async (dispatch: DispatchType) => {
+//@ts-ignore
+export const deleteDeckSaga = function* ({cardsPackId}) {
     try {
-        dispatch(setIsPreventFetching(true));
-        dispatch(currentUserDecksActions.setIsFetching(true));
+        // @ts-ignore
+        yield put(setIsPreventFetching(true))
+        yield put(currentUserDecksActions.setIsFetching(true))
         let token = repository.getToken();
-        const response = await cardPacksApi.deleteCardsPack(token, cardsPackId);
-        dispatch(currentUserDecksActions.deleteDeckSuccess(response.data.deletedCardsPack._id));
+        const response = yield call(cardPacksApi.deleteCardsPack, token, cardsPackId);
+        yield put(currentUserDecksActions.deleteDeckSuccess(response.data.deletedCardsPack._id));
         repository.saveToken(response.data.token, response.data.tokenDeathTime);
-        dispatch(currentUserDecksActions.setIsFetching(false));
-        dispatch(setIsPreventFetching(false));
+        yield put(currentUserDecksActions.setIsFetching(false));
+        // @ts-ignore
+        yield put(setIsPreventFetching(false));
 
     } catch (e) {
-        dispatch(currentUserDecksActions.setError(e.response.data.error));
+        yield put(currentUserDecksActions.setError(e.response.data.error));
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
-        dispatch(currentUserDecksActions.setIsFetching(false));
-        dispatch(setIsPreventFetching(false));
+        yield put(currentUserDecksActions.setIsFetching(false));
+        // @ts-ignore
+        yield put(setIsPreventFetching(false));
     }
 };
-
-export const updateDeck = (cardsPackId: string, name: string): ThunkType => async (dispatch: DispatchType) => {
+//@ts-ignore
+export const updateDeckSaga = function* ({cardsPackId, name}) {
     try {
-        dispatch(setIsPreventFetching(true));
-        dispatch(currentUserDecksActions.setIsFetching(true));
-        let token = repository.getToken();
-
-        const response = await cardPacksApi.updateCardsPack(token, {_id: cardsPackId, name});
-        dispatch(currentUserDecksActions.updateDeckSuccess(response.data.updatedCardsPack));
-        dispatch(currentUserCardsActions.setCards(response.data.updatedCardsPack.name, response.data.updatedCardsPack._id));
-
+        // @ts-ignore
+        yield put(setIsPreventFetching(true))
+        yield put(currentUserDecksActions.setIsFetching(true))
+        let token = repository.getToken()
+        const response = yield call(cardPacksApi.updateCardsPack, token, {_id: cardsPackId, name});
+        yield put(currentUserDecksActions.updateDeckSuccess(response.data.updatedCardsPack));
+        yield put(currentUserCardsActions.setCards(response.data.updatedCardsPack.name, response.data.updatedCardsPack._id));
         repository.saveToken(response.data.token, response.data.tokenDeathTime);
-        dispatch(currentUserDecksActions.setIsFetching(false));
-        dispatch(setIsPreventFetching(false));
+        yield put(currentUserDecksActions.setIsFetching(false));
+        //@ts-ignore
+        yield put(setIsPreventFetching(false));
 
     } catch (e) {
-        dispatch(currentUserDecksActions.setError(e.response.data.error));
+        yield put(currentUserDecksActions.setError(e.response.data.error));
         repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
-        dispatch(currentUserDecksActions.setIsFetching(false));
-        dispatch(setIsPreventFetching(false));
+        yield put(currentUserDecksActions.setIsFetching(false));
+        // @ts-ignore
+        yield put(setIsPreventFetching(false));
     }
 
 };
+
+// @ts-ignore
+const getCurrentUserDecksSaga = function* ({currentPage, pageSize, user_id}) {
+    try {
+        // @ts-ignore
+        yield put(setIsPreventFetching(true))
+        yield put(currentUserDecksActions.setIsFetching(true))
+        let token = repository.getToken();
+        // @ts-ignore
+        const response = yield call(cardPacksApi.getPacks, token, currentPage, pageSize, user_id)
+        yield put(currentUserDecksActions.getDecksSuccess(response.data.cardPacks, response.data.cardPacksTotalCount))
+        repository.saveToken(response.data.token, response.data.tokenDeathTime);
+        yield put(currentUserDecksActions.setIsSuccess(true))
+        yield put(currentUserDecksActions.setIsFetching(false))
+        //@ts-ignore
+        yield put(setIsPreventFetching(false))
+
+    } catch (e) {
+        yield put(currentUserDecksActions.setError(e.response.data.error));
+        repository.saveToken(e.response.data.token, e.response.data.tokenDeathTime);
+        yield put(currentUserDecksActions.setIsSuccess(false));
+        yield put(currentUserDecksActions.setIsFetching(false));
+        //@ts-ignore
+        yield put(setIsPreventFetching(false));
+    }
+}
+
+const saga = function* () {
+    //@ts-ignore
+    yield takeLatest("CURRENT_USER_DECKS_REDUCER/GET_DECKS", getCurrentUserDecksSaga)
+    //@ts-ignore
+    yield takeLatest("CURRENT_USER_DECKS_REDUCER/CREATE_DECK", createDeckSaga)
+    //@ts-ignore
+    yield takeLatest("CURRENT_USER_DECKS_REDUCER/DELETE_DECK", deleteDeckSaga)
+    //@ts-ignore
+    yield takeLatest("CURRENT_USER_DECKS_REDUCER/UPDATE_DECK", updateDeckSaga)
+
+
+}
+
+export const allUserDecksSagas = function* () {
+    yield all([
+        saga()
+    ])
+}
