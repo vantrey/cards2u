@@ -30,9 +30,11 @@ const Buttons = ({ setCardFace, cardface, setCardBg, isSound}) => {
 		<div className={styles.buttons__wrap}>
 			<button className={`${styles.buttons} ${styles.button__left}`}
 					onClick={()=>{setCardFace(true)}}
-					disabled={cardface}	>Back</button>
+					disabled={cardface}	>Back
+			</button>
 			<button className={`${styles.buttons} ${styles.button__right}`}
-					id='nextCardId'>Next</button>
+					id='nextCardId'>Next
+			</button>
 			<audio autoPlay={false} muted={!isSound} id='nextCard'>
 				<source src={soundCard} type="audio/mpeg"/>
 			</audio>

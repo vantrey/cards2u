@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styles from './CardDownside.module.css';
 import arrow from '../../../icons/arrows.png'
 import { useDispatch, useSelector } from "react-redux";
@@ -19,23 +19,35 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 		dispatch (setGrade (Number (e.currentTarget.name)));
 	};
 
-	let arrShuffle = [];
-	let wrongAnswersLength = currentFavCard.wrongAnswers.length
+	let arrShuffle;
 
-	if ( isMulti && (wrongAnswersLength > 0)) {
+	if ( isMulti ) {
 		const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
 			{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0] },
 			{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1] }
 		];
 		arrShuffle = shuffle (arrAnswer);
-	} else  if (isMulti && ( !wrongAnswersLength)) {
-				//sresefsdfs sadfsdf tolltip -> useEffect ->  setTimeOut -> return delete setTimOut
 	}
 
+	// const memoizedCallback = useCallback(
+	// 	() => {
+	// 		if ( isMulti ) {
+	// 			const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
+	// 				{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0] },
+	// 				{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1] }
+	// 			];
+	// 			return arrShuffle = shuffle (arrAnswer);
+	// 		}
+	// 	},
+	// 	[isMulti, gameType],
+	// );
+	//
+	// memoizedCallback();
 
 	useEffect (() => {
 
 		let pElements = document.querySelectorAll ("p[data-text='answer']");
+		let idTest, idTest1;
 
 		pElements.forEach ((el) => {
 			el.addEventListener ('click', () => {
@@ -43,7 +55,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 					el.classList.add (`${styles.discr__text_green}`);
 					if ( gameType === 'test' ) {
 						setPopupBlock (true);
-						setTimeout (() => {
+						idTest = setTimeout (() => {
 							setCardFace (true);
 							getRandomBg (maxNumber);
 							setCardBg(cardBG);
@@ -54,7 +66,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 					el.classList.add (`${styles.discr__text_red}`);
 					if ( gameType === 'test' ) {
 						setPopupBlock (true);
-						setTimeout (() => {
+						idTest1 = setTimeout (() => {
 							setCardFace (true);
 							getRandomBg (maxNumber);
 							setCardBg(cardBG);
@@ -62,9 +74,44 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 						}, 1000);
 					}
 				}
+
 			});
 		});
-	}, [ isMulti ]);
+
+		return () => {
+			pElements.forEach ((el) => {
+				el.removeEventListener('click', () => {
+					if ( el.getAttribute ('id') === 'trueAnswer' ) {
+						el.classList.add (`${styles.discr__text_green}`);
+						if ( gameType === 'test' ) {
+							setPopupBlock (true);
+							idTest = setTimeout (() => {
+								setCardFace (true);
+								getRandomBg (maxNumber);
+								setCardBg(cardBG);
+								dispatch (getCurrentFavCard ());
+							}, 1000);
+						}
+					} else {
+						el.classList.add (`${styles.discr__text_red}`);
+						if ( gameType === 'test' ) {
+							setPopupBlock (true);
+							idTest1 = setTimeout (() => {
+								setCardFace (true);
+								getRandomBg (maxNumber);
+								setCardBg(cardBG);
+								dispatch (getCurrentFavCard ());
+							}, 1000);
+						}
+					}
+
+				});
+			});
+
+			clearTimeout(idTest);
+			clearTimeout(idTest1);
+		}
+	}, [isMulti]);
 
 	useEffect (() => {
 
@@ -126,7 +173,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 				{!isMulti &&
 				<div className={styles.card__text}>
 					<h3 className={styles.text__title}>answer</h3>
-					<p className={styles.text__discr}>{currentFavCard.answer}</p>
+					<p className={`${styles.text__discr} ${styles.text__discr_center}`}>{currentFavCard.answer}</p>
 				</div>
 				}
 				{isMulti &&

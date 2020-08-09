@@ -11,26 +11,32 @@ const Root = () => {
 
 	let [ sound, setSound ] = useState (true);
 	let [ iconFlash, setIconlash ] = useState (false);
+	let IDtime;
 
 	useEffect (() => {
+
 		let vid = document.getElementById ('root');
+
 		vid.volume = 0.4;
 		vid.addEventListener ('playing', () => {
 			setIconlash (true);
-			let IDtime= setTimeout (() => {
+			IDtime = setTimeout (() => {
 				setIconlash (false);
 			}, 3000);
 		}, true);
 
 		return () => {
+
 			vid.removeEventListener ('playing', () => {
 				setIconlash (true);
-				setTimeout (() => {
+				IDtime = setTimeout (() => {
+
 					setIconlash (false);
 				}, 3000);
 			}, true);
-		}
 
+			clearTimeout(IDtime);
+		}
 	}, []);
 
 	const classIcon = iconFlash === true ? `${styles.root__icon_flash}` : `${styles.root__icon}`;

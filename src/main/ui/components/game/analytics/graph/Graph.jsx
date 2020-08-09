@@ -7,6 +7,7 @@ import fireworks from '../../../../video/fireworks.gif';
 import dragonFly from '../../../../audio/dragon-fly.mp3';
 import fireworksSound from '../../../../audio/fireworks.mp3';
 import dragonCloud from '../../../../images/header-bg-cloud80.png';
+import Data from "./graph_data/Data";
 
 
 const Graph = ({ setCardFace, isSound }) => {
@@ -36,27 +37,28 @@ const Graph = ({ setCardFace, isSound }) => {
 		<div className={classForGraph}>
 			<div className={styles.graph__title}>Graph</div>
 			<div className={styles.graph__graph}>
-				{dragon &&
-				<>
-					<div className={styles.dragon__cloud}>
-						{/*<img src={dragonCloud} alt="cloud"/>*/}
-					</div>
-					<img src={dragonImg} alt="dragon"/>
-					<audio autoPlay={true} muted={!isSound}>
-						<source src={dragonFly} type="audio/mpeg"/>
-					</audio>
-				</>
-				}
-				{!dragon &&
-				// <img src={graphImg} alt="graph"/>
-				<>
-					<img src={fireworksImg} alt="fireworks"/>
-					<audio autoPlay={true} muted={!isSound}>
-						<source src={fireworksSound} type="audio/mpeg"/>
-					</audio>
-				</>
-				}
-				<button onClick={() => {setDragon (!dragon)}} className={styles.graph__button}>dragon</button>
+				<Data />
+				{/*{dragon &&*/}
+				{/*<>*/}
+				{/*	<div className={styles.dragon__cloud}>*/}
+				{/*		/!*<img src={dragonCloud} alt="cloud"/>*!/*/}
+				{/*	</div>*/}
+				{/*	<img src={dragonImg} alt="dragon"/>*/}
+				{/*	<audio autoPlay={true} muted={!isSound}>*/}
+				{/*		<source src={dragonFly} type="audio/mpeg"/>*/}
+				{/*	</audio>*/}
+				{/*</>*/}
+				{/*}*/}
+				{/*{!dragon &&*/}
+				{/*// <img src={graphImg} alt="graph"/>*/}
+				{/*<>*/}
+				{/*	<img src={fireworksImg} alt="fireworks"/>*/}
+				{/*	<audio autoPlay={true} muted={!isSound}>*/}
+				{/*		<source src={fireworksSound} type="audio/mpeg"/>*/}
+				{/*	</audio>*/}
+				{/*</>*/}
+				{/*}*/}
+				{/*<button onClick={() => {setDragon (!dragon)}} className={styles.graph__button}>dragon</button>*/}
 			</div>
 			<div className={styles.graph__nav}>
 				<Settings setCardFace={setCardFace}/>

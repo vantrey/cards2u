@@ -13,12 +13,15 @@ const Intro = ({ setBg, toggleBg }) => {
 	let [ sound, setSound ] = useState (true);
 	let [ iconFlash, setIconFlash ] = useState (false);
 
+
 	useEffect (() => {
+
+		let idTest;
 		let vid = document.getElementById ('intro');
 		vid.volume = 0.25;
 		vid.addEventListener ('playing', () => {
 			setIconFlash (true);
-			setTimeout (() => {
+			idTest = setTimeout (() => {
 				setIconFlash (false);
 			}, 3000);
 		}, true);
@@ -26,7 +29,7 @@ const Intro = ({ setBg, toggleBg }) => {
 		return () => {
 			vid.removeEventListener ('playing', () => {
 				setIconFlash (true);
-				setTimeout (() => {
+				idTest = setTimeout (() => {
 					setIconFlash (false);
 				}, 3000);
 			}, true);
@@ -35,7 +38,9 @@ const Intro = ({ setBg, toggleBg }) => {
 				setBg(!toggleBg);
 			}, true);
 
+			clearTimeout(idTest);
 		}
+
 	}, []);
 
 	const classIcon = iconFlash === true ? `${styles.intro__icon_flash}` : `${styles.intro__icon}`;

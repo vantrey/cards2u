@@ -27,7 +27,7 @@ const rootReducer = combineReducers({
     preventRequest: preventRequestReducer,
     currentUserDecks: currentUserDecksReducer,
     currentUserCards: currentUserCardsReducer,
-    searchReducer:searchReducer
+    searchReducer: searchReducer
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>
