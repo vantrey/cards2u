@@ -47,12 +47,19 @@ const DecksNames = ({nameUser, onSelectDeck, deckscount}) => {
 									 key={decksNames._id}
 									 data-deckname={decksNames.name}
 									 onClick={onSelectDeck}
-								>{decksNames.name}
+								>
+									<div className={styles.item__deckName}>{decksNames.name}</div>
+									<div className={styles.item__border}></div>
+									<div className={styles.item__cardCount}>
+										<span className={styles.cardCount__title}>cards:&nbsp;</span>
+										<span className={styles.cardCount__number}>{decksNames.cardsCount}</span>
+									</div>
 								</div>))
 
-					} {
-					(cardPacks.length === 0) && <EmptyDecks/>
-				}
+					}
+					{
+						(cardPacks.length === 0) && <EmptyDecks/>
+					}
 				</div>
 				}
 			</div>

@@ -48,7 +48,7 @@
 }
 
 .decksNames {
-    width: 300px;
+    width: 400px;
     margin: 0 auto;
     margin-top: 25px;
     min-height: 340px;
@@ -62,11 +62,11 @@
 }
 
 .decksNames__item {
-    width: 200px;
+    width: 370px;
     min-height: 40px;
     margin-bottom: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     font-family:  sans-serif;
     border: 1px solid #088dcd;
@@ -98,12 +98,33 @@
     transform: translate(1px, 1px);
 }
 
+.item__deckName {
+    width: 60%;
+    height: 100%;
+}
 
+.item__border {
+    width: 2px;
+    padding: 10px 0;
+    background-color: #088dcd;
+}
 
+.item__cardCount {
+    display: flex;
+    justify-content: space-evenly;
+    width: 39%;
+    height: 100%;
+    text-shadow: none;
+}
 
+.cardCount__title {
+    font-size: 14px;
+    text-shadow: none;
+}
 
-
-
+.cardCount__number {
+    text-shadow: none;
+}
 
 
 
