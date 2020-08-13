@@ -13,7 +13,8 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 
 	const dispatch = useDispatch ();
 	const [ popupBlock, setPopupBlock ] = useState (false);
-	const { currentFavCard, isRandomMode, gameType, isMulti, isSound, currentAnalytics } = useSelector ((state) => state.favoriteDecks);
+	const { currentFavCard, isRandomMode, gameType, isMulti, isSound, currentAnalytics } =
+			useSelector ((state) => state.favoriteDecks);
 
 	// dispatch(favoriteDecksActions.setAnalytics(true));
 
