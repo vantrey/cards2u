@@ -26,6 +26,7 @@ import StartTest from "./test/Start_test";
 import StopTest from "./test/Stop_test";
 import { useLocation } from "react-router";
 import { loginActions } from "../../../auth/login/loginReducer";
+import Taper from "./card/taper/Taper";
 
 
 const Game = () => {
@@ -34,7 +35,8 @@ const Game = () => {
 	const [ startMatrix, setstartMatrix ] = useState (false);
 	const [ cardBg, setCardBg ] = useState (bg_1);
 	const { user } = useSelector ((state) => state.profile);
-	const { userFavoriteDecks, isSound, isTestModeStart, gameType } = useSelector ((state) => state.favoriteDecks);
+	const { userFavoriteDecks, isSound, isTestModeStart, gameType, taperReset } =
+			useSelector ((state) => state.favoriteDecks);
 	const dispatch = useDispatch ();
 	const location = useLocation ();
 
@@ -264,12 +266,7 @@ const Game = () => {
 								<Buttons setCardFace={setCardFace} cardface={cardface} setCardBg={setCardBg}
 										 isSound={isSound}/>
 							</div>
-							<div className={styles.main__card_fire} >
-								<img src={taper} alt="taper"/>
-							</div>
-							<audio autoPlay={true} muted={!isSound}>
-								<source src={taperSound} type="audio/mpeg"/>
-							</audio>
+							{( gameType === 'test' ) && taperReset && <Taper/>}
 						</div>
 						}
 						<div onClick={onClickSound}>

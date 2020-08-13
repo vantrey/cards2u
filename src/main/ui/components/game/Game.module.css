@@ -365,17 +365,6 @@
     position: relative;
 }
 
-.main__card_fire {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    width: 100%;
-    height: 30px;
-    display: flex;
-    align-items: center;
-}
-
-
 .main__deck {
     width: 250px;
     /*max-width: 250px;*/

@@ -46,7 +46,8 @@ const initialState = {
     isTestModeStart: false,
     isTestModeBreak: false,
     percentRightAnswers: 0,
-    bannerForGraph: 'infoBanner'
+    bannerForGraph: 'infoBanner',
+    taperReset: false
 };
 
 type InitialStateType = typeof initialState
@@ -197,10 +198,16 @@ export const favoriteDecksReducer =
                 }
 
             case "FAVORITE_DECKS_REDUCER/SET_BANNER":
-                        return {
-                            ...state,
-                            bannerForGraph: action.banner
-                        }
+                return {
+                    ...state,
+                    bannerForGraph: action.banner
+                }
+
+            case 'FAVORITE_DECKS_REDUCER/SET_TAPER_RESET':
+                return {
+                    ...state,
+                    taperReset: action.taperReset
+                }
 
             default:
                 return state
@@ -285,6 +292,11 @@ export const favoriteDecksActions = {
     setPercentRightAnswers: (percentRightAnswers: number) => ({
         type: 'FAVORITE_DECKS_REDUCER/SET_PERSENT_RIGHT_ANSWER',
         percentRightAnswers
+    } as const),
+
+    setTaperReset: (taperReset: boolean) => ({
+        type: 'FAVORITE_DECKS_REDUCER/SET_TAPER_RESET',
+        taperReset
     } as const),
 };
 

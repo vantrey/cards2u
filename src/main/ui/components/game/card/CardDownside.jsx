@@ -58,12 +58,14 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 					el.classList.add (`${styles.discr__text_green}`);
 					if ( gameType === 'test' ) {
 						setPopupBlock (true);
+						dispatch(favoriteDecksActions.setTaperReset(false));
 						dispatch(favoriteDecksActions.setAnalytics(true));
 						idTest = setTimeout (() => {
 							setCardFace (true);
 							getRandomBg (maxNumber);
 							setCardBg(cardBG);
 							dispatch (getCurrentFavCard ());
+							dispatch(favoriteDecksActions.setTaperReset(true));
 						}, 1000);
 					}
 				} else {
@@ -71,11 +73,13 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 					if ( gameType === 'test' ) {
 						setPopupBlock (true);
 						dispatch(favoriteDecksActions.setAnalytics(false));
+						dispatch(favoriteDecksActions.setTaperReset(false));
 						idTest1 = setTimeout (() => {
 							setCardFace (true);
 							getRandomBg (maxNumber);
 							setCardBg(cardBG);
 							dispatch (getCurrentFavCard ());
+							dispatch(favoriteDecksActions.setTaperReset(true));
 						}, 1000);
 					}
 				}

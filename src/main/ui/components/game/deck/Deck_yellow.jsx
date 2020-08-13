@@ -3,12 +3,12 @@ import styles from './Deck_yellow.module.css';
 import deckBG from '../../../images/card-bg-OR.png'
 import { cardBG, getRandomBg, maxNumber } from "../../../common/random_bg/Random_bg";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentFavCard } from "../../../../bll/favoriteDecks/favoriteDecksReducer";
+import { favoriteDecksActions, getCurrentFavCard } from "../../../../bll/favoriteDecks/favoriteDecksReducer";
 
 
 const Deck_blue = ({ setCardBg, setCardFace }) => {
 
-	const { userFavoriteDecks } = useSelector ((state) => state.favoriteDecks);
+	const { userFavoriteDecks, taperReset } = useSelector ((state) => state.favoriteDecks);
 	const dispatch = useDispatch ();
 
 	const onChangeBG = () => {
@@ -16,6 +16,13 @@ const Deck_blue = ({ setCardBg, setCardFace }) => {
 		getRandomBg (maxNumber);
 		setCardBg(cardBG);
 		dispatch(getCurrentFavCard());
+
+		if ( taperReset ) {
+			dispatch (favoriteDecksActions.setTaperReset (false));
+		}
+		setTimeout( () => {
+			dispatch (favoriteDecksActions.setTaperReset (true));
+		}, 0)
 	};
 
 	return (

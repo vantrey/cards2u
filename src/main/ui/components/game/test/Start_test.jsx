@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './StartTest.module.css';
 import bg_1 from './../../../images/card-bg/card-bg-1.jpg';
 import { cardBG, getRandomBg, maxNumber } from "../../../common/random_bg/Random_bg";
-import { getCurrentFavCard } from "../../../../bll/favoriteDecks/favoriteDecksReducer";
+import { favoriteDecksActions, getCurrentFavCard } from "../../../../bll/favoriteDecks/favoriteDecksReducer";
 import { useDispatch } from "react-redux";
 
 
@@ -18,6 +18,7 @@ const StartTest = ({ setCardFace, setCardBg }) => {
 		getRandomBg (maxNumber);
 		setCardBg (cardBG);
 		dispatch (getCurrentFavCard ());
+		dispatch(favoriteDecksActions.setTaperReset(true));
 	}
 
 	return (
