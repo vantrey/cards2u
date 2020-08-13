@@ -25,7 +25,7 @@ const StartTest = ({ setCardFace, setCardBg }) => {
 		<div className={styles.test__wrap}>
 			<div className={styles.card__wrap}>
 				<div className={styles.card}>
-					<div className={styles.card__background} style={stylesOnline}></div>
+					{/*<div className={styles.card__background} style={stylesOnline}></div>*/}
 					<div className={styles.card__content}>
 						<h2 className={styles.card__title}>Srart</h2>
 						<p className={styles.card__text}>text</p>

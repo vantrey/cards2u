@@ -12,9 +12,9 @@
     position: relative;
     cursor: pointer;
     font-family: 'CS Grimrock', sans-serif;
-    -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
-    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.75);
+    box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.75);
 }
 
 .card {
@@ -27,21 +27,21 @@
     min-height: 300px;
     text-align: center;
     color: whitesmoke;
-    background-color: whitesmoke;
+    background-color: #0b3b63;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1);
 }
 
-.card .card__background {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 110%;
-    background-size: cover;
-    background-position: 0 0;
-    pointer-events: none;
-}
+/*.card .card__background {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 110%;*/
+/*    background-size: cover;*/
+/*    background-position: 0 0;*/
+/*    pointer-events: none;*/
+/*}*/
 
 .card__content {
     position: relative;
@@ -99,9 +99,9 @@
     outline: none;
     font-size: 12px;
     border: 1px solid #0b3b63;
-    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.75);
 
     background-color: #0b3b63;
     color: orange;

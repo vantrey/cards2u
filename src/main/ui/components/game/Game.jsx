@@ -266,7 +266,9 @@ const Game = () => {
 								<Buttons setCardFace={setCardFace} cardface={cardface} setCardBg={setCardBg}
 										 isSound={isSound}/>
 							</div>
-							{( gameType === 'test' ) && taperReset && <Taper/>}
+							{( gameType === 'test' ) && taperReset &&
+								<Taper setCardFace={setCardFace} setCardBg={setCardBg}/>
+							}
 						</div>
 						}
 						<div onClick={onClickSound}>
