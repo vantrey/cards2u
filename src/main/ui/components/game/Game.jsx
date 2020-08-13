@@ -25,6 +25,7 @@ import { favoriteDecksActions, getCurrentFavDeck, setGameType } from "../../../b
 import StartTest from "./test/Start_test";
 import StopTest from "./test/Stop_test";
 import { useLocation } from "react-router";
+import { loginActions } from "../../../auth/login/loginReducer";
 
 
 const Game = () => {
@@ -37,9 +38,13 @@ const Game = () => {
 	const dispatch = useDispatch ();
 	const location = useLocation ();
 
-	useEffect (() => {
+	let currentPath = location.pathname;
 
-		const currentPath = location.pathname;
+	useEffect(() => {
+		dispatch(loginActions.setCurrentLocation(currentPath));
+	}, [currentPath]);
+
+	useEffect (() => {
 
 		switch ( currentPath ) {
 
