@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Dragon.module.css';
 import dragonVD1 from '../../../../../video/dragon-gif.gif';
+import dragonFake from '../../../../../images/dragon-fireworks-fake.png';
 import dragonFly from '../../../../../audio/dragon-fly.mp3';
 import { useDispatch, useSelector } from "react-redux";
 import { favoriteDecksActions } from "../../../../../../bll/favoriteDecks/favoriteDecksReducer";
@@ -10,12 +11,11 @@ const Dragon = () => {
 
 	const { isSound, bannerForGraph } = useSelector ((state) => state.favoriteDecks);
 	const [ fadeIn, setFadeIn ] = useState (false);
-	const [ dragonImg, setDragonImg ] = useState ('');
+	const [ dragonImg, setDragonImg ] = useState (dragonFake);
 	const dispatch = useDispatch ();
 
 	useEffect (() => {
 
-		// setDragonImg ('');
 		const dragonTimerId = setTimeout (() => {
 			setDragonImg (dragonVD1);
 		}, 0)
@@ -28,12 +28,12 @@ const Dragon = () => {
 			}, 11500);
 
 		return () => {
-
+			setDragonImg (dragonFake);
 			clearTimeout(dragonTimerId);
 			clearTimeout(dragonTimerId1);
 			clearTimeout(dragonTimerId2);
 		}
-	}, [bannerForGraph, dragonImg]);
+	}, []);
 
 	const classForGraph = fadeIn ? `${styles.graph__wrap_active}` : `${styles.graph__wrap}`;
 

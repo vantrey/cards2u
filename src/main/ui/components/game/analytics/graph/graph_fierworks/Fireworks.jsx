@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Fireworks.module.css';
 import fireworks from '../../../../../video/fireworks.gif';
+import fireworksFake from '../../../../../images/dragon-fireworks-fake.png';
 import fireworksSound from '../../../../../audio/fireworks.mp3';
 import { useDispatch, useSelector } from "react-redux";
 import { favoriteDecksActions } from "../../../../../../bll/favoriteDecks/favoriteDecksReducer";
@@ -10,7 +11,7 @@ const Fireworks = () => {
 
 	const { isSound, bannerForGraph } = useSelector ((state) => state.favoriteDecks);
 	const [ fadeIn, setFadeIn ] = useState (false);
-	const [ fireworksImg, setFireworksImg ] = useState ('');
+	const [ fireworksImg, setFireworksImg ] = useState (fireworksFake);
 	const dispatch = useDispatch ();
 
 	useEffect (() => {
@@ -24,18 +25,17 @@ const Fireworks = () => {
 		}, 15000);
 
 		const fireworksId2 = setTimeout (() => {
-			setFireworksImg ('');
 			setFireworksImg (fireworks)
 		}, 0);
 
 		return () => {
-
+			setFireworksImg (fireworksFake);
 			clearTimeout (fireworksId);
 			clearTimeout (fireworksId1);
 			clearTimeout (fireworksId2);
 		}
 
-	}, [ fadeIn, bannerForGraph ]);
+	}, []);
 
 
 	const classForGraph = fadeIn ? `${styles.graph__wrap_active}` : `${styles.graph__wrap}`;

@@ -3,7 +3,7 @@ import styles from './Graph.module.css';
 import Settings from "../settings/Settings";
 import Data from "./graph_data/Data";
 import Totals from "./graph_totals/Totals";
-import Dragon from "./graph_dragon/Dracon";
+import Dragon from "./graph_dragon/Dragon";
 import Fireworks from "./graph_fierworks/Fireworks";
 import InfoBanner from "./graph_info/InfoBanner";
 import { useDispatch, useSelector } from "react-redux";
