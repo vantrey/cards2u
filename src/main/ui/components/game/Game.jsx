@@ -13,7 +13,7 @@ import Card from "./card/Card";
 import CardDownside from "./card/CardDownside";
 import Buttons from "./buttons/Buttons";
 import bg_1 from './../../images/card-bg/card-bg-1.jpg';
-import taper from './../../video/taper-1.gif';
+import taper from './../../video/taper-2.gif';
 import taperSound from './../../audio/taper.mp3';
 import { useDispatch, useSelector } from "react-redux";
 import avaDefault from "../../images/ava-default.png";
@@ -21,7 +21,7 @@ import soundDeck from "../../audio/deck.mp3";
 import soundCard from "../../audio/card.mp3";
 import Matrix from "./analytics/matrix/Matrix";
 import Graph from "./analytics/graph/Graph";
-import { getCurrentFavDeck } from "../../../bll/favoriteDecks/favoriteDecksReducer";
+import { favoriteDecksActions, getCurrentFavDeck, setGameType } from "../../../bll/favoriteDecks/favoriteDecksReducer";
 import StartTest from "./test/Start_test";
 import StopTest from "./test/Stop_test";
 import { useLocation } from "react-router";
@@ -33,7 +33,7 @@ const Game = () => {
 	const [ startMatrix, setstartMatrix ] = useState (false);
 	const [ cardBg, setCardBg ] = useState (bg_1);
 	const { user } = useSelector ((state) => state.profile);
-	const { userFavoriteDecks, isSound, isTestModeStart } = useSelector ((state) => state.favoriteDecks);
+	const { userFavoriteDecks, isSound, isTestModeStart, gameType } = useSelector ((state) => state.favoriteDecks);
 	const dispatch = useDispatch ();
 	const location = useLocation ();
 
@@ -67,7 +67,15 @@ const Game = () => {
 
 
 	const onSetFavoriteDeck = (favoriteDeckId) => {
-		dispatch (getCurrentFavDeck (favoriteDeckId));
+
+		if( gameType === 'test') {
+			dispatch (setGameType ("inOrder"));
+			dispatch (favoriteDecksActions.setIsTestStart (false));
+			dispatch (favoriteDecksActions.setBanner ('dragonBanner'));
+		} else {
+			dispatch (getCurrentFavDeck (favoriteDeckId));
+			dispatch (favoriteDecksActions.setBanner ('infoBanner'));
+		}
 	};
 
 	const onClickSound = () => {
@@ -98,7 +106,6 @@ const Game = () => {
 		}
 
 	}, []);
-
 
 	return (
 		<div className={styles.game__wrap}>
@@ -154,7 +161,7 @@ const Game = () => {
 							<div className={styles.header__decks}>
 								<NavLink to={GAME_PATH_DECK_BLUE} className={styles.header__link}
 										 onClick={() => {
-											 onSetFavoriteDeck ('favoriteDeckSlot0')
+											 onSetFavoriteDeck ('favoriteDeckSlot0');
 										 }}>
 									<div className={`${styles.decks__item} ${styles.decks__item_1}`}>
 										<div className={styles.tooltip}>
@@ -168,7 +175,7 @@ const Game = () => {
 								</NavLink>
 								<NavLink to={GAME_PATH_DECK_RED} className={styles.header__link}
 										 onClick={() => {
-											 onSetFavoriteDeck ('favoriteDeckSlot1')
+											 onSetFavoriteDeck ('favoriteDeckSlot1');
 										 }}>
 									<div className={`${styles.decks__item} ${styles.decks__item_2}`}>
 										<div className={styles.tooltip}>
@@ -182,7 +189,7 @@ const Game = () => {
 								</NavLink>
 								<NavLink to={GAME_PATH_DECK_GREEN} className={styles.header__link}
 										 onClick={() => {
-											 onSetFavoriteDeck ('favoriteDeckSlot2')
+											 onSetFavoriteDeck ('favoriteDeckSlot2');;
 										 }}>
 									<div className={`${styles.decks__item} ${styles.decks__item_3}`}>
 										<div className={styles.tooltip}>
@@ -196,7 +203,7 @@ const Game = () => {
 								</NavLink>
 								<NavLink to={GAME_PATH_DECK_PINK} className={styles.header__link}
 										 onClick={() => {
-											 onSetFavoriteDeck ('favoriteDeckSlot3')
+											 onSetFavoriteDeck ('favoriteDeckSlot3');
 										 }}>
 									<div className={`${styles.decks__item} ${styles.decks__item_4}`}>
 										<div className={styles.tooltip}>
@@ -210,7 +217,7 @@ const Game = () => {
 								</NavLink>
 								<NavLink to={GAME_PATH_DECK_YELLOW} className={styles.header__link}
 										 onClick={() => {
-											 onSetFavoriteDeck ('favoriteDeckSlot4')
+											 onSetFavoriteDeck ('favoriteDeckSlot4');
 										 }}>
 									<div className={`${styles.decks__item} ${styles.decks__item_5}`}>
 										<div className={styles.tooltip}>
@@ -224,7 +231,7 @@ const Game = () => {
 								</NavLink>
 								<NavLink to={GAME_PATH_DECK_PURPLE} className={styles.header__link}
 										 onClick={() => {
-											 onSetFavoriteDeck ('favoriteDeckSlot5')
+											 onSetFavoriteDeck ('favoriteDeckSlot5');
 										 }}>
 									<div className={`${styles.decks__item} ${styles.decks__item_6}`}>
 										<div className={styles.tooltip}>
@@ -252,12 +259,12 @@ const Game = () => {
 								<Buttons setCardFace={setCardFace} cardface={cardface} setCardBg={setCardBg}
 										 isSound={isSound}/>
 							</div>
-							<div className={styles.main__card_fire} >
-								<img src={taper} alt="taper"/>
-							</div>
-							<audio autoPlay={true} muted={!isSound}>
-								<source src={taperSound} type="audio/mpeg"/>
-							</audio>
+							{/*<div className={styles.main__card_fire} >*/}
+							{/*	<img src={taper} alt="taper"/>*/}
+							{/*</div>*/}
+							{/*<audio autoPlay={true} muted={!isSound}>*/}
+							{/*	<source src={taperSound} type="audio/mpeg"/>*/}
+							{/*</audio>*/}
 						</div>
 						}
 						<div onClick={onClickSound}>

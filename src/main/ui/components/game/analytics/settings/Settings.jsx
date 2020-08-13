@@ -30,9 +30,11 @@ const Settings = ({setCardFace}) => {
 			dispatch (favoriteDecksActions.setIsMulti (true));
 			dispatch (favoriteDecksActions.setIsRandomMode (false));
 			dispatch (favoriteDecksActions.setIsTestStart (true));
+			dispatch (favoriteDecksActions.setBanner ('dataBanner'));
 		} else {
 			dispatch (setGameType ("inOrder"));
 			dispatch (favoriteDecksActions.setIsTestStart (false));
+			dispatch (favoriteDecksActions.setBanner ('dragonBanner'));
 		}
 	};
 
