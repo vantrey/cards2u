@@ -67,6 +67,7 @@ export type UserFavoriteDeckType = {
     deckName: string
     deck: Array<CardType>
     analytics?: AnalyticsType
+    cardsCount?: number
 }
 
 export type UserFavoriteDecksType = {

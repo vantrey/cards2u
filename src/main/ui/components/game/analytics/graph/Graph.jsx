@@ -1,64 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Graph.module.css';
-import graphImg from '../../../../images/graph.png';
 import Settings from "../settings/Settings";
-import dragonVD1 from '../../../../video/dragon-gif.gif';
-import fireworks from '../../../../video/fireworks.gif';
-import dragonFly from '../../../../audio/dragon-fly.mp3';
-import fireworksSound from '../../../../audio/fireworks.mp3';
-import dragonCloud from '../../../../images/header-bg-cloud80.png';
 import Data from "./graph_data/Data";
+import Totals from "./graph_totals/Totals";
+import Dragon from "./graph_dragon/Dragon";
+import Fireworks from "./graph_fierworks/Fireworks";
+import InfoBanner from "./graph_info/InfoBanner";
+import { useDispatch, useSelector } from "react-redux";
+import { favoriteDecksActions } from "../../../../../bll/favoriteDecks/favoriteDecksReducer";
 
 
-const Graph = ({ setCardFace, isSound }) => {
+const Graph = ({ setCardFace }) => {
 
 	const [ fadeIn, setFadeIn ] = useState (false);
-	const [ dragon, setDragon ] = useState (false);
-	const [ dragonImg, setDragonImg ] = useState ('');
-	const [ fireworksImg, setFireworksImg ] = useState ('');
+	const { bannerForGraph } = useSelector ((state) => state.favoriteDecks);
 
 	useEffect (() => {
+
 		setTimeout (() => {
 			setFadeIn (true);
 		}, 6500);
 
-		setTimeout (() => {
-			setDragonImg ('');
-			setFireworksImg('');
-			setDragonImg (dragonVD1);
-			setFireworksImg(fireworks)
-		}, 0)
-
-	}, [ fadeIn, dragon ]);
+	}, [ fadeIn, bannerForGraph ]);
 
 	const classForGraph = fadeIn ? `${styles.graph__wrap_active}` : `${styles.graph__wrap}`;
 
 	return (
 		<div className={classForGraph}>
-			<div className={styles.graph__title}>Graph</div>
+			<div className={styles.graph__title}></div>
 			<div className={styles.graph__graph}>
-				<Data />
-				{/*{dragon &&*/}
-				{/*<>*/}
-				{/*	<div className={styles.dragon__cloud}>*/}
-				{/*		/!*<img src={dragonCloud} alt="cloud"/>*!/*/}
-				{/*	</div>*/}
-				{/*	<img src={dragonImg} alt="dragon"/>*/}
-				{/*	<audio autoPlay={true} muted={!isSound}>*/}
-				{/*		<source src={dragonFly} type="audio/mpeg"/>*/}
-				{/*	</audio>*/}
-				{/*</>*/}
-				{/*}*/}
-				{/*{!dragon &&*/}
-				{/*// <img src={graphImg} alt="graph"/>*/}
-				{/*<>*/}
-				{/*	<img src={fireworksImg} alt="fireworks"/>*/}
-				{/*	<audio autoPlay={true} muted={!isSound}>*/}
-				{/*		<source src={fireworksSound} type="audio/mpeg"/>*/}
-				{/*	</audio>*/}
-				{/*</>*/}
-				{/*}*/}
-				{/*<button onClick={() => {setDragon (!dragon)}} className={styles.graph__button}>dragon</button>*/}
+				{(bannerForGraph === 'infoBanner') && <InfoBanner/>}
+				{(bannerForGraph === 'dataBanner') && <Data/>}
+				{(bannerForGraph === 'totalsBanner') && <Totals/>}
+				{(bannerForGraph === 'dragonBanner') && <Dragon/>}
+				{(bannerForGraph === 'fireworksBanner') && <Fireworks/>}
+
+			{/*<InfoBanner/>*/}
+			{/*<Data/>*/}
+			{/*<Totals/>*/}
+			{/*<Dragon/>*/}
+			{/*<Fireworks/>*/}
+
 			</div>
 			<div className={styles.graph__nav}>
 				<Settings setCardFace={setCardFace}/>

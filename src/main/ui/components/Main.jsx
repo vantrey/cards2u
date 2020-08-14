@@ -17,6 +17,7 @@ const Main = () => {
     const [openProfile, setProfile] = useState(false);
     const dispatch = useDispatch();
 
+
     useEffect(() => {
         dispatch(localAuthMe());
     }, [dispatch]);

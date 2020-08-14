@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styles from './CardDownside.module.css';
 import arrow from '../../../icons/arrows.png'
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentFavCard, setGrade } from "../../../../bll/favoriteDecks/favoriteDecksReducer"
+import { favoriteDecksActions, getCurrentFavCard, setGrade } from "../../../../bll/favoriteDecks/favoriteDecksReducer"
 import soundTrue from "../../../audio/correctly.mp3";
 import soundFalse from "../../../audio/mistake.mp3";
 import { shuffle } from "../../../../helpers/random_multyanswer/randomAnswer";
@@ -13,7 +13,10 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 
 	const dispatch = useDispatch ();
 	const [ popupBlock, setPopupBlock ] = useState (false);
-	const { currentFavCard, isRandomMode, gameType, isMulti, isSound } = useSelector ((state) => state.favoriteDecks);
+	const { currentFavCard, isRandomMode, gameType, isMulti, isSound, currentAnalytics } =
+			useSelector ((state) => state.favoriteDecks);
+
+	// dispatch(favoriteDecksActions.setAnalytics(true));
 
 	const onSelectGrade = (e) => {
 		dispatch (setGrade (Number (e.currentTarget.name)));
@@ -55,22 +58,28 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 					el.classList.add (`${styles.discr__text_green}`);
 					if ( gameType === 'test' ) {
 						setPopupBlock (true);
+						dispatch(favoriteDecksActions.setTaperReset(false));
+						dispatch(favoriteDecksActions.setAnalytics(true));
 						idTest = setTimeout (() => {
 							setCardFace (true);
 							getRandomBg (maxNumber);
 							setCardBg(cardBG);
 							dispatch (getCurrentFavCard ());
+							dispatch(favoriteDecksActions.setTaperReset(true));
 						}, 1000);
 					}
 				} else {
 					el.classList.add (`${styles.discr__text_red}`);
 					if ( gameType === 'test' ) {
 						setPopupBlock (true);
+						dispatch(favoriteDecksActions.setAnalytics(false));
+						dispatch(favoriteDecksActions.setTaperReset(false));
 						idTest1 = setTimeout (() => {
 							setCardFace (true);
 							getRandomBg (maxNumber);
 							setCardBg(cardBG);
 							dispatch (getCurrentFavCard ());
+							dispatch(favoriteDecksActions.setTaperReset(true));
 						}, 1000);
 					}
 				}

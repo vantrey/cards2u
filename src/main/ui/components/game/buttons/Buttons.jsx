@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './Buttons.module.css';
 import { cardBG, getRandomBg, maxNumber } from "../../../common/random_bg/Random_bg";
 import soundCard from "../../../audio/card.mp3";
-import { getCurrentFavCard } from "../../../../bll/favoriteDecks/favoriteDecksReducer";
+import { favoriteDecksActions, getCurrentFavCard } from "../../../../bll/favoriteDecks/favoriteDecksReducer";
 import { useDispatch} from "react-redux";
 
 
@@ -21,6 +21,8 @@ const Buttons = ({ setCardFace, cardface, setCardBg, isSound}) => {
 				getRandomBg (maxNumber);
 				setCardBg(cardBG);
 				dispatch(getCurrentFavCard());
+				dispatch(favoriteDecksActions.setTaperReset(false));
+				dispatch(favoriteDecksActions.setTaperReset(true));
 			});
 		}
 
