@@ -105,7 +105,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 			clearTimeout (idTest);
 			clearTimeout (idTest1);
 		}
-	}, []);
+	}, [isMulti]);
 
 	useEffect (() => {
 

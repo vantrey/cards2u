@@ -81,6 +81,7 @@ const Game = () => {
 		} else {
 			dispatch (getCurrentFavDeck (favoriteDeckId));
 			dispatch (favoriteDecksActions.setBanner ('infoBanner'));
+			dispatch (favoriteDecksActions.setIsMulti (false));
 		}
 	};
 
