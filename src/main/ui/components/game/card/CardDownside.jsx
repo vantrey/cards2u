@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import styles from './CardDownside.module.css';
 import arrow from '../../../icons/arrows.png'
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 	const dispatch = useDispatch ();
 	const [ popupBlock, setPopupBlock ] = useState (false);
 	const { currentFavCard, isRandomMode, gameType, isMulti, isSound, currentAnalytics } =
-			useSelector ((state) => state.favoriteDecks);
+		useSelector ((state) => state.favoriteDecks);
 
 	// dispatch(favoriteDecksActions.setAnalytics(true));
 
@@ -32,21 +32,6 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 		arrShuffle = shuffle (arrAnswer);
 	}
 
-	// const memoizedCallback = useCallback(
-	// 	() => {
-	// 		if ( isMulti ) {
-	// 			const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
-	// 				{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0] },
-	// 				{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1] }
-	// 			];
-	// 			return arrShuffle = shuffle (arrAnswer);
-	// 		}
-	// 	},
-	// 	[isMulti, gameType],
-	// );
-	//
-	// memoizedCallback();
-
 	useEffect (() => {
 
 		let pElements = document.querySelectorAll ("p[data-text='answer']");
@@ -58,28 +43,28 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 					el.classList.add (`${styles.discr__text_green}`);
 					if ( gameType === 'test' ) {
 						setPopupBlock (true);
-						dispatch(favoriteDecksActions.setTaperReset(false));
-						dispatch(favoriteDecksActions.setAnalytics(true));
+						dispatch (favoriteDecksActions.setTaperReset (false));
+						dispatch (favoriteDecksActions.setAnalytics (true));
 						idTest = setTimeout (() => {
 							setCardFace (true);
 							getRandomBg (maxNumber);
-							setCardBg(cardBG);
+							setCardBg (cardBG);
 							dispatch (getCurrentFavCard ());
-							dispatch(favoriteDecksActions.setTaperReset(true));
+							dispatch (favoriteDecksActions.setTaperReset (true));
 						}, 1000);
 					}
 				} else {
 					el.classList.add (`${styles.discr__text_red}`);
 					if ( gameType === 'test' ) {
 						setPopupBlock (true);
-						dispatch(favoriteDecksActions.setAnalytics(false));
-						dispatch(favoriteDecksActions.setTaperReset(false));
+						dispatch (favoriteDecksActions.setAnalytics (false));
+						dispatch (favoriteDecksActions.setTaperReset (false));
 						idTest1 = setTimeout (() => {
 							setCardFace (true);
 							getRandomBg (maxNumber);
-							setCardBg(cardBG);
+							setCardBg (cardBG);
 							dispatch (getCurrentFavCard ());
-							dispatch(favoriteDecksActions.setTaperReset(true));
+							dispatch (favoriteDecksActions.setTaperReset (true));
 						}, 1000);
 					}
 				}
@@ -89,7 +74,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 
 		return () => {
 			pElements.forEach ((el) => {
-				el.removeEventListener('click', () => {
+				el.removeEventListener ('click', () => {
 					if ( el.getAttribute ('id') === 'trueAnswer' ) {
 						el.classList.add (`${styles.discr__text_green}`);
 						if ( gameType === 'test' ) {
@@ -97,7 +82,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 							idTest = setTimeout (() => {
 								setCardFace (true);
 								getRandomBg (maxNumber);
-								setCardBg(cardBG);
+								setCardBg (cardBG);
 								dispatch (getCurrentFavCard ());
 							}, 1000);
 						}
@@ -108,7 +93,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 							idTest1 = setTimeout (() => {
 								setCardFace (true);
 								getRandomBg (maxNumber);
-								setCardBg(cardBG);
+								setCardBg (cardBG);
 								dispatch (getCurrentFavCard ());
 							}, 1000);
 						}
@@ -117,10 +102,10 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 				});
 			});
 
-			clearTimeout(idTest);
-			clearTimeout(idTest1);
+			clearTimeout (idTest);
+			clearTimeout (idTest1);
 		}
-	}, [isMulti]);
+	}, []);
 
 	useEffect (() => {
 

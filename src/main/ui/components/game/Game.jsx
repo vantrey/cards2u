@@ -39,7 +39,6 @@ const Game = () => {
 			useSelector ((state) => state.favoriteDecks);
 	const dispatch = useDispatch ();
 	const location = useLocation ();
-
 	let currentPath = location.pathname;
 
 	useEffect(() => {
