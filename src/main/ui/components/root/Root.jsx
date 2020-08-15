@@ -5,13 +5,24 @@ import videowebm from '../../video/main-bg-video-20.webm'
 import soundOf from '../../icons/sound-of.svg'
 import soundOn from '../../icons/sound-on.svg'
 import poster from '../../images/main-bg.webp'
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router";
+import { loginActions } from "../../../auth/login/loginReducer";
 
 
 const Root = () => {
 
 	let [ sound, setSound ] = useState (true);
 	let [ iconFlash, setIconlash ] = useState (false);
+	const dispatch = useDispatch ();
+	const location = useLocation ();
+	let currentPath = location.pathname;
 	let IDtime;
+
+	useEffect(() => {
+		dispatch(loginActions.setCurrentLocation(currentPath));
+	}, [currentPath]);
+
 
 	useEffect (() => {
 

@@ -29,7 +29,7 @@ const Taverna = ({toggleMenu, setMenu}) => {
                 </div>
                 <div className={`${styles.main__item} ${ styles.main__item_home}`} onClick={() => {setMenu(false)}}>
                     <NavLink to={HOME_PATH} className={ styles.main__link } >
-                        <h1>HOME</h1>
+                        <h1>LADDER</h1>
                     </NavLink>
                 </div>
             </div>
