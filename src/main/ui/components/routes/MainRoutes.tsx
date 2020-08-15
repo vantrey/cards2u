@@ -3,7 +3,7 @@ import {Route} from 'react-router-dom';
 import Root from '../root/Root';
 import Game from "../game/Game";
 import Create from "../create_cards/CreateContainer";
-import Home from "../home/Home";
+import Home from "../home/Ladder";
 import ProfileContainer from '../profile/ui/ProfileContainer';
 import FindContainer from '../find_deck/FindContainer';
 
