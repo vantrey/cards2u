@@ -9,7 +9,7 @@ import { shuffle } from "../../../../helpers/random_multyanswer/randomAnswer";
 import { cardBG, getRandomBg, maxNumber } from "../../../common/random_bg/Random_bg";
 
 
-const CardDownside = ({ setCardFace, setCardBg }) => {
+const CardDownsideInside = ({ setCardFace, setCardBg }) => {
 
 	const dispatch = useDispatch ();
 	const [ popupBlock, setPopupBlock ] = useState (false);
@@ -22,15 +22,17 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 		dispatch (setGrade (Number (e.currentTarget.name)));
 	};
 
-	let arrShuffle;
-
-	if ( isMulti ) {
-		const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
-			{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0] },
-			{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1] }
-		];
-		arrShuffle = shuffle (arrAnswer);
-	}
+	let arrShuffle = useMemo (() => {
+		let arrShuffleIn;
+		if ( isMulti ) {
+			const arrAnswer = [ { id: 'trueAnswer', answer: currentFavCard.answer },
+				{ id: 'falseAnswer1', answer: currentFavCard.wrongAnswers[0] },
+				{ id: 'falseAnswer2', answer: currentFavCard.wrongAnswers[1] }
+			];
+			arrShuffleIn = shuffle (arrAnswer);
+		}
+		return arrShuffleIn;
+	}, [ isMulti ]);
 
 	useEffect (() => {
 
@@ -105,7 +107,7 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 			clearTimeout (idTest);
 			clearTimeout (idTest1);
 		}
-	}, [isMulti]);
+	}, [ isMulti ]);
 
 	useEffect (() => {
 
@@ -201,4 +203,6 @@ const CardDownside = ({ setCardFace, setCardBg }) => {
 		</div>
 	)
 }
+ const  CardDownside = React.memo(CardDownsideInside);
+
 export default CardDownside;
